@@ -230,7 +230,7 @@ const CareerSection = () => {
                 <div key={idx} className="relative pl-12 md:pl-16 group/item">
                   {/* Timeline icon dot */}
                   <motion.div
-                    className={`absolute left-[19px] -translate-x-1/2 top-2 md:top-3 w-9 h-9 rounded-full border-2 flex items-center justify-center z-10 smooth-transition ${colors.dot}`}
+                    className={`absolute left-[1px] top-2 md:top-3 w-9 h-9 rounded-full border-2 flex items-center justify-center z-10 smooth-transition ${colors.dot}`}
                     initial={ios ? { opacity: 0, scale: 0.6 } : { scale: 0 }}
                     animate={ios ? { opacity: 1, scale: 1 } : undefined}
                     whileInView={ios ? undefined : { scale: 1 }}
