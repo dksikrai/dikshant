@@ -9,7 +9,6 @@ import CompetenciesSection from '@/components/sections/CompetenciesSection.jsx';
 import ClientProjectsSection from '@/components/sections/ClientProjectsSection.jsx';
 import TechnicalExpertiseSection from '@/components/sections/TechnicalExpertiseSection.jsx';
 import SkillsSection from '@/components/sections/SkillsSection.jsx';
-import WorkExperienceSection from '@/components/sections/WorkExperienceSection.jsx';
 import CertificationsSection from '@/components/sections/CertificationsSection.jsx';
 import { FadeIn } from '@/lib/motion.jsx';
 import { Mail, Linkedin, MapPin } from 'lucide-react';
@@ -180,7 +179,6 @@ const HomePage = () => {
         <ClientProjectsSection />
         <TechnicalExpertiseSection />
         <SkillsSection />
-        <WorkExperienceSection />
         <CertificationsSection />
         <WhatsAppCTASection />
       </main>
