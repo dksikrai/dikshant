@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, GraduationCap, Languages, Flame } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
+import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 
 const certs = [
   "Senior Web Developer Promotion (Aug 2025)",
@@ -26,9 +26,11 @@ const CertificationsSection = () => {
   return (
     <section className="py-14 md:py-20 bg-muted/30" id="achievements">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="mb-3">
-          <h2>Background &amp; Recognition</h2>
-        </FadeIn>
+        <div className="mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+            <TextReveal text="Background &amp; Recognition" className="text-gradient-primary" />
+          </h2>
+        </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16">
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
             Education, personal interests, language proficiencies, and notable achievements.

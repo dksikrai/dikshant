@@ -72,14 +72,14 @@ const roles = [
 
 const accentMap = {
   primary: { 
-    dot: "bg-primary/15 border-primary/30 text-primary hover:bg-primary/20", 
+    dot: "bg-background border-primary text-primary hover:border-primary/80", 
     tag: "bg-primary/10 text-primary border border-primary/20",
     glow: "hover:shadow-[0_0_35px_rgba(0,184,217,0.18)] hover:border-primary/50",
     bulletIcon: "text-primary",
     bgGradient: "from-primary/[0.01] to-transparent"
   },
   secondary: { 
-    dot: "bg-secondary/15 border-secondary/30 text-secondary hover:bg-secondary/20", 
+    dot: "bg-background border-secondary text-secondary hover:border-secondary/80", 
     tag: "bg-secondary/10 text-secondary border border-secondary/20",
     glow: "hover:shadow-[0_0_35px_rgba(139,92,246,0.18)] hover:border-secondary/50",
     bulletIcon: "text-secondary",
@@ -230,7 +230,7 @@ const CareerSection = () => {
                 <div key={idx} className="relative pl-12 md:pl-16 group/item">
                   {/* Timeline icon dot */}
                   <motion.div
-                    className={`absolute left-0 top-2 md:top-3 w-9 h-9 rounded-full border-4 border-background flex items-center justify-center z-10 smooth-transition ${colors.dot}`}
+                    className={`absolute left-[19px] -translate-x-1/2 top-2 md:top-3 w-9 h-9 rounded-full border-2 flex items-center justify-center z-10 smooth-transition ${colors.dot}`}
                     initial={ios ? { opacity: 0, scale: 0.6 } : { scale: 0 }}
                     animate={ios ? { opacity: 1, scale: 1 } : undefined}
                     whileInView={ios ? undefined : { scale: 1 }}

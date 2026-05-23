@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Server, Workflow, Cloud } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
+import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 
 const competencies = [
   {
@@ -60,9 +60,11 @@ const CompetenciesSection = () => {
   return (
     <section className="py-14 md:py-20" id="expertise">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="mb-3">
-          <h2>Core Competencies</h2>
-        </FadeIn>
+        <div className="mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+            <TextReveal text="Core Competencies" className="text-gradient-primary" />
+          </h2>
+        </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16">
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
             Specialized domains where I architect solutions that drive business value and operational efficiency.

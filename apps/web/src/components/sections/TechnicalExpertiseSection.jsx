@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Server, Zap, Cloud, ShoppingCart } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
+import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 
 const expertise = [
   {
@@ -46,9 +46,11 @@ const TechnicalExpertiseSection = () => {
   return (
     <section className="py-16 md:py-20" id="tech-expertise">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="text-center mb-4">
-          <h2>Advanced Technical Depth</h2>
-        </FadeIn>
+        <div className="mb-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+            <TextReveal text="Advanced Technical Depth" className="text-gradient-primary" />
+          </h2>
+        </div>
         <FadeIn delay={0.08} className="text-center mb-16">
           <p className="text-xl text-muted-foreground">
             Granular insights into my technical capabilities across the stack.

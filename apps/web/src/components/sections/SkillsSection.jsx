@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FadeIn, RevealLine, isIOS, ease } from '@/lib/motion.jsx';
+import { FadeIn, RevealLine, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 
 const skillCategories = [
   {
@@ -90,9 +90,11 @@ const SkillsSection = () => {
   return (
     <section className="py-14 md:py-20 bg-muted/30" id="skills">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn className="mb-3 text-center">
-          <h2>Skills &amp; Proficiency</h2>
-        </FadeIn>
+        <div className="mb-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+            <TextReveal text="Skills &amp; Proficiency" className="text-gradient-primary" />
+          </h2>
+        </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16 text-center">
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Categorized technical breakdown indicating execution capability levels.
