@@ -5,7 +5,7 @@ import { Calendar, MapPin, Briefcase } from 'lucide-react';
 const ExperienceCard = ({ experience, index = 0 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={false}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}

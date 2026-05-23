@@ -48,7 +48,7 @@ const SkillsSection = () => {
     <section className="py-16 md:py-20 bg-muted/30" id="skills">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
           className="mb-16 text-center"
@@ -63,7 +63,7 @@ const SkillsSection = () => {
           {skillCategories.map((category, catIdx) => (
             <motion.div 
               key={catIdx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: catIdx * 0.1 }}

@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 const TechStackBadge = ({ name, icon: Icon, index = 0 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={false}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}

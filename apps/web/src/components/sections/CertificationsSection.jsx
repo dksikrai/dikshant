@@ -9,7 +9,7 @@ const CertificationsSection = () => {
     <section className="py-16 md:py-20 bg-muted/30" id="achievements">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
           className="mb-16"
@@ -24,7 +24,7 @@ const CertificationsSection = () => {
           
           {/* Certifications Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             className="lg:col-span-2"
@@ -60,7 +60,7 @@ const CertificationsSection = () => {
           {/* Education & Languages Stack */}
           <div className="space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: 0.1 }}
@@ -83,7 +83,7 @@ const CertificationsSection = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: 0.2 }}
@@ -113,7 +113,7 @@ const CertificationsSection = () => {
 
           {/* Interests Full Width */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             className="md:col-span-2 lg:col-span-3"

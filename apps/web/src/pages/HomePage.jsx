@@ -28,7 +28,7 @@ const WhatsAppCTASection = () => (
 
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.05 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -141,7 +141,7 @@ const HomePage = () => {
                 </svg>
               </motion.div>
               <motion.h1
-                initial={{ opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
                 className="text-2xl font-bold tracking-tight text-foreground"

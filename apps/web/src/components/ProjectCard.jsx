@@ -7,7 +7,7 @@ import { ArrowUpRight, Activity, Server, Shield } from 'lucide-react';
 const ProjectCard = ({ project, index = 0, detailed = false }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}

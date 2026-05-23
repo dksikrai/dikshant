@@ -60,7 +60,7 @@ const ExperiencePage = () => {
       <main className="flex-grow pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             className="mb-16"
           >
@@ -81,7 +81,7 @@ const ExperiencePage = () => {
                 {experiences.map((exp, index) => (
                   <motion.div 
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
                     className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
@@ -115,7 +115,7 @@ const ExperiencePage = () => {
             {/* Sidebar */}
             <div className="space-y-8">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.05 }}
               >
@@ -140,7 +140,7 @@ const ExperiencePage = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.1 }}
@@ -172,7 +172,7 @@ const ExperiencePage = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.2 }}
@@ -210,7 +210,7 @@ const ExperiencePage = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.3 }}

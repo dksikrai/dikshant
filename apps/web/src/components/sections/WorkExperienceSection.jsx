@@ -60,7 +60,7 @@ const WorkExperienceSection = () => {
     <section className="py-16 md:py-20" id="experience">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
           className="mb-16 text-center"
@@ -75,7 +75,7 @@ const WorkExperienceSection = () => {
           {experiences.map((job, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: idx * 0.1 }}

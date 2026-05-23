@@ -79,21 +79,27 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    /* Do NOT add overflow-x: hidden here — breaks iOS Safari IntersectionObserver */
   }
 
-  /* ── iOS Safari Safety Net ── */
-  /* When Framer Motion's reducedMotion='always' is set on iOS, elements skip
-     their initial hidden state and render immediately. This extra rule is a
-     belt-and-suspenders fallback: any motion element that somehow still has
-     opacity:0 will become visible after 300ms so content is never trapped. */
+  /* ── NUCLEAR iOS Safari Fix ──
+     Framer Motion sets opacity:0 as inline style via whileInView animations.
+     On iOS Safari, IntersectionObserver never fires so those stay invisible.
+     This CSS rule IMMEDIATELY overrides any inline opacity:0 on iOS devices.
+     The !important beats inline styles. @supports targets only iOS WebKit. */
   @supports (-webkit-touch-callout: none) {
     [style*="opacity: 0"],
     [style*="opacity:0"] {
-      animation: ios-reveal 0s 0.3s forwards;
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
     }
-    @keyframes ios-reveal {
-      to { opacity: 1 !important; transform: none !important; }
+    /* Also force any translateY that might push content off-screen */
+    [style*="translateY(20px)"],
+    [style*="translateY(24px)"],
+    [style*="translateY(-20px)"],
+    [style*="translateX(-20px)"],
+    [style*="translateX(20px)"] {
+      transform: translateY(0px) !important;
     }
   }
 

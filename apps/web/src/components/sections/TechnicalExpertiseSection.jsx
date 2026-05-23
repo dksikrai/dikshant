@@ -37,7 +37,7 @@ const TechnicalExpertiseSection = () => {
     <section className="py-16 md:py-20" id="tech-expertise">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
           className="text-center mb-16"
@@ -49,7 +49,7 @@ const TechnicalExpertiseSection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
         >

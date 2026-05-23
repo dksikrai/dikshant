@@ -40,7 +40,7 @@ const CareerSection = () => {
     <section className="py-16 md:py-20 bg-muted/30" id="career">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.05 }}
           className="mb-16"
@@ -55,7 +55,7 @@ const CareerSection = () => {
           {roles.map((role, idx) => (
             <motion.div 
               key={idx}
-              initial={{ opacity: 0, x: -20 }}
+              initial={false}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: idx * 0.1 }}
