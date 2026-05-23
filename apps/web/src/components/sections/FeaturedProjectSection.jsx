@@ -27,7 +27,7 @@ const FeaturedProjectSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
@@ -44,7 +44,7 @@ const FeaturedProjectSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <h3 className="text-4xl font-extrabold mb-2 text-foreground">Airventory.io</h3>
             <p className="text-lg text-primary font-semibold mb-6">Complete Fulfillment & Asset Management Platform</p>
@@ -107,7 +107,7 @@ const FeaturedProjectSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             className="space-y-8"
           >
             {/* Image Card */}

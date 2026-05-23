@@ -266,7 +266,7 @@ const ClientProjectsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             className="max-w-2xl"
           >
             <h2 className="mb-4">Enterprise Client Portfolio</h2>
@@ -278,7 +278,7 @@ const ClientProjectsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             className="flex flex-wrap gap-2"
           >
             {filters.map(f => (

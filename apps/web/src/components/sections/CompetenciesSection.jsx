@@ -41,7 +41,7 @@ const CompetenciesSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16"
         >
           <h2 className="mb-4">Core Competencies</h2>
@@ -59,7 +59,7 @@ const CompetenciesSection = () => {
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: idx * 0.1 }}
               >
                 <Card className="h-full glass-card border-border/50 premium-shadow hover:-translate-y-1 smooth-transition">
@@ -91,7 +91,7 @@ const CompetenciesSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           transition={{ delay: 0.2 }}
         >
           <Card className="glass-card border-border/50 premium-shadow hover:-translate-y-1 smooth-transition overflow-hidden">

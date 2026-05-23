@@ -22,7 +22,7 @@ const StatsSection = () => (
             key={i}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             transition={{ delay: i * 0.12, duration: 0.6, ease: 'easeOut' }}
             className={`text-center px-6 py-6 md:py-2 group ${
               i < 3 ? 'border-b-2 md:border-b-0 md:border-r-2 border-border/30' : 'border-none'

@@ -29,7 +29,7 @@ const SkillItem = ({ name, proficiency, description }) => {
         <motion.div 
           initial={{ width: 0 }}
           whileInView={{ width: getWidth(proficiency).replace('w-', '').replace('[', '').replace(']', '') }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="h-full bg-primary rounded-full"
         />
@@ -125,7 +125,7 @@ const SkillsPage = () => {
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, amount: 0.05 }}
                   transition={{ delay: idx * 0.1 }}
                   className={idx === 0 ? "lg:col-span-2" : ""}
                 >

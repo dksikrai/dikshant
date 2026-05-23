@@ -9,7 +9,7 @@ const ProjectCard = ({ project, index = 0, detailed = false }) => {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="h-full"
     >

@@ -83,7 +83,7 @@ const ExperiencePage = () => {
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.05 }}
                     className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
                   >
                     <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-background bg-primary text-primary-foreground shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
@@ -117,7 +117,7 @@ const ExperiencePage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05 }}
               >
                 <Card className="bg-card border-border/50 premium-shadow">
                   <CardContent className="p-6">
@@ -142,7 +142,7 @@ const ExperiencePage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.1 }}
               >
                 <Card className="bg-card border-border/50 premium-shadow">
@@ -174,7 +174,7 @@ const ExperiencePage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.2 }}
               >
                 <Card className="bg-card border-border/50 premium-shadow">
@@ -212,7 +212,7 @@ const ExperiencePage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ delay: 0.3 }}
               >
                 <Card className="bg-card border-border/50 premium-shadow">

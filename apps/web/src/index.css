@@ -79,7 +79,22 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    /* Removed overflow-x: hidden to fix iOS Safari Framer Motion intersection observer bugs */
+    /* Do NOT add overflow-x: hidden here — breaks iOS Safari IntersectionObserver */
+  }
+
+  /* ── iOS Safari Safety Net ── */
+  /* When Framer Motion's reducedMotion='always' is set on iOS, elements skip
+     their initial hidden state and render immediately. This extra rule is a
+     belt-and-suspenders fallback: any motion element that somehow still has
+     opacity:0 will become visible after 300ms so content is never trapped. */
+  @supports (-webkit-touch-callout: none) {
+    [style*="opacity: 0"],
+    [style*="opacity:0"] {
+      animation: ios-reveal 0s 0.3s forwards;
+    }
+    @keyframes ios-reveal {
+      to { opacity: 1 !important; transform: none !important; }
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

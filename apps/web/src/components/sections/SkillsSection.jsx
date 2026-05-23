@@ -50,7 +50,7 @@ const SkillsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16 text-center"
         >
           <h2 className="mb-4">Skills & Proficiency</h2>
@@ -65,7 +65,7 @@ const SkillsSection = () => {
               key={catIdx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: catIdx * 0.1 }}
             >
               <h3 className="text-2xl font-bold mb-6 pb-2 border-b border-border/50 text-foreground">
@@ -84,7 +84,7 @@ const SkillsSection = () => {
                       <motion.div 
                         initial={{ width: 0 }}
                         whileInView={{ width: skill.width }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.05 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                         className="h-full bg-primary rounded-full relative"
                       >

@@ -62,7 +62,7 @@ const WorkExperienceSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16 text-center"
         >
           <h2 className="mb-4">Detailed Work Experience</h2>
@@ -77,7 +77,7 @@ const WorkExperienceSection = () => {
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: idx * 0.1 }}
             >
               <Card className="glass-card border-border/50 premium-shadow">

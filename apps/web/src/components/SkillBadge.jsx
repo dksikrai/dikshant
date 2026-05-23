@@ -6,7 +6,7 @@ const SkillBadge = ({ skill, proficiency, index = 0 }) => {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className="flex items-center justify-between p-3 rounded-xl bg-card border border-border premium-shadow hover:border-primary/50 smooth-transition"
     >

@@ -7,7 +7,7 @@ const ExperienceCard = ({ experience, index = 0 }) => {
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.05 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="relative pl-8 md:pl-0"
     >

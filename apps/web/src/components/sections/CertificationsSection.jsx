@@ -11,7 +11,7 @@ const CertificationsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
           className="mb-16"
         >
           <h2 className="mb-4">Background & Recognition</h2>
@@ -26,7 +26,7 @@ const CertificationsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             className="lg:col-span-2"
           >
             <Card className="h-full glass-card border-border/50 premium-shadow">
@@ -62,7 +62,7 @@ const CertificationsSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: 0.1 }}
             >
               <Card className="glass-card border-border/50 premium-shadow">
@@ -85,7 +85,7 @@ const CertificationsSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.05 }}
               transition={{ delay: 0.2 }}
             >
               <Card className="glass-card border-border/50 premium-shadow">
@@ -115,7 +115,7 @@ const CertificationsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.05 }}
             className="md:col-span-2 lg:col-span-3"
           >
             <Card className="glass-card border-border/50 premium-shadow">
