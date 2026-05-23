@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, ArrowRight, Terminal } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 
 const projectsData = [
   {
@@ -160,10 +161,10 @@ const projectsData = [
   }
 ];
 
-import { 
+import {
   SiLaravel, SiVuedotjs, SiRedis, SiJavascript,
   SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor, SiWhatsapp,
-  SiNginx, SiApache, SiCloudflare, SiMapbox, 
+  SiNginx, SiApache, SiCloudflare, SiMapbox,
   SiBootstrap, SiReact, SiNodedotjs, SiPlesk, SiTailwindcss
 } from 'react-icons/si';
 import { TbApi, TbCloud } from 'react-icons/tb';
@@ -172,10 +173,9 @@ import { FaAws, FaDatabase, FaCss3, FaHtml5 } from 'react-icons/fa';
 const TechIcon = ({ name, className }) => {
   const iconProps = { className };
   const n = name.toLowerCase();
-  
   if (n.includes('laravel')) return <SiLaravel {...iconProps} color="#FF2D20" />;
   if (n.includes('vue')) return <SiVuedotjs {...iconProps} color="#4FC08D" />;
-  if (n.includes('aws')) return <FaAws {...iconProps} color="#232F3E" />;
+  if (n.includes('aws')) return <FaAws {...iconProps} color="#FF9900" />;
   if (n.includes('redis')) return <SiRedis {...iconProps} color="#DC382D" />;
   if (n.includes('wordpress')) return <SiWordpress {...iconProps} color="#21759B" />;
   if (n.includes('woocommerce')) return <SiWoocommerce {...iconProps} color="#96588A" />;
@@ -198,18 +198,15 @@ const TechIcon = ({ name, className }) => {
   if (n.includes('js') || n.includes('javascript') || n.includes('fabric')) return <SiJavascript {...iconProps} color="#F7DF1E" />;
   if (n.includes('api')) return <TbApi {...iconProps} color="#00D8FF" />;
   if (n.includes('hcdn')) return <TbCloud {...iconProps} color="#F38020" />;
-  
   return <Terminal className={className} />;
 };
 
-const TechBadge = ({ tech }) => {
-  return (
-    <span className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded bg-muted border border-border text-foreground/80 dark:text-foreground/90">
-      <TechIcon name={tech} className="w-3.5 h-3.5 shrink-0" />
-      {tech}
-    </span>
-  );
-};
+const TechBadge = ({ tech }) => (
+  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded bg-muted border border-border text-foreground/80 dark:text-foreground/90">
+    <TechIcon name={tech} className="w-3.5 h-3.5 shrink-0" />
+    {tech}
+  </span>
+);
 
 const getDomainFavicon = (url) => {
   try {
@@ -217,36 +214,41 @@ const getDomainFavicon = (url) => {
       const hostname = new URL(url).hostname;
       return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
     }
-  } catch (e) {
-    // ignore
-  }
+  } catch (e) { /* ignore */ }
   return null;
 };
 
-const ProjectImage = ({ url, alt }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [src, setSrc] = useState(`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=800&h=600`);
+const getGradientFromName = (name) => {
+  const gradients = [
+    'from-blue-500 to-cyan-400',
+    'from-indigo-500 to-purple-500',
+    'from-emerald-400 to-teal-500',
+    'from-orange-400 to-rose-400',
+    'from-pink-500 to-rose-500',
+    'from-violet-500 to-fuchsia-500',
+    'from-blue-600 to-indigo-600',
+  ];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return gradients[Math.abs(hash) % gradients.length];
+};
+
+const ProjectImage = ({ project }) => {
+  const gradientClass = getGradientFromName(project.name);
 
   return (
-    <div className="w-full h-full relative">
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-muted/20 animate-pulse flex items-center justify-center backdrop-blur-sm z-10">
-          <div className="w-8 h-8 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
-        </div>
-      )}
-      <img 
-        src={src} 
-        alt={alt} 
-        className={`w-full h-full object-cover object-top transition-all duration-700 ease-out group-hover:scale-110 ${
-          isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'
-        }`}
-        loading="lazy"
-        onLoad={() => setIsLoaded(true)}
-        onError={() => {
-          setSrc("https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop");
-          setIsLoaded(true);
-        }}
-      />
+    <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+      <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+      <div className="absolute -top-6 -left-6 w-32 h-32 bg-black/10 rounded-full blur-2xl"></div>
+      
+      {/* Icon */}
+      <div className="relative z-10 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
+        <Globe className="w-12 h-12 text-white/90" strokeWidth={1.5} />
+      </div>
     </div>
   );
 };
@@ -255,64 +257,71 @@ const ClientProjectsSection = () => {
   const [filter, setFilter] = useState('All');
   const filters = ['All', 'SaaS', 'E-commerce', 'Services', 'Enterprise'];
 
-  const filteredProjects = filter === 'All' 
-    ? projectsData 
+  const filteredProjects = filter === 'All'
+    ? projectsData
     : projectsData.filter(p => p.type === filter);
 
   return (
     <section className="py-16 md:py-20 bg-muted/30" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-          <motion.div
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            className="max-w-2xl"
-          >
+          <FadeIn className="max-w-2xl">
             <h2 className="mb-4">Enterprise Client Portfolio</h2>
             <p className="text-lg text-muted-foreground">
-              A curated selection of {projectsData.length} robust web applications, enterprise systems, and high-performance e-commerce platforms deployed globally.
+              A curated selection of {projectsData.length} robust web applications, enterprise systems, and
+              high-performance e-commerce platforms deployed globally.
             </p>
-          </motion.div>
+          </FadeIn>
 
-          <motion.div
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            className="flex flex-wrap gap-2"
-          >
+          <FadeIn delay={0.1} className="flex flex-wrap gap-2">
             {filters.map(f => (
-              <button
+              <motion.button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-4 py-2 rounded-full text-sm font-bold smooth-transition ${
-                  filter === f 
-                    ? 'bg-primary text-white shadow-md shadow-primary/30' 
+                whileHover={isIOS() ? {} : { scale: 1.04 }}
+                whileTap={isIOS() ? {} : { scale: 0.96 }}
+                className={`relative px-4 py-2 rounded-full text-sm font-bold transition-colors duration-150 ${
+                  filter === f
+                    ? 'text-white'
                     : 'bg-card border border-border text-foreground/70 hover:bg-primary/10 hover:border-primary/40 hover:text-primary'
                 }`}
               >
-                {f}
-              </button>
+                {filter === f && (
+                  <motion.span
+                    layoutId="filter-pill"
+                    className="absolute inset-0 bg-primary rounded-full shadow-md shadow-primary/25"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{f}</span>
+              </motion.button>
             ))}
-          </motion.div>
+          </FadeIn>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {/* Project grid — AnimatePresence for filter transitions only */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, idx) => (
               <motion.div
                 key={project.name}
                 layout
-                initial={false}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
+                transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4), ease: ease.out }}
+                whileHover={isIOS() ? {} : { y: -4, transition: { duration: 0.2 } }}
               >
                 <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden">
                   <div className="w-full h-44 bg-muted relative overflow-hidden border-b border-border/50">
-                    <ProjectImage url={project.url} alt={`${project.name} preview`} />
-                    <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 smooth-transition duration-300 z-20">
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 smooth-transition">
+                    <ProjectImage project={project} />
+                    <div className="absolute inset-0 bg-background/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2"
+                      >
                         View Live <ArrowRight className="w-4 h-4" />
                       </a>
                     </div>
@@ -320,9 +329,9 @@ const ClientProjectsSection = () => {
                   <CardContent className="p-6 relative bg-gradient-to-b from-background to-background/80 flex-grow flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-center mb-5">
-                        <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary smooth-transition shrink-0 overflow-hidden p-1.5 border border-border/50">
+                        <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary transition-colors duration-200 shrink-0 overflow-hidden p-1.5 border border-border/50">
                           {getDomainFavicon(project.url) ? (
-                            <img 
+                            <img
                               src={getDomainFavicon(project.url)}
                               alt={`${project.name} icon`}
                               className="w-full h-full object-contain rounded-md"
@@ -338,15 +347,15 @@ const ClientProjectsSection = () => {
                           {project.type}
                         </span>
                       </div>
-                      
-                      <h4 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary smooth-transition leading-snug">
+
+                      <h4 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-200 leading-snug">
                         {project.name}
                       </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2 group-hover:text-foreground/90 smooth-transition">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
                         {project.description}
                       </p>
                     </div>
-                    
+
                     <div className="pt-4 border-t border-border/50">
                       <div className="flex flex-wrap gap-1 mb-3">
                         {project.tech.map((t, tIdx) => (
@@ -355,8 +364,8 @@ const ClientProjectsSection = () => {
                       </div>
                       <div className="flex items-center justify-end">
                         {project.url !== '#' && (
-                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 smooth-transition p-1">
-                            <ArrowUpRight className="w-5 h-5 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors p-1">
+                            <ArrowUpRight className="w-5 h-5 shrink-0" />
                           </a>
                         )}
                       </div>
@@ -366,7 +375,7 @@ const ClientProjectsSection = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

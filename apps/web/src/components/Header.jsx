@@ -84,7 +84,7 @@ const Header = () => {
               href="https://wa.me/919829641370?text=Hi%20Dikshant%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20love%20to%20hire%20you!"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold bg-[#25D366] text-white hover:bg-[#1ebe5d] smooth-transition shadow-md shadow-[#25D366]/30"
+              className="hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 smooth-transition shadow-md shadow-primary/20"
             >
               Hire Me
             </a>
@@ -121,7 +121,7 @@ const Header = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
-                    className="mt-2 w-full flex items-center justify-center gap-2 h-10 rounded-xl bg-[#25D366] text-white font-bold text-sm hover:bg-[#1ebe5d] smooth-transition"
+                    className="mt-2 w-full flex items-center justify-center gap-2 h-10 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 smooth-transition"
                   >
                     Hire Me on WhatsApp
                   </a>

@@ -3,10 +3,19 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" href="/favicon.svg" />
+		<!-- Fallback PNG favicon for broader support -->
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+		<!-- Apple Touch Icon must be PNG -->
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="generator" content="Hostinger Horizons" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 		
+		<!-- High Performance: Preconnect to fonts and preload hero image -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+		<link rel="preload" href="/hero_development_backdrop.jpg" as="image" fetchpriority="high">
+
 		<!-- Primary Meta Tags -->
 		<title>Dikshant Goyal | Best Web Developer & Laravel Architect in Jaipur</title>
 		<meta name="title" content="Dikshant Goyal | Best Web Developer & Laravel Architect in Jaipur" />
@@ -14,7 +23,8 @@
 		<meta name="keywords" content="Dikshant Goyal, Best Web Developer in Jaipur, Laravel Architect, Senior PHP Developer, React Developer Jaipur, Next.js Developer, Enterprise SaaS Developer, AWS Cloud Setup, Web Development Jaipur, Freelance Developer India" />
 		<meta name="author" content="Dikshant Goyal" />
 		<meta name="robots" content="index, follow" />
-		<meta name="theme-color" content="#0E7490" />
+		<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 		<link rel="canonical" href="https://dikshantgoyal.com/" />
 
 		<!-- Open Graph / Facebook -->
@@ -40,7 +50,7 @@
 			"jobTitle": "Senior Software Architect & Full-Stack Developer",
 			"url": "https://dikshantgoyal.com",
 			"sameAs": [
-				"https://linkedin.com/in/dikshantgoyal",
+				"https://linkedin.com/in/csdikshant",
 				"https://github.com/dikshantgoyal"
 			],
 			"address": {

@@ -1,95 +1,133 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, ChevronRight, Award } from 'lucide-react';
+import { Briefcase, Award } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { FadeIn, SlideIn, isIOS, ease } from '@/lib/motion.jsx';
+
+const roles = [
+  {
+    title: "Senior Web Developer",
+    company: "iTechPanel LLP",
+    date: "Aug 2025 – Present",
+    tag: "Current",
+    icon: Briefcase,
+    accent: "primary",
+    description: "Project delivery acceleration, team workflow optimization, technical architecture leadership, and developer mentoring. Spearheading enterprise-grade deployment pipelines and code-review culture."
+  },
+  {
+    title: "Senior PHP & Laravel Developer",
+    company: "iTechPanel LLP",
+    date: "Apr 2025 – Aug 2025",
+    tag: "Promoted",
+    icon: Award,
+    accent: "secondary",
+    description: "Architected enterprise Laravel backends, reducing deployment time by 60% and database load by 70%. Designed and delivered multi-tenant SaaS architectures for global clients."
+  },
+  {
+    title: "WordPress & Laravel Developer",
+    company: "iTechPanel LLP",
+    date: "Jan 2024 – Apr 2025",
+    tag: null,
+    icon: Briefcase,
+    accent: "primary",
+    description: "Built custom WordPress themes, plugins, and complex Laravel APIs. Achieved a 40% reduction in load times through advanced caching and optimized asset delivery pipelines."
+  },
+  {
+    title: "Web Developer",
+    company: "Urban Key Point Real Estate",
+    date: "Sep 2023 – Dec 2023",
+    tag: null,
+    icon: Award,
+    accent: "secondary",
+    description: "Built a comprehensive real estate listing and lead management system using Laravel, with automated matching and WhatsApp notification workflows."
+  }
+];
+
+const accentMap = {
+  primary:   { dot: "bg-primary/15 border-primary/30 text-primary",   tag: "bg-primary/10 text-primary border border-primary/20" },
+  secondary: { dot: "bg-secondary/15 border-secondary/30 text-secondary", tag: "bg-secondary/10 text-secondary border border-secondary/20" },
+};
 
 const CareerSection = () => {
-  const roles = [
-    {
-      title: "Senior Web Developer",
-      company: "iTechPanel LLP",
-      date: "02/08/2025 - Present",
-      promoted: true,
-      description: "Project delivery acceleration, team workflow optimization, technical leadership, and developer mentoring. Spearheading enterprise-grade deployment pipelines."
-    },
-    {
-      title: "Senior PHP, WordPress & Laravel Developer",
-      company: "iTechPanel LLP",
-      date: "04/2025 - 02/08/2025",
-      promoted: false,
-      description: "Architected enterprise Laravel backends, reducing deployment time by 60% and database load by 70%. Engineered multi-tenant architectures."
-    },
-    {
-      title: "WordPress & Laravel Developer",
-      company: "iTechPanel LLP",
-      date: "01/2024 - 04/2025",
-      promoted: false,
-      description: "Developed custom WordPress themes/plugins and complex Laravel APIs. Achieved a 40% reduction in load times through advanced caching strategies."
-    },
-    {
-      title: "Web Developer",
-      company: "Urban Key Point Real Estate",
-      date: "09/2023 - 12/2023",
-      promoted: false,
-      description: "Built automated real estate listing management systems utilizing Laravel jobs and queues for background processing."
-    }
-  ];
+  const ios = isIOS();
 
   return (
-    <section className="py-16 md:py-20 bg-muted/30" id="career">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.05 }}
-          className="mb-16"
-        >
-          <h2 className="mb-4">Career Progression</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            A trajectory of continuous technical growth, leadership, and measurable performance improvements.
+    <section className="py-14 md:py-20 bg-muted/30" id="career">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FadeIn className="mb-3">
+          <h2>Career Progression</h2>
+        </FadeIn>
+        <FadeIn delay={0.07} className="mb-10 md:mb-14">
+          <p className="text-lg md:text-xl text-muted-foreground">
+            A trajectory of continuous technical growth, leadership, and measurable impact.
           </p>
-        </motion.div>
+        </FadeIn>
 
-        <div className="relative border-l-2 border-border/60 ml-4 md:ml-8 space-y-12">
-          {roles.map((role, idx) => (
-            <motion.div 
-              key={idx}
-              initial={false}
-              whileInView={{ opacity: 1, x: 0 }}
+        <div className="relative">
+          {/* Timeline spine */}
+          <div className="absolute left-[18px] top-0 w-0.5 bg-border/50 h-full" aria-hidden="true" />
+          {!ios && (
+            <motion.div
+              className="absolute left-[18px] top-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-primary/20 origin-top h-full"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
               viewport={{ once: true, amount: 0.05 }}
-              transition={{ delay: idx * 0.1 }}
-              className="relative pl-8 md:pl-12"
-            >
-              {/* Timeline Dot */}
-              <div className={`absolute -left-[17px] top-6 w-8 h-8 rounded-full border-4 border-background flex items-center justify-center backdrop-blur-md smooth-transition ${
-                idx % 2 === 0 
-                  ? 'bg-primary/20 border-primary/30 text-primary' 
-                  : 'bg-secondary/20 border-secondary/30 text-secondary'
-              }`}>
-                {idx % 2 === 0 ? <Briefcase className="w-4 h-4" /> : <Award className="w-4 h-4" />}
-              </div>
+              transition={{ duration: 1.4, ease: ease.out }}
+              aria-hidden="true"
+            />
+          )}
 
-              <Card className="glass-card border-border/50 premium-shadow hover:border-primary/30 smooth-transition group">
-                <CardContent className="p-6 md:p-8">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold">{role.title}</h3>
-                      </div>
-                      <p className="text-primary font-medium">{role.company}</p>
-                    </div>
-                    <div className="text-sm font-semibold text-muted-foreground bg-secondary/10 px-4 py-2 rounded-lg border border-secondary/20 whitespace-nowrap">
-                      {role.date}
-                    </div>
+          <div className="space-y-8 md:space-y-10">
+            {roles.map((role, idx) => {
+              const colors = accentMap[role.accent];
+              const Icon = role.icon;
+
+              return (
+                <SlideIn key={idx} direction="left" delay={idx * 0.1}>
+                  <div className="relative pl-12 md:pl-14">
+                    <motion.div
+                      className={`absolute left-0 top-2 md:top-4 w-9 h-9 rounded-full border-4 border-background flex items-center justify-center z-10 ${colors.dot}`}
+                      initial={ios ? { opacity: 0, scale: 0.6 } : { scale: 0 }}
+                      animate={ios ? { opacity: 1, scale: 1 } : undefined}
+                      whileInView={ios ? undefined : { scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: 'spring', stiffness: 380, damping: 18, delay: ios ? 0.1 + idx * 0.07 : 0.15 + idx * 0.1 }}
+                    >
+                      <Icon className="w-3.5 h-3.5 shrink-0" />
+                    </motion.div>
+
+                    <motion.div
+                      whileHover={ios ? {} : { x: 5 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <Card className="glass-card premium-shadow hover:border-primary/30 transition-colors duration-200">
+                        <CardContent className="p-4 sm:p-5 md:p-6">
+                          {/* Header row */}
+                          <div className="flex flex-col gap-2 mb-3">
+                            <div className="flex items-start justify-between gap-3 flex-wrap">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <h3 className="text-lg md:text-xl font-bold leading-tight">{role.title}</h3>
+                                {role.tag && (
+                                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${colors.tag} shrink-0`}>
+                                    {role.tag}
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-xs font-semibold text-muted-foreground bg-muted px-3 py-1 rounded-full whitespace-nowrap shrink-0">
+                                {role.date}
+                              </span>
+                            </div>
+                            <p className="text-sm font-semibold text-primary">{role.company}</p>
+                          </div>
+                          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{role.description}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {role.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                </SlideIn>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

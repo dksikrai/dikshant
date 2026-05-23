@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { isTouchDevice } from '@/lib/motion.jsx';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
 
+  // Skip entirely on touch devices — cursor has no meaning on touchscreens
+  // and mousemove listeners waste resources on mobile
+  const isTouch = isTouchDevice();
+
   useEffect(() => {
+    if (isTouch) return;
+
     const updateMousePosition = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -32,7 +39,10 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [isTouch]);
+
+  // Render nothing on touch devices
+  if (isTouch) return null;
 
   return (
     <>

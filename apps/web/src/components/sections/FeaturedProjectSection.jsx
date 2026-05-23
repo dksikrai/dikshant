@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 
 const FeaturedProjectSection = () => {
-  const [imgSrc, setImgSrc] = useState("https://s0.wordpress.com/mshots/v1/https%3A%2F%2Fwww.airventory.io%2F?w=1600&h=1200");
+  const [imgSrc, setImgSrc] = useState("/airventory_dashboard.png");
   const [isLoaded, setIsLoaded] = useState(false);
   const tech = ['Laravel', 'PHP 8+', 'Redis', 'Hostinger Horizons', 'MySQL', 'AWS Lambda', 'S3', 'Fabric.js', 'REST APIs', 'YunExpress', 'ShipStation'];
   const metrics = [

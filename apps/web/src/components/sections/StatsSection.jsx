@@ -1,40 +1,52 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FadeIn, useCountUp, isIOS, ease } from '@/lib/motion.jsx';
 
 const stats = [
-  { value: "20+", label: "Websites Delivered", icon: "🌐", description: "From MVPs to enterprise SaaS" },
-  { value: "5+", label: "Years Experience", icon: "⚡", description: "Building production systems" },
-  { value: "99.9%", label: "Uptime Achieved", icon: "🛡️", description: "Across all hosted platforms" },
-  { value: "50K+", label: "Users Served", icon: "🚀", description: "Across all client platforms" },
+  { value: "20+",   display: 20,   suffix: "+",  label: "Websites Delivered", icon: "🌐", description: "From MVPs to enterprise SaaS" },
+  { value: "5+",    display: 5,    suffix: "+",  label: "Years Experience",    icon: "⚡", description: "Building production systems" },
+  { value: "99.9%", display: 99.9, suffix: "%",  label: "Uptime Achieved",    icon: "🛡️", description: "Across all hosted platforms" },
+  { value: "50K+",  display: 50,   suffix: "K+", label: "Users Served",       icon: "🚀", description: "Across all client platforms" },
 ];
 
-const StatsSection = () => (
-  <section className="py-16 relative overflow-hidden" id="stats">
-    {/* Background */}
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 border-y border-border/50" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,184,217,0.04),transparent_70%)]" />
+const StatCard = ({ stat, index }) => {
+  const ios = isIOS();
+  const [ref, count] = useCountUp(stat.display, 1.6);
 
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-0 divide-border/30">
+  return (
+    <FadeIn delay={index * 0.08}>
+      <div
+        ref={ref}
+        className={`text-center px-2 sm:px-6 py-6 md:py-4 group ${
+          index < 3 ? 'border-b md:border-b-0 md:border-r border-border/40' : ''
+        }`}
+      >
+        <motion.div
+          className="text-2xl md:text-3xl mb-2 md:mb-3 inline-block"
+          whileHover={ios ? {} : { scale: 1.25, rotate: [0, -8, 8, 0] }}
+          transition={{ duration: 0.38 }}
+        >
+          {stat.icon}
+        </motion.div>
+
+        <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gradient-primary mb-1.5 tabular-nums">
+          {ios ? stat.value : `${count}${stat.suffix}`}
+        </div>
+        <div className="text-xs sm:text-sm font-bold text-foreground mb-0.5 leading-tight">{stat.label}</div>
+        <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{stat.description}</div>
+      </div>
+    </FadeIn>
+  );
+};
+
+const StatsSection = () => (
+  <section className="py-10 md:py-12 relative overflow-hidden" id="stats">
+    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-y border-border/40" />
+
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ delay: i * 0.12, duration: 0.6, ease: 'easeOut' }}
-            className={`text-center px-6 py-6 md:py-2 group ${
-              i < 3 ? 'border-b-2 md:border-b-0 md:border-r-2 border-border/30' : 'border-none'
-            }`}
-          >
-            <div className="text-3xl mb-3 group-hover:scale-110 smooth-transition inline-block">{stat.icon}</div>
-            <div className="text-4xl md:text-5xl font-extrabold text-gradient-primary mb-2 tabular-nums">
-              {stat.value}
-            </div>
-            <div className="text-sm font-bold text-foreground mb-1">{stat.label}</div>
-            <div className="text-xs text-muted-foreground">{stat.description}</div>
-          </motion.div>
+          <StatCard key={i} stat={stat} index={i} />
         ))}
       </div>
     </div>
