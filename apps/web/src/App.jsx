@@ -11,6 +11,7 @@ import CustomCursor from '@/components/CustomCursor.jsx';
 import ScrollProgress from '@/components/ScrollProgress.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 /**
  * Preloader lives at the App level so it:
@@ -123,6 +124,7 @@ function App() {
         <WhatsAppFloat />
       </Router>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
