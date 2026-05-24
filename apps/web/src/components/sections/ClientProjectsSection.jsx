@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, ArrowRight, Terminal } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -246,39 +246,77 @@ const getGradientFromName = (name) => {
 const BrowserMockup = ({ project }) => {
   const gradientClass = getGradientFromName(project.name);
   const hostname = project.url !== '#' ? new URL(project.url).hostname : 'localhost';
+  
+  const [imgSrc, setImgSrc] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    // If we have a high-performance local screenshot cached, use it instantly.
+    if (project.screenshot) {
+      setImgSrc(project.screenshot);
+      setLoading(false);
+      return;
+    }
+
+    if (!project.url || project.url === '#') {
+      setError(true);
+      setLoading(false);
+      return;
+    }
+
+    // Connect to real-time dynamic Microlink screenshot API (headless viewport: 1280x800)
+    const apiUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&embed=screenshot.url&viewport.width=1280&viewport.height=800`;
+    setImgSrc(apiUrl);
+  }, [project.url, project.screenshot]);
 
   return (
     <div className="w-full h-full relative flex flex-col bg-background/50 border border-border/40 rounded-t-lg overflow-hidden group-hover:border-primary/30 transition-all duration-300">
-      {/* Browser Bar */}
+      {/* Browser Header Controls */}
       <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-900 border-b border-border/50 shrink-0 select-none">
-        {/* Three dots */}
+        {/* Apple-style mock buttons */}
         <div className="flex gap-1.5 items-center shrink-0">
           <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
           <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
           <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
         </div>
-        {/* Address Bar */}
+        {/* address bar with security indicator */}
         <div className="flex items-center gap-1.5 bg-neutral-800 text-neutral-400 rounded-md px-3 py-0.5 text-[9px] truncate max-w-[140px] md:max-w-[160px] mx-auto border border-border/30 font-mono">
-          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
           </svg>
           {hostname}
         </div>
-        <div className="w-[32px] shrink-0" /> {/* Spacer */}
+        <div className="w-[32px] shrink-0" />
       </div>
 
-      {/* Image container */}
+      {/* Embedded Live Screenshot Container */}
       <div className="relative flex-grow overflow-hidden bg-muted">
-        {project.screenshot ? (
+        {loading && (
+          <div className="absolute inset-0 bg-neutral-950 flex flex-col items-center justify-center z-10 gap-3 border-t border-border/30">
+            <div className="relative flex items-center justify-center w-10 h-10">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/20 opacity-75" />
+              <div className="w-7 h-7 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+            </div>
+            <span className="text-[9px] text-neutral-400 font-mono tracking-widest uppercase">FETCHING API SCREEN...</span>
+          </div>
+        )}
+
+        {!error && imgSrc ? (
           <img
-            src={project.screenshot}
+            src={imgSrc}
             alt={`${project.name} Live Screenshot`}
             className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+            onLoad={() => setLoading(false)}
+            onError={() => {
+              setError(true);
+              setLoading(false);
+            }}
             loading="lazy"
           />
         ) : (
+          /* High-end Branded Solid Gradient Fallback */
           <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
-            {/* Fallback CSS gradient with stylized icon */}
             <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 11px)' }}></div>
             <div className="relative z-10 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
               <Globe className="w-8 h-8 text-white/90" strokeWidth={1.5} />
@@ -286,7 +324,7 @@ const BrowserMockup = ({ project }) => {
           </div>
         )}
         
-        {/* Premium live hover overlay */}
+        {/* Dynamic ambient highlight */}
         <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
     </div>
