@@ -331,6 +331,22 @@ const BrowserMockup = ({ project }) => {
   );
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 36, scale: 0.96 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 90,
+      damping: 14,
+      delay: i * 0.045,
+    }
+  }),
+  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.15 } }
+};
+
 const ProjectCard = ({ project, idx }) => {
   const { ref, motionProps } = useCardTilt(6);
   const ios = isIOS();
@@ -340,12 +356,14 @@ const ProjectCard = ({ project, idx }) => {
       ref={ref}
       {...(ios ? {} : motionProps)}
       style={{ ...motionProps.style, perspective: 1000 }}
-      whileHover={ios ? {} : { y: -6, scale: 1.012 }}
-      transition={{ duration: 0.2, ease: ease.out }}
+      whileHover={ios ? {} : { y: -8, scale: 1.015 }}
+      variants={cardVariants}
+      custom={idx}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+      exit="exit"
       layout
-      initial={{ opacity: 0, y: 20, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
       className="h-full w-full"
     >
       <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden select-none bg-card/60 backdrop-blur-md preserve-3d">
