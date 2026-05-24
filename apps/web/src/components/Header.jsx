@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, Download, TerminalSquare } from 'lucide-react';
+import { Menu, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import DarkModeToggle from './DarkModeToggle.jsx';
@@ -39,7 +39,7 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="flex items-center gap-3 group">
+          <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="flex items-center gap-3 group" aria-label="Scroll to top">
             <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground smooth-transition">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-5 h-5 shrink-0">
                 <defs>
@@ -103,7 +103,7 @@ const Header = () => {
                     <button
                       key={link.name}
                       onClick={() => scrollTo(link.href)}
-                      className="px-4 py-3 rounded-xl text-left text-base font-semibold text-foreground hover:text-primary hover:bg-primary/8 smooth-transition w-full"
+                      className="px-4 py-3 rounded-xl text-left text-base font-semibold text-foreground hover:text-primary hover:bg-primary/10 smooth-transition w-full"
                     >
                       {link.name}
                     </button>

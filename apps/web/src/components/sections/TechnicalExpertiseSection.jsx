@@ -44,7 +44,7 @@ const TechnicalExpertiseSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-16 md:py-20" id="tech-expertise">
+    <section className="py-16 md:py-24" id="tech-expertise">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4 text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, ArrowRight, Terminal } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
+import { FadeIn, isIOS, ease, TextReveal, useCardTilt } from '@/lib/motion.jsx';
 
 const projectsData = [
   {
@@ -10,28 +10,32 @@ const projectsData = [
     type: "Enterprise",
     tech: ["WordPress", "Elementor", "PHP", "MySQL"],
     url: "https://www.mehtacollege.com/",
-    description: "A comprehensive educational portal for Mehta PG College, featuring student LMS integration, admission workflows, and dynamic academic department management."
+    description: "A comprehensive educational portal for Mehta PG College, featuring student LMS integration, admission workflows, and dynamic academic department management.",
+    screenshot: "/mehta_college_screenshot.png"
   },
   {
     name: "Airventory",
     type: "SaaS",
     tech: ["Laravel", "Vue.js", "AWS", "Redis", "Fabric.js"],
     url: "https://www.airventory.io/",
-    description: "Enterprise e-commerce fulfillment and shipping automation platform integrated with ShipStation, Fabric.js canvas printing, and AWS Lambda."
+    description: "Enterprise e-commerce fulfillment and shipping automation platform integrated with ShipStation, Fabric.js canvas printing, and AWS Lambda.",
+    screenshot: "/airventory_screenshot.png"
   },
   {
     name: "Kritasya Jewels",
     type: "E-commerce",
     tech: ["WordPress", "WooCommerce", "PHP", "MySQL"],
     url: "https://kritasyajewels.com/",
-    description: "Premium fine jewelry e-commerce platform featuring advanced multi-attribute filtering, high-resolution product zooms, and secure checkouts."
+    description: "Premium fine jewelry e-commerce platform featuring advanced multi-attribute filtering, high-resolution product zooms, and secure checkouts.",
+    screenshot: "/kritasya_jewels_screenshot.png"
   },
   {
     name: "Mehandipur Balaji Seva",
     type: "Services",
     tech: ["WordPress", "Elementor", "PHP", "WhatsApp API"],
     url: "https://mehandipurbalajiseva.com/",
-    description: "Devotional service booking platform facilitating online booking of sawamani prasad and arji offerings, integrated with WhatsApp notifications."
+    description: "Devotional service booking platform facilitating online booking of sawamani prasad and arji offerings, integrated with WhatsApp notifications.",
+    screenshot: "/mehandipur_balaji_screenshot.png"
   },
   {
     name: "Bright Hygiene Group",
@@ -101,21 +105,24 @@ const projectsData = [
     type: "E-commerce",
     tech: ["WooCommerce", "Bootstrap", "Cloudflare", "PHP"],
     url: "https://cakedecosupplies.com.au/",
-    description: "Specialized retail and wholesale baking supplies e-commerce store in Australia, supporting massive product variation trees."
+    description: "Specialized retail and wholesale baking supplies e-commerce store in Australia, supporting massive product variation trees.",
+    screenshot: "/cakedeco_screenshot.png"
   },
   {
     name: "Mehta CI",
     type: "Enterprise",
     tech: ["WordPress", "Elementor", "PHP", "Custom CSS"],
     url: "https://www.mehtaci.com/",
-    description: "Portfolio website for high-end commercial interiors and workspace design studio, highlighting premium visual case studies."
+    description: "Portfolio website for high-end commercial interiors and workspace design studio, highlighting premium visual case studies.",
+    screenshot: "/mehtaci_screenshot.png"
   },
   {
     name: "SalesPundit Australia",
     type: "SaaS",
     tech: ["WordPress", "React", "Elementor", "REST APIs"],
     url: "https://salespundit.com.au/",
-    description: "Sales CRM and pipeline manager focusing on customer journey tracing, email marketing integrations, and performance reporting."
+    description: "Sales CRM and pipeline manager focusing on customer journey tracing, email marketing integrations, and performance reporting.",
+    screenshot: "/salespundit_screenshot.png"
   },
   {
     name: "Salg.nu",
@@ -157,7 +164,8 @@ const projectsData = [
     type: "SaaS",
     tech: ["PHP", "Nginx", "Plesk", "Tailwind CSS"],
     url: "https://www.profiletag.de/",
-    description: "SaaS tool enabling users to design mobile-optimized biolink pages, digital business cards, and custom QR codes for social marketing."
+    description: "SaaS tool enabling users to design mobile-optimized biolink pages, digital business cards, and custom QR codes for social marketing.",
+    screenshot: "/profiletag_screenshot.png"
   }
 ];
 
@@ -235,21 +243,132 @@ const getGradientFromName = (name) => {
   return gradients[Math.abs(hash) % gradients.length];
 };
 
-const ProjectImage = ({ project }) => {
+const BrowserMockup = ({ project }) => {
   const gradientClass = getGradientFromName(project.name);
+  const hostname = project.url !== '#' ? new URL(project.url).hostname : 'localhost';
 
   return (
-    <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
-      <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-      <div className="absolute -top-6 -left-6 w-32 h-32 bg-black/10 rounded-full blur-2xl"></div>
-      
-      {/* Icon */}
-      <div className="relative z-10 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
-        <Globe className="w-12 h-12 text-white/90" strokeWidth={1.5} />
+    <div className="w-full h-full relative flex flex-col bg-background/50 border border-border/40 rounded-t-lg overflow-hidden group-hover:border-primary/30 transition-all duration-300">
+      {/* Browser Bar */}
+      <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-900 border-b border-border/50 shrink-0 select-none">
+        {/* Three dots */}
+        <div className="flex gap-1.5 items-center shrink-0">
+          <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+          <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+          <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+        </div>
+        {/* Address Bar */}
+        <div className="flex items-center gap-1.5 bg-neutral-800 text-neutral-400 rounded-md px-3 py-0.5 text-[9px] truncate max-w-[140px] md:max-w-[160px] mx-auto border border-border/30 font-mono">
+          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+          {hostname}
+        </div>
+        <div className="w-[32px] shrink-0" /> {/* Spacer */}
+      </div>
+
+      {/* Image container */}
+      <div className="relative flex-grow overflow-hidden bg-muted">
+        {project.screenshot ? (
+          <img
+            src={project.screenshot}
+            alt={`${project.name} Live Screenshot`}
+            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+            loading="lazy"
+          />
+        ) : (
+          <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
+            {/* Fallback CSS gradient with stylized icon */}
+            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 11px)' }}></div>
+            <div className="relative z-10 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
+              <Globe className="w-8 h-8 text-white/90" strokeWidth={1.5} />
+            </div>
+          </div>
+        )}
+        
+        {/* Premium live hover overlay */}
+        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
     </div>
+  );
+};
+
+const ProjectCard = ({ project, idx }) => {
+  const { ref, motionProps } = useCardTilt(6);
+  const ios = isIOS();
+
+  return (
+    <motion.div
+      ref={ref}
+      {...(ios ? {} : motionProps)}
+      layout
+      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
+      transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4), ease: ease.out }}
+      className="perspective-[1000px] h-full"
+    >
+      <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden select-none transition-all duration-300 transform-gpu preserve-3d">
+        <div className="w-full h-44 bg-muted relative overflow-hidden border-b border-border/50">
+          <BrowserMockup project={project} />
+          <div className="absolute inset-0 bg-background/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+            >
+              View Live <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+        <CardContent className="p-6 relative bg-gradient-to-b from-background to-background/80 flex-grow flex flex-col justify-between">
+          <div>
+            <div className="flex justify-between items-center mb-5">
+              <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary transition-colors duration-200 shrink-0 overflow-hidden p-1.5 border border-border/50">
+                {getDomainFavicon(project.url) ? (
+                  <img
+                    src={getDomainFavicon(project.url)}
+                    alt={`${project.name} icon`}
+                    className="w-full h-full object-contain rounded-md"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                ) : null}
+                <Globe className="w-5 h-5 text-primary group-hover:text-primary-foreground" style={{ display: getDomainFavicon(project.url) ? 'none' : 'block' }} />
+              </div>
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
+                {project.type}
+              </span>
+            </div>
+
+            <h4 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-200 leading-snug">
+              {project.name}
+            </h4>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="pt-4 border-t border-border/50">
+            <div className="flex flex-wrap gap-1 mb-3">
+              {project.tech.map((t, tIdx) => (
+                <TechBadge key={tIdx} tech={t} />
+              ))}
+            </div>
+            <div className="flex items-center justify-end">
+              {project.url !== '#' && (
+                <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors p-1" aria-label={`Open ${project.name} in a new tab`}>
+                  <ArrowUpRight className="w-5 h-5 shrink-0" />
+                </a>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };
 
@@ -262,11 +381,13 @@ const ClientProjectsSection = () => {
     : projectsData.filter(p => p.type === filter);
 
   return (
-    <section className="py-16 md:py-20 bg-muted/30" id="projects">
+    <section className="py-16 md:py-24 bg-muted/30" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <FadeIn className="max-w-2xl">
-            <h2 className="mb-4">Enterprise Client Portfolio</h2>
+            <h2 className="mb-4 text-3xl md:text-5xl font-extrabold tracking-tight">
+              <TextReveal text="Enterprise Client Portfolio" className="text-gradient-primary" />
+            </h2>
             <p className="text-lg text-muted-foreground">
               A curated selection of {projectsData.length} robust web applications, enterprise systems, and
               high-performance e-commerce platforms deployed globally.
@@ -303,76 +424,7 @@ const ClientProjectsSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.name}
-                layout
-                initial={{ opacity: 0, y: 20, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
-                transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4), ease: ease.out }}
-                whileHover={isIOS() ? {} : { y: -4, transition: { duration: 0.2 } }}
-              >
-                <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden">
-                  <div className="w-full h-44 bg-muted relative overflow-hidden border-b border-border/50">
-                    <ProjectImage project={project} />
-                    <div className="absolute inset-0 bg-background/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2"
-                      >
-                        View Live <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-                  <CardContent className="p-6 relative bg-gradient-to-b from-background to-background/80 flex-grow flex flex-col justify-between">
-                    <div>
-                      <div className="flex justify-between items-center mb-5">
-                        <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary transition-colors duration-200 shrink-0 overflow-hidden p-1.5 border border-border/50">
-                          {getDomainFavicon(project.url) ? (
-                            <img
-                              src={getDomainFavicon(project.url)}
-                              alt={`${project.name} icon`}
-                              className="w-full h-full object-contain rounded-md"
-                              onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                              }}
-                            />
-                          ) : null}
-                          <Globe className="w-5 h-5 text-primary group-hover:text-primary-foreground" style={{ display: getDomainFavicon(project.url) ? 'none' : 'block' }} />
-                        </div>
-                        <span className="text-xs font-bold px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
-                          {project.type}
-                        </span>
-                      </div>
-
-                      <h4 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-200 leading-snug">
-                        {project.name}
-                      </h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-border/50">
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.tech.map((t, tIdx) => (
-                          <TechBadge key={tIdx} tech={t} />
-                        ))}
-                      </div>
-                      <div className="flex items-center justify-end">
-                        {project.url !== '#' && (
-                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors p-1">
-                            <ArrowUpRight className="w-5 h-5 shrink-0" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <ProjectCard key={project.name} project={project} idx={idx} />
             ))}
           </AnimatePresence>
         </div>

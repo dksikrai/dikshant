@@ -24,11 +24,11 @@ const CertificationsSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-14 md:py-20 bg-muted/30" id="achievements">
+    <section className="py-16 md:py-24 bg-muted/30" id="achievements">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4">
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-            <TextReveal text="Background &amp; Recognition" className="text-gradient-primary" />
+            <TextReveal text="Background & Recognition" className="text-gradient-primary" />
           </h2>
         </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16">
@@ -137,7 +137,7 @@ const CertificationsSection = () => {
                   {interests.map((interest, i) => (
                     <motion.span
                       key={i}
-                      className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/8 border border-primary/20 text-sm font-semibold text-foreground cursor-default"
+                      className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-semibold text-foreground cursor-default"
                       initial={ios ? { opacity: 0, scale: 0.85 } : { opacity: 0, scale: 0.8 }}
                       animate={ios ? { opacity: 1, scale: 1 } : undefined}
                       whileInView={ios ? undefined : { opacity: 1, scale: 1 }}

@@ -88,11 +88,11 @@ const SkillsSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-14 md:py-20 bg-muted/30" id="skills">
+    <section className="py-16 md:py-24 bg-muted/30" id="skills">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4 text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-            <TextReveal text="Skills &amp; Proficiency" className="text-gradient-primary" />
+            <TextReveal text="Skills & Proficiency" className="text-gradient-primary" />
           </h2>
         </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16 text-center">
