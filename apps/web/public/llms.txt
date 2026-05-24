@@ -1,5 +1,2 @@
 ## Pages
-- [Contact Dikshant Goyal | Best Web Developer & Laravel Architect in Jaipur](/contact): Looking to hire the best web developer and Laravel architect in Jaipur? Contact Dikshant Goyal for enterprise SaaS platforms, queue-driven systems, custom database designs, and cloud deployments.
 - [Dikshant Goyal | Best Full-Stack Web Developer & React/Laravel Architect in Jaipur](/home): Looking for the best full-stack developer in Jaipur? Dikshant Goyal is a senior developer specializing in React, Next.js, Node.js, and Laravel. Available for enterprise SaaS and custom web development in Jaipur, India.
-- [Professional Experience | Dikshant Goyal - Web Architect in Jaipur](/experience): Check the career history, educational background, and certified expertise of Dikshant Goyal, a Senior Laravel Developer based in Jaipur, Rajasthan.
-- [Technical Skills & Stack | Dikshant Goyal - Web Developer Jaipur](/skills): Deep dive into technical skills of Dikshant Goyal, a premier Laravel developer in Jaipur. Detailed breakdown of PHP, Eloquent ORM, Postgres, Redis, AWS, and Docker.
