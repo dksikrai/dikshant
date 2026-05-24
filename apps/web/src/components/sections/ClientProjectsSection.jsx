@@ -339,14 +339,16 @@ const ProjectCard = ({ project, idx }) => {
     <motion.div
       ref={ref}
       {...(ios ? {} : motionProps)}
+      style={{ ...motionProps.style, perspective: 1000 }}
+      whileHover={ios ? {} : { y: -6, scale: 1.012 }}
+      transition={{ duration: 0.2, ease: ease.out }}
       layout
       initial={{ opacity: 0, y: 20, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
-      transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4), ease: ease.out }}
-      className="perspective-[1000px] h-full"
+      className="h-full w-full"
     >
-      <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden select-none transition-all duration-300 transform-gpu preserve-3d">
+      <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden select-none bg-card/60 backdrop-blur-md preserve-3d">
         <div className="w-full h-44 bg-muted relative overflow-hidden border-b border-border/50">
           <BrowserMockup project={project} />
           <div className="absolute inset-0 bg-background/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
