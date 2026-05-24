@@ -148,7 +148,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 pb-24 md:pb-8 border-t border-border/50 flex flex-col items-center justify-center text-center gap-3">
+          <div className="pt-8 pb-16 md:pb-8 border-t border-border/50 flex flex-col items-center justify-center text-center gap-3">
             <p className="text-sm text-muted-foreground">
               © {currentYear} Dikshant Goyal. Crafted with precision &amp; passion.
             </p>

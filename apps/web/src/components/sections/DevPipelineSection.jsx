@@ -61,6 +61,7 @@ const DevPipelineSection = () => {
   const [completedStages, setCompletedStages] = useState({});
   const [successConfetti, setSuccessConfetti] = useState(false);
   const terminalEndRef = useRef(null);
+  const terminalCardRef = useRef(null);
   const ios = isIOS();
 
   // Handle auto-scrolling terminal logs
@@ -91,6 +92,13 @@ const DevPipelineSection = () => {
     setCompletedStages({});
     setSuccessConfetti(false);
     setLogs([]);
+
+    // Smoothly scroll terminal card into viewport on mobile devices immediately upon execution start
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setTimeout(() => {
+        terminalCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
 
     // Calculate latency adjustments based on complexity & worker settings
     const testDelay = Math.round(complexity * 35);
@@ -394,7 +402,7 @@ const DevPipelineSection = () => {
           </div>
 
           {/* Dev Terminal Interactive Screen (Right) */}
-          <div className="lg:col-span-5 flex flex-col">
+          <div ref={terminalCardRef} className="lg:col-span-5 flex flex-col scroll-mt-24">
             <Card className="glass-card border-border/40 premium-shadow bg-neutral-950 flex flex-col h-[400px] lg:h-full overflow-hidden select-text relative">
               
               {/* Terminal Frame Header */}
