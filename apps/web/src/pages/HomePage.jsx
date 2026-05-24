@@ -7,6 +7,8 @@ import StatsSection from '@/components/sections/StatsSection.jsx';
 import CareerSection from '@/components/sections/CareerSection.jsx';
 import CompetenciesSection from '@/components/sections/CompetenciesSection.jsx';
 import ClientProjectsSection from '@/components/sections/ClientProjectsSection.jsx';
+import SystemArchitectureSection from '@/components/sections/SystemArchitectureSection.jsx';
+import DevPipelineSection from '@/components/sections/DevPipelineSection.jsx';
 import TechnicalExpertiseSection from '@/components/sections/TechnicalExpertiseSection.jsx';
 import SkillsSection from '@/components/sections/SkillsSection.jsx';
 import CertificationsSection from '@/components/sections/CertificationsSection.jsx';
@@ -177,6 +179,8 @@ const HomePage = () => {
         <CareerSection />
         <CompetenciesSection />
         <ClientProjectsSection />
+        <SystemArchitectureSection />
+        <DevPipelineSection />
         <TechnicalExpertiseSection />
         <SkillsSection />
         <CertificationsSection />

@@ -122,6 +122,8 @@ const Footer = () => {
                   { label: 'Career', href: '#career' },
                   { label: 'Expertise', href: '#expertise' },
                   { label: 'Projects', href: '#projects' },
+                  { label: 'Architecture', href: '#architecture' },
+                  { label: 'Pipeline', href: '#pipeline' },
                   { label: 'Skills', href: '#skills' },
                   { label: 'Contact', href: '#contact' },
                 ].map((link) => (
