@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, ArrowRight, Terminal } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,7 +11,7 @@ const projectsData = [
     tech: ["WordPress", "Elementor", "PHP", "MySQL"],
     url: "https://www.mehtacollege.com/",
     description: "A comprehensive educational portal for Mehta PG College, featuring student LMS integration, admission workflows, and dynamic academic department management.",
-    screenshot: "/mehta_college_screenshot.png"
+    screenshot: "/screenshots/mehta_college.png"
   },
   {
     name: "Airventory",
@@ -19,7 +19,7 @@ const projectsData = [
     tech: ["Laravel", "Vue.js", "AWS", "Redis", "Fabric.js"],
     url: "https://www.airventory.io/",
     description: "Enterprise e-commerce fulfillment and shipping automation platform integrated with ShipStation, Fabric.js canvas printing, and AWS Lambda.",
-    screenshot: "/airventory_screenshot.png"
+    screenshot: "/screenshots/airventory.png"
   },
   {
     name: "Kritasya Jewels",
@@ -27,7 +27,7 @@ const projectsData = [
     tech: ["WordPress", "WooCommerce", "PHP", "MySQL"],
     url: "https://kritasyajewels.com/",
     description: "Premium fine jewelry e-commerce platform featuring advanced multi-attribute filtering, high-resolution product zooms, and secure checkouts.",
-    screenshot: "/kritasya_jewels_screenshot.png"
+    screenshot: "/screenshots/kritasyajewels.png"
   },
   {
     name: "Mehandipur Balaji Seva",
@@ -35,70 +35,79 @@ const projectsData = [
     tech: ["WordPress", "Elementor", "PHP", "WhatsApp API"],
     url: "https://mehandipurbalajiseva.com/",
     description: "Devotional service booking platform facilitating online booking of sawamani prasad and arji offerings, integrated with WhatsApp notifications.",
-    screenshot: "/mehandipur_balaji_screenshot.png"
+    screenshot: "/screenshots/mehandipurbalajiseva.png"
   },
   {
     name: "Bright Hygiene Group",
     type: "Enterprise",
     tech: ["WordPress", "Elementor", "PHP", "Nginx"],
     url: "http://brighthygienegroup.in/",
-    description: "Regional pest control and commercial cleaning service platform based in Jaipur, featuring service catalog and automated inquiry booking."
+    description: "Regional pest control and commercial cleaning service platform based in Jaipur, featuring service catalog and automated inquiry booking.",
+    screenshot: "/screenshots/brighthygienegroup.png"
   },
   {
     name: "Aussie Translations",
     type: "Services",
     tech: ["WordPress", "Elementor", "PHP", "Nginx"],
     url: "https://aussietranslations.com.au/",
-    description: "High-volume translation agency portal in Australia, offering instant PDF document uploads, automatic word counts, and secure payments."
+    description: "High-volume translation agency portal in Australia, offering instant PDF document uploads, automatic word counts, and secure payments.",
+    screenshot: "/screenshots/aussietranslations.png"
   },
   {
     name: "Flow Rental",
     type: "Services",
     tech: ["WordPress", "PHP", "Apache", "Custom JS"],
     url: "https://www.flowrental.dk/",
-    description: "Danish service rental platform for tool and equipment bookings, integrated with online calendars, custom booking rules, and invoicing."
+    description: "Danish service rental platform for tool and equipment bookings, integrated with online calendars, custom booking rules, and invoicing.",
+    screenshot: "/screenshots/flowrental.png"
   },
   {
     name: "MapView AI",
     type: "SaaS",
     tech: ["WordPress", "Cloudflare", "PHP", "Mapbox API"],
     url: "https://mapview.ai/",
-    description: "Marketing intelligence SaaS overlaying property leads, zoning maps, and regional demographic insights onto visual interactive maps."
+    description: "Marketing intelligence SaaS overlaying property leads, zoning maps, and regional demographic insights onto visual interactive maps.",
+    screenshot: "/screenshots/mapview.png"
   },
   {
     name: "Zircodata",
     type: "Enterprise",
     tech: ["WordPress", "WooCommerce", "PHP", "SQL Server"],
     url: "https://www.zircodata.com/",
-    description: "Australian enterprise document scanning, records storage, data capture, secure backup tape management, and workflow automation portal."
+    description: "Australian enterprise document scanning, records storage, data capture, secure backup tape management, and workflow automation portal.",
+    screenshot: "/screenshots/zircodata.png"
   },
   {
     name: "CleanGuys Germany",
     type: "Services",
     tech: ["WordPress", "WooCommerce", "Elementor", "CSS3"],
     url: "https://cleanguys.de/",
-    description: "German commercial facility management, building sanitation, residential maintenance catalog, and custom contact request booking."
+    description: "German commercial facility management, building sanitation, residential maintenance catalog, and custom contact request booking.",
+    screenshot: "/screenshots/cleanguys.png"
   },
   {
     name: "MedTrans",
     type: "Services",
     tech: ["WordPress", "Vue.js", "Elementor", "NAATI API"],
     url: "https://medtrans.com.au/",
-    description: "Australian medical transcription and translation agency portal, ensuring strict HIPAA compliance, secure file uploads, and NAATI certificates."
+    description: "Australian medical transcription and translation agency portal, ensuring strict HIPAA compliance, secure file uploads, and NAATI certificates.",
+    screenshot: "/screenshots/medtrans.png"
   },
   {
     name: "Legal Translations Australia",
     type: "Services",
     tech: ["WordPress", "WooCommerce", "Bootstrap", "PHP"],
     url: "https://legal-translations.com.au/",
-    description: "Specialized legal translation services portal in Australia for legal documents, court records, and NAATI-certified translations."
+    description: "Specialized legal translation services portal in Australia for legal documents, court records, and NAATI-certified translations.",
+    screenshot: "/screenshots/legaltranslations.png"
   },
   {
     name: "EasyITRFile",
     type: "Services",
     tech: ["WordPress", "Elementor", "PHP", "HCDN"],
     url: "https://easyitrfile.com",
-    description: "Financial tax filing portal in India for filing GST, Income Tax Returns (ITR), corporate audits, and automated tax calculations."
+    description: "Financial tax filing portal in India for filing GST, Income Tax Returns (ITR), corporate audits, and automated tax calculations.",
+    screenshot: "/screenshots/easyitrfile.png"
   },
   {
     name: "Cake Deco Supplies Australia",
@@ -106,7 +115,7 @@ const projectsData = [
     tech: ["WooCommerce", "Bootstrap", "Cloudflare", "PHP"],
     url: "https://cakedecosupplies.com.au/",
     description: "Specialized retail and wholesale baking supplies e-commerce store in Australia, supporting massive product variation trees.",
-    screenshot: "/cakedeco_screenshot.png"
+    screenshot: "/screenshots/cakedecosupplies.png"
   },
   {
     name: "Mehta CI",
@@ -114,7 +123,7 @@ const projectsData = [
     tech: ["WordPress", "Elementor", "PHP", "Custom CSS"],
     url: "https://www.mehtaci.com/",
     description: "Portfolio website for high-end commercial interiors and workspace design studio, highlighting premium visual case studies.",
-    screenshot: "/mehtaci_screenshot.png"
+    screenshot: "/screenshots/mehtaci.png"
   },
   {
     name: "SalesPundit Australia",
@@ -122,42 +131,47 @@ const projectsData = [
     tech: ["WordPress", "React", "Elementor", "REST APIs"],
     url: "https://salespundit.com.au/",
     description: "Sales CRM and pipeline manager focusing on customer journey tracing, email marketing integrations, and performance reporting.",
-    screenshot: "/salespundit_screenshot.png"
+    screenshot: "/screenshots/salespundit.png"
   },
   {
     name: "Salg.nu",
     type: "E-commerce",
     tech: ["HTML5", "CSS3", "JavaScript", "Cloudflare"],
     url: "https://www.salg.nu/",
-    description: "Danish deal site presenting daily discount coupons, retail promo codes, and special campaigns for Scandinavian brands."
+    description: "Danish deal site presenting daily discount coupons, retail promo codes, and special campaigns for Scandinavian brands.",
+    screenshot: "/screenshots/salg.png"
   },
   {
     name: "Jacksons Retreat NZ",
     type: "Services",
     tech: ["WordPress", "WooCommerce", "Elementor", "Booking APIs"],
     url: "https://www.jacksonsretreat.co.nz/",
-    description: "Eco-retreat lodging reservation site in New Zealand, integrated with booking engines, live availability calendars, and local travel guides."
+    description: "Eco-retreat lodging reservation site in New Zealand, integrated with booking engines, live availability calendars, and local travel guides.",
+    screenshot: "/screenshots/jacksonsretreat.png"
   },
   {
     name: "XFC Gym 247",
     type: "Services",
     tech: ["WordPress", "Elementor", "Apache", "PHP"],
     url: "https://xfcgym247.com.au/",
-    description: "Multi-location fitness gym membership checkout, online trainer booking systems, class schedule timetables, and member dashboard portals."
+    description: "Multi-location fitness gym membership checkout, online trainer booking systems, class schedule timetables, and member dashboard portals.",
+    screenshot: "/screenshots/xfcgym247.png"
   },
   {
     name: "White Knight Cyber",
     type: "Enterprise",
     tech: ["WordPress", "Elementor", "Nginx", "Nginx WAF"],
     url: "https://whiteknightcyber.com/",
-    description: "Cyber defense consulting website offering security audits, pen testing, system assessments, and corporate training intake."
+    description: "Cyber defense consulting website offering security audits, pen testing, system assessments, and corporate training intake.",
+    screenshot: "/screenshots/whiteknightcyber.png"
   },
   {
     name: "ITechPanel",
     type: "Services",
     tech: ["WordPress", "React", "Vue.js", "Node.js"],
     url: "http://itechpanel.com/",
-    description: "Creative software agency landing page presenting services, case studies, engineering capabilities, and talent recruitment."
+    description: "Creative software agency landing page presenting services, case studies, engineering capabilities, and talent recruitment.",
+    screenshot: "/screenshots/itechpanel.png"
   },
   {
     name: "ProfileTag Germany",
@@ -165,7 +179,7 @@ const projectsData = [
     tech: ["PHP", "Nginx", "Plesk", "Tailwind CSS"],
     url: "https://www.profiletag.de/",
     description: "SaaS tool enabling users to design mobile-optimized biolink pages, digital business cards, and custom QR codes for social marketing.",
-    screenshot: "/profiletag_screenshot.png"
+    screenshot: "/screenshots/profiletag.png"
   }
 ];
 
@@ -246,29 +260,6 @@ const getGradientFromName = (name) => {
 const BrowserMockup = ({ project }) => {
   const gradientClass = getGradientFromName(project.name);
   const hostname = project.url !== '#' ? new URL(project.url).hostname : 'localhost';
-  
-  const [imgSrc, setImgSrc] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    // If we have a high-performance local screenshot cached, use it instantly.
-    if (project.screenshot) {
-      setImgSrc(project.screenshot);
-      setLoading(false);
-      return;
-    }
-
-    if (!project.url || project.url === '#') {
-      setError(true);
-      setLoading(false);
-      return;
-    }
-
-    // Connect to real-time dynamic Microlink screenshot API (headless viewport: 1280x800)
-    const apiUrl = `https://api.microlink.io/?url=${encodeURIComponent(project.url)}&screenshot=true&embed=screenshot.url&viewport.width=1280&viewport.height=800`;
-    setImgSrc(apiUrl);
-  }, [project.url, project.screenshot]);
 
   return (
     <div className="w-full h-full relative flex flex-col bg-background/50 border border-border/40 rounded-t-lg overflow-hidden group-hover:border-primary/30 transition-all duration-300">
@@ -282,7 +273,7 @@ const BrowserMockup = ({ project }) => {
         </div>
         {/* address bar with security indicator */}
         <div className="flex items-center gap-1.5 bg-neutral-800 text-neutral-400 rounded-md px-3 py-0.5 text-[9px] truncate max-w-[140px] md:max-w-[160px] mx-auto border border-border/30 font-mono">
-          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
           </svg>
           {hostname}
@@ -290,32 +281,16 @@ const BrowserMockup = ({ project }) => {
         <div className="w-[32px] shrink-0" />
       </div>
 
-      {/* Embedded Live Screenshot Container */}
+      {/* Screenshot Frame */}
       <div className="relative flex-grow overflow-hidden bg-muted">
-        {loading && (
-          <div className="absolute inset-0 bg-neutral-950 flex flex-col items-center justify-center z-10 gap-3 border-t border-border/30">
-            <div className="relative flex items-center justify-center w-10 h-10">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/20 opacity-75" />
-              <div className="w-7 h-7 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-            </div>
-            <span className="text-[9px] text-neutral-400 font-mono tracking-widest uppercase">FETCHING API SCREEN...</span>
-          </div>
-        )}
-
-        {!error && imgSrc ? (
+        {project.screenshot ? (
           <img
-            src={imgSrc}
-            alt={`${project.name} Live Screenshot`}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
-            onLoad={() => setLoading(false)}
-            onError={() => {
-              setError(true);
-              setLoading(false);
-            }}
+            src={project.screenshot}
+            alt={`${project.name} Desktop Interface`}
+            className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500 ease-out"
             loading="lazy"
           />
         ) : (
-          /* High-end Branded Solid Gradient Fallback */
           <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
             <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 11px)' }}></div>
             <div className="relative z-10 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
