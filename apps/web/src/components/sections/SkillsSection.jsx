@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FadeIn, RevealLine, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
+import { FadeIn, RevealLine, isIOS, ease, TextReveal, StaggerGrid } from '@/lib/motion.jsx';
 
 const skillCategories = [
   {
@@ -91,49 +91,49 @@ const SkillsSection = () => {
     <section className="py-16 md:py-24 bg-muted/30" id="skills">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
             <TextReveal text="Skills & Proficiency" className="text-gradient-primary" />
           </h2>
         </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16 text-center">
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
             Categorized technical breakdown indicating execution capability levels.
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16">
+        <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16">
           {skillCategories.map((category, catIdx) => (
-            <FadeIn key={catIdx} delay={catIdx * 0.1}>
-              <div className="relative pl-4 border-l-2 border-border/30">
-                {/* Animated left accent line */}
-                {!ios && (
-                  <motion.div
-                    className={`absolute left-[-2px] top-0 w-0.5 bg-gradient-to-b ${category.color} origin-top`}
-                    initial={{ scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, delay: catIdx * 0.1, ease: ease.out }}
-                    style={{ height: '100%' }}
+            <div key={catIdx} className="relative pl-4 border-l-2 border-border/30">
+              {/* Animated left accent line */}
+              {!ios && (
+                <motion.div
+                  className={`absolute left-[-2px] top-0 w-0.5 bg-gradient-to-b ${category.color} origin-top`}
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true, margin: "50px" }}
+                  transition={{ duration: 0.8, ease: ease.out }}
+                  style={{ height: '100%' }}
+                />
+              )}
+
+              <h3 className="font-bold mb-6 text-foreground" style={{ fontSize: 'clamp(1.125rem, 2.5vw, 1.25rem)' }}>
+                {category.title}
+              </h3>
+
+              <div className="space-y-5">
+                {category.skills.map((skill, idx) => (
+                  <SkillBar
+                    key={idx}
+                    skill={skill}
+                    color={category.color}
+                    delay={idx * 0.08}
+                    ios={ios}
                   />
-                )}
-
-                <h3 className="text-xl font-bold mb-6 text-foreground">{category.title}</h3>
-
-                <div className="space-y-5">
-                  {category.skills.map((skill, idx) => (
-                    <SkillBar
-                      key={idx}
-                      skill={skill}
-                      color={category.color}
-                      delay={0.15 + idx * 0.1}
-                      ios={ios}
-                    />
-                  ))}
-                </div>
+                ))}
               </div>
-            </FadeIn>
+            </div>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import ErrorBoundary from '@/components/ErrorBoundary.jsx';
 import ScrollToTop from '@/components/ScrollToTop.jsx';
-import HomePage from '@/pages/HomePage.jsx';
+
+const HomePage = React.lazy(() => import('@/pages/HomePage.jsx'));
+const NotFoundPage = React.lazy(() => import('@/pages/NotFoundPage.jsx'));
 import { Toaster } from '@/components/ui/sonner';
 import WhatsAppFloat from '@/components/WhatsAppFloat.jsx';
 import CustomCursor from '@/components/CustomCursor.jsx';
@@ -108,10 +111,14 @@ function App() {
         <CustomCursor />
         <ScrollProgress />
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
+        <ErrorBoundary>
+          <React.Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </React.Suspense>
+        </ErrorBoundary>
         <Toaster position="bottom-right" richColors />
         <WhatsAppFloat />
       </Router>

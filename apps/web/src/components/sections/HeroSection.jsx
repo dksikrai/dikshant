@@ -109,7 +109,7 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Heading — TextReveal word animation */}
-            <h1 className="mb-4 text-foreground font-black tracking-tight">
+            <h1 className="mb-4 text-foreground font-black tracking-tight" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)', lineHeight: '1.1' }}>
               {isTouch ? (
                 <motion.span variants={item}>Dikshant Goyal</motion.span>
               ) : (
@@ -119,7 +119,8 @@ const HeroSection = () => {
 
             <motion.h2
               variants={item}
-              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium mb-6 leading-tight"
+              className="text-muted-foreground font-medium mb-6 leading-tight"
+              style={{ fontSize: 'clamp(1.25rem, 3vw, 1.875rem)' }}
             >
               Senior Full-Stack Developer&nbsp;
               <span className="text-gradient-primary font-bold">React &amp; Laravel Architect</span>
@@ -130,7 +131,8 @@ const HeroSection = () => {
 
             <motion.p
               variants={item}
-              className="text-base md:text-lg text-muted-foreground mb-10 max-w-2xl leading-relaxed"
+              className="text-muted-foreground mb-10 max-w-2xl leading-relaxed"
+              style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
             >
               Architecting production-grade enterprise systems, modern React/Next.js frontends, and scalable
               Node.js/Laravel backends. As the leading{' '}

@@ -122,7 +122,7 @@ const CareerCard = ({ role, colors, ios }) => {
           <div className="flex flex-col gap-3 mb-5 pb-5 border-b border-border/30">
             <div className="flex items-start justify-between gap-3 flex-wrap">
               <div className="flex items-center gap-2.5 flex-wrap">
-                <h3 className="text-xl md:text-2xl font-bold leading-tight tracking-tight text-foreground">{role.title}</h3>
+                <h3 className="font-bold leading-tight tracking-tight text-foreground" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>{role.title}</h3>
                 {role.tag && (
                   <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${colors.tag} uppercase tracking-wider shrink-0`}>
                     {role.tag}
@@ -146,7 +146,7 @@ const CareerCard = ({ role, colors, ios }) => {
           </div>
 
           {/* Role Tagline/Description */}
-          <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-6 italic">
+          <p className="text-foreground/80 leading-relaxed mb-6 italic" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>
             {role.description}
           </p>
 
@@ -196,12 +196,12 @@ const CareerSection = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14 md:mb-20">
           <div className="mb-4">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+            <h2 className="font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
               <TextReveal text="Professional Journey" className="text-gradient-primary" />
             </h2>
           </div>
           <FadeIn delay={0.15}>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
               A trajectory of continuous technical growth, architectural leadership, and delivering high-performance enterprise web solutions.
             </p>
           </FadeIn>
@@ -234,8 +234,8 @@ const CareerSection = () => {
                     initial={ios ? { opacity: 0, scale: 0.6 } : { scale: 0 }}
                     animate={ios ? { opacity: 1, scale: 1 } : undefined}
                     whileInView={ios ? undefined : { scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 350, damping: 18, delay: ios ? 0.1 + idx * 0.08 : 0.15 + idx * 0.1 }}
+                    viewport={{ once: true, margin: "50px" }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 18, delay: ios ? 0.1 : 0 }}
                   >
                     {/* Ring pulse animation for current active job */}
                     {role.tag === 'Current' && (
@@ -244,7 +244,7 @@ const CareerSection = () => {
                     <Icon className="w-3.5 h-3.5 shrink-0" />
                   </motion.div>
 
-                  <SlideIn direction="left" delay={idx * 0.1}>
+                  <SlideIn direction="left" delay={0}>
                     <CareerCard role={role} colors={colors} ios={ios} />
                   </SlideIn>
                 </div>

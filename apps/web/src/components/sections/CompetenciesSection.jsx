@@ -61,12 +61,12 @@ const CompetenciesSection = () => {
     <section className="py-16 md:py-24" id="expertise">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
             <TextReveal text="Core Competencies" className="text-gradient-primary" />
           </h2>
         </div>
         <FadeIn delay={0.07} className="mb-10 md:mb-16">
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
+          <p className="text-muted-foreground max-w-2xl" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
             Specialized domains where I architect solutions that drive business value and operational efficiency.
           </p>
         </FadeIn>
@@ -91,20 +91,25 @@ const CompetenciesSection = () => {
                       >
                         <Icon className={`w-6 h-6 md:w-7 md:h-7 ${comp.color}`} />
                       </motion.div>
-                      <CardTitle className="text-xl md:text-2xl leading-tight">{comp.title}</CardTitle>
+                      <CardTitle className="leading-tight" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>{comp.title}</CardTitle>
                     </CardHeader>
                     <CardContent className="px-5 pb-5 md:px-8 md:pb-8">
-                      <p className="text-sm md:text-base text-muted-foreground mb-5">{comp.description}</p>
-                      <ul className="space-y-2.5">
+                      <p className="text-muted-foreground mb-5" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>{comp.description}</p>
+                      <motion.ul 
+                        className="space-y-2.5"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "50px" }}
+                        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+                      >
                         {comp.items.map((item, i) => (
                           <motion.li
                             key={i}
                             className="flex items-start gap-2.5 text-sm font-medium"
-                            initial={ios ? { opacity: 0 } : { opacity: 0, x: -10 }}
-                            whileInView={ios ? undefined : { opacity: 1, x: 0 }}
-                            animate={ios ? { opacity: 1 } : undefined}
-                            viewport={{ once: true }}
-                            transition={{ delay: ios ? 0.1 + i * 0.06 : 0.1 + i * 0.07, duration: 0.38, ease: ease.out }}
+                            variants={{
+                              hidden: ios ? {} : { opacity: 0, x: -10 },
+                              visible: ios ? {} : { opacity: 1, x: 0, transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }
+                            }}
                           >
                             <svg className={`${comp.color} w-3 h-3 shrink-0 mt-0.5`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                               <polygon points="6 3 20 12 6 21" />
@@ -112,7 +117,7 @@ const CompetenciesSection = () => {
                             <span className="text-foreground/90 leading-snug">{item}</span>
                           </motion.li>
                         ))}
-                      </ul>
+                      </motion.ul>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -138,22 +143,27 @@ const CompetenciesSection = () => {
                   >
                     <ThirdIcon className={`w-6 h-6 md:w-7 md:h-7 ${thirdComp.color}`} />
                   </motion.div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">{thirdComp.title}</h3>
-                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{thirdComp.description}</p>
+                  <h3 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>{thirdComp.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>{thirdComp.description}</p>
                 </div>
 
                 {/* Right items grid */}
                 <div className="md:w-3/5 p-5 md:p-8">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <motion.div 
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "50px" }}
+                    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }}
+                  >
                     {thirdComp.items.map((item, i) => (
                       <motion.div
                         key={i}
                         className="flex items-start gap-2.5 p-3.5 md:p-4 rounded-xl bg-background border border-border/40 hover:border-primary/30 transition-colors duration-150"
-                        initial={ios ? { opacity: 0 } : { opacity: 0, scale: 0.94 }}
-                        whileInView={ios ? undefined : { opacity: 1, scale: 1 }}
-                        animate={ios ? { opacity: 1 } : undefined}
-                        viewport={{ once: true }}
-                        transition={{ delay: ios ? 0.08 + i * 0.07 : 0.05 + i * 0.08, duration: 0.38, ease: ease.out }}
+                        variants={{
+                          hidden: ios ? {} : { opacity: 0, scale: 0.94 },
+                          visible: ios ? {} : { opacity: 1, scale: 1, transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }
+                        }}
                         whileHover={ios ? {} : { scale: 1.02 }}
                       >
                         <svg className={`${thirdComp.color} w-3 h-3 shrink-0 mt-0.5`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -162,7 +172,7 @@ const CompetenciesSection = () => {
                         <span className="text-sm font-medium text-foreground/90 leading-snug">{item}</span>
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </Card>

@@ -47,12 +47,12 @@ const TechnicalExpertiseSection = () => {
     <section className="py-16 md:py-24" id="tech-expertise">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
             <TextReveal text="Advanced Technical Depth" className="text-gradient-primary" />
           </h2>
         </div>
         <FadeIn delay={0.08} className="text-center mb-16">
-          <p className="text-xl text-muted-foreground">
+          <p className="text-muted-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
             Granular insights into my technical capabilities across the stack.
           </p>
         </FadeIn>
@@ -60,40 +60,50 @@ const TechnicalExpertiseSection = () => {
         <FadeIn delay={0.1}>
           <Card className="glass-card border-border/50 premium-shadow">
             <CardContent className="p-2 sm:p-6">
-              <Accordion type="single" collapsible defaultValue="item-1" className="w-full space-y-4">
-                {expertise.map((exp, idx) => (
-                  <motion.div
-                    key={exp.id}
-                    initial={ios ? false : { opacity: 0, x: -16 }}
-                    whileInView={ios ? {} : { opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.05 + idx * 0.09, duration: 0.45, ease: ease.out }}
-                  >
-                    <AccordionItem
-                      value={exp.id}
-                      className="border-border/50 px-4 rounded-xl data-[state=open]:bg-secondary/5 transition-colors duration-150"
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "50px" }}
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+                }}
+              >
+                <Accordion type="single" collapsible defaultValue="item-1" className="w-full space-y-4">
+                  {expertise.map((exp) => (
+                    <motion.div
+                      key={exp.id}
+                      variants={{
+                        hidden: ios ? {} : { opacity: 0, x: -16 },
+                        visible: ios ? {} : { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }
+                      }}
                     >
-                      <AccordionTrigger className="hover:no-underline py-6">
-                        <div className="flex items-center gap-4 text-left">
-                          <motion.div
-                            className={`p-3 rounded-xl border ${exp.bg} shadow-sm shrink-0`}
-                            whileHover={ios ? {} : { scale: 1.1, rotate: -6 }}
-                            transition={{ type: 'spring', stiffness: 380, damping: 15 }}
-                          >
-                            <exp.icon className={`w-6 h-6 ${exp.color}`} />
-                          </motion.div>
-                          <span className="text-xl font-bold">{exp.title}</span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="pt-2 pb-6 pl-[4.5rem]">
-                        <p className="text-muted-foreground text-base leading-relaxed">
-                          {exp.description}
-                        </p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </motion.div>
-                ))}
-              </Accordion>
+                      <AccordionItem
+                        value={exp.id}
+                        className="border-border/50 px-4 rounded-xl data-[state=open]:bg-secondary/5 transition-colors duration-150"
+                      >
+                        <AccordionTrigger className="hover:no-underline py-6">
+                          <div className="flex items-center gap-4 text-left">
+                            <motion.div
+                              className={`p-3 rounded-xl border ${exp.bg} shadow-sm shrink-0`}
+                              whileHover={ios ? {} : { scale: 1.1, rotate: -6 }}
+                              transition={{ type: 'spring', stiffness: 380, damping: 15 }}
+                            >
+                              <exp.icon className={`w-6 h-6 ${exp.color}`} />
+                            </motion.div>
+                            <span className="font-bold" style={{ fontSize: 'clamp(1.125rem, 2.5vw, 1.25rem)' }}>{exp.title}</span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="pt-2 pb-6 pl-[4.5rem]">
+                          <p className="text-muted-foreground leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2vw, 1rem)' }}>
+                            {exp.description}
+                          </p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </motion.div>
+                  ))}
+                </Accordion>
+              </motion.div>
             </CardContent>
           </Card>
         </FadeIn>

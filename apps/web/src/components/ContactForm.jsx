@@ -28,8 +28,7 @@ const ContactForm = () => {
     
     try {
       const formData = new FormData();
-      // NOTE: Replace YOUR_ACCESS_KEY_HERE with a real key from Web3Forms.com
-      formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); 
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE");
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("subject", data.subject);

@@ -14,7 +14,12 @@ const StatCard = ({ stat, index }) => {
   const [ref, count] = useCountUp(stat.display, 1.6);
 
   return (
-    <FadeIn delay={index * 0.08}>
+    <motion.div 
+      variants={{
+        hidden: ios ? {} : { opacity: 0, y: 15 },
+        visible: ios ? {} : { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+      }}
+    >
       <div
         ref={ref}
         className={`text-center px-2 sm:px-6 py-6 md:py-4 group ${
@@ -29,13 +34,13 @@ const StatCard = ({ stat, index }) => {
           {stat.icon}
         </motion.div>
 
-        <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gradient-primary mb-1.5 tabular-nums">
+        <div className="font-extrabold text-gradient-primary mb-1.5 tabular-nums" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1' }}>
           {ios ? stat.value : `${count}${stat.suffix}`}
         </div>
-        <div className="text-xs sm:text-sm font-bold text-foreground mb-0.5 leading-tight">{stat.label}</div>
-        <div className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{stat.description}</div>
+        <div className="font-bold text-foreground mb-0.5 leading-tight" style={{ fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>{stat.label}</div>
+        <div className="text-muted-foreground hidden sm:block" style={{ fontSize: 'clamp(0.625rem, 1vw, 0.75rem)' }}>{stat.description}</div>
       </div>
-    </FadeIn>
+    </motion.div>
   );
 };
 
@@ -44,11 +49,17 @@ const StatsSection = () => (
     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-y border-border/40" />
 
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid grid-cols-2 lg:grid-cols-4">
+      <motion.div 
+        className="grid grid-cols-2 lg:grid-cols-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "50px" }}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+      >
         {stats.map((stat, i) => (
           <StatCard key={i} stat={stat} index={i} />
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 );

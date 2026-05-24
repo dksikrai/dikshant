@@ -308,7 +308,7 @@ const BrowserMockup = ({ project }) => {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 36, scale: 0.96 },
-  visible: (i) => ({
+  visible: {
     opacity: 1,
     y: 0,
     scale: 1,
@@ -316,9 +316,8 @@ const cardVariants = {
       type: 'spring',
       stiffness: 90,
       damping: 14,
-      delay: i * 0.045,
     }
-  }),
+  },
   exit: { opacity: 0, scale: 0.95, transition: { duration: 0.15 } }
 };
 
@@ -333,10 +332,9 @@ const ProjectCard = ({ project, idx }) => {
       style={{ ...motionProps.style, perspective: 1000 }}
       whileHover={ios ? {} : { y: -8, scale: 1.015 }}
       variants={cardVariants}
-      custom={idx}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
+      viewport={{ once: true, margin: "50px" }}
       exit="exit"
       layout
       className="h-full w-full"
@@ -418,10 +416,10 @@ const ClientProjectsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <FadeIn className="max-w-2xl">
-            <h2 className="mb-4 text-3xl md:text-5xl font-extrabold tracking-tight">
+            <h2 className="mb-4 font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
               <TextReveal text="Enterprise Client Portfolio" className="text-gradient-primary" />
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
               A curated selection of {projectsData.length} robust web applications, enterprise systems, and
               high-performance e-commerce platforms deployed globally.
             </p>
@@ -453,14 +451,23 @@ const ClientProjectsSection = () => {
           </FadeIn>
         </div>
 
-        {/* Project grid — AnimatePresence for filter transitions only */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {/* Project grid — stagger container handles scroll timings properly */}
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "50px" }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } }
+          }}
+        >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
-              <ProjectCard key={project.name} project={project} idx={idx} />
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.name} project={project} />
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
