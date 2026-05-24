@@ -274,7 +274,7 @@ export const TextReveal = ({ text, className, delay = 0, as: Tag = 'span' }) => 
 
   return (
     <motion.span
-      className={`inline ${className}`}
+      className="inline"
       variants={container}
       initial="hidden"
       whileInView="visible"
@@ -286,10 +286,10 @@ export const TextReveal = ({ text, className, delay = 0, as: Tag = 'span' }) => 
         <motion.span
           key={i}
           variants={word}
-          className="inline-block"
-          style={{ marginRight: '0.25em', willChange: 'transform, opacity' }}
+          className={`inline-block ${className || ''}`}
+          style={{ willChange: 'transform, opacity', whiteSpace: 'pre-wrap' }}
         >
-          {w}
+          {w}{i < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </motion.span>

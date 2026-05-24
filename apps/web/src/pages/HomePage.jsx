@@ -4,204 +4,225 @@ import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import HeroSection from '@/components/sections/HeroSection.jsx';
 import StatsSection from '@/components/sections/StatsSection.jsx';
-import ContactForm from '@/components/ContactForm.jsx';
-import { FadeIn } from '@/lib/motion.jsx';
-import { Mail, Linkedin, MapPin } from 'lucide-react';
+import FloatingTechBackground from '@/components/FloatingTechBackground.jsx';
 import { siteConfig } from '@/config/site.js';
 
-const CareerSection = React.lazy(() => import('@/components/sections/CareerSection.jsx'));
-const CompetenciesSection = React.lazy(() => import('@/components/sections/CompetenciesSection.jsx'));
-const ClientProjectsSection = React.lazy(() => import('@/components/sections/ClientProjectsSection.jsx'));
+// Lazy-loaded sections for performance
+const AboutSection = React.lazy(() => import('@/components/sections/AboutSection.jsx'));
 const TechnicalExpertiseSection = React.lazy(() => import('@/components/sections/TechnicalExpertiseSection.jsx'));
+const ProductionSection = React.lazy(() => import('@/components/sections/ProductionSection.jsx'));
+const AISection = React.lazy(() => import('@/components/sections/AISection.jsx'));
+const ClientProjectsSection = React.lazy(() => import('@/components/sections/ClientProjectsSection.jsx'));
+const CaseStudiesSection = React.lazy(() => import('@/components/sections/CaseStudiesSection.jsx'));
+const WhatISolveSection = React.lazy(() => import('@/components/sections/WhatISolveSection.jsx'));
 const SkillsSection = React.lazy(() => import('@/components/sections/SkillsSection.jsx'));
-const CertificationsSection = React.lazy(() => import('@/components/sections/CertificationsSection.jsx'));
+const CareerSection = React.lazy(() => import('@/components/sections/CareerSection.jsx'));
 
-const WhatsAppCTASection = () => (
-  <section className="py-16 md:py-20 relative overflow-hidden" id="contact">
-    {/* Lightweight static backgrounds — no blur, no animation */}
-    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.08),transparent_55%)]" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,hsl(var(--secondary)/0.08),transparent_55%)]" />
-    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+// Contact section — inline (always loaded)
+const ContactSection = () => (
+  <section className="py-20 md:py-28 relative overflow-hidden" id="contact">
+    <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
+    {/* Ambient glow */}
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.05),transparent_65%)] pointer-events-none" />
 
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <FadeIn>
-        <div className="text-center mb-12">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-sm font-semibold mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            Available for New Projects
-          </div>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      {/* Available badge */}
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/25 bg-emerald-500/8 text-emerald-400 text-sm font-semibold mb-8">
+        <span className="status-dot" />
+        Currently Available for Senior Roles & Consulting
+      </div>
 
-          <h2 className="mb-6 text-gradient-primary" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
-            Let's Build Something<br className="hidden md:block" /> Extraordinary Together
-          </h2>
+      {/* Headline */}
+      <h2
+        className="font-extrabold text-foreground mb-6"
+        style={{ fontSize: 'clamp(1.875rem, 5vw, 3.5rem)', letterSpacing: '-0.04em', lineHeight: 1.1 }}
+      >
+        Let's Build Something{' '}
+        <span className="text-gradient-primary">Exceptional</span>
+      </h2>
 
-          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
-            Looking to scale your platform, build a SaaS product, or automate complex workflows?
-            I'm one message away. Let's talk about your project.
-          </p>
-        </div>
+      <p className="text-muted-foreground max-w-xl mx-auto mb-12" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
+        Looking to scale your platform, build AI-powered workflows, or architect a production SaaS system?
+        I'm one message away.
+      </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start">
-          {/* Left Column: Direct Contact */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-sm">
-            <div className="mb-8">
-              <h3 className="font-bold mb-3 text-foreground" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>Direct Message</h3>
-              <p className="text-muted-foreground mb-6">
-                The fastest way to reach me is through WhatsApp. I usually reply within a few hours.
-              </p>
-              
-              <a
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-bold shadow-lg shadow-primary/20 hover:from-primary/90 hover:to-primary active:scale-95 transition-all w-full sm:w-auto"
-                style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 shrink-0" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                WhatsApp Me
-              </a>
-            </div>
+      {/* Contact options */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a
+          href={`mailto:${siteConfig.email}`}
+          className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-xl bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/20 hover:bg-primary/90 smooth-transition"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Send an Email
+        </a>
+        <a
+          href={siteConfig.links.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 px-8 h-12 rounded-xl border border-white/[0.12] bg-white/[0.04] text-foreground/80 font-semibold text-sm hover:border-white/20 hover:text-foreground hover:bg-white/[0.07] smooth-transition"
+        >
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          Connect on LinkedIn
+        </a>
+      </div>
 
-            <div className="w-full h-px bg-border/60 my-2" />
-
-            <div className="flex flex-col gap-4 w-full mt-6">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border/60 hover:border-primary/50 hover:text-primary transition-colors text-sm font-medium text-muted-foreground w-full justify-center lg:justify-start premium-shadow"
-              >
-                <Mail className="w-4 h-4 text-primary shrink-0" />
-                {siteConfig.email}
-              </a>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border/60 hover:border-primary/50 hover:text-primary transition-colors text-sm font-medium text-muted-foreground w-full justify-center lg:justify-start premium-shadow"
-              >
-                <Linkedin className="w-4 h-4 text-primary shrink-0" />
-                LinkedIn Profile
-              </a>
-              <div className="flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border/60 text-sm font-medium text-muted-foreground w-full justify-center lg:justify-start premium-shadow">
-                <MapPin className="w-4 h-4 text-primary shrink-0" />
-                Jaipur, India (IST)
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Contact Form */}
-          <div className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-sm">
-            <h3 className="font-bold mb-2 text-foreground" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>Send an Email</h3>
-            <p className="text-muted-foreground mb-8">
-              Prefer email? Fill out the form below and I'll get back to you within 24 hours.
-            </p>
-            <ContactForm />
-          </div>
-        </div>
-      </FadeIn>
+      {/* Secondary contact info */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
+        <a href={`mailto:${siteConfig.email}`} className="hover:text-foreground smooth-transition">
+          {siteConfig.email}
+        </a>
+        <span className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
+        <span>{siteConfig.location}</span>
+        <span className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
+        <a
+          href={siteConfig.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-foreground smooth-transition"
+        >
+          WhatsApp
+        </a>
+      </div>
     </div>
   </section>
+);
+
+const SectionFallback = () => (
+  <div className="py-20 flex items-center justify-center">
+    <div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
+  </div>
 );
 
 const HomePage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {/* Subtle static background gradients — no blur, no animation, GPU-friendly */}
+      {/* Grain texture overlay */}
+      <div className="noise-overlay" aria-hidden="true" />
+
+      {/* Floating Tech Icons */}
+      <FloatingTechBackground />
+
+      {/* Ambient background gradients — static, no animation */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-full h-[60vh] bg-[radial-gradient(ellipse_at_top_left,hsl(199,89%,42%,0.06),transparent_65%)]" />
-        <div className="absolute bottom-0 right-0 w-full h-[50vh] bg-[radial-gradient(ellipse_at_bottom_right,hsl(255,65%,58%,0.05),transparent_65%)]" />
-        <div className="texture-overlay" />
+        <div className="absolute top-0 left-0 w-[70%] h-[50vh] bg-[radial-gradient(ellipse_at_top_left,rgba(99,102,241,0.06),transparent_55%)]" />
+        <div className="absolute bottom-0 right-0 w-[50%] h-[40vh] bg-[radial-gradient(ellipse_at_bottom_right,rgba(34,211,238,0.04),transparent_60%)]" />
       </div>
 
+      {/* ── SEO Meta Tags ── */}
       <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Dikshant Goyal | Best Full-Stack Web Developer &amp; React/Laravel Architect in Jaipur</title>
-        <meta name="title" content="Dikshant Goyal | Best Full-Stack Web Developer &amp; React/Laravel Architect in Jaipur" />
-        <meta name="description" content="Looking for the best full-stack developer in Jaipur? Dikshant Goyal is a senior developer specializing in React, Next.js, Node.js, and Laravel. Available for enterprise SaaS and custom web development in Jaipur, India." />
-        <meta name="keywords" content="Dikshant Goyal, Best Web Developer in Jaipur, React Developer Jaipur, Next.js Developer Jaipur, Node.js Developer Jaipur, Laravel Architect Jaipur, Senior Full-Stack Developer Jaipur, Freelance Web Developer Jaipur, Web Development Services Jaipur" />
+        <title>Dikshant Goyal | AI-Powered Backend & Product Engineer | Laravel · AWS · OpenAI</title>
+        <meta name="title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer | Laravel · AWS · OpenAI" />
+        <meta
+          name="description"
+          content="Dikshant Goyal is a backend & product engineer specializing in scalable Laravel APIs, Redis/Horizon queue systems, AWS cloud infrastructure, OpenAI integrations, and production SaaS platforms."
+        />
+        <meta
+          name="keywords"
+          content="Dikshant Goyal, Backend Engineer, Laravel Engineer, AI Engineer, Product Engineer, SaaS Engineer, Full Stack Engineer, Cloud Engineer, PHP Developer, OpenAI Integration, Redis Horizon, AWS Developer, Jaipur, India"
+        />
         <meta name="author" content="Dikshant Goyal" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <link rel="canonical" href="https://dikshantgoyal.com/" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
-        <meta name="theme-color" content="#00B8D9" />
-        <meta name="msapplication-TileColor" content="#00B8D9" />
+        <meta name="theme-color" content="#080810" />
 
-        {/* Open Graph / Facebook */}
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Dikshant Goyal Portfolio" />
+        <meta property="og:site_name" content="Dikshant Goyal — Portfolio" />
         <meta property="og:url" content="https://dikshantgoyal.com/" />
-        <meta property="og:title" content="Dikshant Goyal | Best Full-Stack Web Developer &amp; React/Laravel Architect in Jaipur" />
-        <meta property="og:description" content="Looking for the best full-stack web developer in Jaipur? Senior Full-Stack Developer specializing in production-grade React/Next.js frontends, Node.js/Laravel backends, and robust AWS deployments." />
-        <meta property="og:image" content="https://dikshantgoyal.com/hero_development_backdrop.png" />
+        <meta property="og:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
+        <meta
+          property="og:description"
+          content="Backend engineer specializing in Laravel, Redis/Horizon, AWS infrastructure, OpenAI integrations, and production SaaS architecture."
+        />
+        <meta property="og:image" content="https://dikshantgoyal.com/og-image.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:site" content="@csdikshant" />
         <meta property="twitter:creator" content="@csdikshant" />
         <meta property="twitter:url" content="https://dikshantgoyal.com/" />
-        <meta property="twitter:title" content="Dikshant Goyal | Best Full-Stack Web Developer &amp; React/Laravel Architect in Jaipur" />
-        <meta property="twitter:description" content="Looking for the best full-stack web developer in Jaipur? Senior Full-Stack Developer specializing in production-grade React/Next.js frontends, Node.js/Laravel backends, and robust AWS deployments." />
-        <meta property="twitter:image" content="https://dikshantgoyal.com/hero_development_backdrop.png" />
+        <meta property="twitter:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
+        <meta
+          property="twitter:description"
+          content="Backend engineer specializing in Laravel, Redis/Horizon, AWS, OpenAI integrations, and production SaaS architecture."
+        />
+        <meta property="twitter:image" content="https://dikshantgoyal.com/og-image.jpg" />
 
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Dikshant Goyal",
-            "url": "https://dikshantgoyal.com/",
-            "image": "https://dikshantgoyal.com/hero_development_backdrop.png",
-            "sameAs": [
-              "https://in.linkedin.com/in/csdikshant",
-              "https://wa.me/919829641370"
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Dikshant Goyal',
+            url: 'https://dikshantgoyal.com/',
+            jobTitle: 'AI-Powered Backend & Product Engineer',
+            worksFor: { '@type': 'Organization', name: 'iTechPanel LLP' },
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Jaipur',
+              addressRegion: 'Rajasthan',
+              addressCountry: 'IN',
+            },
+            sameAs: [
+              'https://in.linkedin.com/in/csdikshant',
+              'https://github.com/dikshantgoyal',
             ],
-            "jobTitle": "Senior Web Developer & Laravel Architect",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "iTechPanel LLP"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Jaipur",
-              "addressRegion": "Rajasthan",
-              "addressCountry": "IN"
-            },
-            "description": "Senior Web Developer and Laravel Architect specializing in production-grade SaaS platforms, queue-driven architectures (Redis Horizon), and robust AWS deployments.",
-            "alumniOf": {
-              "@type": "EducationalOrganization",
-              "name": "Swargiya P.N.K.S. Government PG College"
-            },
-            "knowsAbout": [
-              "Laravel", "PHP", "Redis", "Amazon Web Services (AWS)",
-              "API Integration", "Database Optimization", "SaaS Architecture", "Fulfillment Automation"
-            ]
+            knowsAbout: [
+              'Laravel', 'PHP', 'Redis', 'Laravel Horizon', 'AWS', 'OpenAI API',
+              'RAG Systems', 'SaaS Architecture', 'API Development', 'Queue Systems',
+              'React', 'Next.js', 'TypeScript', 'Docker', 'CI/CD',
+            ],
+            description:
+              'Backend & product engineer specializing in scalable Laravel APIs, Redis/Horizon queue systems, AWS cloud infrastructure, OpenAI integrations, and production SaaS platforms.',
           })}
         </script>
       </Helmet>
 
       <Header />
 
-      <main className="flex-grow relative z-10 overflow-hidden">
+      <main className="flex-grow relative z-10">
+        {/* 1. Hero */}
         <HeroSection />
+
+        {/* 2. Stats bar */}
         <StatsSection />
-        <React.Suspense fallback={<div className="h-40 flex items-center justify-center opacity-50">Loading section...</div>}>
-          <CareerSection />
-          <CompetenciesSection />
-          <ClientProjectsSection />
+
+        <React.Suspense fallback={<SectionFallback />}>
+          {/* 3. About */}
+          <AboutSection />
+
+          {/* 4. Engineering Expertise */}
           <TechnicalExpertiseSection />
+
+          {/* 5. Production Experience */}
+          <ProductionSection />
+
+          {/* 6. AI Engineering */}
+          <AISection />
+
+          {/* 7. Featured Projects + Client Work */}
+          <ClientProjectsSection />
+
+          {/* 8. Case Studies */}
+          <CaseStudiesSection />
+
+          {/* 9. What I Solve */}
+          <WhatISolveSection />
+
+          {/* 10. Tech Stack */}
           <SkillsSection />
-          <CertificationsSection />
+
+          {/* 11. Career Timeline */}
+          <CareerSection />
         </React.Suspense>
-        <WhatsAppCTASection />
+
+        {/* 12. Contact CTA */}
+        <ContactSection />
       </main>
 
       <Footer />

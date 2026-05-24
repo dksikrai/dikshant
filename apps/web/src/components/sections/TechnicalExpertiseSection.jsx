@@ -1,112 +1,137 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Server, Zap, Cloud, ShoppingCart } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
+import { Server, Zap, Cloud, ShoppingCart, Brain, Layout } from 'lucide-react';
+import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 
 const expertise = [
   {
-    id: "item-1",
-    title: "Backend & SaaS Engineering",
     icon: Server,
-    color: "text-primary",
-    bg: "bg-primary/10 border-primary/20",
-    description: "Laravel architecture, API-first development, queue-driven design, background processing, multi-tenant SaaS, database optimization, production-grade systems."
+    title: 'Backend Architecture',
+    color: 'text-indigo-400',
+    iconBg: 'bg-indigo-500/10 border-indigo-500/20',
+    description: 'Laravel, PHP 8+, API-first design, multi-tenant SaaS, Eloquent optimization, microservice patterns, and production-grade backend systems.',
+    points: ['Laravel & PHP 8+ Expert', 'Multi-Tenant SaaS Design', 'API-First Architecture', 'Database Optimization'],
   },
   {
-    id: "item-2",
-    title: "Automation & Integration Systems",
     icon: Zap,
-    color: "text-secondary",
-    bg: "bg-secondary/10 border-secondary/20",
-    description: "Shipping APIs, payment gateways, email/notification systems, image processing via Fabric.js, queue-based workflows, third-party integrations, webhook architecture."
+    title: 'Queue & Async Systems',
+    color: 'text-amber-400',
+    iconBg: 'bg-amber-500/10 border-amber-500/20',
+    description: 'Redis queues, Laravel Horizon, background job processing, webhook delivery, event-driven architecture, and async workflow automation.',
+    points: ['Redis + Laravel Horizon', 'Background Job Pipelines', 'Webhook Architecture', 'Event-Driven Systems'],
   },
   {
-    id: "item-3",
-    title: "Cloud & DevOps Infrastructure",
     icon: Cloud,
-    color: "text-amber-500 dark:text-amber-400",
-    bg: "bg-amber-500/10 border-amber-500/20",
-    description: "AWS services (EC2, S3, RDS), Docker containerization, Linux management, CloudPanel setup, Hostinger Horizons, CI/CD pipelines, performance optimization."
+    title: 'Cloud Infrastructure',
+    color: 'text-sky-400',
+    iconBg: 'bg-sky-500/10 border-sky-500/20',
+    description: 'AWS (EC2, S3, SQS, Lambda), Linux server management, CI/CD pipelines, zero-downtime deployment, and production monitoring.',
+    points: ['AWS EC2, S3, SQS, Lambda', 'CI/CD Pipeline Setup', 'Linux Server Management', 'Zero-Downtime Deploys'],
   },
   {
-    id: "item-4",
-    title: "E-commerce & Product Systems",
+    icon: Brain,
+    title: 'AI Engineering',
+    color: 'text-violet-400',
+    iconBg: 'bg-violet-500/10 border-violet-500/20',
+    description: 'OpenAI API integrations, RAG pipelines, document embeddings, vector caching with Redis, AI automation workflows for production SaaS.',
+    points: ['OpenAI API Integration', 'RAG Pipelines & Embeddings', 'AI Automation Workflows', 'Vector Search Systems'],
+  },
+  {
+    icon: Layout,
+    title: 'Frontend Systems',
+    color: 'text-cyan-400',
+    iconBg: 'bg-cyan-500/10 border-cyan-500/20',
+    description: 'Next.js, React, TypeScript, Tailwind CSS — building modern SaaS dashboards, responsive UI systems, and performant frontend architectures.',
+    points: ['Next.js / React / TypeScript', 'Tailwind CSS Systems', 'SaaS Dashboard UI', 'Performance Optimization'],
+  },
+  {
     icon: ShoppingCart,
-    color: "text-rose-500 dark:text-rose-400",
-    bg: "bg-rose-500/10 border-rose-500/20",
-    description: "WooCommerce customization, dynamic product builders, inventory management, automated order routing, checkout optimization, secure payment workflows."
-  }
+    title: 'Ecommerce & Payments',
+    color: 'text-rose-400',
+    iconBg: 'bg-rose-500/10 border-rose-500/20',
+    description: 'WooCommerce, Stripe, PayPal, ShipStation — building high-volume ecommerce backends with automated order processing and payment systems.',
+    points: ['WooCommerce Customization', 'Stripe / PayPal Integration', 'Order Automation Systems', 'Inventory Management'],
+  },
 ];
+
+const ExpertiseCard = ({ exp, index }) => {
+  const ios = isIOS();
+  const Icon = exp.icon;
+
+  return (
+    <motion.div
+      variants={{
+        hidden: ios ? {} : { opacity: 0, y: 24 },
+        visible: ios ? {} : {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }
+        },
+      }}
+      className="group"
+    >
+      <div className="h-full glass-card rounded-xl p-6 card-hover flex flex-col gap-4">
+        {/* Icon */}
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${exp.iconBg} shrink-0`}>
+          <Icon className={`w-5 h-5 ${exp.color}`} />
+        </div>
+
+        {/* Title */}
+        <h3 className="font-bold text-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
+          {exp.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
+          {exp.description}
+        </p>
+
+        {/* Points */}
+        <ul className="space-y-1.5 mt-1">
+          {exp.points.map((point, i) => (
+            <li key={i} className="flex items-center gap-2 text-xs text-muted-foreground/80">
+              <span className={`w-1 h-1 rounded-full ${exp.color.replace('text-', 'bg-')} shrink-0`} />
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
 
 const TechnicalExpertiseSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-16 md:py-24" id="tech-expertise">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-4 text-center">
-          <h2 className="font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
-            <TextReveal text="Advanced Technical Depth" className="text-gradient-primary" />
+    <section className="py-10 md:py-28 relative overflow-hidden" id="expertise">
+      {/* Ambient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <FadeIn className="text-center mb-16">
+          <div className="section-label mb-4">ENGINEERING EXPERTISE</div>
+          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
+            What I Build With
           </h2>
-        </div>
-        <FadeIn delay={0.08} className="text-center mb-16">
-          <p className="text-muted-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
-            Granular insights into my technical capabilities across the stack.
+          <p className="text-muted-foreground max-w-xl mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
+            Core engineering domains where I have deep, production-proven experience.
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <Card className="glass-card border-border/50 premium-shadow">
-            <CardContent className="p-2 sm:p-6">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "50px" }}
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
-                }}
-              >
-                <Accordion type="single" collapsible defaultValue="item-1" className="w-full space-y-4">
-                  {expertise.map((exp) => (
-                    <motion.div
-                      key={exp.id}
-                      variants={{
-                        hidden: ios ? {} : { opacity: 0, x: -16 },
-                        visible: ios ? {} : { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }
-                      }}
-                    >
-                      <AccordionItem
-                        value={exp.id}
-                        className="border-border/50 px-4 rounded-xl data-[state=open]:bg-secondary/5 transition-colors duration-150"
-                      >
-                        <AccordionTrigger className="hover:no-underline py-6">
-                          <div className="flex items-center gap-4 text-left">
-                            <motion.div
-                              className={`p-3 rounded-xl border ${exp.bg} shadow-sm shrink-0`}
-                              whileHover={ios ? {} : { scale: 1.1, rotate: -6 }}
-                              transition={{ type: 'spring', stiffness: 380, damping: 15 }}
-                            >
-                              <exp.icon className={`w-6 h-6 ${exp.color}`} />
-                            </motion.div>
-                            <span className="font-bold" style={{ fontSize: 'clamp(1.125rem, 2.5vw, 1.25rem)' }}>{exp.title}</span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="pt-2 pb-6 pl-[4.5rem]">
-                          <p className="text-muted-foreground leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2vw, 1rem)' }}>
-                            {exp.description}
-                          </p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </motion.div>
-                  ))}
-                </Accordion>
-              </motion.div>
-            </CardContent>
-          </Card>
-        </FadeIn>
+        {/* Cards grid */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '60px' }}
+          variants={{ hidden: {}, visible: {} }}
+        >
+          {expertise.map((exp, i) => (
+            <ExpertiseCard key={i} exp={exp} index={i} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );

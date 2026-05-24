@@ -1,67 +1,180 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FadeIn, useCountUp, isIOS, ease } from '@/lib/motion.jsx';
+/**
+ * StatsSection.jsx — Metrics bar.
+ *
+ * 4 stats in a horizontal bar (desktop) / 2×2 grid (mobile).
+ * Thin top/bottom borders only, no fill background.
+ * Gradient number text + useCountUp animation (iOS-safe).
+ */
 
-const stats = [
-  { value: "20+",   display: 20,   suffix: "+",  label: "Websites Delivered", icon: "🌐", description: "From MVPs to enterprise SaaS" },
-  { value: "5+",    display: 5,    suffix: "+",  label: "Years Experience",    icon: "⚡", description: "Building production systems" },
-  { value: "99.9%", display: 99.9, suffix: "%",  label: "Uptime Achieved",    icon: "🛡️", description: "Across all hosted platforms" },
-  { value: "50K+",  display: 50,   suffix: "K+", label: "Users Served",       icon: "🚀", description: "Across all client platforms" },
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useCountUp, isIOS, ease } from '@/lib/motion.jsx';
+
+// ─── Stat data ────────────────────────────────────────────────────────────────
+
+const STATS = [
+  {
+    value: 22,
+    suffix: '+',
+    label: 'Projects Delivered',
+    description: 'End-to-end production deployments',
+    gradient: 'linear-gradient(135deg, hsl(243,88%,72%) 0%, hsl(192,80%,60%) 100%)',
+  },
+  {
+    value: 2,
+    suffix: '+',
+    label: 'Years Production Experience',
+    description: 'Live systems serving real users',
+    gradient: 'linear-gradient(135deg, hsl(192,80%,60%) 0%, hsl(160,70%,55%) 100%)',
+  },
+  {
+    value: 99.9,
+    suffix: '%',
+    label: 'Uptime SLA',
+    description: 'Maintained across all critical services',
+    gradient: 'linear-gradient(135deg, hsl(160,70%,55%) 0%, hsl(243,88%,72%) 100%)',
+  },
+  {
+    value: 50,
+    suffix: 'K+',
+    label: 'Users Served',
+    description: 'Across platforms and client products',
+    gradient: 'linear-gradient(135deg, hsl(280,70%,68%) 0%, hsl(243,88%,72%) 100%)',
+  },
 ];
 
-const StatCard = ({ stat, index }) => {
+// ─── Individual stat card ─────────────────────────────────────────────────────
+
+function StatItem({ stat, index }) {
+  const [ref, count] = useCountUp(stat.value, 1.8);
+  const prefersReducedMotion = useReducedMotion();
   const ios = isIOS();
-  const [ref, count] = useCountUp(stat.display, 1.6);
+
+  // Format displayed value
+  const isFloat = String(stat.value).includes('.');
+  const displayed = isFloat
+    ? Number(count).toFixed(1)
+    : Math.floor(Number(count));
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.55,
+        delay: ios ? Math.min(index * 0.06, 0.3) : index * 0.1,
+        ease: ease.out,
+      },
+    },
+  };
 
   return (
-    <motion.div 
-      variants={{
-        hidden: ios ? {} : { opacity: 0, y: 15 },
-        visible: ios ? {} : { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
-      }}
+    <motion.div
+      ref={ref}
+      variants={itemVariants}
+      className="flex flex-col gap-1.5 px-6 py-8 md:px-8 md:py-10 text-center md:text-left"
     >
+      {/* Number */}
       <div
-        ref={ref}
-        className={`text-center px-2 sm:px-6 py-6 md:py-4 group ${
-          index < 3 ? 'border-b md:border-b-0 md:border-r border-border/40' : ''
-        }`}
+        className="font-extrabold tracking-tight leading-none"
+        style={{
+          fontSize: 'clamp(2rem, 4.5vw, 3rem)',
+          letterSpacing: '-0.04em',
+          backgroundImage: stat.gradient,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
       >
-        <motion.div
-          className="text-2xl md:text-3xl mb-2 md:mb-3 inline-block"
-          whileHover={ios ? {} : { scale: 1.25, rotate: [0, -8, 8, 0] }}
-          transition={{ duration: 0.38 }}
-        >
-          {stat.icon}
-        </motion.div>
+        {displayed}{stat.suffix}
+      </div>
 
-        <div className="font-extrabold text-gradient-primary mb-1.5 tabular-nums" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1' }}>
-          {ios ? stat.value : `${count}${stat.suffix}`}
-        </div>
-        <div className="font-bold text-foreground mb-0.5 leading-tight" style={{ fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>{stat.label}</div>
-        <div className="text-muted-foreground hidden sm:block" style={{ fontSize: 'clamp(0.625rem, 1vw, 0.75rem)' }}>{stat.description}</div>
+      {/* Label */}
+      <div
+        className="font-semibold text-sm leading-tight"
+        style={{ color: 'hsl(var(--foreground))', letterSpacing: '-0.01em' }}
+      >
+        {stat.label}
+      </div>
+
+      {/* Description */}
+      <div
+        className="text-xs leading-relaxed"
+        style={{ color: 'hsl(var(--muted-foreground))', opacity: 0.75 }}
+      >
+        {stat.description}
       </div>
     </motion.div>
   );
-};
+}
 
-const StatsSection = () => (
-  <section className="py-10 md:py-12 relative overflow-hidden" id="stats">
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-y border-border/40" />
+// ─── StatsSection ─────────────────────────────────────────────────────────────
 
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <motion.div 
-        className="grid grid-cols-2 lg:grid-cols-4"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "50px" }}
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+export default function StatsSection() {
+  const ios = isIOS();
+  const prefersReducedMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.09,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  return (
+    <>
+      <style>{`
+        .stats-grid .stat-cell {
+          border-right: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .stats-grid .stat-cell:nth-child(2n) {
+          border-right: none;
+        }
+        .stats-grid .stat-cell:nth-child(3),
+        .stats-grid .stat-cell:nth-child(4) {
+          border-bottom: none;
+        }
+        @media (min-width: 768px) {
+          .stats-grid .stat-cell {
+            border-right: 1px solid rgba(255,255,255,0.06);
+            border-bottom: none;
+          }
+          .stats-grid .stat-cell:last-child {
+            border-right: none;
+          }
+        }
+      `}</style>
+      <section
+        id="stats"
+        className="w-full py-0"
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+        }}
+        aria-label="Key metrics"
       >
-        {stats.map((stat, i) => (
-          <StatCard key={i} stat={stat} index={i} />
-        ))}
-      </motion.div>
-    </div>
-  </section>
-);
-
-export default StatsSection;
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="stats-grid grid grid-cols-2 md:grid-cols-4"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView={(!ios && !prefersReducedMotion) ? 'visible' : undefined}
+            animate={(ios || prefersReducedMotion) ? 'visible' : undefined}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {STATS.map((stat, i) => (
+              <div key={stat.label} className="stat-cell">
+                <StatItem stat={stat} index={i} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}

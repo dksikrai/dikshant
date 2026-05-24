@@ -1,231 +1,112 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, ArrowUpRight, ArrowRight, Terminal } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { FadeIn, isIOS, ease, TextReveal, useCardTilt } from '@/lib/motion.jsx';
-
-const projectsData = [
-  {
-    name: "Mehta College",
-    type: "Enterprise",
-    tech: ["WordPress", "Elementor", "PHP", "MySQL"],
-    url: "https://www.mehtacollege.com/",
-    description: "A comprehensive educational portal for Mehta PG College, featuring student LMS integration, admission workflows, and dynamic academic department management.",
-    screenshot: "/screenshots/mehta_college.png"
-  },
-  {
-    name: "Airventory",
-    type: "SaaS",
-    tech: ["Laravel", "Vue.js", "AWS", "Redis", "Fabric.js"],
-    url: "https://www.airventory.io/",
-    description: "Enterprise e-commerce fulfillment and shipping automation platform integrated with ShipStation, Fabric.js canvas printing, and AWS Lambda.",
-    screenshot: "/screenshots/airventory.png"
-  },
-  {
-    name: "Kritasya Jewels",
-    type: "E-commerce",
-    tech: ["WordPress", "WooCommerce", "PHP", "MySQL"],
-    url: "https://kritasyajewels.com/",
-    description: "Premium fine jewelry e-commerce platform featuring advanced multi-attribute filtering, high-resolution product zooms, and secure checkouts.",
-    screenshot: "/screenshots/kritasyajewels.png"
-  },
-  {
-    name: "Mehandipur Balaji Seva",
-    type: "Services",
-    tech: ["WordPress", "Elementor", "PHP", "WhatsApp API"],
-    url: "https://mehandipurbalajiseva.com/",
-    description: "Devotional service booking platform facilitating online booking of sawamani prasad and arji offerings, integrated with WhatsApp notifications.",
-    screenshot: "/screenshots/mehandipurbalajiseva.png"
-  },
-  {
-    name: "Bright Hygiene Group",
-    type: "Enterprise",
-    tech: ["WordPress", "Elementor", "PHP", "Nginx"],
-    url: "http://brighthygienegroup.in/",
-    description: "Regional pest control and commercial cleaning service platform based in Jaipur, featuring service catalog and automated inquiry booking.",
-    screenshot: "/screenshots/brighthygienegroup.png"
-  },
-  {
-    name: "Aussie Translations",
-    type: "Services",
-    tech: ["WordPress", "Elementor", "PHP", "Nginx"],
-    url: "https://aussietranslations.com.au/",
-    description: "High-volume translation agency portal in Australia, offering instant PDF document uploads, automatic word counts, and secure payments.",
-    screenshot: "/screenshots/aussietranslations.png"
-  },
-  {
-    name: "Flow Rental",
-    type: "Services",
-    tech: ["WordPress", "PHP", "Apache", "Custom JS"],
-    url: "https://www.flowrental.dk/",
-    description: "Danish service rental platform for tool and equipment bookings, integrated with online calendars, custom booking rules, and invoicing.",
-    screenshot: "/screenshots/flowrental.png"
-  },
-  {
-    name: "MapView AI",
-    type: "SaaS",
-    tech: ["WordPress", "Cloudflare", "PHP", "Mapbox API"],
-    url: "https://mapview.ai/",
-    description: "Marketing intelligence SaaS overlaying property leads, zoning maps, and regional demographic insights onto visual interactive maps.",
-    screenshot: "/screenshots/mapview.png"
-  },
-  {
-    name: "Zircodata",
-    type: "Enterprise",
-    tech: ["WordPress", "WooCommerce", "PHP", "SQL Server"],
-    url: "https://www.zircodata.com/",
-    description: "Australian enterprise document scanning, records storage, data capture, secure backup tape management, and workflow automation portal.",
-    screenshot: "/screenshots/zircodata.png"
-  },
-  {
-    name: "CleanGuys Germany",
-    type: "Services",
-    tech: ["WordPress", "WooCommerce", "Elementor", "CSS3"],
-    url: "https://cleanguys.de/",
-    description: "German commercial facility management, building sanitation, residential maintenance catalog, and custom contact request booking.",
-    screenshot: "/screenshots/cleanguys.png"
-  },
-  {
-    name: "MedTrans",
-    type: "Services",
-    tech: ["WordPress", "Vue.js", "Elementor", "NAATI API"],
-    url: "https://medtrans.com.au/",
-    description: "Australian medical transcription and translation agency portal, ensuring strict HIPAA compliance, secure file uploads, and NAATI certificates.",
-    screenshot: "/screenshots/medtrans.png"
-  },
-  {
-    name: "Legal Translations Australia",
-    type: "Services",
-    tech: ["WordPress", "WooCommerce", "Bootstrap", "PHP"],
-    url: "https://legal-translations.com.au/",
-    description: "Specialized legal translation services portal in Australia for legal documents, court records, and NAATI-certified translations.",
-    screenshot: "/screenshots/legaltranslations.png"
-  },
-  {
-    name: "EasyITRFile",
-    type: "Services",
-    tech: ["WordPress", "Elementor", "PHP", "HCDN"],
-    url: "https://easyitrfile.com",
-    description: "Financial tax filing portal in India for filing GST, Income Tax Returns (ITR), corporate audits, and automated tax calculations.",
-    screenshot: "/screenshots/easyitrfile.png"
-  },
-  {
-    name: "Cake Deco Supplies Australia",
-    type: "E-commerce",
-    tech: ["WooCommerce", "Bootstrap", "Cloudflare", "PHP"],
-    url: "https://cakedecosupplies.com.au/",
-    description: "Specialized retail and wholesale baking supplies e-commerce store in Australia, supporting massive product variation trees.",
-    screenshot: "/screenshots/cakedecosupplies.png"
-  },
-  {
-    name: "Mehta CI",
-    type: "Enterprise",
-    tech: ["WordPress", "Elementor", "PHP", "Custom CSS"],
-    url: "https://www.mehtaci.com/",
-    description: "Portfolio website for high-end commercial interiors and workspace design studio, highlighting premium visual case studies.",
-    screenshot: "/screenshots/mehtaci.png"
-  },
-  {
-    name: "SalesPundit Australia",
-    type: "SaaS",
-    tech: ["WordPress", "React", "Elementor", "REST APIs"],
-    url: "https://salespundit.com.au/",
-    description: "Sales CRM and pipeline manager focusing on customer journey tracing, email marketing integrations, and performance reporting.",
-    screenshot: "/screenshots/salespundit.png"
-  },
-  {
-    name: "Salg.nu",
-    type: "E-commerce",
-    tech: ["HTML5", "CSS3", "JavaScript", "Cloudflare"],
-    url: "https://www.salg.nu/",
-    description: "Danish deal site presenting daily discount coupons, retail promo codes, and special campaigns for Scandinavian brands.",
-    screenshot: "/screenshots/salg.png"
-  },
-  {
-    name: "Jacksons Retreat NZ",
-    type: "Services",
-    tech: ["WordPress", "WooCommerce", "Elementor", "Booking APIs"],
-    url: "https://www.jacksonsretreat.co.nz/",
-    description: "Eco-retreat lodging reservation site in New Zealand, integrated with booking engines, live availability calendars, and local travel guides.",
-    screenshot: "/screenshots/jacksonsretreat.png"
-  },
-  {
-    name: "XFC Gym 247",
-    type: "Services",
-    tech: ["WordPress", "Elementor", "Apache", "PHP"],
-    url: "https://xfcgym247.com.au/",
-    description: "Multi-location fitness gym membership checkout, online trainer booking systems, class schedule timetables, and member dashboard portals.",
-    screenshot: "/screenshots/xfcgym247.png"
-  },
-  {
-    name: "White Knight Cyber",
-    type: "Enterprise",
-    tech: ["WordPress", "Elementor", "Nginx", "Nginx WAF"],
-    url: "https://whiteknightcyber.com/",
-    description: "Cyber defense consulting website offering security audits, pen testing, system assessments, and corporate training intake.",
-    screenshot: "/screenshots/whiteknightcyber.png"
-  },
-  {
-    name: "ITechPanel",
-    type: "Services",
-    tech: ["WordPress", "React", "Vue.js", "Node.js"],
-    url: "http://itechpanel.com/",
-    description: "Creative software agency landing page presenting services, case studies, engineering capabilities, and talent recruitment.",
-    screenshot: "/screenshots/itechpanel.png"
-  },
-  {
-    name: "ProfileTag Germany",
-    type: "SaaS",
-    tech: ["PHP", "Nginx", "Plesk", "Tailwind CSS"],
-    url: "https://www.profiletag.de/",
-    description: "SaaS tool enabling users to design mobile-optimized biolink pages, digital business cards, and custom QR codes for social marketing.",
-    screenshot: "/screenshots/profiletag.png"
-  }
-];
-
+import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
+import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 import {
   SiLaravel, SiVuedotjs, SiRedis, SiJavascript,
-  SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor, SiWhatsapp,
+  SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor,
   SiNginx, SiApache, SiCloudflare, SiMapbox,
   SiBootstrap, SiReact, SiNodedotjs, SiPlesk, SiTailwindcss
 } from 'react-icons/si';
 import { TbApi, TbCloud } from 'react-icons/tb';
 import { FaAws, FaDatabase, FaCss3, FaHtml5 } from 'react-icons/fa';
 
+const featuredProjects = [
+  {
+    name: 'Airventory',
+    type: 'SaaS · Fulfillment Platform',
+    url: 'https://www.airventory.io/',
+    description: 'Enterprise e-commerce fulfillment automation platform with priority-lane queue processing, ShipStation integration, and Fabric.js canvas for custom product label printing.',
+    challenge: 'Manual fulfillment causing 30% error rate and 4-hour processing delays for high-volume operations.',
+    architecture: 'Laravel queue system (priority lanes) + Redis deduplication + AWS Lambda + ShipStation API + Fabric.js canvas',
+    tech: ['Laravel', 'Redis', 'AWS', 'Vue.js', 'Fabric.js'],
+    metric: '10K+ Orders/Month',
+    impact: '60% Error Reduction',
+    screenshot: '/screenshots/airventory.png',
+    featured: true,
+  },
+  {
+    name: 'MapView AI',
+    type: 'SaaS · Intelligence Platform',
+    url: 'https://mapview.ai/',
+    description: 'Marketing intelligence SaaS overlaying property leads, zoning maps, and demographic insights onto interactive Mapbox maps with AI-powered data enrichment.',
+    challenge: 'Real estate teams needed visual intelligence dashboards combining disparate data sources with live map overlays.',
+    architecture: 'WordPress + Cloudflare CDN + Mapbox GL API + custom PHP data pipeline + AI enrichment layer',
+    tech: ['PHP', 'Cloudflare', 'Mapbox API', 'WordPress'],
+    metric: 'Real-Time Intelligence',
+    impact: 'AI-Enhanced Maps',
+    screenshot: '/screenshots/mapview.png',
+    featured: true,
+  },
+  {
+    name: 'ProfileTag Germany',
+    type: 'SaaS · Digital Identity',
+    url: 'https://www.profiletag.de/',
+    description: 'SaaS platform enabling users to design mobile-optimized biolink pages, digital business cards, and custom QR codes for social marketing campaigns.',
+    challenge: 'German market needed a GDPR-compliant, high-performance biolink SaaS with QR code generation and analytics.',
+    architecture: 'PHP + Nginx + Tailwind CSS + custom QR engine + Plesk deployment automation',
+    tech: ['PHP', 'Nginx', 'Plesk', 'Tailwind CSS'],
+    metric: '1000+ Active Users',
+    impact: 'GDPR Compliant',
+    screenshot: '/screenshots/profiletag.png',
+    featured: true,
+  },
+];
+
+const allProjects = [
+  { name: 'Mehta College', type: 'Enterprise', tech: ['WordPress', 'PHP', 'MySQL'], url: 'https://www.mehtacollege.com/', screenshot: '/screenshots/mehta_college.png' },
+  { name: 'Kritasya Jewels', type: 'E-commerce', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://kritasyajewels.com/', screenshot: '/screenshots/kritasyajewels.png' },
+  { name: 'Mehandipur Balaji Seva', type: 'Services', tech: ['WordPress', 'PHP', 'WhatsApp API'], url: 'https://mehandipurbalajiseva.com/', screenshot: '/screenshots/mehandipurbalajiseva.png' },
+  { name: 'Bright Hygiene Group', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Nginx'], url: 'http://brighthygienegroup.in/', screenshot: '/screenshots/brighthygienegroup.png' },
+  { name: 'Aussie Translations', type: 'Services', tech: ['WordPress', 'PHP', 'Nginx'], url: 'https://aussietranslations.com.au/', screenshot: '/screenshots/aussietranslations.png' },
+  { name: 'Flow Rental', type: 'Services', tech: ['WordPress', 'PHP', 'Custom JS'], url: 'https://www.flowrental.dk/', screenshot: '/screenshots/flowrental.png' },
+  { name: 'Zircodata', type: 'Enterprise', tech: ['WordPress', 'WooCommerce', 'SQL Server'], url: 'https://www.zircodata.com/', screenshot: '/screenshots/zircodata.png' },
+  { name: 'CleanGuys Germany', type: 'Services', tech: ['WordPress', 'WooCommerce'], url: 'https://cleanguys.de/', screenshot: '/screenshots/cleanguys.png' },
+  { name: 'MedTrans', type: 'Services', tech: ['WordPress', 'Vue.js', 'NAATI API'], url: 'https://medtrans.com.au/', screenshot: '/screenshots/medtrans.png' },
+  { name: 'Legal Translations AU', type: 'Services', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://legal-translations.com.au/', screenshot: '/screenshots/legaltranslations.png' },
+  { name: 'EasyITRFile', type: 'Services', tech: ['WordPress', 'PHP', 'Elementor'], url: 'https://easyitrfile.com', screenshot: '/screenshots/easyitrfile.png' },
+  { name: 'Cake Deco Supplies AU', type: 'E-commerce', tech: ['WooCommerce', 'PHP', 'Cloudflare'], url: 'https://cakedecosupplies.com.au/', screenshot: '/screenshots/cakedecosupplies.png' },
+  { name: 'Mehta CI', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Custom CSS'], url: 'https://www.mehtaci.com/', screenshot: '/screenshots/mehtaci.png' },
+  { name: 'SalesPundit AU', type: 'SaaS', tech: ['WordPress', 'React', 'REST APIs'], url: 'https://salespundit.com.au/', screenshot: '/screenshots/salespundit.png' },
+  { name: 'Salg.nu', type: 'E-commerce', tech: ['HTML5', 'CSS3', 'JavaScript'], url: 'https://www.salg.nu/', screenshot: '/screenshots/salg.png' },
+  { name: 'Jacksons Retreat NZ', type: 'Services', tech: ['WordPress', 'WooCommerce', 'Booking APIs'], url: 'https://www.jacksonsretreat.co.nz/', screenshot: '/screenshots/jacksonsretreat.png' },
+  { name: 'XFC Gym 247', type: 'Services', tech: ['WordPress', 'Elementor', 'PHP'], url: 'https://xfcgym247.com.au/', screenshot: '/screenshots/xfcgym247.png' },
+  { name: 'White Knight Cyber', type: 'Enterprise', tech: ['WordPress', 'Nginx', 'Nginx WAF'], url: 'https://whiteknightcyber.com/', screenshot: '/screenshots/whiteknightcyber.png' },
+  { name: 'ITechPanel', type: 'Services', tech: ['WordPress', 'React', 'Node.js'], url: 'http://itechpanel.com/', screenshot: '/screenshots/itechpanel.png' },
+];
+
 const TechIcon = ({ name, className }) => {
-  const iconProps = { className };
   const n = name.toLowerCase();
-  if (n.includes('laravel')) return <SiLaravel {...iconProps} color="#FF2D20" />;
-  if (n.includes('vue')) return <SiVuedotjs {...iconProps} color="#4FC08D" />;
-  if (n.includes('aws')) return <FaAws {...iconProps} color="#FF9900" />;
-  if (n.includes('redis')) return <SiRedis {...iconProps} color="#DC382D" />;
-  if (n.includes('wordpress')) return <SiWordpress {...iconProps} color="#21759B" />;
-  if (n.includes('woocommerce')) return <SiWoocommerce {...iconProps} color="#96588A" />;
-  if (n.includes('php')) return <SiPhp {...iconProps} color="#777BB4" />;
-  if (n.includes('mysql')) return <SiMysql {...iconProps} color="#4479A1" />;
-  if (n.includes('elementor')) return <SiElementor {...iconProps} color="#D53184" />;
-  if (n.includes('whatsapp')) return <SiWhatsapp {...iconProps} color="#25D366" />;
-  if (n.includes('nginx')) return <SiNginx {...iconProps} color="#009639" />;
-  if (n.includes('apache')) return <SiApache {...iconProps} color="#D22128" />;
-  if (n.includes('cloudflare')) return <SiCloudflare {...iconProps} color="#F38020" />;
-  if (n.includes('mapbox')) return <SiMapbox {...iconProps} color="#000000" />;
-  if (n.includes('sql server')) return <FaDatabase {...iconProps} color="#CC292B" />;
-  if (n.includes('css')) return <FaCss3 {...iconProps} color="#1572B6" />;
-  if (n.includes('bootstrap')) return <SiBootstrap {...iconProps} color="#7952B3" />;
-  if (n.includes('react')) return <SiReact {...iconProps} color="#61DAFB" />;
-  if (n.includes('html')) return <FaHtml5 {...iconProps} color="#E34F26" />;
-  if (n.includes('node')) return <SiNodedotjs {...iconProps} color="#339933" />;
-  if (n.includes('plesk')) return <SiPlesk {...iconProps} color="#52B0E8" />;
-  if (n.includes('tailwind')) return <SiTailwindcss {...iconProps} color="#06B6D4" />;
-  if (n.includes('js') || n.includes('javascript') || n.includes('fabric')) return <SiJavascript {...iconProps} color="#F7DF1E" />;
-  if (n.includes('api')) return <TbApi {...iconProps} color="#00D8FF" />;
-  if (n.includes('hcdn')) return <TbCloud {...iconProps} color="#F38020" />;
+  const p = { className };
+  if (n.includes('laravel')) return <SiLaravel {...p} style={{ color: '#FF2D20' }} />;
+  if (n.includes('vue')) return <SiVuedotjs {...p} style={{ color: '#4FC08D' }} />;
+  if (n.includes('aws')) return <FaAws {...p} style={{ color: '#FF9900' }} />;
+  if (n.includes('redis')) return <SiRedis {...p} style={{ color: '#DC382D' }} />;
+  if (n.includes('wordpress')) return <SiWordpress {...p} style={{ color: '#21759B' }} />;
+  if (n.includes('woocommerce')) return <SiWoocommerce {...p} style={{ color: '#96588A' }} />;
+  if (n.includes('php')) return <SiPhp {...p} style={{ color: '#777BB4' }} />;
+  if (n.includes('mysql')) return <SiMysql {...p} style={{ color: '#4479A1' }} />;
+  if (n.includes('elementor')) return <SiElementor {...p} style={{ color: '#D53184' }} />;
+  if (n.includes('nginx')) return <SiNginx {...p} style={{ color: '#009639' }} />;
+  if (n.includes('apache')) return <SiApache {...p} style={{ color: '#D22128' }} />;
+  if (n.includes('cloudflare')) return <SiCloudflare {...p} style={{ color: '#F38020' }} />;
+  if (n.includes('mapbox')) return <SiMapbox {...p} style={{ color: '#aaa' }} />;
+  if (n.includes('sql server')) return <FaDatabase {...p} style={{ color: '#CC292B' }} />;
+  if (n.includes('css')) return <FaCss3 {...p} style={{ color: '#1572B6' }} />;
+  if (n.includes('bootstrap')) return <SiBootstrap {...p} style={{ color: '#7952B3' }} />;
+  if (n.includes('react')) return <SiReact {...p} style={{ color: '#61DAFB' }} />;
+  if (n.includes('html')) return <FaHtml5 {...p} style={{ color: '#E34F26' }} />;
+  if (n.includes('node')) return <SiNodedotjs {...p} style={{ color: '#339933' }} />;
+  if (n.includes('plesk')) return <SiPlesk {...p} style={{ color: '#52B0E8' }} />;
+  if (n.includes('tailwind')) return <SiTailwindcss {...p} style={{ color: '#06B6D4' }} />;
+  if (n.includes('fabric') || n.includes('js') || n.includes('javascript')) return <SiJavascript {...p} style={{ color: '#F7DF1E' }} />;
+  if (n.includes('api')) return <TbApi {...p} style={{ color: '#60a5fa' }} />;
   return <Terminal className={className} />;
 };
 
 const TechBadge = ({ tech }) => (
-  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded bg-muted border border-border text-foreground/80 dark:text-foreground/90">
-    <TechIcon name={tech} className="w-3.5 h-3.5 shrink-0" />
+  <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold mono-badge px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/70">
+    <TechIcon name={tech} className="w-3 h-3 shrink-0" />
     {tech}
   </span>
 );
@@ -240,233 +121,198 @@ const getDomainFavicon = (url) => {
   return null;
 };
 
-const getGradientFromName = (name) => {
-  const gradients = [
-    'from-blue-500 to-cyan-400',
-    'from-indigo-500 to-purple-500',
-    'from-emerald-400 to-teal-500',
-    'from-orange-400 to-rose-400',
-    'from-pink-500 to-rose-500',
-    'from-violet-500 to-fuchsia-500',
-    'from-blue-600 to-indigo-600',
-  ];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return gradients[Math.abs(hash) % gradients.length];
-};
-
-const BrowserMockup = ({ project }) => {
-  const gradientClass = getGradientFromName(project.name);
-  const hostname = project.url !== '#' ? new URL(project.url).hostname : 'localhost';
-
-  return (
-    <div className="w-full h-full relative flex flex-col bg-background/50 border border-border/40 rounded-t-lg overflow-hidden group-hover:border-primary/30 transition-all duration-300">
-      {/* Browser Header Controls */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-900 border-b border-border/50 shrink-0 select-none">
-        {/* Apple-style mock buttons */}
-        <div className="flex gap-1.5 items-center shrink-0">
-          <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
-          <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-          <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
-        </div>
-        {/* address bar with security indicator */}
-        <div className="flex items-center gap-1.5 bg-neutral-800 text-neutral-400 rounded-md px-3 py-0.5 text-[9px] truncate max-w-[140px] md:max-w-[160px] mx-auto border border-border/30 font-mono">
-          <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-          </svg>
-          {hostname}
-        </div>
-        <div className="w-[32px] shrink-0" />
-      </div>
-
-      {/* Screenshot Frame */}
-      <div className="relative flex-grow overflow-hidden bg-muted">
-        {project.screenshot ? (
-          <img
-            src={project.screenshot}
-            alt={`${project.name} Desktop Interface`}
-            className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500 ease-out"
-            loading="lazy"
-          />
-        ) : (
-          <div className={`w-full h-full relative bg-gradient-to-br ${gradientClass} flex items-center justify-center overflow-hidden`}>
-            <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 11px)' }}></div>
-            <div className="relative z-10 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl group-hover:scale-110 transition-transform duration-500">
-              <Globe className="w-8 h-8 text-white/90" strokeWidth={1.5} />
-            </div>
-          </div>
-        )}
-        
-        {/* Dynamic ambient highlight */}
-        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-      </div>
-    </div>
-  );
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 36, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 90,
-      damping: 14,
-    }
-  },
-  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.15 } }
-};
-
-const ProjectCard = ({ project, idx }) => {
-  const { ref, motionProps } = useCardTilt(6);
+// Featured project card — large horizontal layout
+const FeaturedProjectCard = ({ project, index }) => {
   const ios = isIOS();
+  const isEven = index % 2 === 0;
 
   return (
     <motion.div
-      ref={ref}
-      {...(ios ? {} : motionProps)}
-      style={{ ...motionProps.style, perspective: 1000 }}
-      whileHover={ios ? {} : { y: -8, scale: 1.015 }}
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "50px" }}
-      exit="exit"
-      layout
-      className="h-full w-full"
+      variants={ios ? {} : {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 } },
+      }}
+      className="glass-card rounded-2xl overflow-hidden border border-white/[0.07]"
     >
-      <Card className="h-full glass-card border-border/50 premium-shadow hover-glow group flex flex-col overflow-hidden select-none bg-card/60 backdrop-blur-md preserve-3d">
-        <div className="w-full h-44 bg-muted relative overflow-hidden border-b border-border/50">
-          <BrowserMockup project={project} />
-          <div className="absolute inset-0 bg-background/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
-            >
-              View Live <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
-        <CardContent className="p-6 relative bg-gradient-to-b from-background to-background/80 flex-grow flex flex-col justify-between">
-          <div>
-            <div className="flex justify-between items-center mb-5">
-              <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center group-hover:bg-primary transition-colors duration-200 shrink-0 overflow-hidden p-1.5 border border-border/50">
-                {getDomainFavicon(project.url) ? (
-                  <img
-                    src={getDomainFavicon(project.url)}
-                    alt={`${project.name} icon`}
-                    className="w-full h-full object-contain rounded-md"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
-                  />
-                ) : null}
-                <Globe className="w-5 h-5 text-primary group-hover:text-primary-foreground" style={{ display: getDomainFavicon(project.url) ? 'none' : 'block' }} />
-              </div>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
-                {project.type}
-              </span>
+      <div className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? '' : 'lg:[&>*:first-child]:order-2'}`}>
+        {/* Screenshot */}
+        <div className="relative h-56 lg:h-auto bg-background/50 overflow-hidden">
+          {project.screenshot ? (
+            <img
+              src={project.screenshot}
+              alt={`${project.name} screenshot`}
+              className="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/10 to-cyan-500/5">
+              <Globe className="w-12 h-12 text-muted-foreground/30" strokeWidth={1} />
             </div>
+          )}
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-background/60" />
+        </div>
 
-            <h4 className="text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-200 leading-snug">
+        {/* Content */}
+        <div className="p-7 md:p-9 flex flex-col justify-center gap-5">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="section-label text-indigo-400">{project.type}</span>
+              {project.url !== '#' && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-foreground smooth-transition"
+                  aria-label={`Visit ${project.name}`}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+            <h3 className="font-extrabold text-foreground mb-3" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
               {project.name}
-            </h4>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-3">
               {project.description}
             </p>
           </div>
 
-          <div className="pt-4 border-t border-border/50">
-            <div className="flex flex-wrap gap-1 mb-3">
-              {project.tech.map((t, tIdx) => (
-                <TechBadge key={tIdx} tech={t} />
-              ))}
-            </div>
-            <div className="flex items-center justify-end">
-              {project.url !== '#' && (
-                <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors p-1" aria-label={`Open ${project.name} in a new tab`}>
-                  <ArrowUpRight className="w-5 h-5 shrink-0" />
-                </a>
-              )}
-            </div>
+          {/* Architecture note */}
+          <div className="text-xs text-muted-foreground/70 border-l-2 border-indigo-500/30 pl-3 leading-relaxed">
+            <span className="text-indigo-400/70 section-label mr-2">ARCH</span>
+            {project.architecture}
           </div>
-        </CardContent>
-      </Card>
+
+          {/* Metrics */}
+          <div className="flex gap-2 flex-wrap">
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              {project.metric}
+            </span>
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              {project.impact}
+            </span>
+          </div>
+
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-1.5">
+            {project.tech.map((t, i) => (
+              <TechBadge key={i} tech={t} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Compact project card for the grid
+const CompactProjectCard = ({ project }) => {
+  const ios = isIOS();
+  const favicon = getDomainFavicon(project.url);
+
+  return (
+    <motion.div
+      variants={ios ? {} : {
+        hidden: { opacity: 0, y: 20, scale: 0.97 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+      }}
+      className="glass-card rounded-xl p-5 card-hover flex flex-col gap-3 h-full"
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center overflow-hidden p-1">
+          {favicon ? (
+            <img src={favicon} alt="" className="w-full h-full object-contain rounded" loading="lazy"
+              onError={(e) => { e.target.style.display = 'none'; }} />
+          ) : (
+            <Globe className="w-4 h-4 text-muted-foreground/60" />
+          )}
+        </div>
+        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
+          {project.type}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h4 className="font-bold text-foreground text-sm">{project.name}</h4>
+
+      {/* Tech */}
+      <div className="flex flex-wrap gap-1 mt-auto">
+        {project.tech.slice(0, 3).map((t, i) => (
+          <TechBadge key={i} tech={t} />
+        ))}
+      </div>
+
+      {/* Link */}
+      {project.url !== '#' && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-[10px] text-muted-foreground/60 hover:text-primary smooth-transition mt-1"
+        >
+          <Globe className="w-3 h-3" />
+          {new URL(project.url).hostname.replace('www.', '')}
+          <ArrowUpRight className="w-3 h-3 ml-auto" />
+        </a>
+      )}
     </motion.div>
   );
 };
 
 const ClientProjectsSection = () => {
-  const [filter, setFilter] = useState('All');
-  const filters = ['All', 'SaaS', 'E-commerce', 'Services', 'Enterprise'];
-
-  const filteredProjects = filter === 'All'
-    ? projectsData
-    : projectsData.filter(p => p.type === filter);
+  const ios = isIOS();
 
   return (
-    <section className="py-16 md:py-24 bg-muted/30" id="projects">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-          <FadeIn className="max-w-2xl">
-            <h2 className="mb-4 font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}>
-              <TextReveal text="Enterprise Client Portfolio" className="text-gradient-primary" />
-            </h2>
-            <p className="text-muted-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
-              A curated selection of {projectsData.length} robust web applications, enterprise systems, and
-              high-performance e-commerce platforms deployed globally.
-            </p>
-          </FadeIn>
+    <section className="py-10 md:py-28 relative overflow-hidden" id="projects">
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
 
-          <FadeIn delay={0.1} className="flex flex-wrap gap-2">
-            {filters.map(f => (
-              <motion.button
-                key={f}
-                onClick={() => setFilter(f)}
-                whileHover={isIOS() ? {} : { scale: 1.04 }}
-                whileTap={isIOS() ? {} : { scale: 0.96 }}
-                className={`relative px-4 py-2 rounded-full text-sm font-bold transition-colors duration-150 ${
-                  filter === f
-                    ? 'text-white'
-                    : 'bg-card border border-border text-foreground/70 hover:bg-primary/10 hover:border-primary/40 hover:text-primary'
-                }`}
-              >
-                {filter === f && (
-                  <motion.span
-                    layoutId="filter-pill"
-                    className="absolute inset-0 bg-primary rounded-full shadow-md shadow-primary/25"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{f}</span>
-              </motion.button>
-            ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Featured Projects ── */}
+        <FadeIn className="mb-16">
+          <div className="section-label mb-4">FEATURED WORK</div>
+          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
+            Flagship Projects
+          </h2>
+          <p className="text-muted-foreground max-w-xl" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
+            Production systems with real architecture, real scale, real impact.
+          </p>
+        </FadeIn>
+
+        <motion.div
+          className="space-y-6 mb-24"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '60px' }}
+          variants={{ hidden: {}, visible: {} }}
+        >
+          {featuredProjects.map((project, i) => (
+            <FeaturedProjectCard key={project.name} project={project} index={i} />
+          ))}
+        </motion.div>
+
+        {/* ── All Client Work ── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+          <FadeIn>
+            <div className="section-label mb-3">ALL CLIENT WORK</div>
+            <h2 className="font-extrabold text-foreground" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
+              {allProjects.length}+ Projects Delivered
+            </h2>
           </FadeIn>
         </div>
 
-        {/* Project grid — stagger container handles scroll timings properly */}
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "50px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } }
-          }}
+          viewport={{ once: true, margin: '60px' }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
-          </AnimatePresence>
+          {allProjects.map(project => (
+            <CompactProjectCard key={project.name} project={project} />
+          ))}
         </motion.div>
       </div>
     </section>
