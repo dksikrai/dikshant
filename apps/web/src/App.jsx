@@ -7,6 +7,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat.jsx';
 import CustomCursor from '@/components/CustomCursor.jsx';
 import ScrollProgress from '@/components/ScrollProgress.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * Preloader lives at the App level so it:
@@ -114,6 +115,7 @@ function App() {
         <Toaster position="bottom-right" richColors />
         <WhatsAppFloat />
       </Router>
+      <Analytics />
     </>
   );
 }
