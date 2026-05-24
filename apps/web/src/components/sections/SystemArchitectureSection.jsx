@@ -187,20 +187,14 @@ const SystemArchitectureSection = () => {
                             r={isActive ? 3.5 : 2}
                             fill={isActive ? "hsl(var(--secondary))" : "hsl(var(--primary))"}
                             className="shadow-sm shadow-primary"
-                            initial={{ offsetDistance: "0%" }}
                             animate={{
-                              offsetPath: `M 0 0 L 100 100`, // virtual trigger fallback
-                              offsetDistance: ["0%", "100%"]
+                              cx: [`${fromNode.x}%`, `${toNode.x}%`],
+                              cy: [`${fromNode.y}%`, `${toNode.y}%`]
                             }}
                             transition={{
                               duration: 3 + idx * 0.5,
                               repeat: Infinity,
                               ease: "linear"
-                            }}
-                            style={{
-                              motionPath: `path('M ${fromNode.x * 6} ${fromNode.y * 4} L ${toNode.x * 6} ${toNode.y * 4}')`, // proportional scale paths
-                              cx: `${fromNode.x}%`,
-                              cy: `${fromNode.y}%`
                             }}
                           />
                         )}

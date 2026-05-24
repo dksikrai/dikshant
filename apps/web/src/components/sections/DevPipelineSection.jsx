@@ -247,9 +247,8 @@ const DevPipelineSection = () => {
               {/* Dynamic Connecting Lines SVG */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" xmlns="http://www.w3.org/2000/svg">
                 {pipelineStages.slice(0, -1).map((stage, i) => {
-                  const stepPercent = 100 / (pipelineStages.length - 1);
-                  const x1 = `${10 + i * stepPercent}%`;
-                  const x2 = `${10 + (i + 1) * stepPercent}%`;
+                  const x1 = `${10 + i * 20}%`;
+                  const x2 = `${10 + (i + 1) * 20}%`;
                   const isLineActive = isRunning && currentStageIndex >= i;
                   
                   return (
@@ -265,12 +264,13 @@ const DevPipelineSection = () => {
                       />
                       {isLineActive && currentStageIndex === i && (
                         <motion.circle
-                          r="4"
+                          r="4.5"
                           fill={pipelineStages[i + 1].color}
-                          initial={{ cx: x1 }}
-                          animate={{ cx: [x1, x2] }}
+                          animate={{
+                            cx: [x1, x2]
+                          }}
                           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                          style={{ cy: "50%" }}
+                          cy="50%"
                         />
                       )}
                     </g>
@@ -279,7 +279,7 @@ const DevPipelineSection = () => {
               </svg>
 
               {/* Steps Layout */}
-              <div className="flex flex-col md:flex-row justify-between items-center gap-6 relative z-10 w-full">
+              <div className="flex flex-col md:block md:relative w-full md:h-24 relative z-10 gap-6">
                 {pipelineStages.map((stage, index) => {
                   const StageIcon = stage.icon;
                   const isStageCurrent = currentStageIndex === index;
@@ -287,7 +287,15 @@ const DevPipelineSection = () => {
                   const isStageIdle = currentStageIndex < index;
 
                   return (
-                    <div key={stage.id} className="flex md:flex-col items-center gap-4 md:gap-3 w-full md:w-auto relative group">
+                    <div
+                      key={stage.id}
+                      className="w-full md:w-auto md:absolute md:-translate-x-1/2 md:-translate-y-1/2"
+                      style={{
+                        left: `${10 + index * 20}%`,
+                        top: "50%"
+                      }}
+                    >
+                      <div className="flex md:flex-col items-center gap-4 md:gap-3 relative group w-full">
                       
                       {/* Interactive Step Badge */}
                       <motion.div
@@ -342,9 +350,9 @@ const DevPipelineSection = () => {
                         <p className="text-[10px] font-bold text-foreground mb-0.5">{stage.name}</p>
                         <p className="text-[9px] text-muted-foreground leading-normal">{stage.description}</p>
                       </div>
-
                     </div>
-                  );
+                  </div>
+                );
                 })}
               </div>
 
