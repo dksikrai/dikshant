@@ -42,7 +42,7 @@ const WhatsAppFloat = () => {
             >
               <X className="w-3 h-3" />
             </button>
-            <p className="text-xs sm:text-sm font-bold text-foreground mb-1 pr-4">👋 Available for Hire!</p>
+            <p className="text-xs sm:text-sm font-bold text-foreground mb-1 pr-4">👋 Let's talk about your project!</p>
             <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
               Message me on WhatsApp — I typically reply within 1 hour.
             </p>

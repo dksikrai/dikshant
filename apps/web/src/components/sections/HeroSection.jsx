@@ -248,7 +248,7 @@ export default function HeroSection() {
                   className="gap-2 rounded-full border-emerald-400/25 bg-emerald-400/[0.07] px-3 py-1.5 text-xs font-medium text-emerald-400"
                 >
                   <span className="status-dot flex-shrink-0" />
-                  Available for Senior Roles
+                  Open to Consulting & New Opportunities
                 </Badge>
               </motion.div>
 

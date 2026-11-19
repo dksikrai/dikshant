@@ -72,7 +72,7 @@ const ContactSection = () => (
           className="mb-8 gap-2 rounded-full border-emerald-500/25 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-400"
         >
           <span className="status-dot" />
-          Currently available for senior roles &amp; consulting
+          Open to consulting &amp; new opportunities
         </Badge>
 
         <h2

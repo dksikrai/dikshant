@@ -73,7 +73,7 @@ const roles = [
     ],
   },
   {
-    title: 'Web Developer',
+    title: 'Business Development Executive',
     company: 'Urban Key Point Real Estate',
     date: 'Sep 2023 – Dec 2023',
     location: 'Jaipur, India',
