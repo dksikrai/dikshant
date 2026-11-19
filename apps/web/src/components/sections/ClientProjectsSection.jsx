@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
@@ -265,6 +265,13 @@ const CompactProjectCard = ({ project }) => {
 
 const ClientProjectsSection = () => {
   const [filter, setFilter] = useState('All');
+  const tabsRef = useRef(null);
+
+  // Keep the selected segment in view when the row scrolls sideways (phones).
+  useEffect(() => {
+    const el = tabsRef.current?.querySelector('[role="tab"][data-state="active"]');
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }, [filter]);
   const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.type)))];
   const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
 
@@ -309,7 +316,13 @@ const ClientProjectsSection = () => {
 
         <Tabs value={filter} onValueChange={setFilter}>
           {/* iOS-style segmented control: glass track + sliding thumb */}
-          <TabsList className="glass-pill h-auto max-w-full justify-start gap-0.5 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {/* Glass lives on this NON-scrolling wrapper: its edge/sheen overlays are sized to the box,
+              so putting overflow-x on the glass element itself made them scroll away with the content. */}
+          <div className="glass-pill max-w-full overflow-hidden rounded-full p-1">
+          <TabsList
+            ref={tabsRef}
+            className="h-auto w-full justify-start gap-0.5 overflow-x-auto rounded-full bg-transparent p-0 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,#000_14px,#000_calc(100%-14px),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_14px,#000_calc(100%-14px),transparent)]"
+          >
             {categories.map((c) => (
               <TabsTrigger
                 key={c}
@@ -332,6 +345,7 @@ const ClientProjectsSection = () => {
               </TabsTrigger>
             ))}
           </TabsList>
+          </div>
 
         <TabsContent value={filter} className="mt-8">
           <motion.div
