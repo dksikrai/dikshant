@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/config/site.js';
 
 const LogoMark = () => (
@@ -111,24 +113,28 @@ const Footer = () => {
           {/* Right – Social icons */}
           <div className="flex items-center gap-2">
             {socialLinks.map(({ id, label, href, icon: Icon }) => (
-              <a
+              <motion.a
                 key={id}
                 id={id}
                 href={href}
                 target={href.startsWith('mailto') ? undefined : '_blank'}
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-2 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/6 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                title={label}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.92 }}
+                className="p-2 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 <Icon className="w-4 h-4" />
-              </a>
+              </motion.a>
             ))}
           </div>
 
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="border-t border-border/30 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.75rem] text-muted-foreground/60">
+        <Separator className="bg-border/30" />
+        <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.75rem] text-muted-foreground/60">
           <span>© {year} Dikshant Goyal</span>
           <span className="hidden sm:block">·</span>
           <span>Built with passion in Jaipur, India</span>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   SiLaravel, SiVuedotjs, SiRedis, SiJavascript,
   SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor,
@@ -213,10 +214,11 @@ const CompactProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      variants={ios ? {} : {
-        hidden: { opacity: 0, y: 20, scale: 0.97 },
-        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-      }}
+      layout={!ios}
+      initial={ios ? false : { opacity: 0, scale: 0.94 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.15 } }}
+      transition={{ duration: 0.3, ease: ease.out }}
       className="glass-card rounded-xl p-5 card-hover flex flex-col gap-3 h-full"
     >
       {/* Header */}
@@ -262,7 +264,9 @@ const CompactProjectCard = ({ project }) => {
 };
 
 const ClientProjectsSection = () => {
-  const ios = isIOS();
+  const [filter, setFilter] = useState('All');
+  const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.type)))];
+  const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
 
   return (
     <section className="py-10 md:py-28 relative overflow-hidden" id="projects">
@@ -303,16 +307,28 @@ const ClientProjectsSection = () => {
           </FadeIn>
         </div>
 
+        <Tabs value={filter} onValueChange={setFilter} className="mb-8">
+          <TabsList className="h-auto flex-wrap justify-start gap-1 bg-white/[0.04] border border-white/[0.06] p-1">
+            {categories.map((c) => (
+              <TabsTrigger key={c} value={c} className="relative text-xs">
+                {c}
+                <span className="ml-1.5 text-[10px] text-muted-foreground">
+                  {c === 'All' ? allProjects.length : allProjects.filter((p) => p.type === c).length}
+                </span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+
         <motion.div
+          layout={!isIOS()}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '60px' }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
         >
-          {allProjects.map(project => (
-            <CompactProjectCard key={project.name} project={project} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {visible.map((project) => (
+              <CompactProjectCard key={project.name} project={project} />
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>

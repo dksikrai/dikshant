@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { siteConfig } from '@/config/site.js';
 
-const WHATSAPP_URL = "https://wa.me/919829641370?text=Hi%20Dikshant%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20project%20with%20you!";
+const WHATSAPP_URL = siteConfig.whatsappUrl;
+
 
 const WhatsAppFloat = () => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -40,7 +42,7 @@ const WhatsAppFloat = () => {
             >
               <X className="w-3 h-3" />
             </button>
-            <p className="text-xs sm:text-sm font-bold text-foreground mb-1 pr-4">👋 Available for Hire!</p>
+            <p className="text-xs sm:text-sm font-bold text-foreground mb-1 pr-4">👋 Let's talk about your project!</p>
             <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
               Message me on WhatsApp — I typically reply within 1 hour.
             </p>
