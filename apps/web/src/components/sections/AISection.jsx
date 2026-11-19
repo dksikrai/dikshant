@@ -161,7 +161,7 @@ const tokenColor = {
 
 const MonoBadge = ({ label }) => (
   <span
-    className="mono-badge inline-block px-2 py-0.5 rounded border text-[10px]"
+    className="mono-badge inline-block px-2 py-0.5 rounded border text-[11px]"
     style={{
       background: 'rgba(255,255,255,0.04)',
       borderColor: 'rgba(255,255,255,0.1)',
@@ -237,7 +237,7 @@ const CodeBlock = () => (
         <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
         <span
-          className="ml-3 text-[10px] font-mono tracking-wider"
+          className="ml-3 text-[11px] font-mono tracking-wider"
           style={{ color: 'rgba(255,255,255,0.3)' }}
         >
           DocumentAnalysisPipeline.php

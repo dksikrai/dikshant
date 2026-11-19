@@ -60,7 +60,7 @@ const caseStudies = [
 
 const MonoBadge = ({ label }) => (
   <span
-    className="mono-badge inline-block px-2.5 py-1 rounded border text-[10px] leading-none"
+    className="mono-badge inline-block px-2.5 py-1 rounded border text-[11px] leading-none"
     style={{
       background: 'rgba(255,255,255,0.04)',
       borderColor: 'rgba(255,255,255,0.1)',
@@ -119,7 +119,7 @@ const CaseStudyCard = ({ study, index }) => {
             <div className="flex flex-wrap items-start justify-between gap-3 mb-5">
               <div>
                 <span
-                  className={`mono-badge inline-block px-2.5 py-1 rounded-full border text-[10px] font-semibold mb-2 ${study.badgeColor}`}
+                  className={`mono-badge inline-block px-2.5 py-1 rounded-full border text-[11px] font-semibold mb-2 ${study.badgeColor}`}
                 >
                   {study.badge}
                 </span>

@@ -9,23 +9,28 @@ const WHATSAPP_URL = siteConfig.whatsappUrl;
 const WhatsAppFloat = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [dismissed, setDismissed] = useState(() => {
-    return localStorage.getItem('whatsapp_tooltip_dismissed') === 'true';
+    try {
+      return localStorage.getItem('whatsapp_tooltip_dismissed') === 'true';
+    } catch {
+      return false; // storage can be blocked (e.g. Safari private mode)
+    }
   });
 
   useEffect(() => {
     if (!dismissed) {
-      const timer = setTimeout(() => setShowTooltip(true), 3500);
-      return () => clearTimeout(timer);
+      const show = setTimeout(() => setShowTooltip(true), 3500);
+      const hide = setTimeout(() => setShowTooltip(false), 12000); // don't linger over content
+      return () => { clearTimeout(show); clearTimeout(hide); };
     }
   }, [dismissed]);
 
   const handleDismiss = () => {
     setDismissed(true);
-    localStorage.setItem('whatsapp_tooltip_dismissed', 'true');
+    try { localStorage.setItem('whatsapp_tooltip_dismissed', 'true'); } catch { /* ignore */ }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end gap-3 pointer-events-none">
+    <div className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[999] flex flex-col items-end gap-3 pointer-events-none">
       <AnimatePresence>
         {showTooltip && !dismissed && (
           <motion.div
@@ -33,17 +38,17 @@ const WhatsAppFloat = () => {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 16, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-            className="relative pointer-events-auto bg-card border border-border shadow-2xl shadow-black/15 rounded-2xl p-3 sm:p-4 w-[180px] sm:w-auto sm:max-w-[220px]"
+            className="relative hidden sm:block pointer-events-auto bg-card border border-border shadow-2xl shadow-black/15 rounded-2xl p-3 sm:p-4 w-[180px] sm:w-auto sm:max-w-[220px]"
           >
             <button
               onClick={handleDismiss}
-              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-1 right-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Dismiss"
             >
               <X className="w-3 h-3" />
             </button>
             <p className="text-xs sm:text-sm font-bold text-foreground mb-1 pr-4">👋 Let's talk about your project!</p>
-            <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
+            <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
               Message me on WhatsApp — I typically reply within 1 hour.
             </p>
             {/* Arrow */}

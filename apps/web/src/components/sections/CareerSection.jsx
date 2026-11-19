@@ -109,13 +109,13 @@ const CareerCard = ({ role, colors, ios }) => {
               {role.title}
             </h3>
             {role.tag && (
-              <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${colors.tag}`}>
+              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${colors.tag}`}>
                 {role.tag}
               </span>
             )}
           </div>
           {/* Impact chip */}
-          <span className={`flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full border ${colors.impact}`}>
+          <span className={`flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full border ${colors.impact}`}>
             <TrendingUp className="w-3 h-3" />
             {role.impact}
           </span>

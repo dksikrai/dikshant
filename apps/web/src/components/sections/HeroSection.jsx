@@ -178,7 +178,7 @@ function ScrollHint() {
 
   return (
     <div
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 pointer-events-none"
       style={{
         opacity: visible ? 0.45 : 0,
         transition: 'opacity 0.8s ease',
@@ -216,7 +216,7 @@ export default function HeroSection() {
 
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+        className="relative min-h-screen-safe flex flex-col justify-center overflow-hidden"
         style={{ paddingTop: '5rem' }}
       >
         {/* Subtle radial glow — no orbs, just a faint ambient wash */}
@@ -287,8 +287,8 @@ export default function HeroSection() {
                 variants={childVariants}
                 className="flex flex-wrap items-center gap-3 pt-1"
               >
-                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
-                  <Button asChild size="lg" className="h-11 px-5 font-semibold shadow-lg shadow-primary/25">
+                <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
+                  <Button asChild size="lg" className="h-12 sm:h-11 w-full sm:w-auto px-5 font-semibold shadow-lg shadow-primary/25">
                     <a
                       href="#projects"
                       onClick={(e) => {
@@ -302,8 +302,8 @@ export default function HeroSection() {
                   </Button>
                 </motion.div>
 
-                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
-                  <Button asChild variant="outline" size="lg" className="h-11 px-5 font-semibold bg-transparent border-white/[0.14] hover:bg-white/[0.05]">
+                <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
+                  <Button asChild variant="outline" size="lg" className="h-12 sm:h-11 w-full sm:w-auto px-5 font-semibold bg-transparent border-white/[0.14] hover:bg-white/[0.05]">
                     <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
                       <Download strokeWidth={2} />
                       Download Resume
@@ -311,7 +311,7 @@ export default function HeroSection() {
                   </Button>
                 </motion.div>
 
-                <Button asChild variant="link" className="text-muted-foreground hover:text-foreground">
+                <Button asChild variant="link" className="h-11 text-muted-foreground hover:text-foreground">
                   <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
                     GitHub
                     <ExternalLink strokeWidth={2} />

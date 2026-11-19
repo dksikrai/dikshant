@@ -90,13 +90,17 @@ function App() {
   const [loading, setLoading] = useState(() => {
     // Only show preloader if this session hasn't seen it yet
     if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem(PRELOADER_KEY);
+      try {
+        return !sessionStorage.getItem(PRELOADER_KEY);
+      } catch {
+        return false; // storage blocked: skip the preloader rather than crash
+      }
     }
     return false;
   });
 
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem(PRELOADER_KEY, '1');
+    try { sessionStorage.setItem(PRELOADER_KEY, '1'); } catch { /* ignore */ }
     setLoading(false);
   };
 

@@ -69,8 +69,9 @@ const AboutSection = () => (
           <FadeIn delay={0.18}>
             <p className="text-muted-foreground mb-10 leading-relaxed">
               Currently at <strong className="text-foreground font-semibold">iTechPanel LLP</strong> as
-              Senior Web Developer — leading architectural decisions, mentoring developers,
-              and delivering systems that run at 99.9% uptime.
+              Project Manager — leading planning and delivery across software workstreams,
+              coordinating developers, QA and stakeholders, and staying hands-on with the
+              PHP/Laravel systems behind e-commerce and integration-heavy platforms.
             </p>
           </FadeIn>
 
