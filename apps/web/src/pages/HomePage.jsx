@@ -126,32 +126,32 @@ const HomePage = () => {
         />
         <meta name="author" content="Dikshant Goyal" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-        <link rel="canonical" href="https://dikshantgoyal.com/" />
+        <link rel="canonical" href="https://dikshant-ivory.vercel.app/" />
         <meta name="theme-color" content="#080810" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:site_name" content="Dikshant Goyal — Portfolio" />
-        <meta property="og:url" content="https://dikshantgoyal.com/" />
+        <meta property="og:url" content="https://dikshant-ivory.vercel.app/" />
         <meta property="og:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
         <meta
           property="og:description"
           content="Backend engineer specializing in Laravel, Redis/Horizon, AWS infrastructure, OpenAI integrations, and production SaaS architecture."
         />
-        <meta property="og:image" content="https://dikshantgoyal.com/og-image.jpg" />
+        <meta property="og:image" content="https://dikshant-ivory.vercel.app/hero_development_backdrop.jpg" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:site" content="@csdikshant" />
         <meta property="twitter:creator" content="@csdikshant" />
-        <meta property="twitter:url" content="https://dikshantgoyal.com/" />
+        <meta property="twitter:url" content="https://dikshant-ivory.vercel.app/" />
         <meta property="twitter:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
         <meta
           property="twitter:description"
           content="Backend engineer specializing in Laravel, Redis/Horizon, AWS, OpenAI integrations, and production SaaS architecture."
         />
-        <meta property="twitter:image" content="https://dikshantgoyal.com/og-image.jpg" />
+        <meta property="twitter:image" content="https://dikshant-ivory.vercel.app/hero_development_backdrop.jpg" />
 
         {/* JSON-LD Structured Data */}
         <script type="application/ld+json">
@@ -159,7 +159,7 @@ const HomePage = () => {
             '@context': 'https://schema.org',
             '@type': 'Person',
             name: 'Dikshant Goyal',
-            url: 'https://dikshantgoyal.com/',
+            url: 'https://dikshant-ivory.vercel.app/',
             jobTitle: 'AI-Powered Backend & Product Engineer',
             worksFor: { '@type': 'Organization', name: 'iTechPanel LLP' },
             address: {

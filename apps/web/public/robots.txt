@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://dikshant-ivory.vercel.app/sitemap.xml
