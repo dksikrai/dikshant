@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 import WhatsAppFloat from '@/components/WhatsAppFloat.jsx';
 import CustomCursor from '@/components/CustomCursor.jsx';
 import ScrollProgress from '@/components/ScrollProgress.jsx';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
@@ -101,7 +101,7 @@ function App() {
   };
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <AnimatePresence mode="wait">
         {loading && (
           <Preloader key="preloader" onComplete={handlePreloaderComplete} />
@@ -125,7 +125,7 @@ function App() {
       </Router>
       <Analytics />
       <SpeedInsights />
-    </>
+    </MotionConfig>
   );
 }
 

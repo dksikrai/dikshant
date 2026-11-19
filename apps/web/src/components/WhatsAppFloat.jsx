@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { siteConfig } from '@/config/site.js';
 
-const WHATSAPP_URL = "https://wa.me/919829641370?text=Hi%20Dikshant%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20love%20to%20discuss%20a%20project%20with%20you!";
+const WHATSAPP_URL = siteConfig.whatsappUrl;
+
 
 const WhatsAppFloat = () => {
   const [showTooltip, setShowTooltip] = useState(false);

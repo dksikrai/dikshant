@@ -7,8 +7,10 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Download, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 import { siteConfig } from '@/config/site.js';
 
@@ -26,6 +28,47 @@ const TERMINAL_LINES = [
   { text: 'Queue depth: 0 | Workers: 4 active', color: '#67e8f9', delay: 3.2 },
   { text: 'Horizon status: running ✓', color: '#67e8f9', delay: 3.6 },
 ];
+
+// ─── Rotating focus line ──────────────────────────────────────────────────────
+
+const ROLES = [
+  'Laravel APIs that scale',
+  'Redis & Horizon queue systems',
+  'OpenAI-powered workflows',
+  'AWS infrastructure that stays up',
+];
+
+function RotatingRole() {
+  const [index, setIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return undefined;
+    const id = setInterval(() => setIndex((i) => (i + 1) % ROLES.length), 2600);
+    return () => clearInterval(id);
+  }, [prefersReducedMotion]);
+
+  return (
+    <p className="font-mono text-sm tracking-wide text-muted-foreground flex items-center gap-2 min-h-[1.5rem]">
+      <span className="text-primary">&gt;</span>
+      <span className="sr-only">Backend Engineer · Laravel · AWS · OpenAI</span>
+      <span aria-hidden="true" className="relative inline-flex overflow-hidden h-6 items-center">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={index}
+            initial={{ y: 14, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -14, opacity: 0 }}
+            transition={{ duration: 0.3, ease: ease.out }}
+            className="whitespace-nowrap"
+          >
+            {ROLES[index]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+    </p>
+  );
+}
 
 // ─── Stagger container variants ───────────────────────────────────────────────
 
@@ -155,18 +198,9 @@ export default function HeroSection() {
   const ios = isIOS();
   const prefersReducedMotion = useReducedMotion();
 
-  const MotionContainer = motion.div;
-  const motionContainerProps = ios || prefersReducedMotion
-    ? {
-        initial: 'hidden',
-        animate: 'visible',
-        variants: containerVariants,
-      }
-    : {
-        initial: 'hidden',
-        animate: 'visible',
-        variants: containerVariants,
-      };
+  const { scrollY } = useScroll();
+  // Ambient glow drifts slower than the page for subtle depth (transform-only).
+  const glowY = useTransform(scrollY, [0, 600], [0, prefersReducedMotion || ios ? 0 : 90]);
 
   const childVariants = ios ? itemVariantsIOS : itemVariants;
 
@@ -186,10 +220,11 @@ export default function HeroSection() {
         style={{ paddingTop: '5rem' }}
       >
         {/* Subtle radial glow — no orbs, just a faint ambient wash */}
-        <div
+        <motion.div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
+            y: glowY,
             background:
               'radial-gradient(ellipse 80% 60% at 20% 40%, hsl(243 88% 68% / 0.06) 0%, transparent 65%), ' +
               'radial-gradient(ellipse 60% 50% at 80% 70%, hsl(192 80% 55% / 0.04) 0%, transparent 60%)',
@@ -200,21 +235,21 @@ export default function HeroSection() {
           <div className="flex flex-col md:flex-row items-center gap-14 lg:gap-20">
 
             {/* ── LEFT COLUMN ──────────────────────────────────────────── */}
-            <MotionContainer
-              {...motionContainerProps}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
               className="flex-1 flex flex-col gap-6 min-w-0"
             >
               {/* Status badge */}
               <motion.div variants={childVariants}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium"
-                     style={{
-                       borderColor: 'rgba(52,211,153,0.25)',
-                       background: 'rgba(52,211,153,0.07)',
-                       color: '#34d399',
-                     }}>
+                <Badge
+                  variant="outline"
+                  className="gap-2 rounded-full border-emerald-400/25 bg-emerald-400/[0.07] px-3 py-1.5 text-xs font-medium text-emerald-400"
+                >
                   <span className="status-dot flex-shrink-0" />
                   Available for Senior Roles
-                </div>
+                </Badge>
               </motion.div>
 
               {/* Main headline */}
@@ -231,14 +266,10 @@ export default function HeroSection() {
                 I Build Scalable Backend Systems, AI Workflows &amp; Production SaaS.
               </motion.h1>
 
-              {/* Sub-role line */}
-              <motion.p
-                variants={childVariants}
-                className="font-mono text-sm tracking-wide"
-                style={{ color: 'hsl(var(--muted-foreground))', letterSpacing: '0.02em' }}
-              >
-                Backend Engineer · Laravel · AWS · OpenAI
-              </motion.p>
+              {/* Rotating focus line */}
+              <motion.div variants={childVariants}>
+                <RotatingRole />
+              </motion.div>
 
               {/* Description */}
               <motion.p
@@ -256,50 +287,38 @@ export default function HeroSection() {
                 variants={childVariants}
                 className="flex flex-wrap items-center gap-3 pt-1"
               >
-                {/* Primary — View My Work */}
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-white
-                             transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-                  style={{ background: 'hsl(243 88% 68%)' }}
-                  onClick={e => {
-                    e.preventDefault();
-                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  View My Work
-                  <ArrowRight size={15} strokeWidth={2.5} />
-                </a>
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
+                  <Button asChild size="lg" className="h-11 px-5 font-semibold shadow-lg shadow-primary/25">
+                    <a
+                      href="#projects"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      View My Work
+                      <ArrowRight strokeWidth={2.5} />
+                    </a>
+                  </Button>
+                </motion.div>
 
-                {/* Secondary — Download Resume */}
-                <a
-                  href={siteConfig.resume}
-                  download={siteConfig.resumeFilename}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm
-                             border transition-all duration-200 hover:bg-white/[0.05] active:scale-[0.98]"
-                  style={{
-                    borderColor: 'rgba(255,255,255,0.14)',
-                    color: 'hsl(var(--foreground))',
-                  }}
-                >
-                  <Download size={14} strokeWidth={2} />
-                  Download Resume
-                </a>
+                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
+                  <Button asChild variant="outline" size="lg" className="h-11 px-5 font-semibold bg-transparent border-white/[0.14] hover:bg-white/[0.05]">
+                    <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
+                      <Download strokeWidth={2} />
+                      Download Resume
+                    </a>
+                  </Button>
+                </motion.div>
 
-                {/* Tertiary — GitHub */}
-                <a
-                  href={siteConfig.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium
-                             transition-colors duration-200 hover:text-white"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  GitHub
-                  <ExternalLink size={13} strokeWidth={2} />
-                </a>
+                <Button asChild variant="link" className="text-muted-foreground hover:text-foreground">
+                  <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
+                    GitHub
+                    <ExternalLink strokeWidth={2} />
+                  </a>
+                </Button>
               </motion.div>
-            </MotionContainer>
+            </motion.div>
 
             {/* ── RIGHT COLUMN (terminal) — hidden on mobile ────────── */}
             <FadeIn
