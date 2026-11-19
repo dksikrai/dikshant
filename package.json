@@ -13,5 +13,9 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "allowScripts": {
+    "esbuild": false,
+    "fsevents": false
+  }
 }
