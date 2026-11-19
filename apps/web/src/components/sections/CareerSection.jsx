@@ -100,7 +100,7 @@ const accentConfig = {
 const CareerCard = ({ role, colors, ios }) => {
   const Icon = role.icon;
   return (
-    <div className="glass-card rounded-xl p-6 md:p-7 border border-white/[0.07]">
+    <div className="glass-card card-hover rounded-2xl p-6 md:p-7">
       {/* Header */}
       <div className="flex flex-col gap-3 mb-5 pb-5 border-b border-white/[0.06]">
         <div className="flex items-start justify-between gap-3 flex-wrap">

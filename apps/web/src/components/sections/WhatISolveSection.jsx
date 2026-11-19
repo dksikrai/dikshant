@@ -39,7 +39,7 @@ const solutions = [
 
 const SolutionCard = ({ title, description }) => (
   <article
-    className="glass-card hover-glow rounded-xl p-5 flex flex-col gap-3 transition-all duration-200 cursor-default h-full"
+    className="glass-card card-hover rounded-2xl p-5 flex flex-col gap-3 transition-all duration-200 cursor-default h-full"
     aria-label={title}
   >
     <div className="flex items-start gap-3">

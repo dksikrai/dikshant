@@ -134,7 +134,7 @@ const SkillsSection = () => {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
               }}
-              className="glass-card rounded-xl p-5"
+              className="glass-card card-hover rounded-2xl p-5"
             >
               {/* Category header */}
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/[0.06]">

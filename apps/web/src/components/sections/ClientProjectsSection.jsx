@@ -133,7 +133,7 @@ const FeaturedProjectCard = ({ project, index }) => {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 } },
       }}
-      className="glass-card rounded-3xl overflow-hidden"
+      className="glass-card card-hover rounded-3xl overflow-hidden"
     >
       <div className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? '' : 'lg:[&>*:first-child]:order-2'}`}>
         {/* Screenshot */}

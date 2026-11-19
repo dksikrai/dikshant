@@ -110,7 +110,7 @@ const CaseStudyCard = ({ study, index }) => {
         />
 
         <div
-          className="rounded-xl glass-card hover-glow overflow-hidden"
+          className="rounded-2xl glass-card card-hover overflow-hidden"
           style={{ background: 'hsl(220,16%,6%)', borderLeft: 'none' }}
         >
           <div className="p-6 md:p-8">
