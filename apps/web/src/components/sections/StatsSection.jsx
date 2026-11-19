@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m as motion, useReducedMotion } from 'framer-motion';
 import { useCountUp, isIOS, ease } from '@/lib/motion.jsx';
 
 // ─── Stat data ────────────────────────────────────────────────────────────────

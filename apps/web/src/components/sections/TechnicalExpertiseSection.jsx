@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Server, Zap, Cloud, ShoppingCart, Brain, Layout } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 

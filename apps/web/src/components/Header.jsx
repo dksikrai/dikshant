@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Download, ArrowRight, ChevronRight, User, Layers, FolderKanban, Sparkles, Mail, Github, Linkedin, Twitter } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -113,7 +113,7 @@ const Header = () => {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
-            aria-label="Back to top"
+            aria-label="Dikshant Goyal, back to top"
           >
             <motion.div
               whileHover={{ rotate: -8, scale: 1.06 }}

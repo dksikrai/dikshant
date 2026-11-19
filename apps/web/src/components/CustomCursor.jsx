@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { isTouchDevice } from '@/lib/motion.jsx';
 
 const CustomCursor = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import {
   SiLaravel, SiPhp, SiRedis, SiMysql, SiPostgresql, SiNodedotjs,
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,

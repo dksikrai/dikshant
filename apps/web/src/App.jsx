@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner';
 import WhatsAppFloat from '@/components/WhatsAppFloat.jsx';
 import CustomCursor from '@/components/CustomCursor.jsx';
 import ScrollProgress from '@/components/ScrollProgress.jsx';
-import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
+import { m as motion, AnimatePresence, MotionConfig, LazyMotion } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { initGlassPointer } from '@/lib/glass.js';
 import { IconContext } from 'react-icons';
@@ -27,7 +27,7 @@ const Preloader = ({ onComplete }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onComplete();
-    }, 1400);
+    }, 700);
     return () => clearTimeout(timer);
   }, [onComplete]);
 
@@ -110,6 +110,7 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <LazyMotion features={() => import('@/lib/motionFeatures.js').then((mod) => mod.default)}>
       <IconContext.Provider value={{ attr: { 'aria-hidden': 'true', focusable: 'false' } }}>
       <AnimatePresence mode="wait">
         {loading && (
@@ -135,6 +136,7 @@ function App() {
       <Analytics />
       <SpeedInsights />
       </IconContext.Provider>
+      </LazyMotion>
     </MotionConfig>
   );
 }

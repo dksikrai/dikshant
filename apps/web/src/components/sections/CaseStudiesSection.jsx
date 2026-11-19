@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 

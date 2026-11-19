@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Cpu, Database, Zap, Layers } from 'lucide-react';
 import { FadeIn, isIOS, ease, TextReveal, StaggerGrid } from '@/lib/motion.jsx';
 
