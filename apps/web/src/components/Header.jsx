@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, Download, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/sheet';
 import { siteConfig } from '@/config/site.js';
 import { ease } from '@/lib/motion.jsx';
+import { enableRefraction } from '@/lib/glass.js';
 
 const navLinks = [
   { name: 'About',     href: '#about' },
@@ -74,6 +75,10 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = useActiveSection(hrefs);
+  const capsuleRef = useRef(null);
+
+  // Real refraction on desktop Chromium; other browsers keep the CSS glass.
+  useEffect(() => enableRefraction(capsuleRef.current, { bezel: 20, scale: 30 }), []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -92,6 +97,7 @@ const Header = () => {
       <div className="max-w-6xl mx-auto px-3 sm:px-5">
         {/* Floating liquid-glass capsule */}
         <div
+          ref={capsuleRef}
           className={`pointer-events-auto flex items-center justify-between gap-2 rounded-full glass-pill pl-2 pr-1.5 py-1 transition-shadow duration-300 ${
             isScrolled ? 'shadow-2xl shadow-black/60' : ''
           }`}

@@ -11,6 +11,7 @@ import CustomCursor from '@/components/CustomCursor.jsx';
 import ScrollProgress from '@/components/ScrollProgress.jsx';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
+import { initGlassPointer } from '@/lib/glass.js';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 /**
@@ -98,6 +99,8 @@ function App() {
     }
     return false;
   });
+
+  useEffect(() => initGlassPointer(), []);
 
   const handlePreloaderComplete = () => {
     try { sessionStorage.setItem(PRELOADER_KEY, '1'); } catch { /* ignore */ }
