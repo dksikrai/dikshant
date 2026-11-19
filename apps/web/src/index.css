@@ -247,3 +247,41 @@
   .safe-top    { padding-top:    env(safe-area-inset-top); }
   .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Mobile / iOS comfort layer (unlayered so it wins over utilities)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html { -webkit-tap-highlight-color: transparent; }
+
+/* 100vh is taller than the visible area on iOS Safari (URL bar); prefer svh. */
+.min-h-screen-safe { min-height: 100vh; min-height: 100svh; }
+
+/* iOS Safari zooms the page when a focused field has font-size < 16px (incl. iPad). */
+@media (pointer: coarse) {
+  input, textarea, select { font-size: 16px !important; }
+}
+
+/* Touch screens: no sticky :hover lift after a tap, and drop the costly grain overlay. */
+@media (hover: none) {
+  .card-hover:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: inherit;
+  }
+  .glass-card:hover { border-color: rgba(255,255,255,0.07); }
+  .noise-overlay { display: none; }
+}
+
+/* Big blur radii are expensive on phones: scroll jank and battery. */
+@media (max-width: 767px) {
+  .glass, .glass-card, .glass-strong {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
+  html { scroll-behavior: auto; }
+}

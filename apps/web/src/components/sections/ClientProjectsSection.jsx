@@ -106,7 +106,7 @@ const TechIcon = ({ name, className }) => {
 };
 
 const TechBadge = ({ tech }) => (
-  <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold mono-badge px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/70">
+  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold mono-badge px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/70">
     <TechIcon name={tech} className="w-3 h-3 shrink-0" />
     {tech}
   </span>
@@ -164,7 +164,7 @@ const FeaturedProjectCard = ({ project, index }) => {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground smooth-transition"
+                  className="p-3 -m-3 text-muted-foreground hover:text-foreground smooth-transition"
                   aria-label={`Visit ${project.name}`}
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -231,7 +231,7 @@ const CompactProjectCard = ({ project }) => {
             <Globe className="w-4 h-4 text-muted-foreground/60" />
           )}
         </div>
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
+        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
           {project.type}
         </span>
       </div>
@@ -252,7 +252,7 @@ const CompactProjectCard = ({ project }) => {
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 text-[10px] text-muted-foreground/60 hover:text-primary smooth-transition mt-1"
+          className="flex items-center gap-1 text-[11px] text-muted-foreground/70 hover:text-primary smooth-transition py-3 -my-2"
         >
           <Globe className="w-3 h-3" />
           {new URL(project.url).hostname.replace('www.', '')}
@@ -310,9 +310,9 @@ const ClientProjectsSection = () => {
         <Tabs value={filter} onValueChange={setFilter} className="mb-8">
           <TabsList className="h-auto flex-wrap justify-start gap-1 bg-white/[0.04] border border-white/[0.06] p-1">
             {categories.map((c) => (
-              <TabsTrigger key={c} value={c} className="relative text-xs">
+              <TabsTrigger key={c} value={c} className="relative text-xs min-h-11 sm:min-h-9 px-3.5">
                 {c}
-                <span className="ml-1.5 text-[10px] text-muted-foreground">
+                <span className="ml-1.5 text-[11px] text-muted-foreground">
                   {c === 'All' ? allProjects.length : allProjects.filter((p) => p.type === c).length}
                 </span>
               </TabsTrigger>

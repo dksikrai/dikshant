@@ -89,8 +89,8 @@ const Header = () => {
       transition={{ duration: 0.45, ease: ease.out }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'py-3 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm'
-          : 'py-5 bg-transparent'
+          ? 'pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] bg-background/95 md:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm'
+          : 'pb-5 pt-[calc(env(safe-area-inset-top)+1.25rem)] bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +98,7 @@ const Header = () => {
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
+            className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
             aria-label="Back to top"
           >
             <motion.div
@@ -176,14 +176,14 @@ const Header = () => {
                   id="mobile-menu-toggle"
                   variant="ghost"
                   size="icon"
-                  className="md:hidden rounded-full w-10 h-10 hover:bg-primary/10 hover:text-primary"
+                  className="md:hidden rounded-full w-11 h-11 hover:bg-primary/10 hover:text-primary"
                   aria-label="Open menu"
                 >
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-full sm:max-w-sm bg-background/95 backdrop-blur-2xl flex flex-col">
+              <SheetContent side="right" className="w-full sm:max-w-sm bg-background/95 backdrop-blur-2xl flex flex-col pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-[calc(1.5rem+env(safe-area-inset-top))]">
                 <SheetTitle className="text-left font-bold tracking-tight">
                   Dikshant Goyal<span className="text-primary">.</span>
                 </SheetTitle>

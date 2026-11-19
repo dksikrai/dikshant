@@ -29,7 +29,7 @@ const CopyEmailButton = () => {
       variant="ghost"
       size="icon"
       onClick={copy}
-      className="h-8 w-8 shrink-0"
+      className="h-11 w-11 shrink-0 -my-2"
       aria-label="Copy email address"
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -98,7 +98,7 @@ const ContactSection = () => (
           <CardContent className="space-y-5">
             <InfoRow icon={Mail} label="Email">
               <span className="flex items-center gap-1">
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-primary smooth-transition truncate">
+                <a href={`mailto:${siteConfig.email}`} className="py-2.5 hover:text-primary smooth-transition truncate">
                   {siteConfig.email}
                 </a>
                 <CopyEmailButton />
@@ -110,13 +110,13 @@ const ContactSection = () => (
             <Separator className="bg-white/[0.08]" />
 
             <div className="flex flex-col gap-2.5">
-              <Button asChild className="w-full justify-start shadow-lg shadow-primary/20">
+              <Button asChild className="w-full h-11 justify-start shadow-lg shadow-primary/20">
                 <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle />
                   Chat on WhatsApp
                 </a>
               </Button>
-              <Button asChild variant="outline" className="w-full justify-start">
+              <Button asChild variant="outline" className="w-full h-11 justify-start">
                 <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">
                   <Linkedin />
                   Connect on LinkedIn

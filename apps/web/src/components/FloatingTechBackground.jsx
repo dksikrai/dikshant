@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   SiLaravel,
   SiReact,
@@ -39,16 +39,21 @@ const icons = [
 ];
 
 const FloatingTechBackground = () => {
+  const reduce = useReducedMotion();
+  // 16 perpetually animated, fixed-position SVGs is heavy on phones; use a handful there.
+  const [visible] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches ? icons.slice(0, 5) : icons
+  );
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-      {icons.map((item, i) => {
+      {visible.map((item, i) => {
         const { Icon, size, top, left, duration, delay } = item;
         return (
           <motion.div
             key={i}
             className="absolute text-white/[0.04]"
             style={{ top, left }}
-            animate={{
+            animate={reduce ? undefined : {
               y: [0, -50, 0],
               rotate: [0, 10, -10, 0],
             }}

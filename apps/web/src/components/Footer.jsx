@@ -67,7 +67,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="border-t border-border/40 bg-background"
+      className="border-t border-border/40 bg-background pb-[env(safe-area-inset-bottom)]"
       aria-label="Site footer"
     >
       {/* ── Main footer row ── */}
@@ -78,7 +78,7 @@ const Footer = () => {
           <div className="flex flex-col gap-2">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2.5 group focus-visible:outline-none w-fit"
+              className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none w-fit"
               aria-label="Back to top"
             >
               <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
@@ -103,7 +103,7 @@ const Footer = () => {
                 key={link.label}
                 id={`footer-nav-${link.label.toLowerCase()}`}
                 onClick={() => scrollTo(link.href)}
-                className="text-[0.8125rem] font-medium text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline"
+                className="py-2.5 text-[0.8125rem] font-medium text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline"
               >
                 {link.label}
               </button>
@@ -123,7 +123,7 @@ const Footer = () => {
                 title={label}
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.92 }}
-                className="p-2 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="p-3 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 <Icon className="w-4 h-4" />
               </motion.a>
