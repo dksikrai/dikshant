@@ -1,2 +1,22 @@
-## Pages
-- [404 - Page Not Found | Dikshant Goyal](/notfound): No description available
+# Dikshant Goyal
+
+> Project Manager and senior PHP/Laravel backend engineer based in Jaipur, India. Builds and delivers business applications: backend modules, API layers and integrations for e-commerce and operational platforms (inventory, factory, sales-order, payment and shipping domains), and leads technical delivery across development, design and QA.
+
+## Site
+- [Portfolio](https://dikshant-ivory.vercel.app/): single-page portfolio with About, Expertise, Projects (19+ client and product sites), Case Studies, Skills, Experience and Contact sections.
+- [Resume (PDF)](https://dikshant-ivory.vercel.app/resume.pdf): current resume.
+
+## Experience
+- Project Manager, iTechPanel LLP (Jun 2026 - present): planning, execution and delivery across software workstreams.
+- Senior Web Developer, iTechPanel LLP (Aug 2025 - May 2026): Laravel backends, Etsy/Shopify/WooCommerce integrations, webhook-driven queue-based order processing.
+- Senior PHP, WordPress & Laravel Developer, iTechPanel LLP (Apr 2025 - Jul 2025).
+- WordPress Developer, iTechPanel LLP (Jan 2024 - Apr 2025).
+- Business Development Executive, Urban Key Point (Sep 2023 - Dec 2023).
+
+## Skills
+PHP, Laravel, REST APIs, Redis, queues and webhooks, WordPress, e-commerce integrations, project management, team leadership.
+
+## Contact
+- LinkedIn: https://in.linkedin.com/in/csdikshant
+- GitHub: https://github.com/dksikrai
+- Email: webwithdikshant@gmail.com
