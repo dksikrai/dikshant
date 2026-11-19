@@ -5,13 +5,30 @@ import { FadeIn, SlideIn, isIOS, ease } from '@/lib/motion.jsx';
 
 const roles = [
   {
-    title: 'Senior Web Developer',
+    title: 'Project Manager',
     company: 'iTechPanel LLP',
-    date: 'Aug 2025 – Present',
+    date: 'Jun 2026 – Present',
     location: 'Jaipur, India',
     tag: 'Current',
-    icon: Briefcase,
+    icon: Award,
     accent: 'indigo',
+    impact: 'Delivery & Team Lead',
+    description: 'Owning delivery across client projects: planning, sprint management, code review and technical decision-making, while staying hands-on with the Laravel stack.',
+    bullets: [
+      'Plan sprints and break client requirements into reviewable tasks with clear acceptance criteria.',
+      'Coordinate developers, QA and stakeholders; track delivery, risks and blockers.',
+      'Run code and architecture reviews to keep quality, security and maintainability high.',
+      'Communicate status, scope changes and technical trade-offs to clients and management.',
+    ],
+  },
+  {
+    title: 'Senior Web Developer',
+    company: 'iTechPanel LLP',
+    date: 'Aug 2025 – May 2026',
+    location: 'Jaipur, India',
+    tag: 'Promoted',
+    icon: Briefcase,
+    accent: 'violet',
     impact: '60% Faster Releases',
     description: 'Leading architectural decisions, mentoring engineers, and accelerating project delivery for enterprise clients globally.',
     bullets: [
@@ -22,13 +39,13 @@ const roles = [
     ],
   },
   {
-    title: 'Senior PHP & Laravel Developer',
+    title: 'Senior PHP, WordPress & Laravel Developer',
     company: 'iTechPanel LLP',
-    date: 'Apr 2025 – Aug 2025',
+    date: 'Apr 2025 – Jul 2025',
     location: 'Jaipur, India',
     tag: 'Promoted',
     icon: Award,
-    accent: 'violet',
+    accent: 'cyan',
     impact: '70% DB Load Reduction',
     description: 'Architected enterprise Laravel backends, optimized critical performance bottlenecks, and delivered multi-tenant SaaS systems.',
     bullets: [
@@ -45,7 +62,7 @@ const roles = [
     location: 'Jaipur, India',
     tag: null,
     icon: Briefcase,
-    accent: 'cyan',
+    accent: 'emerald',
     impact: '40% Load Time Improvement',
     description: 'Built high-performance custom WordPress and Laravel systems for international clients across 5 countries.',
     bullets: [
@@ -62,7 +79,7 @@ const roles = [
     location: 'Jaipur, India',
     tag: null,
     icon: Award,
-    accent: 'emerald',
+    accent: 'amber',
     impact: 'First Production System',
     description: 'Built a comprehensive real estate lead management system with Laravel Jobs, property matching automation, and CRM workflows.',
     bullets: [
@@ -77,6 +94,7 @@ const accentConfig = {
   indigo:  { dot: 'border-indigo-500 text-indigo-400',  tag: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/25',  check: 'text-indigo-400',  impact: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/25', spine: 'from-indigo-500 to-violet-500' },
   violet:  { dot: 'border-violet-500 text-violet-400',  tag: 'bg-violet-500/10 text-violet-400 border-violet-500/25',  check: 'text-violet-400',  impact: 'bg-violet-500/10 text-violet-400 border-violet-500/25', spine: 'from-violet-500 to-cyan-500' },
   cyan:    { dot: 'border-cyan-500 text-cyan-400',      tag: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25',      check: 'text-cyan-400',    impact: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25', spine: 'from-cyan-500 to-emerald-500' },
+  amber:   { dot: 'border-amber-500 text-amber-400',    tag: 'bg-amber-500/10 text-amber-400 border-amber-500/25',    check: 'text-amber-400',   impact: 'bg-amber-500/10 text-amber-400 border-amber-500/25', spine: 'from-amber-500 to-orange-500' },
   emerald: { dot: 'border-emerald-500 text-emerald-400', tag: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25', check: 'text-emerald-400', impact: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25', spine: 'from-emerald-500 to-sky-500' },
 };
 
