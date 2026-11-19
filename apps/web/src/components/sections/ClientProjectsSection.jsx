@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   SiLaravel, SiVuedotjs, SiRedis, SiJavascript,
   SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor,
@@ -237,7 +237,7 @@ const CompactProjectCard = ({ project }) => {
       </div>
 
       {/* Title */}
-      <h4 className="font-bold text-foreground text-sm">{project.name}</h4>
+      <h3 className="font-bold text-foreground text-sm">{project.name}</h3>
 
       {/* Tech */}
       <div className="flex flex-wrap gap-1 mt-auto">
@@ -307,7 +307,7 @@ const ClientProjectsSection = () => {
           </FadeIn>
         </div>
 
-        <Tabs value={filter} onValueChange={setFilter} className="mb-8">
+        <Tabs value={filter} onValueChange={setFilter}>
           {/* iOS-style segmented control: glass track + sliding thumb */}
           <TabsList className="glass-pill h-auto max-w-full justify-start gap-0.5 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => (
@@ -332,18 +332,20 @@ const ClientProjectsSection = () => {
               </TabsTrigger>
             ))}
           </TabsList>
-        </Tabs>
 
-        <motion.div
-          layout={!isIOS()}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-        >
-          <AnimatePresence mode="popLayout">
-            {visible.map((project) => (
-              <CompactProjectCard key={project.name} project={project} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <TabsContent value={filter} className="mt-8">
+          <motion.div
+            layout={!isIOS()}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            <AnimatePresence mode="popLayout">
+              {visible.map((project) => (
+                <CompactProjectCard key={project.name} project={project} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </TabsContent>
+        </Tabs>
       </div>
     </section>
   );

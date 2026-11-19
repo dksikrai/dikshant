@@ -18,7 +18,8 @@
     --accent: 220 14% 10%;
     --accent-foreground: 0 0% 97%;
     --muted: 220 14% 10%;
-    --muted-foreground: 220 9% 56%;
+    --muted-foreground: 220 9% 66%;
+    --primary-solid: 243 78% 61%; /* filled buttons: white text >= 4.5:1 */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 14% 11%;
@@ -190,8 +191,7 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: hsl(var(--primary));
-    opacity: 0.85;
+    color: hsl(243 90% 79%);
   }
 
   /* ── Mono badge (for tech chips) ── */

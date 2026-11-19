@@ -14,7 +14,7 @@ import { useCountUp, isIOS, ease } from '@/lib/motion.jsx';
 
 const STATS = [
   {
-    value: 22,
+    value: 19,
     suffix: '+',
     label: 'Projects Delivered',
     description: 'End-to-end production deployments',
@@ -101,7 +101,7 @@ function StatItem({ stat, index }) {
       {/* Description */}
       <div
         className="text-xs leading-relaxed"
-        style={{ color: 'hsl(var(--muted-foreground))', opacity: 0.75 }}
+        style={{ color: 'hsl(var(--muted-foreground))' }}
       >
         {stat.description}
       </div>

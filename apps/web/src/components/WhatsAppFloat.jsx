@@ -30,7 +30,7 @@ const WhatsAppFloat = () => {
   };
 
   return (
-    <div className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[999] flex flex-col items-end gap-3 pointer-events-none">
+    <aside aria-label="Contact shortcut" className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[999] flex flex-col items-end gap-3 pointer-events-none">
       <AnimatePresence>
         {showTooltip && !dismissed && (
           <motion.div
@@ -77,7 +77,7 @@ const WhatsAppFloat = () => {
         {/* Online indicator — static, no animation */}
         <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-green-400 rounded-full border-2 border-background" aria-hidden="true" />
       </motion.a>
-    </div>
+    </aside>
   );
 };
 

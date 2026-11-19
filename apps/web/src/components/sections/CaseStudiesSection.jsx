@@ -142,7 +142,7 @@ const CaseStudyCard = ({ study, index }) => {
               <div>
                 <p
                   className="text-[11px] font-semibold uppercase tracking-widest mb-2"
-                  style={{ color: 'rgba(255,255,255,0.3)' }}
+                  style={{ color: 'rgba(255,255,255,0.55)' }}
                 >
                   Challenge
                 </p>
@@ -155,7 +155,7 @@ const CaseStudyCard = ({ study, index }) => {
               <div>
                 <p
                   className="text-[11px] font-semibold uppercase tracking-widest mb-2.5"
-                  style={{ color: 'rgba(255,255,255,0.3)' }}
+                  style={{ color: 'rgba(255,255,255,0.55)' }}
                 >
                   Architecture
                 </p>
