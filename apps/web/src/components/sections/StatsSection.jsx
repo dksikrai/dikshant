@@ -21,7 +21,7 @@ const STATS = [
     gradient: 'linear-gradient(135deg, hsl(243,88%,72%) 0%, hsl(192,80%,60%) 100%)',
   },
   {
-    value: 2,
+    value: 3,
     suffix: '+',
     label: 'Years Production Experience',
     description: 'Live systems serving real users',

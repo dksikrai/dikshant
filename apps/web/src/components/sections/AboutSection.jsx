@@ -2,7 +2,7 @@ import React from 'react';
 import { FadeIn, SlideIn, StaggerGrid } from '@/lib/motion.jsx';
 
 const facts = [
-  { value: '2+ Years',      label: 'Building production systems' },
+  { value: '3+ Years',      label: 'Building production systems' },
   { value: '22+ Projects',  label: 'Across 5 countries' },
   { value: 'Backend First', label: 'APIs, queues, cloud infra' },
   { value: 'AI-Enabled',    label: 'OpenAI, RAG, embeddings' },
@@ -58,7 +58,7 @@ const AboutSection = () => (
 
           <FadeIn delay={0.14}>
             <p className="text-muted-foreground mb-5 leading-relaxed">
-              I'm Dikshant Goyal — a backend-first engineer with 2+ years building
+              I'm Dikshant Goyal — a backend-first engineer with 3+ years building
               production-grade SaaS systems, AI-powered automation pipelines, and scalable
               cloud architectures. I care about system reliability, clean APIs, and
               engineering solutions that handle real scale. From Redis queue monitoring to
