@@ -3,7 +3,7 @@ import { FadeIn, SlideIn, StaggerGrid } from '@/lib/motion.jsx';
 
 const facts = [
   { value: '3+ Years',      label: 'Building production systems' },
-  { value: '22+ Projects',  label: 'Across 5 countries' },
+  { value: '19+ Projects',  label: 'Across 5 countries' },
   { value: 'Backend First', label: 'APIs, queues, cloud infra' },
   { value: 'AI-Enabled',    label: 'OpenAI, RAG, embeddings' },
 ];

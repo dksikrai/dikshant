@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Dikshant Goyal",
-  tagline: "AI-Powered Backend & Product Engineer",
+  tagline: "Project Manager & Senior Laravel Developer",
   headline: "I build scalable backend systems, AI workflows & production-ready SaaS platforms.",
   email: "webwithdikshant@gmail.com",
   phone: "+919829641370",

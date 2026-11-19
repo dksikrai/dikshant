@@ -50,7 +50,7 @@ const CopyEmailButton = () => {
 
 const InfoRow = ({ icon: Icon, label, children }) => (
   <div className="flex items-start gap-3">
-    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl glass-pill text-primary">
       <Icon className="h-4 w-4" />
     </span>
     <div className="min-w-0">
@@ -90,7 +90,7 @@ const ContactSection = () => (
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Contact details */}
         <FadeIn className="lg:col-span-2">
-        <Card className="h-full glass-card border-white/[0.07] bg-transparent">
+        <Card className="h-full glass-card rounded-3xl border-white/[0.09] bg-transparent">
           <CardHeader>
             <CardTitle className="text-xl">Get in touch</CardTitle>
             <CardDescription>The fastest way to reach me.</CardDescription>
@@ -110,13 +110,13 @@ const ContactSection = () => (
             <Separator className="bg-white/[0.08]" />
 
             <div className="flex flex-col gap-2.5">
-              <Button asChild className="w-full h-11 justify-start shadow-lg shadow-primary/20">
+              <Button asChild className="w-full h-11 justify-start rounded-xl shadow-lg shadow-primary/25">
                 <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle />
                   Chat on WhatsApp
                 </a>
               </Button>
-              <Button asChild variant="outline" className="w-full h-11 justify-start">
+              <Button asChild variant="glass" className="w-full h-11 justify-start rounded-xl">
                 <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">
                   <Linkedin />
                   Connect on LinkedIn
@@ -130,7 +130,7 @@ const ContactSection = () => (
 
         {/* Form */}
         <FadeIn className="lg:col-span-3" delay={0.12}>
-        <Card className="h-full glass-card border-white/[0.07] bg-transparent">
+        <Card className="h-full glass-card rounded-3xl border-white/[0.09] bg-transparent">
           <CardHeader>
             <CardTitle className="text-xl">Send a message</CardTitle>
             <CardDescription>Share a few details and I&apos;ll get back to you.</CardDescription>

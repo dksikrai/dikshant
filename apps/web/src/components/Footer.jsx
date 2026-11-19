@@ -1,143 +1,144 @@
-
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowUp, Download, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/config/site.js';
 
 const LogoMark = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    className="w-4 h-4 shrink-0"
-    aria-hidden="true"
-  >
-    <path
-      d="M8 6L2 12L8 18M16 6L22 12L16 18M14 3L10 21"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px] shrink-0" aria-hidden="true">
+    <path d="M8 6L2 12L8 18M16 6L22 12L16 18M14 3L10 21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
-const footerNavLinks = [
-  { label: 'About',     href: '#about' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Projects',  href: '#projects' },
-  { label: 'Contact',   href: '#contact' },
+const navLinks = [
+  { label: 'About',      href: '#about' },
+  { label: 'Expertise',  href: '#expertise' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'AI',         href: '#ai-engineering' },
+  { label: 'Experience', href: '#career' },
+  { label: 'Contact',    href: '#contact' },
 ];
 
-const scrollTo = (href) => {
-  const el = document.querySelector(href);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-};
-
-const socialLinks = [
-  {
-    id: 'footer-github',
-    label: 'GitHub',
-    href: siteConfig.links.github,
-    icon: Github,
-  },
-  {
-    id: 'footer-linkedin',
-    label: 'LinkedIn',
-    href: siteConfig.links.linkedin,
-    icon: Linkedin,
-  },
-  {
-    id: 'footer-twitter',
-    label: 'Twitter / X',
-    href: siteConfig.links.twitter,
-    icon: Twitter,
-  },
-  {
-    id: 'footer-email',
-    label: 'Email',
-    href: `mailto:${siteConfig.email}`,
-    icon: Mail,
-  },
+const connectLinks = [
+  { id: 'footer-github',   label: 'GitHub',      href: siteConfig.links.github,   icon: Github },
+  { id: 'footer-linkedin', label: 'LinkedIn',    href: siteConfig.links.linkedin, icon: Linkedin },
+  { id: 'footer-twitter',  label: 'Twitter / X', href: siteConfig.links.twitter,  icon: Twitter },
+  { id: 'footer-email',    label: 'Email',       href: `mailto:${siteConfig.email}`, icon: Mail },
 ];
+
+const scrollToHash = (href) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+
+const ColumnTitle = ({ children }) => (
+  <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+    {children}
+  </h2>
+);
+
+const linkClass =
+  'group flex min-h-11 items-center gap-2.5 rounded-lg text-sm font-medium text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 active:text-primary';
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
     <footer
-      className="border-t border-border/40 bg-background pb-[env(safe-area-inset-bottom)]"
       aria-label="Site footer"
+      className="relative px-3 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 sm:px-6 sm:pb-[calc(2.5rem+env(safe-area-inset-bottom))]"
     >
-      {/* ── Main footer row ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-
-          {/* Left – Logo + tagline */}
-          <div className="flex flex-col gap-2">
+      <div className="mx-auto max-w-6xl glass-card rounded-[1.75rem] p-5 sm:p-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-[1.5fr_1fr_1fr]">
+          {/* Brand: full width on phones */}
+          <div className="col-span-2 flex flex-col gap-4 md:col-span-1">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none w-fit"
+              className="group flex min-h-11 w-fit items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               aria-label="Back to top"
             >
-              <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl glass-pill text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <LogoMark />
-              </div>
-              <span className="font-bold text-base tracking-tight">
+              </span>
+              <span className="text-lg font-bold tracking-tight">
                 Dikshant Goyal<span className="text-primary">.</span>
               </span>
             </button>
-            <p className="text-[0.8125rem] text-muted-foreground pl-0.5 max-w-[240px] leading-snug">
-              {siteConfig.tagline}
+
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{siteConfig.tagline}</p>
+
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="inline-flex items-center gap-2 rounded-full glass-pill px-3 py-1.5 text-xs font-medium text-emerald-300">
+                <span className="status-dot" />
+                Open to consulting
+              </span>
+              <Button asChild variant="glass" size="sm" className="h-11 rounded-full px-4 text-xs font-semibold">
+                <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
+                  <Download />
+                  Resume
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Navigate */}
+          <nav aria-label="Footer navigation">
+            <ColumnTitle>Navigate</ColumnTitle>
+            <ul>
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <button
+                    id={`footer-nav-${link.label.toLowerCase()}`}
+                    onClick={() => scrollToHash(link.href)}
+                    className={`${linkClass} w-full text-left`}
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Connect */}
+          <div>
+            <ColumnTitle>Connect</ColumnTitle>
+            <ul>
+              {connectLinks.map(({ id, label, href, icon: Icon }) => (
+                <li key={id}>
+                  <a
+                    id={id}
+                    href={href}
+                    target={href.startsWith('mailto') ? undefined : '_blank'}
+                    rel="noopener noreferrer"
+                    className={linkClass}
+                  >
+                    <Icon className="h-4 w-4 shrink-0 text-foreground/50 transition-colors group-hover:text-primary" aria-hidden="true" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Separator className="my-6 bg-white/[0.08]" />
+
+        {/* Bottom bar */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="space-y-1 text-xs text-muted-foreground">
+            <p className="text-muted-foreground">&copy; {year} Dikshant Goyal</p>
+            <p className="flex items-center gap-1.5">
+              <MapPin className="h-3 w-3" aria-hidden="true" />
+              {siteConfig.location}
             </p>
           </div>
 
-          {/* Center – Nav links */}
-          <nav
-            className="flex flex-wrap gap-x-6 gap-y-2"
-            aria-label="Footer navigation"
+          <motion.button
+            whileTap={{ scale: 0.94 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex h-11 items-center gap-2 rounded-full glass-pill px-4 text-xs font-semibold text-foreground/85 transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
           >
-            {footerNavLinks.map((link) => (
-              <button
-                key={link.label}
-                id={`footer-nav-${link.label.toLowerCase()}`}
-                onClick={() => scrollTo(link.href)}
-                className="py-2.5 text-[0.8125rem] font-medium text-muted-foreground hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:underline"
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
-
-          {/* Right – Social icons */}
-          <div className="flex items-center gap-2">
-            {socialLinks.map(({ id, label, href, icon: Icon }) => (
-              <motion.a
-                key={id}
-                id={id}
-                href={href}
-                target={href.startsWith('mailto') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                aria-label={label}
-                title={label}
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.92 }}
-                className="p-3 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-              >
-                <Icon className="w-4 h-4" />
-              </motion.a>
-            ))}
-          </div>
-
-        </div>
-
-        {/* ── Bottom bar ── */}
-        <Separator className="bg-border/30" />
-        <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[0.75rem] text-muted-foreground/60">
-          <span>© {year} Dikshant Goyal</span>
-          <span className="hidden sm:block">·</span>
-          <span>Built with passion in Jaipur, India</span>
+            Back to top
+            <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
+          </motion.button>
         </div>
       </div>
     </footer>

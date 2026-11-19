@@ -245,7 +245,7 @@ export default function HeroSection() {
               <motion.div variants={childVariants}>
                 <Badge
                   variant="outline"
-                  className="gap-2 rounded-full border-emerald-400/25 bg-emerald-400/[0.07] px-3 py-1.5 text-xs font-medium text-emerald-400"
+                  className="glass-pill gap-2 rounded-full border-emerald-400/25 px-3.5 py-1.5 text-xs font-medium text-emerald-300"
                 >
                   <span className="status-dot flex-shrink-0" />
                   Open to Consulting & New Opportunities
@@ -288,7 +288,7 @@ export default function HeroSection() {
                 className="flex flex-wrap items-center gap-3 pt-1"
               >
                 <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
-                  <Button asChild size="lg" className="h-12 sm:h-11 w-full sm:w-auto px-5 font-semibold shadow-lg shadow-primary/25">
+                  <Button asChild size="lg" className="h-12 sm:h-11 w-full sm:w-auto rounded-full px-6 font-semibold shadow-lg shadow-primary/30">
                     <a
                       href="#projects"
                       onClick={(e) => {
@@ -303,7 +303,7 @@ export default function HeroSection() {
                 </motion.div>
 
                 <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
-                  <Button asChild variant="outline" size="lg" className="h-12 sm:h-11 w-full sm:w-auto px-5 font-semibold bg-transparent border-white/[0.14] hover:bg-white/[0.05]">
+                  <Button asChild variant="glass" size="lg" className="h-12 sm:h-11 w-full sm:w-auto rounded-full px-6 font-semibold">
                     <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
                       <Download strokeWidth={2} />
                       Download Resume

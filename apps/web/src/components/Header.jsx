@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, Download, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Download, ArrowRight, ChevronRight, User, Layers, FolderKanban, Sparkles, Mail, Github, Linkedin, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,13 +12,21 @@ import {
 } from '@/components/ui/sheet';
 import { siteConfig } from '@/config/site.js';
 import { ease } from '@/lib/motion.jsx';
+import { enableRefraction } from '@/lib/glass.js';
 
 const navLinks = [
-  { name: 'About',     href: '#about' },
-  { name: 'Expertise', href: '#expertise' },
-  { name: 'Projects',  href: '#projects' },
-  { name: 'AI',        href: '#ai-engineering' },
-  { name: 'Contact',   href: '#contact' },
+  { name: 'About',     href: '#about',          icon: User },
+  { name: 'Expertise', href: '#expertise',      icon: Layers },
+  { name: 'Projects',  href: '#projects',       icon: FolderKanban },
+  { name: 'AI',        href: '#ai-engineering', icon: Sparkles },
+  { name: 'Contact',   href: '#contact',        icon: Mail },
+];
+
+const socials = [
+  { label: 'GitHub',   href: siteConfig.links.github,   icon: Github },
+  { label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
+  { label: 'Twitter / X', href: siteConfig.links.twitter, icon: Twitter },
+  { label: 'Email',    href: `mailto:${siteConfig.email}`, icon: Mail },
 ];
 
 const LogoMark = () => (
@@ -74,6 +82,10 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = useActiveSection(hrefs);
+  const capsuleRef = useRef(null);
+
+  // Real refraction on desktop Chromium; other browsers keep the CSS glass.
+  useEffect(() => enableRefraction(capsuleRef.current, { bezel: 20, scale: 30 }), []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -87,14 +99,16 @@ const Header = () => {
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: ease.out }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] bg-background/95 md:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm'
-          : 'pb-5 pt-[calc(env(safe-area-inset-top)+1.25rem)] bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 pt-[calc(env(safe-area-inset-top)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top)+0.875rem)] pointer-events-none"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 sm:px-5">
+        {/* Floating liquid-glass capsule */}
+        <div
+          ref={capsuleRef}
+          className={`pointer-events-auto flex items-center justify-between gap-2 rounded-full glass-pill pl-2 pr-1.5 py-1 transition-shadow duration-300 ${
+            isScrolled ? 'shadow-2xl shadow-black/60' : ''
+          }`}
+        >
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -115,7 +129,7 @@ const Header = () => {
 
           {/* Desktop nav with animated active pill */}
           <nav
-            className="hidden md:flex items-center gap-0.5 bg-background/60 backdrop-blur-md px-1.5 py-1 rounded-full border border-border/60 shadow-sm"
+            className="hidden md:flex items-center gap-0.5"
             aria-label="Primary navigation"
           >
             {navLinks.map((link) => {
@@ -133,7 +147,7 @@ const Header = () => {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-primary/15 border border-primary/25"
+                      className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -159,9 +173,8 @@ const Header = () => {
 
             <Button
               asChild
-              variant="outline"
               size="sm"
-              className="hidden md:inline-flex rounded-full border-primary/40 bg-transparent text-primary text-[0.8125rem] font-semibold hover:bg-primary hover:text-primary-foreground hover:shadow-md hover:shadow-primary/20"
+              className="hidden md:inline-flex rounded-full text-[0.8125rem] font-semibold shadow-md shadow-primary/30"
             >
               <a id="header-hire-me-btn" href={`mailto:${siteConfig.email}`}>
                 Hire Me
@@ -183,59 +196,100 @@ const Header = () => {
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-full sm:max-w-sm bg-background/95 backdrop-blur-2xl flex flex-col pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-[calc(1.5rem+env(safe-area-inset-top))]">
-                <SheetTitle className="text-left font-bold tracking-tight">
-                  Dikshant Goyal<span className="text-primary">.</span>
-                </SheetTitle>
+              {/* Floating glass panel (not full-bleed) so the blurred page stays visible behind it */}
+              <SheetContent
+                side="right"
+                showClose={false}
+                onOpenAutoFocus={(e) => e.preventDefault()}
+                className="!inset-y-3 !left-3 !right-3 h-auto w-auto sm:!left-auto sm:w-[22rem] glass-sheet flex flex-col gap-5 overflow-y-auto rounded-[1.75rem] p-5 pt-[calc(1.25rem+env(safe-area-inset-top)*0.5)] pb-[calc(1.25rem+env(safe-area-inset-bottom))]"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl glass-pill text-primary">
+                      <LogoMark />
+                    </span>
+                    <SheetTitle className="text-base font-bold tracking-tight">
+                      Dikshant Goyal<span className="text-primary">.</span>
+                    </SheetTitle>
+                  </div>
+                  <SheetClose asChild>
+                    <Button variant="glass" size="icon" className="h-11 w-11 rounded-full" aria-label="Close menu">
+                      <X />
+                    </Button>
+                  </SheetClose>
+                </div>
                 <SheetDescription className="sr-only">Site navigation</SheetDescription>
 
-                <nav className="flex flex-col flex-1 pt-6" aria-label="Mobile navigation">
+                {/* iOS-style grouped list */}
+                <nav aria-label="Mobile navigation">
                   <motion.ul
-                    className="flex flex-col gap-1 mb-auto"
+                    className="overflow-hidden rounded-2xl border border-white/[0.10] bg-white/[0.06] divide-y divide-white/[0.07]"
                     initial="hidden"
                     animate={mobileOpen ? 'visible' : 'hidden'}
-                    variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+                    variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } } }}
                   >
-                    {navLinks.map((link) => (
-                      <motion.li
-                        key={link.name}
-                        variants={{
-                          hidden:  { opacity: 0, x: 20 },
-                          visible: { opacity: 1, x: 0, transition: { duration: 0.3, ease: ease.out } },
-                        }}
-                      >
-                        <SheetClose asChild>
-                          <button
-                            id={`mobile-nav-${link.name.toLowerCase()}`}
-                            // Wait for the sheet to unlock body scroll before scrolling.
-                            onClick={() => setTimeout(() => scrollToHash(link.href), 320)}
-                            className={`w-full text-left px-4 py-4 rounded-2xl text-2xl font-bold tracking-tight flex items-center justify-between group transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
-                              active === link.href ? 'text-primary bg-primary/10' : 'text-foreground/80 hover:text-foreground hover:bg-primary/5'
-                            }`}
-                          >
-                            {link.name}
-                            <ArrowRight className="w-5 h-5 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
-                          </button>
-                        </SheetClose>
-                      </motion.li>
-                    ))}
+                    {navLinks.map((link) => {
+                      const Icon = link.icon;
+                      const isActive = active === link.href;
+                      return (
+                        <motion.li
+                          key={link.name}
+                          variants={{
+                            hidden:  { opacity: 0, y: 10 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: ease.out } },
+                          }}
+                        >
+                          <SheetClose asChild>
+                            <button
+                              id={`mobile-nav-${link.name.toLowerCase()}`}
+                              // Wait for the sheet to unlock body scroll before scrolling.
+                              onClick={() => setTimeout(() => scrollToHash(link.href), 320)}
+                              aria-current={isActive ? 'true' : undefined}
+                              className={`group flex min-h-[3.5rem] w-full items-center gap-3.5 px-4 text-left text-[1.0625rem] font-semibold tracking-tight transition-colors duration-150 active:bg-white/[0.08] focus-visible:outline-none focus-visible:bg-white/[0.08] ${
+                                isActive ? 'bg-primary/15 text-foreground' : 'text-foreground/85'
+                              }`}
+                            >
+                              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isActive ? 'bg-primary/25 text-primary' : 'bg-white/[0.07] text-foreground/70'}`}>
+                                <Icon className="h-4 w-4" />
+                              </span>
+                              <span className="flex-1">{link.name}</span>
+                              <ChevronRight className="h-4 w-4 text-foreground/35 transition-transform group-active:translate-x-0.5" />
+                            </button>
+                          </SheetClose>
+                        </motion.li>
+                      );
+                    })}
                   </motion.ul>
-
-                  <div className="mt-10 flex flex-col gap-3">
-                    <Button asChild variant="outline" className="h-14 rounded-2xl text-base font-semibold">
-                      <a id="mobile-download-resume" href={siteConfig.resume} download={siteConfig.resumeFilename}>
-                        <Download className="text-primary" />
-                        Download Resume
-                      </a>
-                    </Button>
-                    <Button asChild className="h-14 rounded-2xl text-base font-bold shadow-lg shadow-primary/20">
-                      <a id="mobile-hire-me-btn" href={`mailto:${siteConfig.email}`}>
-                        Hire Me
-                        <ArrowRight />
-                      </a>
-                    </Button>
-                  </div>
                 </nav>
+
+                <div className="mt-auto flex flex-col gap-3">
+                  <div className="flex items-center justify-center gap-2.5">
+                    {socials.map(({ label, href, icon: SocialIcon }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target={href.startsWith('mailto') ? undefined : '_blank'}
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex h-11 w-11 items-center justify-center rounded-full glass-pill text-foreground/75 active:scale-95 active:bg-white/[0.14] transition"
+                      >
+                        <SocialIcon className="h-[18px] w-[18px]" />
+                      </a>
+                    ))}
+                  </div>
+                  <Button asChild variant="glass" className="h-12 rounded-2xl text-[0.9375rem] font-semibold">
+                    <a id="mobile-download-resume" href={siteConfig.resume} download={siteConfig.resumeFilename}>
+                      <Download className="text-primary" />
+                      Download Resume
+                    </a>
+                  </Button>
+                  <Button asChild className="h-12 rounded-2xl text-[0.9375rem] font-bold shadow-lg shadow-primary/30">
+                    <a id="mobile-hire-me-btn" href={`mailto:${siteConfig.email}`}>
+                      Hire Me
+                      <ArrowRight />
+                    </a>
+                  </Button>
+                </div>
               </SheetContent>
             </Sheet>
           </div>

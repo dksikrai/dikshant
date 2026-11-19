@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   SiLaravel, SiVuedotjs, SiRedis, SiJavascript,
   SiWordpress, SiWoocommerce, SiPhp, SiMysql, SiElementor,
@@ -133,7 +133,7 @@ const FeaturedProjectCard = ({ project, index }) => {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 } },
       }}
-      className="glass-card rounded-2xl overflow-hidden border border-white/[0.07]"
+      className="glass-card rounded-3xl overflow-hidden"
     >
       <div className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? '' : 'lg:[&>*:first-child]:order-2'}`}>
         {/* Screenshot */}
@@ -219,7 +219,7 @@ const CompactProjectCard = ({ project }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.15 } }}
       transition={{ duration: 0.3, ease: ease.out }}
-      className="glass-card rounded-xl p-5 card-hover flex flex-col gap-3 h-full"
+      className="glass-card rounded-2xl p-5 card-hover flex flex-col gap-3 h-full"
     >
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -237,7 +237,7 @@ const CompactProjectCard = ({ project }) => {
       </div>
 
       {/* Title */}
-      <h4 className="font-bold text-foreground text-sm">{project.name}</h4>
+      <h3 className="font-bold text-foreground text-sm">{project.name}</h3>
 
       {/* Tech */}
       <div className="flex flex-wrap gap-1 mt-auto">
@@ -307,29 +307,45 @@ const ClientProjectsSection = () => {
           </FadeIn>
         </div>
 
-        <Tabs value={filter} onValueChange={setFilter} className="mb-8">
-          <TabsList className="h-auto flex-wrap justify-start gap-1 bg-white/[0.04] border border-white/[0.06] p-1">
+        <Tabs value={filter} onValueChange={setFilter}>
+          {/* iOS-style segmented control: glass track + sliding thumb */}
+          <TabsList className="glass-pill h-auto max-w-full justify-start gap-0.5 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => (
-              <TabsTrigger key={c} value={c} className="relative text-xs min-h-11 sm:min-h-9 px-3.5">
-                {c}
-                <span className="ml-1.5 text-[11px] text-muted-foreground">
-                  {c === 'All' ? allProjects.length : allProjects.filter((p) => p.type === c).length}
+              <TabsTrigger
+                key={c}
+                value={c}
+                className="relative shrink-0 rounded-full bg-transparent text-xs min-h-11 sm:min-h-9 px-4 text-foreground/60 data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none"
+              >
+                {filter === c && (
+                  <motion.span
+                    layoutId="project-filter-thumb"
+                    className="absolute inset-0 rounded-full bg-white/[0.14] border border-white/20 shadow-[0_2px_8px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.25)]"
+                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center">
+                  {c}
+                  <span className="ml-1.5 text-[11px] text-muted-foreground">
+                    {c === 'All' ? allProjects.length : allProjects.filter((p) => p.type === c).length}
+                  </span>
                 </span>
               </TabsTrigger>
             ))}
           </TabsList>
-        </Tabs>
 
-        <motion.div
-          layout={!isIOS()}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-        >
-          <AnimatePresence mode="popLayout">
-            {visible.map((project) => (
-              <CompactProjectCard key={project.name} project={project} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <TabsContent value={filter} className="mt-8">
+          <motion.div
+            layout={!isIOS()}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            <AnimatePresence mode="popLayout">
+              {visible.map((project) => (
+                <CompactProjectCard key={project.name} project={project} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </TabsContent>
+        </Tabs>
       </div>
     </section>
   );

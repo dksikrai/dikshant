@@ -50,8 +50,9 @@ const HomePage = () => {
 
       {/* Ambient background gradients — static, no animation */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-[70%] h-[50vh] bg-[radial-gradient(ellipse_at_top_left,rgba(99,102,241,0.06),transparent_55%)]" />
-        <div className="absolute bottom-0 right-0 w-[50%] h-[40vh] bg-[radial-gradient(ellipse_at_bottom_right,rgba(34,211,238,0.04),transparent_60%)]" />
+        <div className="absolute -top-[10%] -left-[10%] w-[70%] h-[60vh] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.20),transparent_65%)]" />
+        <div className="absolute top-[35%] -right-[15%] w-[60%] h-[55vh] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.13),transparent_65%)]" />
+        <div className="absolute -bottom-[10%] left-[15%] w-[65%] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.12),transparent_65%)]" />
       </div>
 
       {/* ── SEO Meta Tags ── */}

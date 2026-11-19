@@ -148,7 +148,7 @@ const codeLines = [
 ];
 
 const tokenColor = {
-  comment: 'text-neutral-500',
+  comment: 'text-neutral-400',
   var:     'text-cyan-300',
   class:   'text-indigo-400',
   fn:      'text-sky-300',
@@ -202,9 +202,9 @@ const CapabilityCard = ({ item, index }) => {
           </div>
 
           {/* Text */}
-          <h4 className="text-sm font-semibold text-foreground mb-2 leading-snug tracking-tight">
+          <h3 className="text-sm font-semibold text-foreground mb-2 leading-snug tracking-tight">
             {item.title}
-          </h4>
+          </h3>
           <p className="text-xs text-muted-foreground leading-relaxed flex-grow">
             {item.description}
           </p>
@@ -238,7 +238,7 @@ const CodeBlock = () => (
         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
         <span
           className="ml-3 text-[11px] font-mono tracking-wider"
-          style={{ color: 'rgba(255,255,255,0.3)' }}
+          style={{ color: 'rgba(255,255,255,0.55)' }}
         >
           DocumentAnalysisPipeline.php
         </span>
@@ -250,7 +250,7 @@ const CodeBlock = () => (
           {codeLines.map((line, i) => {
             if (line.type === 'blank') return <div key={i}>&nbsp;</div>;
             if (line.type === 'comment') return (
-              <div key={i} className="text-neutral-500">{line.text}</div>
+              <div key={i} className="text-neutral-400">{line.text}</div>
             );
             return (
               <div key={i}>
