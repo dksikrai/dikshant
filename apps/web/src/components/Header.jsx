@@ -87,14 +87,15 @@ const Header = () => {
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: ease.out }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'pb-3 pt-[calc(env(safe-area-inset-top)+0.75rem)] bg-background/95 md:bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm'
-          : 'pb-5 pt-[calc(env(safe-area-inset-top)+1.25rem)] bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 pt-[calc(env(safe-area-inset-top)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top)+0.875rem)] pointer-events-none"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-3 sm:px-5">
+        {/* Floating liquid-glass capsule */}
+        <div
+          className={`pointer-events-auto flex items-center justify-between gap-2 rounded-full glass-pill pl-2 pr-1.5 py-1 transition-shadow duration-300 ${
+            isScrolled ? 'shadow-2xl shadow-black/60' : ''
+          }`}
+        >
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -115,7 +116,7 @@ const Header = () => {
 
           {/* Desktop nav with animated active pill */}
           <nav
-            className="hidden md:flex items-center gap-0.5 bg-background/60 backdrop-blur-md px-1.5 py-1 rounded-full border border-border/60 shadow-sm"
+            className="hidden md:flex items-center gap-0.5"
             aria-label="Primary navigation"
           >
             {navLinks.map((link) => {
@@ -133,7 +134,7 @@ const Header = () => {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-primary/15 border border-primary/25"
+                      className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -159,9 +160,8 @@ const Header = () => {
 
             <Button
               asChild
-              variant="outline"
               size="sm"
-              className="hidden md:inline-flex rounded-full border-primary/40 bg-transparent text-primary text-[0.8125rem] font-semibold hover:bg-primary hover:text-primary-foreground hover:shadow-md hover:shadow-primary/20"
+              className="hidden md:inline-flex rounded-full text-[0.8125rem] font-semibold shadow-md shadow-primary/30"
             >
               <a id="header-hire-me-btn" href={`mailto:${siteConfig.email}`}>
                 Hire Me
@@ -183,7 +183,7 @@ const Header = () => {
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-full sm:max-w-sm bg-background/95 backdrop-blur-2xl flex flex-col pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-[calc(1.5rem+env(safe-area-inset-top))]">
+              <SheetContent side="right" className="w-full sm:max-w-sm glass-strong sm:rounded-l-3xl border-l-white/10 flex flex-col pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-[calc(1.5rem+env(safe-area-inset-top))]">
                 <SheetTitle className="text-left font-bold tracking-tight">
                   Dikshant Goyal<span className="text-primary">.</span>
                 </SheetTitle>

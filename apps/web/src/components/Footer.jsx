@@ -67,7 +67,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="border-t border-border/40 bg-background pb-[env(safe-area-inset-bottom)]"
+      className="relative mt-8 border-t border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-xl pb-[env(safe-area-inset-bottom)]"
       aria-label="Site footer"
     >
       {/* ── Main footer row ── */}
@@ -123,7 +123,7 @@ const Footer = () => {
                 title={label}
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.92 }}
-                className="p-3 rounded-full border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                className="p-3 rounded-full glass-pill text-muted-foreground hover:text-foreground hover:bg-white/[0.14] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               >
                 <Icon className="w-4 h-4" />
               </motion.a>
