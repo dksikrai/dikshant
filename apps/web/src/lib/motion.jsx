@@ -9,7 +9,7 @@
  */
 
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useReducedMotion, useMotionValue, useTransform, useSpring, animate } from 'framer-motion';
+import { m as motion, useReducedMotion, useMotionValue, useTransform, useSpring, animate } from 'framer-motion';
 
 // ─── Device Detection ─────────────────────────────────────────────────────────
 

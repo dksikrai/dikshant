@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Server, Zap, Cloud, ShoppingCart, Brain, Layout } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 
@@ -70,7 +70,7 @@ const ExpertiseCard = ({ exp, index }) => {
       }}
       className="group"
     >
-      <div className="h-full glass-card rounded-xl p-6 card-hover flex flex-col gap-4">
+      <div className="h-full glass-card card-hover rounded-2xl p-6 flex flex-col gap-4">
         {/* Icon */}
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${exp.iconBg} shrink-0`}>
           <Icon className={`w-5 h-5 ${exp.color}`} />

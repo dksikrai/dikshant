@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
 
@@ -110,7 +110,7 @@ const CaseStudyCard = ({ study, index }) => {
         />
 
         <div
-          className="rounded-xl glass-card hover-glow overflow-hidden"
+          className="rounded-2xl glass-card card-hover overflow-hidden"
           style={{ background: 'hsl(220,16%,6%)', borderLeft: 'none' }}
         >
           <div className="p-6 md:p-8">

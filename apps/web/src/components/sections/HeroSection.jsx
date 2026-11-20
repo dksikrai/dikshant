@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { m as motion, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Download, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

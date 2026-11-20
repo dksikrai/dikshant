@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -23,7 +23,7 @@ const featuredProjects = [
     tech: ['Laravel', 'Redis', 'AWS', 'Vue.js', 'Fabric.js'],
     metric: '10K+ Orders/Month',
     impact: '60% Error Reduction',
-    screenshot: '/screenshots/airventory.png',
+    screenshot: '/screenshots/airventory.webp',
     featured: true,
   },
   {
@@ -36,7 +36,7 @@ const featuredProjects = [
     tech: ['PHP', 'Cloudflare', 'Mapbox API', 'WordPress'],
     metric: 'Real-Time Intelligence',
     impact: 'AI-Enhanced Maps',
-    screenshot: '/screenshots/mapview.png',
+    screenshot: '/screenshots/mapview.webp',
     featured: true,
   },
   {
@@ -49,31 +49,31 @@ const featuredProjects = [
     tech: ['PHP', 'Nginx', 'Plesk', 'Tailwind CSS'],
     metric: '1000+ Active Users',
     impact: 'GDPR Compliant',
-    screenshot: '/screenshots/profiletag.png',
+    screenshot: '/screenshots/profiletag.webp',
     featured: true,
   },
 ];
 
 const allProjects = [
-  { name: 'Mehta College', type: 'Enterprise', tech: ['WordPress', 'PHP', 'MySQL'], url: 'https://www.mehtacollege.com/', screenshot: '/screenshots/mehta_college.png' },
-  { name: 'Kritasya Jewels', type: 'E-commerce', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://kritasyajewels.com/', screenshot: '/screenshots/kritasyajewels.png' },
-  { name: 'Mehandipur Balaji Seva', type: 'Services', tech: ['WordPress', 'PHP', 'WhatsApp API'], url: 'https://mehandipurbalajiseva.com/', screenshot: '/screenshots/mehandipurbalajiseva.png' },
-  { name: 'Bright Hygiene Group', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Nginx'], url: 'http://brighthygienegroup.in/', screenshot: '/screenshots/brighthygienegroup.png' },
-  { name: 'Aussie Translations', type: 'Services', tech: ['WordPress', 'PHP', 'Nginx'], url: 'https://aussietranslations.com.au/', screenshot: '/screenshots/aussietranslations.png' },
-  { name: 'Flow Rental', type: 'Services', tech: ['WordPress', 'PHP', 'Custom JS'], url: 'https://www.flowrental.dk/', screenshot: '/screenshots/flowrental.png' },
-  { name: 'Zircodata', type: 'Enterprise', tech: ['WordPress', 'WooCommerce', 'SQL Server'], url: 'https://www.zircodata.com/', screenshot: '/screenshots/zircodata.png' },
-  { name: 'CleanGuys Germany', type: 'Services', tech: ['WordPress', 'WooCommerce'], url: 'https://cleanguys.de/', screenshot: '/screenshots/cleanguys.png' },
-  { name: 'MedTrans', type: 'Services', tech: ['WordPress', 'Vue.js', 'NAATI API'], url: 'https://medtrans.com.au/', screenshot: '/screenshots/medtrans.png' },
-  { name: 'Legal Translations AU', type: 'Services', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://legal-translations.com.au/', screenshot: '/screenshots/legaltranslations.png' },
-  { name: 'EasyITRFile', type: 'Services', tech: ['WordPress', 'PHP', 'Elementor'], url: 'https://easyitrfile.com', screenshot: '/screenshots/easyitrfile.png' },
-  { name: 'Cake Deco Supplies AU', type: 'E-commerce', tech: ['WooCommerce', 'PHP', 'Cloudflare'], url: 'https://cakedecosupplies.com.au/', screenshot: '/screenshots/cakedecosupplies.png' },
-  { name: 'Mehta CI', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Custom CSS'], url: 'https://www.mehtaci.com/', screenshot: '/screenshots/mehtaci.png' },
-  { name: 'SalesPundit AU', type: 'SaaS', tech: ['WordPress', 'React', 'REST APIs'], url: 'https://salespundit.com.au/', screenshot: '/screenshots/salespundit.png' },
-  { name: 'Salg.nu', type: 'E-commerce', tech: ['HTML5', 'CSS3', 'JavaScript'], url: 'https://www.salg.nu/', screenshot: '/screenshots/salg.png' },
-  { name: 'Jacksons Retreat NZ', type: 'Services', tech: ['WordPress', 'WooCommerce', 'Booking APIs'], url: 'https://www.jacksonsretreat.co.nz/', screenshot: '/screenshots/jacksonsretreat.png' },
-  { name: 'XFC Gym 247', type: 'Services', tech: ['WordPress', 'Elementor', 'PHP'], url: 'https://xfcgym247.com.au/', screenshot: '/screenshots/xfcgym247.png' },
-  { name: 'White Knight Cyber', type: 'Enterprise', tech: ['WordPress', 'Nginx', 'Nginx WAF'], url: 'https://whiteknightcyber.com/', screenshot: '/screenshots/whiteknightcyber.png' },
-  { name: 'ITechPanel', type: 'Services', tech: ['WordPress', 'React', 'Node.js'], url: 'http://itechpanel.com/', screenshot: '/screenshots/itechpanel.png' },
+  { name: 'Mehta College', type: 'Enterprise', tech: ['WordPress', 'PHP', 'MySQL'], url: 'https://www.mehtacollege.com/', screenshot: '/screenshots/mehta_college.webp' },
+  { name: 'Kritasya Jewels', type: 'E-commerce', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://kritasyajewels.com/', screenshot: '/screenshots/kritasyajewels.webp' },
+  { name: 'Mehandipur Balaji Seva', type: 'Services', tech: ['WordPress', 'PHP', 'WhatsApp API'], url: 'https://mehandipurbalajiseva.com/', screenshot: '/screenshots/mehandipurbalajiseva.webp' },
+  { name: 'Bright Hygiene Group', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Nginx'], url: 'http://brighthygienegroup.in/', screenshot: '/screenshots/brighthygienegroup.webp' },
+  { name: 'Aussie Translations', type: 'Services', tech: ['WordPress', 'PHP', 'Nginx'], url: 'https://aussietranslations.com.au/', screenshot: '/screenshots/aussietranslations.webp' },
+  { name: 'Flow Rental', type: 'Services', tech: ['WordPress', 'PHP', 'Custom JS'], url: 'https://www.flowrental.dk/', screenshot: '/screenshots/flowrental.webp' },
+  { name: 'Zircodata', type: 'Enterprise', tech: ['WordPress', 'WooCommerce', 'SQL Server'], url: 'https://www.zircodata.com/', screenshot: '/screenshots/zircodata.webp' },
+  { name: 'CleanGuys Germany', type: 'Services', tech: ['WordPress', 'WooCommerce'], url: 'https://cleanguys.de/', screenshot: '/screenshots/cleanguys.webp' },
+  { name: 'MedTrans', type: 'Services', tech: ['WordPress', 'Vue.js', 'NAATI API'], url: 'https://medtrans.com.au/', screenshot: '/screenshots/medtrans.webp' },
+  { name: 'Legal Translations AU', type: 'Services', tech: ['WordPress', 'WooCommerce', 'PHP'], url: 'https://legal-translations.com.au/', screenshot: '/screenshots/legaltranslations.webp' },
+  { name: 'EasyITRFile', type: 'Services', tech: ['WordPress', 'PHP', 'Elementor'], url: 'https://easyitrfile.com', screenshot: '/screenshots/easyitrfile.webp' },
+  { name: 'Cake Deco Supplies AU', type: 'E-commerce', tech: ['WooCommerce', 'PHP', 'Cloudflare'], url: 'https://cakedecosupplies.com.au/', screenshot: '/screenshots/cakedecosupplies.webp' },
+  { name: 'Mehta CI', type: 'Enterprise', tech: ['WordPress', 'PHP', 'Custom CSS'], url: 'https://www.mehtaci.com/', screenshot: '/screenshots/mehtaci.webp' },
+  { name: 'SalesPundit AU', type: 'SaaS', tech: ['WordPress', 'React', 'REST APIs'], url: 'https://salespundit.com.au/', screenshot: '/screenshots/salespundit.webp' },
+  { name: 'Salg.nu', type: 'E-commerce', tech: ['HTML5', 'CSS3', 'JavaScript'], url: 'https://www.salg.nu/', screenshot: '/screenshots/salg.webp' },
+  { name: 'Jacksons Retreat NZ', type: 'Services', tech: ['WordPress', 'WooCommerce', 'Booking APIs'], url: 'https://www.jacksonsretreat.co.nz/', screenshot: '/screenshots/jacksonsretreat.webp' },
+  { name: 'XFC Gym 247', type: 'Services', tech: ['WordPress', 'Elementor', 'PHP'], url: 'https://xfcgym247.com.au/', screenshot: '/screenshots/xfcgym247.webp' },
+  { name: 'White Knight Cyber', type: 'Enterprise', tech: ['WordPress', 'Nginx', 'Nginx WAF'], url: 'https://whiteknightcyber.com/', screenshot: '/screenshots/whiteknightcyber.webp' },
+  { name: 'ITechPanel', type: 'Services', tech: ['WordPress', 'React', 'Node.js'], url: 'http://itechpanel.com/', screenshot: '/screenshots/itechpanel.webp' },
 ];
 
 const TechIcon = ({ name, className }) => {
@@ -133,7 +133,7 @@ const FeaturedProjectCard = ({ project, index }) => {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 } },
       }}
-      className="glass-card rounded-3xl overflow-hidden"
+      className="glass-card card-hover rounded-3xl overflow-hidden"
     >
       <div className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? '' : 'lg:[&>*:first-child]:order-2'}`}>
         {/* Screenshot */}
@@ -144,6 +144,7 @@ const FeaturedProjectCard = ({ project, index }) => {
               alt={`${project.name} screenshot`}
               className="w-full h-full object-cover object-top"
               loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/10 to-cyan-500/5">
@@ -265,6 +266,13 @@ const CompactProjectCard = ({ project }) => {
 
 const ClientProjectsSection = () => {
   const [filter, setFilter] = useState('All');
+  const tabsRef = useRef(null);
+
+  // Keep the selected segment in view when the row scrolls sideways (phones).
+  useEffect(() => {
+    const el = tabsRef.current?.querySelector('[role="tab"][data-state="active"]');
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+  }, [filter]);
   const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.type)))];
   const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
 
@@ -309,7 +317,13 @@ const ClientProjectsSection = () => {
 
         <Tabs value={filter} onValueChange={setFilter}>
           {/* iOS-style segmented control: glass track + sliding thumb */}
-          <TabsList className="glass-pill h-auto max-w-full justify-start gap-0.5 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {/* Glass lives on this NON-scrolling wrapper: its edge/sheen overlays are sized to the box,
+              so putting overflow-x on the glass element itself made them scroll away with the content. */}
+          <div className="glass-pill max-w-full overflow-hidden rounded-full p-1">
+          <TabsList
+            ref={tabsRef}
+            className="h-auto w-full justify-start gap-0.5 overflow-x-auto rounded-full bg-transparent p-0 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,#000_14px,#000_calc(100%-14px),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_14px,#000_calc(100%-14px),transparent)]"
+          >
             {categories.map((c) => (
               <TabsTrigger
                 key={c}
@@ -332,6 +346,7 @@ const ClientProjectsSection = () => {
               </TabsTrigger>
             ))}
           </TabsList>
+          </div>
 
         <TabsContent value={filter} className="mt-8">
           <motion.div

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Cpu, Database, Zap, Layers } from 'lucide-react';
 import { FadeIn, isIOS, ease, TextReveal, StaggerGrid } from '@/lib/motion.jsx';
 
@@ -182,18 +182,9 @@ const CapabilityCard = ({ item, index }) => {
       whileInView={ios ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '40px' }}
       transition={{ duration: 0.55, delay: ios ? Math.min(index * 0.06, 0.3) : index * 0.08, ease: ease.out }}
-      whileHover={ios ? {} : { y: -4 }}
       className="h-full"
     >
-      {/* Gradient top border via wrapper */}
-      <div
-        className="h-full rounded-xl relative overflow-hidden"
-        style={{ padding: '1px', background: 'linear-gradient(135deg, hsl(243,88%,62%,0.45), hsl(192,80%,50%,0.3), transparent 60%)' }}
-      >
-        <div
-          className="h-full rounded-[11px] flex flex-col p-5 glass-card hover-glow cursor-default"
-          style={{ background: 'hsl(220,16%,6%)' }}
-        >
+      <div className="h-full rounded-2xl flex flex-col p-5 glass-card card-hover cursor-default">
           {/* Icon */}
           <div
             className={`w-11 h-11 rounded-xl ${item.iconBg} border ${item.iconBorder} flex items-center justify-center mb-4 shrink-0`}
@@ -215,7 +206,6 @@ const CapabilityCard = ({ item, index }) => {
               <MonoBadge key={s} label={s} />
             ))}
           </div>
-        </div>
       </div>
     </motion.div>
   );

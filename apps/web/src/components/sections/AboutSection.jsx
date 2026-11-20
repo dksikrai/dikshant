@@ -13,7 +13,7 @@ const techBadges = [
 ];
 
 const FactCard = ({ value, label }) => (
-  <div className="glass-card rounded-xl p-5 flex flex-col gap-1 h-full">
+  <div className="glass-card card-hover rounded-2xl p-5 flex flex-col gap-1 h-full">
     <span
       className="font-black tracking-tight text-foreground"
       style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', letterSpacing: '-0.03em' }}

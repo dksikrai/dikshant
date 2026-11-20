@@ -99,7 +99,7 @@ const HomePage = () => {
 
       <Header />
 
-      <main id="main" className="flex-grow relative z-10">
+      <main id="main" tabIndex={-1} className="flex-grow relative z-10 focus:outline-none">
         {/* 1. Hero */}
         <HeroSection />
 

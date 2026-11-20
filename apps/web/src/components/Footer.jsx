@@ -1,6 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Twitter, Mail, ArrowUp, Download, MapPin } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/config/site.js';
@@ -53,7 +53,7 @@ const Footer = () => {
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="group flex min-h-11 w-fit items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-              aria-label="Back to top"
+              aria-label="Dikshant Goyal, back to top"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-xl glass-pill text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <LogoMark />
