@@ -269,9 +269,18 @@ const ClientProjectsSection = () => {
   const tabsRef = useRef(null);
 
   // Keep the selected segment in view when the row scrolls sideways (phones).
+  // Scroll ONLY the filter bar itself: scrollIntoView() would also scroll the whole page
+  // (it ran on mount and yanked visitors down to this section).
+  const firstRun = useRef(true);
   useEffect(() => {
-    const el = tabsRef.current?.querySelector('[role="tab"][data-state="active"]');
-    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    if (firstRun.current) {
+      firstRun.current = false;
+      return;
+    }
+    const list = tabsRef.current;
+    const tab = list?.querySelector('[role="tab"][data-state="active"]');
+    if (!list || !tab) return;
+    list.scrollTo({ left: tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2, behavior: 'smooth' });
   }, [filter]);
   const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.type)))];
   const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
