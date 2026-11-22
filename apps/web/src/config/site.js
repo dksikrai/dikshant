@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Dikshant Goyal",
-  tagline: "Backend & Product Engineer · Technical Consultant",
+  tagline: "Full-Stack Developer & Technical Consultant. Web apps, APIs, AI automation and cloud, built end to end.",
   headline: "I build scalable backend systems, AI workflows & production-ready SaaS platforms.",
   email: "webwithdikshant@gmail.com",
   phone: "+919829641370",

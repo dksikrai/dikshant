@@ -6,6 +6,7 @@
 export const services = [
   {
     id: 'web-app-development',
+    shortTitle: 'Web App Development',
     icon: 'Layers',
     title: 'Full-Stack Web Application Development',
     metaTitle: 'Full-Stack Web App Development: Next.js, React, Node.js',
@@ -42,6 +43,7 @@ export const services = [
   },
   {
     id: 'backend-api-development',
+    shortTitle: 'Backend & APIs',
     icon: 'Server',
     title: 'Backend & API Development',
     metaTitle: 'Backend & API Development: Node.js, Python, Laravel',
@@ -78,6 +80,7 @@ export const services = [
   },
   {
     id: 'ai-automation',
+    shortTitle: 'AI Automation',
     icon: 'Bot',
     title: 'AI Automation & OpenAI Integration',
     metaTitle: 'AI Automation & OpenAI Integration Services',
@@ -114,6 +117,7 @@ export const services = [
   },
   {
     id: 'ecommerce-integrations',
+    shortTitle: 'Shopify & Ecommerce',
     icon: 'ShoppingCart',
     title: 'Ecommerce & Marketplace Integrations',
     metaTitle: 'Shopify, WooCommerce & Etsy Integration Developer',
@@ -150,6 +154,7 @@ export const services = [
   },
   {
     id: 'cloud-server-devops',
+    shortTitle: 'Cloud & Server Setup',
     icon: 'Cloud',
     title: 'Cloud, Server & DevOps Setup',
     metaTitle: 'AWS, Linux Server & DevOps Setup Services',
@@ -186,6 +191,7 @@ export const services = [
   },
   {
     id: 'architecture-audit',
+    shortTitle: 'Architecture Audit',
     icon: 'ClipboardCheck',
     title: 'Architecture Review & Code Audit',
     metaTitle: 'Software Architecture Review & Code Audit',
@@ -222,6 +228,7 @@ export const services = [
   },
   {
     id: 'performance-support',
+    shortTitle: 'Performance Tuning',
     icon: 'Zap',
     title: 'Performance Optimisation & Production Support',
     metaTitle: 'Website & API Performance Optimisation Expert',
@@ -258,6 +265,7 @@ export const services = [
   },
   {
     id: 'technical-project-management',
+    shortTitle: 'Project Management',
     icon: 'Users',
     title: 'Technical Project Management',
     metaTitle: 'Technical Project Manager & Software Delivery Lead',
