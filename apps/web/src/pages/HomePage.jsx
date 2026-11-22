@@ -55,46 +55,9 @@ const HomePage = () => {
         <div className="absolute -bottom-[10%] left-[15%] w-[65%] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.12),transparent_65%)]" />
       </div>
 
-      {/* ── SEO Meta Tags ── */}
+      {/* SEO/OG/Twitter/JSON-LD live in index.html so non-JS crawlers (Slack, X, LinkedIn) see them. */}
       <Helmet>
-        <title>Dikshant Goyal | AI-Powered Backend & Product Engineer | Laravel · AWS · OpenAI</title>
-        <meta name="title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer | Laravel · AWS · OpenAI" />
-        <meta
-          name="description"
-          content="Dikshant Goyal is a backend & product engineer specializing in scalable Laravel APIs, Redis/Horizon queue systems, AWS cloud infrastructure, OpenAI integrations, and production SaaS platforms."
-        />
-        <meta
-          name="keywords"
-          content="Dikshant Goyal, Backend Engineer, Laravel Engineer, AI Engineer, Product Engineer, SaaS Engineer, Full Stack Engineer, Cloud Engineer, PHP Developer, OpenAI Integration, Redis Horizon, AWS Developer, Jaipur, India"
-        />
-        <meta name="author" content="Dikshant Goyal" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-        <link rel="canonical" href="https://dikshant-ivory.vercel.app/" />
-        <meta name="theme-color" content="#080810" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Dikshant Goyal — Portfolio" />
-        <meta property="og:url" content="https://dikshant-ivory.vercel.app/" />
-        <meta property="og:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
-        <meta
-          property="og:description"
-          content="Backend engineer specializing in Laravel, Redis/Horizon, AWS infrastructure, OpenAI integrations, and production SaaS architecture."
-        />
-        <meta property="og:image" content="https://dikshant-ivory.vercel.app/hero_development_backdrop.jpg" />
-
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:site" content="@csdikshant" />
-        <meta property="twitter:creator" content="@csdikshant" />
-        <meta property="twitter:url" content="https://dikshant-ivory.vercel.app/" />
-        <meta property="twitter:title" content="Dikshant Goyal | AI-Powered Backend & Product Engineer" />
-        <meta
-          property="twitter:description"
-          content="Backend engineer specializing in Laravel, Redis/Horizon, AWS, OpenAI integrations, and production SaaS architecture."
-        />
-        <meta property="twitter:image" content="https://dikshant-ivory.vercel.app/hero_development_backdrop.jpg" />
+        <title>Dikshant Goyal | Backend &amp; Product Engineer – Laravel, AWS, OpenAI</title>
       </Helmet>
 
       <Header />
