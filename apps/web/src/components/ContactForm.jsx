@@ -3,8 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, Loader2, Mail, ShieldCheck } from 'lucide-react';
-import { toast } from 'sonner';
+import { MessageCircle, CheckCircle2, Loader2, Mail, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,8 +12,23 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { siteConfig } from '@/config/site.js';
 import { consumeContactIntent } from '@/lib/contactIntent.js';
 
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-const HAS_KEY = Boolean(ACCESS_KEY) && ACCESS_KEY !== 'YOUR_ACCESS_KEY_HERE';
+/** The enquiry as a WhatsApp message (WhatsApp *bold* markup) and as plain text for email. */
+const formatEnquiry = (d, bold = true) => {
+  const b = (s) => (bold ? `*${s}*` : s);
+  return [
+    bold ? '*New enquiry from your portfolio*' : 'New enquiry from your portfolio',
+    '',
+    `${b('Type:')} ${d.inquiry}`,
+    `${b('Subject:')} ${d.subject}`,
+    `${b('Name:')} ${d.name}`,
+    `${b('Email:')} ${d.email}`,
+    d.company ? `${b('Company:')} ${d.company}` : null,
+    '',
+    d.message,
+  ]
+    .filter((line) => line !== null)
+    .join('\n');
+};
 
 const MESSAGE_MIN = 20;
 const MESSAGE_MAX = 1000;
@@ -89,7 +103,8 @@ const controlClass = (error) =>
 const describedBy = (id, error, hint) => (error ? `${id}-error` : hint ? `${id}-hint` : undefined);
 
 const ContactForm = () => {
-  const [sent, setSent] = useState(false);
+  // After submit: links the visitor can use to finish sending (WhatsApp is primary, email is the fallback)
+  const [handoff, setHandoff] = useState(null);
 
   const {
     register,
@@ -120,62 +135,31 @@ const ContactForm = () => {
 
   const messageLength = (watch('message') || '').length;
 
-  const openMailClient = (data) => {
-    const body = encodeURIComponent(
-      `${data.message}\n\n— ${data.name} (${data.email})${data.company ? `, ${data.company}` : ''}`
-    );
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`[${data.inquiry}] ${data.subject}`)}&body=${body}`;
-  };
-
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     if (data.botcheck) return; // bot: silently drop
 
-    // No API key configured (local dev / fresh deploy): fall back to the visitor's mail client.
-    if (!HAS_KEY) {
-      openMailClient(data);
-      return;
-    }
+    const waUrl = siteConfig.whatsappUrlFor(formatEnquiry(data, true));
+    const mailUrl = siteConfig.mailtoFor({
+      subject: `[${data.inquiry}] ${data.subject}`,
+      body: formatEnquiry(data, false),
+    });
 
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          from_name: 'Portfolio contact form',
-          subject: `[${data.inquiry}] ${data.subject}`,
-          name: data.name,
-          email: data.email,
-          company: data.company || '—',
-          inquiry_type: data.inquiry,
-          message: data.message,
-          botcheck: '',
-        }),
-      });
-      const result = await response.json();
+    // Open WhatsApp straight away. Some browsers block pop-ups, so the confirmation screen
+    // below always shows a button that opens it too.
+    const win = window.open(waUrl, '_blank');
+    if (win) win.opener = null;
 
-      if (result.success) {
-        toast.success('Message sent. I will get back to you soon.');
-        setSent(true);
-        reset();
-      } else {
-        throw new Error(result.message || 'Request failed');
-      }
-    } catch {
-      toast.error('Could not send your message.', {
-        description: `Please email ${siteConfig.email} directly.`,
-        action: { label: 'Open email', onClick: () => openMailClient(data) },
-      });
-    }
+    setHandoff({ waUrl, mailUrl, opened: Boolean(win) });
+    reset();
   };
 
-  if (sent) {
+  if (handoff) {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        className="flex flex-col items-center justify-center gap-4 py-12 text-center"
+        className="flex flex-col items-center justify-center gap-4 py-10 text-center"
         role="status"
       >
         <motion.span
@@ -186,13 +170,30 @@ const ContactForm = () => {
         >
           <CheckCircle2 className="h-8 w-8 text-emerald-400" />
         </motion.span>
-        <h3 className="text-xl font-bold text-foreground">Message sent</h3>
-        <p className="max-w-xs text-sm text-muted-foreground">
-          Thanks for reaching out. I usually reply within one business day.
+        <h3 className="text-xl font-bold text-foreground">Your message is ready</h3>
+        <p className="max-w-sm text-sm text-muted-foreground m-0">
+          {handoff.opened
+            ? 'WhatsApp should have opened with your message filled in. Press Send there to deliver it. It is not sent until you do.'
+            : 'Tap the button below to open WhatsApp with your message filled in, then press Send to deliver it.'}
         </p>
-        <Button variant="glass" className="rounded-full" onClick={() => setSent(false)}>
-          Send another message
-        </Button>
+        <div className="flex w-full max-w-xs flex-col gap-2.5">
+          <Button asChild className="h-12 rounded-full font-semibold shadow-lg shadow-primary/25">
+            <a href={handoff.waUrl} target="_blank" rel="noopener noreferrer">
+              <MessageCircle />
+              Open WhatsApp
+            </a>
+          </Button>
+          <Button asChild variant="glass" className="h-11 rounded-full">
+            <a href={handoff.mailUrl}>
+              <Mail />
+              Send by email instead
+            </a>
+          </Button>
+          <Button variant="ghost" className="rounded-full text-muted-foreground" onClick={() => setHandoff(null)}>
+            <ArrowLeft />
+            Back to the form
+          </Button>
+        </div>
       </motion.div>
     );
   }
@@ -334,10 +335,7 @@ const ContactForm = () => {
       <div className="flex flex-col gap-4 border-t border-white/[0.08] pt-5 sm:flex-row sm:items-center sm:justify-between">
         <p id="contact-form-note" className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground sm:max-w-xs">
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
-          {HAS_KEY
-            ? 'Your details are used only to reply to this message.'
-            : 'This will open your email app with the message ready to send.'}
-        </p>
+          Opens WhatsApp with your message ready to send. Your details are used only to reply.</p>
 
         <motion.div whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
           <Button
@@ -348,17 +346,12 @@ const ContactForm = () => {
             {isSubmitting ? (
               <>
                 <Loader2 className="animate-spin" />
-                Sending…
-              </>
-            ) : HAS_KEY ? (
-              <>
-                <Send />
-                Send message
+                Opening…
               </>
             ) : (
               <>
-                <Mail />
-                Compose email
+                <MessageCircle />
+                Send via WhatsApp
               </>
             )}
           </Button>

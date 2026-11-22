@@ -21,7 +21,7 @@ const socials = [
   { label: 'GitHub',   href: siteConfig.links.github,   icon: Github },
   { label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
   { label: 'Twitter / X', href: siteConfig.links.twitter, icon: Twitter },
-  { label: 'Email',    href: `mailto:${siteConfig.email}`, icon: Mail },
+  { label: 'Email',    href: siteConfig.mailtoUrl, icon: Mail },
 ];
 
 const LogoMark = () => (

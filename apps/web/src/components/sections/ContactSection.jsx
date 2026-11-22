@@ -98,11 +98,16 @@ const ContactSection = () => (
           <CardContent className="space-y-5">
             <InfoRow icon={Mail} label="Email">
               <span className="flex items-center gap-1">
-                <a href={`mailto:${siteConfig.email}`} className="py-2.5 hover:text-primary smooth-transition truncate">
+                <a href={siteConfig.mailtoUrl} className="py-2.5 hover:text-primary smooth-transition truncate">
                   {siteConfig.email}
                 </a>
                 <CopyEmailButton />
               </span>
+            </InfoRow>
+            <InfoRow icon={MessageCircle} label="WhatsApp">
+              <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block py-2.5 hover:text-primary smooth-transition">
+                {siteConfig.phoneDisplay}
+              </a>
             </InfoRow>
             <InfoRow icon={MapPin} label="Location">{siteConfig.location}</InfoRow>
             <InfoRow icon={Clock} label="Response time">Within 1 business day</InfoRow>

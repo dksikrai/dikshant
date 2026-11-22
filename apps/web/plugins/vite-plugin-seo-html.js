@@ -286,6 +286,12 @@ export default function seoHtmlPlugin() {
     },
     generateBundle() {
       this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: sitemap() });
+      // llms.txt: contact details are filled in from src/config/site.js
+      const llms = fs
+        .readFileSync(new URL('./llms.template.txt', import.meta.url), 'utf8')
+        .replace('{{EMAIL}}', siteConfig.email)
+        .replace('{{PHONE}}', siteConfig.phoneDisplay);
+      this.emitFile({ type: 'asset', fileName: 'llms.txt', source: llms });
     },
     closeBundle() {
       const indexPath = path.join(outDir, 'index.html');

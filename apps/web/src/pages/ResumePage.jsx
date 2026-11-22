@@ -32,7 +32,7 @@ const ResumePage = () => {
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 m-0 p-0 list-none text-sm text-muted-foreground">
             <li className="flex items-center gap-1.5"><MapPin size={15} aria-hidden="true" />{siteConfig.location}</li>
-            <li className="flex items-center gap-1.5"><Mail size={15} aria-hidden="true" /><a className="hover:text-foreground" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+            <li className="flex items-center gap-1.5"><Mail size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.mailtoUrl}>{siteConfig.email}</a></li>
             <li className="flex items-center gap-1.5"><Linkedin size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             <li className="flex items-center gap-1.5"><Github size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
           </ul>

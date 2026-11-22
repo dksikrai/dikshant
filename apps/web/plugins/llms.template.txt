@@ -33,4 +33,5 @@ JavaScript, TypeScript, Python, PHP, React, Next.js, Node.js, Laravel, REST and 
 - Contact form: https://dikshant-ivory.vercel.app/#contact
 - LinkedIn: https://in.linkedin.com/in/csdikshant
 - GitHub: https://github.com/dksikrai
-- Email: webwithdikshant@gmail.com
+- Email: {{EMAIL}}
+- WhatsApp: {{PHONE}}

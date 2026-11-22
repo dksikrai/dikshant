@@ -19,7 +19,7 @@ const socialIcons = [
   { id: 'linkedin', label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
   { id: 'twitter', label: 'Twitter / X', href: siteConfig.links.twitter, icon: Twitter },
   { id: 'whatsapp', label: 'WhatsApp', href: siteConfig.whatsappUrl, icon: MessageCircle },
-  { id: 'email', label: 'Email', href: `mailto:${siteConfig.email}`, icon: Mail },
+  { id: 'email', label: 'Email', href: siteConfig.mailtoUrl, icon: Mail },
 ];
 
 const ColumnTitle = ({ children }) => (
