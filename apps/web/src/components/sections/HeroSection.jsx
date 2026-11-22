@@ -11,6 +11,7 @@ import { m as motion, AnimatePresence, useReducedMotion, useScroll, useTransform
 import { ArrowRight, Download, ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { startInquiry } from '@/lib/contactIntent.js';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 import { siteConfig } from '@/config/site.js';
 
@@ -248,7 +249,7 @@ export default function HeroSection() {
                   className="glass-pill gap-2 rounded-full border-emerald-400/25 px-3.5 py-1.5 text-xs font-medium text-emerald-300"
                 >
                   <span className="status-dot flex-shrink-0" />
-                  Open to Consulting & New Opportunities
+                  Available for consulting & new projects
                 </Badge>
               </motion.div>
 
@@ -277,9 +278,9 @@ export default function HeroSection() {
                 className="max-w-xl text-base leading-relaxed"
                 style={{ color: 'hsl(var(--muted-foreground))' }}
               >
-                Specializing in production-grade APIs, queue-driven architectures,
-                Redis&nbsp;/&nbsp;Horizon monitoring, and AI-powered automation pipelines.
-                Building systems that scale.
+                Backend &amp; product engineering and technical consulting for businesses:
+                production-grade APIs, queue-driven architectures, AWS, and AI-powered
+                automation. From first scope to launch and support.
               </motion.p>
 
               {/* CTA buttons */}
@@ -290,13 +291,13 @@ export default function HeroSection() {
                 <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                   <Button asChild size="lg" className="h-12 sm:h-11 w-full sm:w-auto rounded-full px-6 font-semibold shadow-lg shadow-primary/30">
                     <a
-                      href="#projects"
+                      href="#contact"
                       onClick={(e) => {
                         e.preventDefault();
-                        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                        startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' });
                       }}
                     >
-                      View My Work
+                      Book a Consultation
                       <ArrowRight strokeWidth={2.5} />
                     </a>
                   </Button>
@@ -304,13 +305,24 @@ export default function HeroSection() {
 
                 <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                   <Button asChild variant="glass" size="lg" className="h-12 sm:h-11 w-full sm:w-auto rounded-full px-6 font-semibold">
-                    <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
-                      <Download strokeWidth={2} />
-                      Download Resume
+                    <a
+                      href="#projects"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      View My Work
                     </a>
                   </Button>
                 </motion.div>
 
+                <Button asChild variant="link" className="h-11 text-muted-foreground hover:text-foreground">
+                  <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
+                    <Download strokeWidth={2} />
+                    Resume
+                  </a>
+                </Button>
                 <Button asChild variant="link" className="h-11 text-muted-foreground hover:text-foreground">
                   <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
                     GitHub

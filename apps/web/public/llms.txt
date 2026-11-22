@@ -1,10 +1,19 @@
 # Dikshant Goyal
 
-> Project Manager and senior PHP/Laravel backend engineer based in Jaipur, India. Builds and delivers business applications: backend modules, API layers and integrations for e-commerce and operational platforms (inventory, factory, sales-order, payment and shipping domains), and leads technical delivery across development, design and QA.
+> Backend & product engineer and technical consultant based in Jaipur, India, available for consulting and new projects. Builds and delivers business applications: Laravel/PHP backends, API layers and integrations for e-commerce and operational platforms, AI/OpenAI automation, AWS and queue-based architectures, and leads technical delivery across development, design and QA.
 
 ## Site
-- [Portfolio](https://dikshant-ivory.vercel.app/): single-page portfolio with About, Expertise, Projects (19+ client and product sites), Case Studies, Skills, Experience and Contact sections.
+- [Portfolio](https://dikshant-ivory.vercel.app/): single-page site with Services, About, Expertise, Projects (19+ client and product sites), Case Studies, Skills, Experience and Contact sections.
 - [Resume (PDF)](https://dikshant-ivory.vercel.app/resume.pdf): current resume.
+
+## Services (available for hire)
+- Backend & API development (Laravel/PHP, REST/GraphQL, multi-tenant SaaS)
+- AI automation & OpenAI integration (RAG, document processing, workflows)
+- Ecommerce & marketplace integrations (Shopify, WooCommerce, Etsy, shipping and payments)
+- Cloud, queues & performance (AWS, Redis/Horizon, query optimisation)
+- Architecture review & code audit (written report and prioritised roadmap)
+- Technical project management & delivery
+Engagement models: fixed-scope project, monthly retainer, consulting & audit. Contact: https://dikshant-ivory.vercel.app/#contact
 
 ## Experience
 - Project Manager, iTechPanel LLP (Jun 2026 - present): planning, execution and delivery across software workstreams.

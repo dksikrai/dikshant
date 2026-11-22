@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { siteConfig } from '@/config/site.js';
+import { consumeContactIntent } from '@/lib/contactIntent.js';
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 const HAS_KEY = Boolean(ACCESS_KEY) && ACCESS_KEY !== 'YOUR_ACCESS_KEY_HERE';
@@ -96,12 +97,26 @@ const ContactForm = () => {
     control,
     watch,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(formSchema),
     mode: 'onTouched',
     defaultValues: { inquiry: 'Project', name: '', email: '', company: '', subject: '', message: '', botcheck: '' },
   });
+
+  // CTAs elsewhere on the page can pre-fill the inquiry type and subject.
+  useEffect(() => {
+    const apply = ({ inquiry, subject }) => {
+      if (inquiry) setValue('inquiry', inquiry);
+      if (subject) setValue('subject', subject, { shouldDirty: true });
+    };
+    const pending = consumeContactIntent();
+    if (pending) apply(pending);
+    const onPrefill = (e) => { consumeContactIntent(); apply(e.detail || {}); };
+    window.addEventListener('contact:prefill', onPrefill);
+    return () => window.removeEventListener('contact:prefill', onPrefill);
+  }, [setValue]);
 
   const messageLength = (watch('message') || '').length;
 

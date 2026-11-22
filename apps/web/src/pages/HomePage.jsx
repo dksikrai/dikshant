@@ -5,7 +5,20 @@ import Footer from '@/components/Footer.jsx';
 import HeroSection from '@/components/sections/HeroSection.jsx';
 import StatsSection from '@/components/sections/StatsSection.jsx';
 import { Skeleton } from '@/components/ui/skeleton';
-import FloatingTechBackground from '@/components/FloatingTechBackground.jsx';
+const FloatingTechBackground = React.lazy(() => import('@/components/FloatingTechBackground.jsx'));
+
+// Decorative only: mount after first paint, desktop-class devices only (keeps LCP/TBT clean).
+const useDeferredDecor = () => {
+  const [ready, setReady] = React.useState(false);
+  React.useEffect(() => {
+    if (window.matchMedia('(max-width: 1023px)').matches) return undefined;
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
+    const cancel = window.cancelIdleCallback || clearTimeout;
+    const id = idle(() => setReady(true), { timeout: 3000 });
+    return () => cancel(id);
+  }, []);
+  return ready;
+};
 
 // Lazy-loaded sections for performance
 const AboutSection = React.lazy(() => import('@/components/sections/AboutSection.jsx'));
@@ -14,7 +27,9 @@ const ProductionSection = React.lazy(() => import('@/components/sections/Product
 const AISection = React.lazy(() => import('@/components/sections/AISection.jsx'));
 const ClientProjectsSection = React.lazy(() => import('@/components/sections/ClientProjectsSection.jsx'));
 const CaseStudiesSection = React.lazy(() => import('@/components/sections/CaseStudiesSection.jsx'));
-const WhatISolveSection = React.lazy(() => import('@/components/sections/WhatISolveSection.jsx'));
+const ServicesSection = React.lazy(() => import('@/components/sections/ServicesSection.jsx'));
+const EngagementSection = React.lazy(() => import('@/components/sections/EngagementSection.jsx'));
+const FAQSection = React.lazy(() => import('@/components/sections/FAQSection.jsx'));
 const SkillsSection = React.lazy(() => import('@/components/sections/SkillsSection.jsx'));
 const CareerSection = React.lazy(() => import('@/components/sections/CareerSection.jsx'));
 
@@ -34,6 +49,7 @@ const SectionFallback = () => (
 );
 
 const HomePage = () => {
+  const showDecor = useDeferredDecor();
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <a
@@ -46,7 +62,11 @@ const HomePage = () => {
       <div className="noise-overlay" aria-hidden="true" />
 
       {/* Floating Tech Icons */}
-      <FloatingTechBackground />
+      {showDecor && (
+        <React.Suspense fallback={null}>
+          <FloatingTechBackground />
+        </React.Suspense>
+      )}
 
       {/* Ambient background gradients — static, no animation */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
@@ -70,7 +90,10 @@ const HomePage = () => {
         <StatsSection />
 
         <React.Suspense fallback={<SectionFallback />}>
-          {/* 3. About */}
+          {/* 3. Services & consulting (primary offer) */}
+          <ServicesSection />
+
+          {/* 4. About */}
           <AboutSection />
 
           {/* 4. Engineering Expertise */}
@@ -88,8 +111,8 @@ const HomePage = () => {
           {/* 8. Case Studies */}
           <CaseStudiesSection />
 
-          {/* 9. What I Solve */}
-          <WhatISolveSection />
+          {/* 9. Engagement models + process */}
+          <EngagementSection />
 
           {/* 10. Tech Stack */}
           <SkillsSection />
@@ -97,7 +120,10 @@ const HomePage = () => {
           {/* 11. Career Timeline */}
           <CareerSection />
 
-          {/* 12. Contact */}
+          {/* 12. FAQ */}
+          <FAQSection />
+
+          {/* 13. Contact */}
           <ContactSection />
         </React.Suspense>
       </main>

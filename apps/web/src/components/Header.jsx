@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Download, ArrowRight, ChevronRight, User, Layers, FolderKanban, Sparkles, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Menu, X, Download, ArrowRight, ChevronRight, User, Layers, FolderKanban, Sparkles, Mail, Github, Linkedin, Twitter, Briefcase } from 'lucide-react';
+import { startInquiry } from '@/lib/contactIntent.js';
 import { m as motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +16,7 @@ import { ease } from '@/lib/motion.jsx';
 import { enableRefraction } from '@/lib/glass.js';
 
 const navLinks = [
+  { name: 'Services',  href: '#services',       icon: Briefcase },
   { name: 'About',     href: '#about',          icon: User },
   { name: 'Expertise', href: '#expertise',      icon: Layers },
   { name: 'Projects',  href: '#projects',       icon: FolderKanban },
@@ -176,8 +178,15 @@ const Header = () => {
               size="sm"
               className="hidden md:inline-flex rounded-full text-[0.8125rem] font-semibold shadow-md shadow-primary/30"
             >
-              <a id="header-hire-me-btn" href={`mailto:${siteConfig.email}`}>
-                Hire Me
+              <a
+                id="header-hire-me-btn"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' });
+                }}
+              >
+                Book a Call
                 <ArrowRight />
               </a>
             </Button>
@@ -284,8 +293,16 @@ const Header = () => {
                     </a>
                   </Button>
                   <Button asChild className="h-12 rounded-2xl text-[0.9375rem] font-bold shadow-lg shadow-primary/30">
-                    <a id="mobile-hire-me-btn" href={`mailto:${siteConfig.email}`}>
-                      Hire Me
+                    <a
+                      id="mobile-hire-me-btn"
+                      href="#contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMobileOpen(false);
+                        setTimeout(() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' }), 320);
+                      }}
+                    >
+                      Book a Call
                       <ArrowRight />
                     </a>
                   </Button>

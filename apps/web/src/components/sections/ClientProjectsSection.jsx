@@ -112,16 +112,6 @@ const TechBadge = ({ tech }) => (
   </span>
 );
 
-const getDomainFavicon = (url) => {
-  try {
-    if (url && url.startsWith('http')) {
-      const hostname = new URL(url).hostname;
-      return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
-    }
-  } catch (e) { /* ignore */ }
-  return null;
-};
-
 // Featured project card — large horizontal layout
 const FeaturedProjectCard = ({ project, index }) => {
   const ios = isIOS();
@@ -211,7 +201,6 @@ const FeaturedProjectCard = ({ project, index }) => {
 // Compact project card for the grid
 const CompactProjectCard = ({ project }) => {
   const ios = isIOS();
-  const favicon = getDomainFavicon(project.url);
 
   return (
     <motion.div
@@ -225,12 +214,7 @@ const CompactProjectCard = ({ project }) => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center overflow-hidden p-1">
-          {favicon ? (
-            <img src={favicon} alt="" className="w-full h-full object-contain rounded" loading="lazy"
-              onError={(e) => { e.target.style.display = 'none'; }} />
-          ) : (
-            <Globe className="w-4 h-4 text-muted-foreground/60" />
-          )}
+          <Globe className="w-4 h-4 text-muted-foreground/60" />
         </div>
         <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
           {project.type}
