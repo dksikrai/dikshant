@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { useSeo } from '@/lib/seo.js';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import HeroSection from '@/components/sections/HeroSection.jsx';
@@ -49,6 +49,7 @@ const SectionFallback = () => (
 );
 
 const HomePage = () => {
+  useSeo('/');
   const showDecor = useDeferredDecor();
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -74,11 +75,6 @@ const HomePage = () => {
         <div className="absolute top-[35%] -right-[15%] w-[60%] h-[55vh] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.13),transparent_65%)]" />
         <div className="absolute -bottom-[10%] left-[15%] w-[65%] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.12),transparent_65%)]" />
       </div>
-
-      {/* SEO/OG/Twitter/JSON-LD live in index.html so non-JS crawlers (Slack, X, LinkedIn) see them. */}
-      <Helmet>
-        <title>Dikshant Goyal | Backend &amp; Product Engineer – Laravel, AWS, OpenAI</title>
-      </Helmet>
 
       <Header />
 

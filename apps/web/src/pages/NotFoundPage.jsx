@@ -1,19 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { useSeo } from '@/lib/seo.js';
 import { Home } from 'lucide-react';
 import { FadeIn } from '@/lib/motion.jsx';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
 const NotFoundPage = () => {
+  useSeo('/404');
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Helmet>
-        <title>404 - Page Not Found | Dikshant Goyal</title>
-        <meta name="robots" content="noindex, follow" />
-      </Helmet>
-
       <Header />
 
       <main className="flex-grow flex items-center justify-center relative z-10 py-24 overflow-hidden">

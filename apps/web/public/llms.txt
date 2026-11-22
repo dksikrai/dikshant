@@ -1,31 +1,36 @@
 # Dikshant Goyal
 
-> Backend & product engineer and technical consultant based in Jaipur, India, available for consulting and new projects. Builds and delivers business applications: Laravel/PHP backends, API layers and integrations for e-commerce and operational platforms, AI/OpenAI automation, AWS and queue-based architectures, and leads technical delivery across development, design and QA.
+> Full-stack developer, backend engineer and technical consultant based in Jaipur, India, available for consulting and new projects worldwide. Builds web applications, APIs, integrations and AI automation with Next.js, React, Node.js, Python, PHP/Laravel and AWS; sets up and secures servers; and leads technical delivery across development, design and QA.
 
-## Site
-- [Portfolio](https://dikshant-ivory.vercel.app/): single-page site with Services, About, Expertise, Projects (19+ client and product sites), Case Studies, Skills, Experience and Contact sections.
-- [Resume (PDF)](https://dikshant-ivory.vercel.app/resume.pdf): current resume.
+## Pages
+- [Home](https://dikshant-ivory.vercel.app/): overview, case studies, projects (19+ client and product sites), skills and contact.
+- [Services](https://dikshant-ivory.vercel.app/services): all services, engagement models, process and FAQ.
+- [Resume](https://dikshant-ivory.vercel.app/resume): experience, skills and downloadable PDF ([resume.pdf](https://dikshant-ivory.vercel.app/resume.pdf)).
 
 ## Services (available for hire)
-- Backend & API development (Laravel/PHP, REST/GraphQL, multi-tenant SaaS)
-- AI automation & OpenAI integration (RAG, document processing, workflows)
-- Ecommerce & marketplace integrations (Shopify, WooCommerce, Etsy, shipping and payments)
-- Cloud, queues & performance (AWS, Redis/Horizon, query optimisation)
-- Architecture review & code audit (written report and prioritised roadmap)
-- Technical project management & delivery
-Engagement models: fixed-scope project, monthly retainer, consulting & audit. Contact: https://dikshant-ivory.vercel.app/#contact
+- [Full-stack web application development](https://dikshant-ivory.vercel.app/services/web-app-development): Next.js, React, Node.js, Python, Laravel, TypeScript.
+- [Backend & API development](https://dikshant-ivory.vercel.app/services/backend-api-development): REST/GraphQL, queues, webhooks, integrations.
+- [AI automation & OpenAI integration](https://dikshant-ivory.vercel.app/services/ai-automation): RAG, document processing, workflow automation.
+- [Ecommerce & marketplace integrations](https://dikshant-ivory.vercel.app/services/ecommerce-integrations): Shopify, WooCommerce, Etsy, shipping and payments.
+- [Cloud, server & DevOps setup](https://dikshant-ivory.vercel.app/services/cloud-server-devops): AWS, Linux, Nginx, Docker, CI/CD, monitoring, backups.
+- [Architecture review & code audit](https://dikshant-ivory.vercel.app/services/architecture-audit): written report and prioritised roadmap.
+- [Performance optimisation & production support](https://dikshant-ivory.vercel.app/services/performance-support): speed, queries, caching, maintenance.
+- [Technical project management](https://dikshant-ivory.vercel.app/services/technical-project-management): planning, coordination and delivery.
+
+Engagement models: fixed-scope project, monthly retainer, consulting & audit.
 
 ## Experience
 - Project Manager, iTechPanel LLP (Jun 2026 - present): planning, execution and delivery across software workstreams.
-- Senior Web Developer, iTechPanel LLP (Aug 2025 - May 2026): Laravel backends, Etsy/Shopify/WooCommerce integrations, webhook-driven queue-based order processing.
+- Senior Web Developer, iTechPanel LLP (Aug 2025 - May 2026): backends for Etsy/Shopify/WooCommerce integrations, webhook-driven queue-based order processing.
 - Senior PHP, WordPress & Laravel Developer, iTechPanel LLP (Apr 2025 - Jul 2025).
 - WordPress Developer, iTechPanel LLP (Jan 2024 - Apr 2025).
 - Business Development Executive, Urban Key Point (Sep 2023 - Dec 2023).
 
 ## Skills
-PHP, Laravel, REST APIs, Redis, queues and webhooks, WordPress, e-commerce integrations, project management, team leadership.
+JavaScript, TypeScript, Python, PHP, React, Next.js, Node.js, Laravel, REST and GraphQL APIs, Redis, MySQL, PostgreSQL, AWS, Linux, Nginx, Docker, CI/CD, OpenAI, RAG, Shopify, WooCommerce, WordPress, project management.
 
 ## Contact
+- Contact form: https://dikshant-ivory.vercel.app/#contact
 - LinkedIn: https://in.linkedin.com/in/csdikshant
 - GitHub: https://github.com/dksikrai
 - Email: webwithdikshant@gmail.com

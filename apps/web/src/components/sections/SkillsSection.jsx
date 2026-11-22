@@ -1,7 +1,7 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
 import {
-  SiLaravel, SiPhp, SiRedis, SiMysql, SiPostgresql, SiNodedotjs,
+  SiLaravel, SiPhp, SiPython, SiRedis, SiMysql, SiPostgresql, SiNodedotjs,
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss,
   SiDocker, SiGithub, SiNginx, SiWordpress, SiWoocommerce
 } from 'react-icons/si';
@@ -17,6 +17,7 @@ const techStack = [
       { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
       { name: 'PHP 8+', icon: SiPhp, color: '#777BB4' },
       { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+      { name: 'Python', icon: SiPython, color: '#3776AB' },
       { name: 'REST APIs', icon: TbApi, color: '#60a5fa' },
     ],
   },

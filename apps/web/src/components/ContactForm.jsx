@@ -289,7 +289,7 @@ const ContactForm = () => {
           <Input
             id="subject"
             enterKeyHint="next"
-            placeholder="e.g. Laravel API for our platform"
+            placeholder="e.g. Next.js web app for our platform"
             aria-invalid={!!errors.subject}
             aria-describedby={describedBy('subject', errors.subject)}
             className={controlClass(errors.subject)}

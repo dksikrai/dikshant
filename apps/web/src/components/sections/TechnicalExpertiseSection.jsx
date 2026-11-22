@@ -6,19 +6,19 @@ import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 const expertise = [
   {
     icon: Server,
-    title: 'Backend Architecture',
+    title: 'Backend & API Architecture',
     color: 'text-indigo-400',
     iconBg: 'bg-indigo-500/10 border-indigo-500/20',
-    description: 'Laravel, PHP 8+, API-first design, multi-tenant SaaS, Eloquent optimization, microservice patterns, and production-grade backend systems.',
-    points: ['Laravel & PHP 8+ Expert', 'Multi-Tenant SaaS Design', 'API-First Architecture', 'Database Optimization'],
+    description: 'Node.js, Python and PHP/Laravel backends: API-first design, multi-tenant SaaS, database optimization, and production-grade services in the language that fits the job.',
+    points: ['Node.js, Python & Laravel', 'Multi-Tenant SaaS Design', 'API-First Architecture', 'Database Optimization'],
   },
   {
     icon: Zap,
     title: 'Queue & Async Systems',
     color: 'text-amber-400',
     iconBg: 'bg-amber-500/10 border-amber-500/20',
-    description: 'Redis queues, Laravel Horizon, background job processing, webhook delivery, event-driven architecture, and async workflow automation.',
-    points: ['Redis + Laravel Horizon', 'Background Job Pipelines', 'Webhook Architecture', 'Event-Driven Systems'],
+    description: 'Redis queues, background job processing, webhook delivery, event-driven architecture, and async workflow automation in Node.js, Python and Laravel (Horizon).',
+    points: ['Redis & Queue Workers', 'Background Job Pipelines', 'Webhook Architecture', 'Event-Driven Systems'],
   },
   {
     icon: Cloud,

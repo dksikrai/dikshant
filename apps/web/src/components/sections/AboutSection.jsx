@@ -4,12 +4,12 @@ import { FadeIn, SlideIn, StaggerGrid } from '@/lib/motion.jsx';
 const facts = [
   { value: '3+ Years',      label: 'Building production systems' },
   { value: '19+ Projects',  label: 'Across 5 countries' },
-  { value: 'Backend First', label: 'APIs, queues, cloud infra' },
+  { value: 'Full-Stack', label: 'Next.js, Node, Python, Laravel' },
   { value: 'AI-Enabled',    label: 'OpenAI, RAG, embeddings' },
 ];
 
 const techBadges = [
-  'Laravel', 'PHP', 'Redis', 'AWS', 'Next.js', 'OpenAI', 'Docker',
+  'Next.js', 'React', 'Node.js', 'Python', 'Laravel', 'AWS', 'OpenAI', 'Docker',
 ];
 
 const FactCard = ({ value, label }) => (
@@ -52,15 +52,15 @@ const AboutSection = () => (
 
           <FadeIn delay={0.08}>
             <h2 className="text-foreground mb-8">
-              Senior Engineer with a Production Mindset
+              Full-Stack Engineer with a Production Mindset
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.14}>
             <p className="text-muted-foreground mb-5 leading-relaxed">
-              I'm Dikshant Goyal — a backend-first engineer with 3+ years building
-              production-grade SaaS systems, AI-powered automation pipelines, and scalable
-              cloud architectures. I care about system reliability, clean APIs, and
+              I'm Dikshant Goyal — a full-stack engineer and technical consultant with 3+ years
+              building production web apps, APIs, AI-powered automation pipelines, and scalable
+              cloud infrastructure in JavaScript/TypeScript, Python and PHP. I care about system reliability, clean APIs, and
               engineering solutions that handle real scale. From Redis queue monitoring to
               OpenAI integrations, I build for production — not demos.
             </p>
@@ -71,7 +71,7 @@ const AboutSection = () => (
               Currently at <strong className="text-foreground font-semibold">iTechPanel LLP</strong> as
               Project Manager — leading planning and delivery across software workstreams,
               coordinating developers, QA and stakeholders, and staying hands-on with the
-              PHP/Laravel systems behind e-commerce and integration-heavy platforms.
+              backend systems behind e-commerce and integration-heavy platforms.
             </p>
           </FadeIn>
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Download, ArrowRight, ChevronRight, User, Layers, FolderKanban, Sparkles, Mail, Github, Linkedin, Twitter, Briefcase } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Download, ArrowRight, ChevronRight, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { navLinks, NavEntry, useIsActive } from '@/lib/nav.jsx';
 import { startInquiry } from '@/lib/contactIntent.js';
 import { m as motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -15,15 +17,6 @@ import { siteConfig } from '@/config/site.js';
 import { ease } from '@/lib/motion.jsx';
 import { enableRefraction } from '@/lib/glass.js';
 
-const navLinks = [
-  { name: 'Services',  href: '#services',       icon: Briefcase },
-  { name: 'About',     href: '#about',          icon: User },
-  { name: 'Expertise', href: '#expertise',      icon: Layers },
-  { name: 'Projects',  href: '#projects',       icon: FolderKanban },
-  { name: 'AI',        href: '#ai-engineering', icon: Sparkles },
-  { name: 'Contact',   href: '#contact',        icon: Mail },
-];
-
 const socials = [
   { label: 'GitHub',   href: siteConfig.links.github,   icon: Github },
   { label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
@@ -36,10 +29,6 @@ const LogoMark = () => (
     <path d="M8 6L2 12L8 18M16 6L22 12L16 18M14 3L10 21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
-const scrollToHash = (href) => {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-};
 
 /** Tracks which section is currently in the viewport band (scrollspy). */
 const useActiveSection = (hrefs) => {
@@ -78,7 +67,60 @@ const useActiveSection = (hrefs) => {
   return active;
 };
 
-const hrefs = navLinks.map((l) => l.href);
+const hrefs = navLinks.filter((l) => l.href).map((l) => l.href);
+
+const DesktopNavItem = ({ link, active }) => {
+  const isActive = useIsActive(link, active);
+  return (
+    <NavEntry
+      link={link}
+      id={`nav-${link.name.toLowerCase()}`}
+      aria-current={isActive ? 'true' : undefined}
+      className={`relative px-4 py-2 rounded-full text-[0.8125rem] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
+        isActive ? 'text-foreground' : 'text-foreground/60 hover:text-foreground'
+      }`}
+    >
+      {isActive && (
+        <motion.span
+          layoutId="nav-active-pill"
+          className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
+          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+        />
+      )}
+      <span className="relative z-10">{link.name}</span>
+    </NavEntry>
+  );
+};
+
+const MobileNavItem = ({ link, active, mobileOpen }) => {
+  const Icon = link.icon;
+  const isActive = useIsActive(link, active);
+  return (
+    <motion.li
+      variants={{
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: ease.out } },
+      }}
+    >
+      <SheetClose asChild>
+        <NavEntry
+          link={link}
+          id={`mobile-nav-${link.name.toLowerCase()}`}
+          aria-current={isActive ? 'true' : undefined}
+          className={`group flex min-h-[3.5rem] w-full items-center gap-3.5 px-4 text-left text-[1.0625rem] font-semibold tracking-tight transition-colors duration-150 active:bg-white/[0.08] focus-visible:outline-none focus-visible:bg-white/[0.08] ${
+            isActive ? 'bg-primary/15 text-foreground' : 'text-foreground/85'
+          }`}
+        >
+          <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isActive ? 'bg-primary/25 text-primary' : 'bg-white/[0.07] text-foreground/70'}`}>
+            <Icon className="h-4 w-4" />
+          </span>
+          <span className="flex-1">{link.name}</span>
+          <ChevronRight className="h-4 w-4 text-foreground/35 transition-transform group-active:translate-x-0.5" />
+        </NavEntry>
+      </SheetClose>
+    </motion.li>
+  );
+};
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -112,10 +154,11 @@ const Header = () => {
           }`}
         >
           {/* Logo */}
-          <button
+          <Link
+            to="/"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
-            aria-label="Dikshant Goyal, back to top"
+            aria-label="Dikshant Goyal, home"
           >
             <motion.div
               whileHover={{ rotate: -8, scale: 1.06 }}
@@ -127,51 +170,17 @@ const Header = () => {
             <span className="font-bold text-[1.1rem] tracking-tight select-none">
               Dikshant Goyal<span className="text-primary">.</span>
             </span>
-          </button>
+          </Link>
 
           {/* Desktop nav with animated active pill */}
-          <nav
-            className="hidden md:flex items-center gap-0.5"
-            aria-label="Primary navigation"
-          >
-            {navLinks.map((link) => {
-              const isActive = active === link.href;
-              return (
-                <button
-                  key={link.name}
-                  id={`nav-${link.name.toLowerCase()}`}
-                  onClick={() => scrollToHash(link.href)}
-                  aria-current={isActive ? 'true' : undefined}
-                  className={`relative px-4 py-2 rounded-full text-[0.8125rem] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
-                    isActive ? 'text-foreground' : 'text-foreground/60 hover:text-foreground'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  <span className="relative z-10">{link.name}</span>
-                </button>
-              );
-            })}
+          <nav className="hidden md:flex items-center gap-0.5" aria-label="Primary navigation">
+            {navLinks.map((link) => (
+              <DesktopNavItem key={link.name} link={link} active={active} />
+            ))}
           </nav>
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <Button
-              asChild
-              variant="ghost"
-              size="sm"
-              className="hidden lg:inline-flex rounded-full text-[0.8125rem] text-foreground/70 hover:text-foreground"
-            >
-              <a id="header-resume-btn" href={siteConfig.resume} download={siteConfig.resumeFilename}>
-                <Download />
-                Resume
-              </a>
-            </Button>
 
             <Button
               asChild
@@ -237,37 +246,9 @@ const Header = () => {
                     animate={mobileOpen ? 'visible' : 'hidden'}
                     variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } } }}
                   >
-                    {navLinks.map((link) => {
-                      const Icon = link.icon;
-                      const isActive = active === link.href;
-                      return (
-                        <motion.li
-                          key={link.name}
-                          variants={{
-                            hidden:  { opacity: 0, y: 10 },
-                            visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: ease.out } },
-                          }}
-                        >
-                          <SheetClose asChild>
-                            <button
-                              id={`mobile-nav-${link.name.toLowerCase()}`}
-                              // Wait for the sheet to unlock body scroll before scrolling.
-                              onClick={() => setTimeout(() => scrollToHash(link.href), 320)}
-                              aria-current={isActive ? 'true' : undefined}
-                              className={`group flex min-h-[3.5rem] w-full items-center gap-3.5 px-4 text-left text-[1.0625rem] font-semibold tracking-tight transition-colors duration-150 active:bg-white/[0.08] focus-visible:outline-none focus-visible:bg-white/[0.08] ${
-                                isActive ? 'bg-primary/15 text-foreground' : 'text-foreground/85'
-                              }`}
-                            >
-                              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${isActive ? 'bg-primary/25 text-primary' : 'bg-white/[0.07] text-foreground/70'}`}>
-                                <Icon className="h-4 w-4" />
-                              </span>
-                              <span className="flex-1">{link.name}</span>
-                              <ChevronRight className="h-4 w-4 text-foreground/35 transition-transform group-active:translate-x-0.5" />
-                            </button>
-                          </SheetClose>
-                        </motion.li>
-                      );
-                    })}
+                    {navLinks.map((link) => (
+                      <MobileNavItem key={link.name} link={link} active={active} mobileOpen={mobileOpen} />
+                    ))}
                   </motion.ul>
                 </nav>
 

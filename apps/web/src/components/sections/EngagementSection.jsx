@@ -1,11 +1,11 @@
 import React from 'react';
-import { Target, Repeat, Lightbulb, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import ServiceIcon from '@/components/ServiceIcon.jsx';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 import { Button } from '@/components/ui/button';
 import { engagementModels, processSteps } from '@/config/offer.js';
 import { startInquiry } from '@/lib/contactIntent.js';
 
-const icons = { Target, Repeat, Lightbulb };
 
 const EngagementSection = () => (
   <section id="process" className="relative py-16 md:py-28" aria-labelledby="engagement-heading">
@@ -26,7 +26,6 @@ const EngagementSection = () => (
 
       <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5" stagger={0.08} delay={0.1}>
         {engagementModels.map((m) => {
-          const Icon = icons[m.icon] ?? Target;
           return (
             <article
               key={m.id}
@@ -34,7 +33,7 @@ const EngagementSection = () => (
             >
               <div className="flex items-center justify-between">
                 <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
-                  <Icon size={20} strokeWidth={2} aria-hidden="true" />
+                  <ServiceIcon name={m.icon} />
                 </div>
                 {m.featured && (
                   <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/25">

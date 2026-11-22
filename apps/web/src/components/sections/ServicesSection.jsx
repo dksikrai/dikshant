@@ -1,47 +1,55 @@
 import React from 'react';
-import { ArrowRight, Server, Bot, ShoppingCart, Gauge, ClipboardCheck, Users, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 import { Button } from '@/components/ui/button';
+import ServiceIcon from '@/components/ServiceIcon.jsx';
 import { services } from '@/config/offer.js';
 import { startInquiry } from '@/lib/contactIntent.js';
 
-const icons = { Server, Bot, ShoppingCart, Gauge, ClipboardCheck, Users };
-
-const ServiceCard = ({ service }) => {
-  const Icon = icons[service.icon] ?? Server;
-  return (
-    <article className="glass-card card-hover rounded-2xl p-6 flex flex-col gap-4 h-full">
-      <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
-        <Icon size={20} strokeWidth={2} aria-hidden="true" />
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="text-foreground font-semibold leading-snug" style={{ fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+export const ServiceCard = ({ service }) => (
+  <article className="glass-card card-hover rounded-2xl p-6 flex flex-col gap-4 h-full">
+    <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
+      <ServiceIcon name={service.icon} />
+    </div>
+    <div className="flex flex-col gap-2">
+      <h3 className="text-foreground font-semibold leading-snug" style={{ fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+        <Link to={`/services/${service.id}`} className="hover:text-primary transition-colors">
           {service.title}
-        </h3>
-        <p className="text-muted-foreground leading-relaxed m-0" style={{ fontSize: '0.875rem' }}>
-          {service.summary}
-        </p>
-      </div>
-      <ul className="flex flex-col gap-1.5 m-0 p-0 list-none">
-        {service.outcomes.map((o) => (
-          <li key={o} className="flex items-start gap-2 text-[0.8125rem] text-foreground/80">
-            <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
-            {o}
-          </li>
-        ))}
-      </ul>
+        </Link>
+      </h3>
+      <p className="text-muted-foreground leading-relaxed m-0" style={{ fontSize: '0.875rem' }}>
+        {service.summary}
+      </p>
+    </div>
+    <ul className="flex flex-col gap-1.5 m-0 p-0 list-none">
+      {service.includes.slice(0, 3).map((o) => (
+        <li key={o} className="flex items-start gap-2 text-[0.8125rem] text-foreground/80">
+          <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+          {o}
+        </li>
+      ))}
+    </ul>
+    <div className="mt-auto flex items-center justify-between gap-3 pt-1">
+      <Link
+        to={`/services/${service.id}`}
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4"
+        aria-label={`View service: ${service.title}`}
+      >
+        View service
+        <ArrowRight size={15} strokeWidth={2.5} aria-hidden="true" />
+      </Link>
       <Button
         variant="link"
-        className="mt-auto h-auto justify-start p-0 text-primary"
+        className="h-auto p-0 text-muted-foreground hover:text-foreground"
         onClick={() => startInquiry({ inquiry: 'Consulting', subject: service.title })}
         aria-label={`Discuss ${service.title}`}
       >
-        Discuss this
-        <ArrowRight strokeWidth={2.5} />
+        Discuss
       </Button>
-    </article>
-  );
-};
+    </div>
+  </article>
+);
 
 const ServicesSection = () => (
   <section id="services" className="relative py-16 md:py-28 overflow-hidden" aria-labelledby="services-heading">
@@ -60,18 +68,18 @@ const ServicesSection = () => (
         </FadeIn>
         <FadeIn delay={0.12}>
           <p className="text-muted-foreground mt-4 max-w-xl">
-            Hands-on engineering and independent technical advice for teams that need reliable software, shipped without drama.
+            Hands-on engineering and independent technical advice across the full stack: web, APIs, AI, cloud and delivery.
           </p>
         </FadeIn>
       </div>
 
-      <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" stagger={0.06} delay={0.1}>
+      <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5" stagger={0.05} delay={0.1}>
         {services.map((s) => (
           <ServiceCard key={s.id} service={s} />
         ))}
       </StaggerGrid>
 
-      <FadeIn delay={0.1} className="mt-10 flex justify-center">
+      <FadeIn delay={0.1} className="mt-10 flex flex-wrap justify-center gap-3">
         <Button
           size="lg"
           className="h-12 rounded-full px-7 font-semibold shadow-lg shadow-primary/30"
@@ -79,6 +87,9 @@ const ServicesSection = () => (
         >
           Book a Consultation
           <ArrowRight strokeWidth={2.5} />
+        </Button>
+        <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-7 font-semibold">
+          <Link to="/services">View all services</Link>
         </Button>
       </FadeIn>
     </div>

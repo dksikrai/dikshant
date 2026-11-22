@@ -33,10 +33,10 @@ const TERMINAL_LINES = [
 // ─── Rotating focus line ──────────────────────────────────────────────────────
 
 const ROLES = [
-  'Laravel APIs that scale',
-  'Redis & Horizon queue systems',
+  'Next.js & React web apps',
+  'Node.js, Python & Laravel APIs',
   'OpenAI-powered workflows',
-  'AWS infrastructure that stays up',
+  'AWS & server setup that stays up',
 ];
 
 function RotatingRole() {
@@ -52,7 +52,7 @@ function RotatingRole() {
   return (
     <p className="font-mono text-sm tracking-wide text-muted-foreground flex items-center gap-2 min-h-[1.5rem]">
       <span className="text-primary">&gt;</span>
-      <span className="sr-only">Backend Engineer · Laravel · AWS · OpenAI</span>
+      <span className="sr-only">Full-Stack Developer · Next.js · Node.js · Python · Laravel · AWS</span>
       <span aria-hidden="true" className="relative inline-flex overflow-hidden h-6 items-center">
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
@@ -264,7 +264,7 @@ export default function HeroSection() {
                   fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
                 }}
               >
-                I Build Scalable Backend Systems, AI Workflows &amp; Production SaaS.
+                I Build Web Apps, APIs &amp; AI Workflows That Scale: Full-Stack, End to End.
               </motion.h1>
 
               {/* Rotating focus line */}
@@ -278,9 +278,9 @@ export default function HeroSection() {
                 className="max-w-xl text-base leading-relaxed"
                 style={{ color: 'hsl(var(--muted-foreground))' }}
               >
-                Backend &amp; product engineering and technical consulting for businesses:
-                production-grade APIs, queue-driven architectures, AWS, and AI-powered
-                automation. From first scope to launch and support.
+                Full-stack development and technical consulting for businesses: Next.js, React,
+                Node.js, Python and Laravel applications, AI automation, and the AWS and server
+                setup to run them. From first scope to launch and support.
               </motion.p>
 
               {/* CTA buttons */}
