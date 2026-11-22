@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { toast } from 'sonner';
 import { siteConfig } from '@/config/site.js';
 import { consumeContactIntent } from '@/lib/contactIntent.js';
 
@@ -28,6 +29,31 @@ const formatEnquiry = (d, bold = true) => {
   ]
     .filter((line) => line !== null)
     .join('\n');
+};
+
+// Web3Forms emails every enquiry to you server-side (free key from web3forms.com, set in .env).
+// The key is meant to be public. Without it, WhatsApp still works and email falls back to the visitor's mail app.
+const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const HAS_KEY = Boolean(ACCESS_KEY) && ACCESS_KEY !== 'YOUR_ACCESS_KEY_HERE';
+
+const deliverByEmail = async (d) => {
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: ACCESS_KEY,
+      subject: `[${d.inquiry}] ${d.subject}`,
+      from_name: d.name,
+      email: d.email,
+      name: d.name,
+      company: d.company || '-',
+      message: d.message,
+      botcheck: '',
+    }),
+    keepalive: true,
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || 'Email delivery failed');
 };
 
 const MESSAGE_MIN = 20;
@@ -135,7 +161,7 @@ const ContactForm = () => {
 
   const messageLength = (watch('message') || '').length;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data, channel) => {
     if (data.botcheck) return; // bot: silently drop
 
     const waUrl = siteConfig.whatsappUrlFor(formatEnquiry(data, true));
@@ -144,12 +170,31 @@ const ContactForm = () => {
       body: formatEnquiry(data, false),
     });
 
-    // Open WhatsApp straight away. Some browsers block pop-ups, so the confirmation screen
-    // below always shows a button that opens it too.
+    if (channel === 'email') {
+      if (HAS_KEY) {
+        try {
+          await deliverByEmail(data);
+          setHandoff({ kind: 'emailed', waUrl, mailUrl });
+          reset();
+        } catch {
+          toast.error('Could not send right now. Please use WhatsApp or your mail app instead.');
+          setHandoff({ kind: 'mailto', waUrl, mailUrl });
+        }
+        return;
+      }
+      window.location.href = mailUrl; // opens the visitor's mail app
+      setHandoff({ kind: 'mailto', waUrl, mailUrl });
+      reset();
+      return;
+    }
+
+    // WhatsApp: also keep a copy by email on our side, so the lead is not lost if Send is never pressed.
+    if (HAS_KEY) deliverByEmail(data).catch(() => {});
+
+    // Some browsers block pop-ups, so the confirmation screen always has a button that opens WhatsApp too.
     const win = window.open(waUrl, '_blank');
     if (win) win.opener = null;
-
-    setHandoff({ waUrl, mailUrl, opened: Boolean(win) });
+    setHandoff({ kind: 'whatsapp', opened: Boolean(win), waUrl, mailUrl });
     reset();
   };
 
@@ -170,28 +215,46 @@ const ContactForm = () => {
         >
           <CheckCircle2 className="h-8 w-8 text-emerald-400" />
         </motion.span>
-        <h3 className="text-xl font-bold text-foreground">Your message is ready</h3>
+        <h3 className="text-xl font-bold text-foreground">
+          {handoff.kind === 'emailed' ? 'Message sent' : handoff.kind === 'mailto' ? 'Almost there' : 'Your message is ready'}
+        </h3>
         <p className="max-w-sm text-sm text-muted-foreground m-0">
-          {handoff.opened
-            ? 'WhatsApp should have opened with your message filled in. Press Send there to deliver it. It is not sent until you do.'
-            : 'Tap the button below to open WhatsApp with your message filled in, then press Send to deliver it.'}
+          {handoff.kind === 'emailed'
+            ? "Thanks! I've received your message and will reply by email within one business day."
+            : handoff.kind === 'mailto'
+              ? 'Your mail app should have opened with the message written. Press Send there to deliver it.'
+              : handoff.opened
+                ? 'WhatsApp should have opened with your message filled in. Press Send there to deliver it. It is not sent until you do.'
+                : 'Tap the button below to open WhatsApp with your message filled in, then press Send to deliver it.'}
         </p>
         <div className="flex w-full max-w-xs flex-col gap-2.5">
-          <Button asChild className="h-12 rounded-full font-semibold shadow-lg shadow-primary/25">
-            <a href={handoff.waUrl} target="_blank" rel="noopener noreferrer">
-              <MessageCircle />
-              Open WhatsApp
-            </a>
-          </Button>
-          <Button asChild variant="glass" className="h-11 rounded-full">
-            <a href={handoff.mailUrl}>
-              <Mail />
-              Send by email instead
-            </a>
-          </Button>
+          {handoff.kind !== 'emailed' && (
+            <Button asChild className="h-12 rounded-full font-semibold shadow-lg shadow-primary/25">
+              <a href={handoff.kind === 'mailto' ? handoff.mailUrl : handoff.waUrl} target={handoff.kind === 'mailto' ? undefined : '_blank'} rel="noopener noreferrer">
+                {handoff.kind === 'mailto' ? <Mail /> : <MessageCircle />}
+                {handoff.kind === 'mailto' ? 'Open mail app' : 'Open WhatsApp'}
+              </a>
+            </Button>
+          )}
+          {handoff.kind === 'whatsapp' && (
+            <Button asChild variant="glass" className="h-11 rounded-full">
+              <a href={handoff.mailUrl}>
+                <Mail />
+                Send by email instead
+              </a>
+            </Button>
+          )}
+          {handoff.kind !== 'whatsapp' && (
+            <Button asChild variant="glass" className="h-11 rounded-full">
+              <a href={handoff.waUrl} target="_blank" rel="noopener noreferrer">
+                <MessageCircle />
+                {handoff.kind === 'emailed' ? 'Also message on WhatsApp' : 'Use WhatsApp instead'}
+              </a>
+            </Button>
+          )}
           <Button variant="ghost" className="rounded-full text-muted-foreground" onClick={() => setHandoff(null)}>
             <ArrowLeft />
-            Back to the form
+            {handoff.kind === 'emailed' ? 'Send another message' : 'Back to the form'}
           </Button>
         </div>
       </motion.div>
@@ -199,7 +262,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-6" aria-describedby="contact-form-note">
+    <form noValidate onSubmit={handleSubmit((d) => onSubmit(d, 'whatsapp'))} className="space-y-6" aria-describedby="contact-form-note">
       {/* Inquiry type: iOS-style segmented control */}
       <div className="space-y-2">
         <Label id="inquiry-label" className="text-sm font-medium text-foreground">
@@ -335,27 +398,32 @@ const ContactForm = () => {
       <div className="flex flex-col gap-4 border-t border-white/[0.08] pt-5 sm:flex-row sm:items-center sm:justify-between">
         <p id="contact-form-note" className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground sm:max-w-xs">
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
-          Opens WhatsApp with your message ready to send. Your details are used only to reply.</p>
+          Choose WhatsApp (opens with your message ready) or email. Your details are used only to reply.</p>
 
-        <motion.div whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="h-12 w-full rounded-full px-7 text-[0.9375rem] font-semibold shadow-lg shadow-primary/25 sm:h-11 sm:w-auto"
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="animate-spin" />
-                Opening…
-              </>
-            ) : (
-              <>
-                <MessageCircle />
-                Send via WhatsApp
-              </>
-            )}
-          </Button>
-        </motion.div>
+        <div className="flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row-reverse">
+          <motion.div whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="h-12 w-full rounded-full px-7 text-[0.9375rem] font-semibold shadow-lg shadow-primary/25 sm:h-11 sm:w-auto"
+            >
+              {isSubmitting ? <Loader2 className="animate-spin" /> : <MessageCircle />}
+              Send via WhatsApp
+            </Button>
+          </motion.div>
+          <motion.div whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
+            <Button
+              type="button"
+              variant="glass"
+              disabled={isSubmitting}
+              onClick={handleSubmit((d) => onSubmit(d, 'email'))}
+              className="h-12 w-full rounded-full px-6 text-[0.9375rem] font-semibold sm:h-11 sm:w-auto"
+            >
+              {isSubmitting ? <Loader2 className="animate-spin" /> : <Mail />}
+              Send by email
+            </Button>
+          </motion.div>
+        </div>
       </div>
     </form>
   );

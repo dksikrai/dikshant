@@ -13,6 +13,12 @@
 const PHONE = '+919829641370';
 const EMAIL = 'webwithdikshant@gmail.com';
 
+/**
+ * BOOKING_URL: your Cal.com / Calendly link, e.g. "https://cal.com/yourname/20min".
+ * Leave it empty and the "Book a call" buttons send a WhatsApp request for a call instead.
+ */
+const BOOKING_URL = '';
+
 const digits = PHONE.replace(/\D/g, '');
 
 /** "+919829641370" -> "+91 98296 41370" (Indian format); other countries stay as typed. */
@@ -21,6 +27,7 @@ const formatPhone = (p) => {
   return p.startsWith('+91') && d.length === 12 ? `+91 ${d.slice(2, 7)} ${d.slice(7)}` : p;
 };
 
+const CALL_REQUEST_TEXT = "Hi Dikshant, I'd like to book a 20-minute call to discuss a project. When are you free?";
 const DEFAULT_WHATSAPP_TEXT = "Hi Dikshant, I saw your portfolio and I'd like to discuss a project with you!";
 
 export const siteConfig = {
@@ -40,6 +47,10 @@ export const siteConfig = {
   whatsappUrl: `https://wa.me/${digits}?text=${encodeURIComponent(DEFAULT_WHATSAPP_TEXT)}`,
   mailtoFor: ({ subject = '', body = '' } = {}) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+
+  // ── Book a call ──
+  hasBooking: Boolean(BOOKING_URL),
+  bookingUrl: BOOKING_URL || `https://wa.me/${digits}?text=${encodeURIComponent(CALL_REQUEST_TEXT)}`,
 
   links: {
     linkedin: 'https://in.linkedin.com/in/csdikshant',

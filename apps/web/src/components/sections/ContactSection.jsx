@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { Mail, Copy, Check, MapPin, MessageCircle, Linkedin, Clock } from 'lucide-react';
+import { Mail, Copy, Check, MapPin, MessageCircle, Linkedin, Clock, CalendarCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -116,6 +116,12 @@ const ContactSection = () => (
 
             <div className="flex flex-col gap-2.5">
               <Button asChild className="w-full h-11 justify-start rounded-xl shadow-lg shadow-primary/25">
+                <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">
+                  <CalendarCheck />
+                  {siteConfig.hasBooking ? 'Book a 20-minute call' : 'Request a 20-minute call'}
+                </a>
+              </Button>
+              <Button asChild variant="glass" className="w-full h-11 justify-start rounded-xl">
                 <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle />
                   Chat on WhatsApp
