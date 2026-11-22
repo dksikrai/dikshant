@@ -17,7 +17,13 @@ const EMAIL = 'webwithdikshant@gmail.com';
  * BOOKING_URL: your Cal.com / Calendly link, e.g. "https://cal.com/yourname/20min".
  * Leave it empty and the "Book a call" buttons send a WhatsApp request for a call instead.
  */
-const BOOKING_URL = '';
+const BOOKING_URL = 'https://cal.com/dksikrai/20-minute-intro-call';
+
+/**
+ * Web3Forms access key (public by design). Every enquiry from the contact form is emailed to the
+ * address on your Web3Forms account (manage at app.web3forms.com). Empty = disable server-side email.
+ */
+const FORM_ACCESS_KEY = '61e60555-a9cb-4245-adcc-3811aa9d5e06';
 
 const digits = PHONE.replace(/\D/g, '');
 
@@ -47,6 +53,8 @@ export const siteConfig = {
   whatsappUrl: `https://wa.me/${digits}?text=${encodeURIComponent(DEFAULT_WHATSAPP_TEXT)}`,
   mailtoFor: ({ subject = '', body = '' } = {}) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+
+  formAccessKey: FORM_ACCESS_KEY,
 
   // ── Book a call ──
   hasBooking: Boolean(BOOKING_URL),

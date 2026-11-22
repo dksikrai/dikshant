@@ -31,10 +31,10 @@ const formatEnquiry = (d, bold = true) => {
     .join('\n');
 };
 
-// Web3Forms emails every enquiry to you server-side (free key from web3forms.com, set in .env).
+// Web3Forms emails every enquiry to you server-side (key lives in config/site.js).
 // The key is meant to be public. Without it, WhatsApp still works and email falls back to the visitor's mail app.
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-const HAS_KEY = Boolean(ACCESS_KEY) && ACCESS_KEY !== 'YOUR_ACCESS_KEY_HERE';
+const ACCESS_KEY = siteConfig.formAccessKey;
+const HAS_KEY = Boolean(ACCESS_KEY);
 
 const deliverByEmail = async (d) => {
   const res = await fetch('https://api.web3forms.com/submit', {
