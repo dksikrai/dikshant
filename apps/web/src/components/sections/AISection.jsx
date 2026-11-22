@@ -1,7 +1,8 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Cpu, Database, Zap, Layers } from 'lucide-react';
-import { FadeIn, isIOS, ease, TextReveal, StaggerGrid } from '@/lib/motion.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import { FadeIn, isIOS, ease, StaggerGrid } from '@/lib/motion.jsx';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -261,26 +262,14 @@ const CodeBlock = () => (
 // ─── Main Section ─────────────────────────────────────────────────────────────
 
 const AISection = () => (
-  <section className="py-10 md:py-24" id="ai-engineering">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section className="site-section" id="ai-engineering">
+    <div className="site-container">
 
-      {/* Header */}
-      <FadeIn className="mb-10 md:mb-16">
-        <p className="section-label mb-3">AI ENGINEERING</p>
-        <h2
-          className="font-extrabold tracking-tight mb-4"
-          style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}
-        >
-          <TextReveal text="Building AI-Powered Systems" className="text-gradient-primary" />
-        </h2>
-        <p
-          className="text-muted-foreground max-w-2xl"
-          style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
-        >
-          Integrating modern AI capabilities into production architectures — not just demos, but
-          real systems handling real workloads.
-        </p>
-      </FadeIn>
+      <SectionHeader
+        label="AI ENGINEERING"
+        title="Building AI-Powered Systems"
+        description="Integrating modern AI capabilities into production architectures — not just demos, but real systems handling real workloads."
+      />
 
       {/* Two-column layout on desktop */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">

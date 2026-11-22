@@ -7,6 +7,7 @@ import {
 } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa';
 import { TbApi, TbBrandOpenai } from 'react-icons/tb';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, isIOS } from '@/lib/motion.jsx';
 
 const techStack = [
@@ -102,20 +103,15 @@ const SkillsSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-10 md:py-28 relative overflow-hidden bg-white/[0.01]" id="skills">
+    <section className="site-section bg-white/[0.01]" id="skills">
       <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <FadeIn className="text-center mb-16">
-          <div className="section-label mb-4">TECH STACK</div>
-          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
-            Tools of the Trade
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
-            Technologies I work with daily in production environments.
-          </p>
-        </FadeIn>
+      <div className="site-container">
+        <SectionHeader
+          label="TECH STACK"
+          title="Tools of the Trade"
+          description="Technologies I work with daily in production environments."
+        />
 
         {/* Tech grid */}
         <motion.div

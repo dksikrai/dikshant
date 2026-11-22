@@ -1,17 +1,30 @@
 import React from 'react';
 import { FadeIn } from '@/lib/motion.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import { Button } from '@/components/ui/button';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { faqs } from '@/config/offer.js';
+import { startInquiry } from '@/lib/contactIntent.js';
 
 const FAQSection = () => (
-  <section id="faq" className="relative py-16 md:py-24" aria-labelledby="faq-heading">
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="mb-10 text-center">
-        <FadeIn delay={0}>
-          <span className="section-label block mb-4">FAQ</span>
-        </FadeIn>
-        <FadeIn delay={0.07}>
-          <h2 id="faq-heading" className="text-foreground">Questions Clients Ask</h2>
+  <section id="faq" className="site-section" aria-labelledby="faq-heading">
+    <div className="site-container grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] gap-10 lg:gap-16 items-start">
+      <div className="lg:sticky lg:top-28">
+        <SectionHeader
+          compact
+          id="faq-heading"
+          label="FAQ"
+          title="Questions Clients Ask"
+          description="Can't find your answer? Send a message and I'll reply within one business day."
+        />
+        <FadeIn delay={0.16} className="mt-6">
+          <Button
+            variant="glass"
+            className="rounded-full"
+            onClick={() => startInquiry({ inquiry: 'Other', subject: 'Question about your services' })}
+          >
+            Ask a question
+          </Button>
         </FadeIn>
       </div>
       <FadeIn delay={0.1}>

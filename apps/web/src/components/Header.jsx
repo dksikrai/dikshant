@@ -145,7 +145,7 @@ const Header = () => {
       transition={{ duration: 0.45, ease: ease.out }}
       className="fixed top-0 left-0 right-0 z-50 pt-[calc(env(safe-area-inset-top)+0.625rem)] sm:pt-[calc(env(safe-area-inset-top)+0.875rem)] pointer-events-none"
     >
-      <div className="max-w-6xl mx-auto px-3 sm:px-5">
+      <div className="site-container">
         {/* Floating liquid-glass capsule */}
         <div
           ref={capsuleRef}

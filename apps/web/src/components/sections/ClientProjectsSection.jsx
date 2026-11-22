@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { Globe, ArrowUpRight, Terminal, ExternalLink } from 'lucide-react';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
@@ -270,21 +271,17 @@ const ClientProjectsSection = () => {
   const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
 
   return (
-    <section className="py-10 md:py-28 relative overflow-hidden" id="projects">
+    <section className="site-section" id="projects">
       <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container">
 
         {/* ── Featured Projects ── */}
-        <FadeIn className="mb-16">
-          <div className="section-label mb-4">FEATURED WORK</div>
-          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
-            Flagship Projects
-          </h2>
-          <p className="text-muted-foreground max-w-xl" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
-            Production systems with real architecture, real scale, real impact.
-          </p>
-        </FadeIn>
+        <SectionHeader
+          label="FEATURED WORK"
+          title="Flagship Projects"
+          description="Production systems with real architecture, real scale, real impact."
+        />
 
         <motion.div
           className="space-y-6 mb-24"
@@ -302,9 +299,9 @@ const ClientProjectsSection = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
           <FadeIn>
             <div className="section-label mb-3">ALL CLIENT WORK</div>
-            <h2 className="font-extrabold text-foreground" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
+            <h3 className="text-foreground" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
               {allProjects.length}+ Projects Delivered
-            </h2>
+            </h3>
           </FadeIn>
         </div>
 

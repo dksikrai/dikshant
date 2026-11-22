@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 import { Button } from '@/components/ui/button';
 import ServiceIcon from '@/components/ServiceIcon.jsx';
@@ -52,26 +53,19 @@ export const ServiceCard = ({ service }) => (
 );
 
 const ServicesSection = () => (
-  <section id="services" className="relative py-16 md:py-28 overflow-hidden" aria-labelledby="services-heading">
+  <section id="services" className="site-section" aria-labelledby="services-heading">
     <div
       className="pointer-events-none absolute inset-0 z-0"
       aria-hidden="true"
       style={{ background: 'radial-gradient(ellipse 50% 40% at 50% 20%, hsl(243,88%,68%,0.07) 0%, transparent 70%)' }}
     />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mb-12">
-        <FadeIn delay={0}>
-          <span className="section-label block mb-4">SERVICES &amp; CONSULTING</span>
-        </FadeIn>
-        <FadeIn delay={0.07}>
-          <h2 id="services-heading" className="text-foreground">How I Can Help Your Business</h2>
-        </FadeIn>
-        <FadeIn delay={0.12}>
-          <p className="text-muted-foreground mt-4 max-w-xl">
-            Hands-on engineering and independent technical advice across the full stack: web, APIs, AI, cloud and delivery.
-          </p>
-        </FadeIn>
-      </div>
+    <div className="site-container z-10">
+      <SectionHeader
+        id="services-heading"
+        label="SERVICES & CONSULTING"
+        title="How I Can Help Your Business"
+        description="Hands-on engineering and independent technical advice across the full stack: web, APIs, AI, cloud and delivery."
+      />
 
       <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5" stagger={0.05} delay={0.1}>
         {services.map((s) => (

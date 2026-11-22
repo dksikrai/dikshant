@@ -18,7 +18,7 @@ const NotFoundPage = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,hsl(var(--primary)/0.05),transparent_70%)]" />
         </div>
 
-        <div className="max-w-xl mx-auto px-6 sm:px-8 text-center relative z-10 w-full">
+        <div className="site-container z-10"><div className="max-w-xl mx-auto text-center">
           <FadeIn>
             <div className="mb-4 sm:mb-8">
               <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/50 drop-shadow-sm leading-none" style={{ fontSize: 'clamp(6rem, 25vw, 12rem)' }}>
@@ -42,6 +42,7 @@ const NotFoundPage = () => {
               Return Home
             </Link>
           </FadeIn>
+        </div>
         </div>
       </main>
 

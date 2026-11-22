@@ -20,10 +20,10 @@ const ResumePage = () => {
   useSeo('/resume');
   return (
     <PageShell>
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <article className="site-container pb-16">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resume' }]} />
 
-        <header className="flex flex-col gap-4">
+        <header className="flex flex-col gap-4 max-w-3xl">
           <h1 className="text-foreground" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             Dikshant Goyal
           </h1>
@@ -53,7 +53,7 @@ const ResumePage = () => {
 
         <section className="mt-14" aria-labelledby="skills-h">
           <H2><span id="skills-h">Skills</span></H2>
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-0">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 m-0">
             {skillGroups.map((g) => (
               <div key={g.group} className="glass-card rounded-2xl p-5">
                 <dt className="text-foreground font-semibold mb-3">{g.group}</dt>
@@ -71,7 +71,7 @@ const ResumePage = () => {
 
         <section className="mt-14" aria-labelledby="exp-h">
           <H2><span id="exp-h">Experience</span></H2>
-          <ol className="flex flex-col gap-5 m-0 p-0 list-none">
+          <ol className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start m-0 p-0 list-none">
             {experience.map((r) => (
               <li key={`${r.title}-${r.date}`} className="glass-card rounded-2xl p-6">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">

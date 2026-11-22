@@ -16,7 +16,7 @@ const ServicesPage = () => {
   useSeo('/services');
   return (
     <PageShell>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div className="site-container pb-12">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services' }]} />
         <h1 className="text-foreground max-w-3xl" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
           Web, API, AI &amp; DevOps Services

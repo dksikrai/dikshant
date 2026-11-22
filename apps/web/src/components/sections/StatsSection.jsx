@@ -147,6 +147,10 @@ export default function StatsSection() {
           .stats-grid .stat-cell:last-child {
             border-right: none;
           }
+          /* First stat sits flush with the shared container edge, like every section heading */
+          .stats-grid .stat-cell:first-child > * {
+            padding-left: 0;
+          }
         }
       `}</style>
       <section
@@ -158,7 +162,7 @@ export default function StatsSection() {
         }}
         aria-label="Key metrics"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="site-container">
           <motion.div
             className="stats-grid grid grid-cols-2 md:grid-cols-4"
             variants={containerVariants}

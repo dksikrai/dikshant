@@ -36,7 +36,7 @@ const CareerSection = React.lazy(() => import('@/components/sections/CareerSecti
 const ContactSection = React.lazy(() => import('@/components/sections/ContactSection.jsx'));
 
 const SectionFallback = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-4" aria-hidden="true">
+  <div className="site-container py-20 space-y-4" aria-hidden="true">
     <Skeleton className="h-4 w-28" />
     <Skeleton className="h-10 w-2/3 max-w-lg" />
     <Skeleton className="h-4 w-full max-w-xl" />

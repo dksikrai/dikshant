@@ -23,91 +23,102 @@ const ServiceDetail = ({ service }) => {
   const cta = () => startInquiry({ inquiry: 'Consulting', subject: service.title });
   return (
     <PageShell>
-      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <article className="site-container pb-16">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.title }]} />
 
-        <header className="flex flex-col gap-5">
+        <header className="flex flex-col gap-5 max-w-3xl">
           <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
             <ServiceIcon name={service.icon} size={22} />
           </div>
           <h1 className="text-foreground" style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             {service.title}
           </h1>
-          <p className="text-muted-foreground max-w-3xl m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
+          <p className="text-muted-foreground m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
             {service.intro}
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" className="h-12 rounded-full px-7 font-semibold shadow-lg shadow-primary/30" onClick={cta}>
-              Discuss your project
-              <ArrowRight strokeWidth={2.5} />
-            </Button>
-            <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-7 font-semibold">
-              <Link to="/services">All services</Link>
-            </Button>
-          </div>
         </header>
 
-        <section className="mt-14" aria-labelledby="included">
-          <H2><span id="included">What&apos;s included</span></H2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 m-0 p-0 list-none">
-            {service.includes.map((item) => (
-              <li key={item} className="glass-card rounded-xl p-4 flex items-start gap-3 text-foreground/90 text-[0.9375rem]">
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_22rem] gap-10 lg:gap-14 items-start">
+          {/* Main column */}
+          <div className="flex flex-col gap-14 min-w-0">
+            <section aria-labelledby="included">
+              <H2><span id="included">What&apos;s included</span></H2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 m-0 p-0 list-none">
+                {service.includes.map((item) => (
+                  <li key={item} className="glass-card rounded-xl p-4 flex items-start gap-3 text-foreground/90 text-[0.9375rem]">
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-        <section className="mt-12" aria-labelledby="tech">
-          <H2><span id="tech">Technologies</span></H2>
-          <ul className="flex flex-wrap gap-2 m-0 p-0 list-none">
-            {service.tech.map((t) => (
-              <li key={t} className="mono-badge text-[0.8125rem] font-semibold px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.09] text-foreground/80">
-                {t}
-              </li>
-            ))}
-          </ul>
-        </section>
+            <section aria-labelledby="process">
+              <H2><span id="process">How we work</span></H2>
+              <ol className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-0 p-0 list-none">
+                {processSteps.map((s, i) => (
+                  <li key={s.title} className="glass-card rounded-2xl p-5 flex flex-col gap-2">
+                    <span className="font-mono text-xs text-primary font-semibold">0{i + 1}</span>
+                    <h3 className="text-foreground font-semibold m-0 text-base">{s.title}</h3>
+                    <p className="text-muted-foreground m-0 text-[0.8125rem] leading-relaxed">{s.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
 
-        <section className="mt-12" aria-labelledby="ideal">
-          <H2><span id="ideal">Who this is for</span></H2>
-          <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
-            {service.idealFor.map((i) => (
-              <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                <ArrowRight size={16} className="mt-1 shrink-0 text-primary" aria-hidden="true" />
-                {i}
-              </li>
-            ))}
-          </ul>
-        </section>
+            <section aria-labelledby="faq">
+              <H2><span id="faq">Frequently asked questions</span></H2>
+              <Accordion type="single" collapsible className="glass-card rounded-2xl px-5">
+                {service.faqs.map((f, i) => (
+                  <AccordionItem key={f.q} value={`f-${i}`} className="border-white/[0.08]">
+                    <AccordionTrigger className="text-left text-foreground">{f.q}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground leading-relaxed">{f.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </section>
+          </div>
 
-        <section className="mt-12" aria-labelledby="process">
-          <H2><span id="process">How we work</span></H2>
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 m-0 p-0 list-none">
-            {processSteps.map((s, i) => (
-              <li key={s.title} className="glass-card rounded-2xl p-5 flex flex-col gap-2">
-                <span className="font-mono text-xs text-primary font-semibold">0{i + 1}</span>
-                <h3 className="text-foreground font-semibold m-0 text-base">{s.title}</h3>
-                <p className="text-muted-foreground m-0 text-[0.8125rem] leading-relaxed">{s.text}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
+          {/* Sidebar */}
+          <aside className="flex flex-col gap-5 lg:sticky lg:top-28" aria-label="Service summary">
+            <div className="glass-card rounded-2xl p-6 flex flex-col gap-4 ring-1 ring-primary/30">
+              <h2 className="text-foreground font-bold m-0" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Ready to start?</h2>
+              <p className="text-muted-foreground m-0 text-sm leading-relaxed">Tell me about your project. I reply within one business day.</p>
+              <Button size="lg" className="h-12 rounded-full font-semibold shadow-lg shadow-primary/30" onClick={cta}>
+                Discuss your project
+                <ArrowRight strokeWidth={2.5} />
+              </Button>
+              <Button asChild variant="glass" className="rounded-full">
+                <Link to="/services">All services</Link>
+              </Button>
+            </div>
 
-        <section className="mt-12" aria-labelledby="faq">
-          <H2><span id="faq">Frequently asked questions</span></H2>
-          <Accordion type="single" collapsible className="glass-card rounded-2xl px-5">
-            {service.faqs.map((f, i) => (
-              <AccordionItem key={f.q} value={`f-${i}`} className="border-white/[0.08]">
-                <AccordionTrigger className="text-left text-foreground">{f.q}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">{f.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+            <div className="glass-card rounded-2xl p-6">
+              <h2 className="text-foreground font-bold m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Technologies</h2>
+              <ul className="flex flex-wrap gap-2 m-0 p-0 list-none">
+                {service.tech.map((t) => (
+                  <li key={t} className="mono-badge text-[0.8125rem] font-semibold px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.09] text-foreground/80">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        <section className="mt-14" aria-labelledby="related">
+            <div className="glass-card rounded-2xl p-6">
+              <h2 className="text-foreground font-bold m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Who this is for</h2>
+              <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
+                {service.idealFor.map((i) => (
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm">
+                    <ArrowRight size={16} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+                    {i}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+
+        <section className="mt-16" aria-labelledby="related">
           <H2><span id="related">Related services</span></H2>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 m-0 p-0 list-none">
             {related.map((r) => (

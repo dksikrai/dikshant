@@ -1,6 +1,7 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Briefcase, Award, CheckCircle2, Calendar, MapPin, TrendingUp } from 'lucide-react';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, SlideIn, isIOS, ease } from '@/lib/motion.jsx';
 import { experience } from '@/config/resume.js';
 
@@ -80,23 +81,18 @@ const CareerSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-10 md:py-28 relative overflow-hidden" id="career">
+    <section className="site-section" id="career">
       <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <FadeIn className="text-center mb-16">
-          <div className="section-label mb-4">EXPERIENCE</div>
-          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
-            Professional Journey
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
-            A trajectory of continuous growth, architectural ownership, and production impact.
-          </p>
-        </FadeIn>
+      <div className="site-container">
+        <SectionHeader
+          label="EXPERIENCE"
+          title="Professional Journey"
+          description="A trajectory of continuous growth, architectural ownership, and production impact."
+        />
 
-        {/* Timeline */}
-        <div className="relative">
+        {/* Timeline: readable measure, aligned to the container's left edge like every other section */}
+        <div className="relative max-w-4xl">
           {/* Static spine */}
           <div className="absolute left-[19px] top-0 w-px bg-white/[0.08] h-full" aria-hidden="true" />
           {/* Animated spine */}

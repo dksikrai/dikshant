@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Activity, Cloud, Zap, Clock, TrendingUp, Terminal,
 } from 'lucide-react';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 
 const accentMap = {
@@ -150,7 +151,7 @@ const ProductionCard = ({ icon: Icon, title, description, metric, accent }) => {
 };
 
 const ProductionSection = () => (
-  <section id="production" className="relative py-12 md:py-32 overflow-hidden">
+  <section id="production" className="site-section">
     {/* Background glow */}
     <div
       className="pointer-events-none absolute inset-0 z-0"
@@ -161,23 +162,13 @@ const ProductionSection = () => (
       }}
     />
 
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="site-container z-10">
 
-      {/* Header */}
-      <div className="max-w-2xl mb-14">
-        <FadeIn delay={0}>
-          <span className="section-label block mb-4">PRODUCTION EXPERIENCE</span>
-        </FadeIn>
-        <FadeIn delay={0.07}>
-          <h2 className="text-foreground mb-5">Production Systems I've Owned</h2>
-        </FadeIn>
-        <FadeIn delay={0.13}>
-          <p className="text-muted-foreground leading-relaxed">
-            Real production work — not side projects. Systems handling real traffic, real
-            data, real consequences.
-          </p>
-        </FadeIn>
-      </div>
+      <SectionHeader
+        label="PRODUCTION EXPERIENCE"
+        title="Production Systems I've Owned"
+        description="Real production work — not side projects. Systems handling real traffic, real data, real consequences."
+      />
 
       {/* Cards grid — 3 col desktop, 2 tablet, 1 mobile */}
       <StaggerGrid

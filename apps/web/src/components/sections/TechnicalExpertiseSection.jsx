@@ -1,6 +1,7 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Server, Zap, Cloud, ShoppingCart, Brain, Layout } from 'lucide-react';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 
 const expertise = [
@@ -104,21 +105,16 @@ const TechnicalExpertiseSection = () => {
   const ios = isIOS();
 
   return (
-    <section className="py-10 md:py-28 relative overflow-hidden" id="expertise">
+    <section className="site-section" id="expertise">
       {/* Ambient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <FadeIn className="text-center mb-16">
-          <div className="section-label mb-4">ENGINEERING EXPERTISE</div>
-          <h2 className="font-extrabold text-foreground mb-4" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)' }}>
-            What I Build With
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
-            Core engineering domains where I have deep, production-proven experience.
-          </p>
-        </FadeIn>
+      <div className="site-container">
+        <SectionHeader
+          label="ENGINEERING EXPERTISE"
+          title="What I Build With"
+          description="Core engineering domains where I have deep, production-proven experience."
+        />
 
         {/* Cards grid */}
         <motion.div

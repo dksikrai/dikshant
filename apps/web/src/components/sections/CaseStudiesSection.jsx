@@ -1,7 +1,8 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import { FadeIn, isIOS, ease, TextReveal } from '@/lib/motion.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
+import { FadeIn, isIOS, ease } from '@/lib/motion.jsx';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -210,25 +211,14 @@ const CaseStudyCard = ({ study, index }) => {
 // ─── Main Section ─────────────────────────────────────────────────────────────
 
 const CaseStudiesSection = () => (
-  <section className="py-10 md:py-24 bg-muted/20" id="case-studies">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section className="site-section bg-muted/20" id="case-studies">
+    <div className="site-container">
 
-      {/* Header */}
-      <FadeIn className="mb-10 md:mb-16">
-        <p className="section-label mb-3">CASE STUDIES</p>
-        <h2
-          className="font-extrabold tracking-tight mb-4"
-          style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)', lineHeight: '1.1' }}
-        >
-          <TextReveal text="Engineering Deep Dives" className="text-gradient-primary" />
-        </h2>
-        <p
-          className="text-muted-foreground max-w-2xl"
-          style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
-        >
-          Real problems, real architectures, real results.
-        </p>
-      </FadeIn>
+      <SectionHeader
+        label="CASE STUDIES"
+        title="Engineering Deep Dives"
+        description="Real problems, real architectures, real results."
+      />
 
       {/* Cards — vertical stack */}
       <div className="flex flex-col gap-6">

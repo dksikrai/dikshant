@@ -36,9 +36,10 @@ const Footer = () => {
   return (
     <footer
       aria-label="Site footer"
-      className="relative px-3 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 sm:px-6 sm:pb-[calc(2.5rem+env(safe-area-inset-bottom))]"
+      className="relative pb-[calc(6rem+env(safe-area-inset-bottom))] pt-10 sm:pb-[calc(2.5rem+env(safe-area-inset-bottom))]"
     >
-      <div className="mx-auto max-w-6xl glass-card rounded-[1.75rem] p-5 sm:p-8">
+      <div className="site-container">
+      <div className="glass-card rounded-[1.75rem] p-5 sm:p-8">
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-[1.3fr_0.8fr_1.4fr_0.9fr]">
           {/* Brand: full width on phones */}
           <div className="col-span-2 flex flex-col gap-4 md:col-span-1">
@@ -143,6 +144,7 @@ const Footer = () => {
             <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />
           </motion.button>
         </div>
+      </div>
       </div>
     </footer>
   );

@@ -61,11 +61,11 @@ const InfoRow = ({ icon: Icon, label, children }) => (
 );
 
 const ContactSection = () => (
-  <section className="py-20 md:py-28 relative overflow-hidden" id="contact">
+  <section className="site-section" id="contact">
     <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.06),transparent_65%)] pointer-events-none" />
 
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="site-container z-10">
       <FadeIn className="text-center mb-14">
         <Badge
           variant="outline"

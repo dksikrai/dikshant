@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import ServiceIcon from '@/components/ServiceIcon.jsx';
+import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 import { Button } from '@/components/ui/button';
 import { engagementModels, processSteps } from '@/config/offer.js';
@@ -8,21 +9,14 @@ import { startInquiry } from '@/lib/contactIntent.js';
 
 
 const EngagementSection = () => (
-  <section id="process" className="relative py-16 md:py-28" aria-labelledby="engagement-heading">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mb-12">
-        <FadeIn delay={0}>
-          <span className="section-label block mb-4">WORKING TOGETHER</span>
-        </FadeIn>
-        <FadeIn delay={0.07}>
-          <h2 id="engagement-heading" className="text-foreground">Flexible Ways to Engage</h2>
-        </FadeIn>
-        <FadeIn delay={0.12}>
-          <p className="text-muted-foreground mt-4 max-w-xl">
-            Pick the model that fits your stage. Scope and cost are agreed up front.
-          </p>
-        </FadeIn>
-      </div>
+  <section id="process" className="site-section" aria-labelledby="engagement-heading">
+    <div className="site-container">
+      <SectionHeader
+        id="engagement-heading"
+        label="WORKING TOGETHER"
+        title="Flexible Ways to Engage"
+        description="Pick the model that fits your stage. Scope and cost are agreed up front."
+      />
 
       <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5" stagger={0.08} delay={0.1}>
         {engagementModels.map((m) => {

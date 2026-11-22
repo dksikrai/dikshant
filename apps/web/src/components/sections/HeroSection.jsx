@@ -232,7 +232,7 @@ export default function HeroSection() {
           }}
         />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 py-8 md:py-20">
+        <div className="site-container z-10 py-8 md:py-20">
           <div className="flex flex-col md:flex-row items-center gap-14 lg:gap-20">
 
             {/* ── LEFT COLUMN ──────────────────────────────────────────── */}
