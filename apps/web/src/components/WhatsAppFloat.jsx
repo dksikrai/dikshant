@@ -17,11 +17,18 @@ const WhatsAppFloat = () => {
   });
 
   useEffect(() => {
-    if (!dismissed) {
-      const show = setTimeout(() => setShowTooltip(true), 3500);
-      const hide = setTimeout(() => setShowTooltip(false), 12000); // don't linger over content
-      return () => { clearTimeout(show); clearTimeout(hide); };
-    }
+    if (dismissed) return undefined;
+    let hide;
+    let shown = false;
+    // Show once, only after the visitor has read past the hero, so it never covers the first screen.
+    const onScroll = () => {
+      if (shown || window.scrollY < window.innerHeight) return;
+      shown = true;
+      setShowTooltip(true);
+      hide = setTimeout(() => setShowTooltip(false), 7000);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(hide); };
   }, [dismissed]);
 
   const handleDismiss = () => {
@@ -30,29 +37,24 @@ const WhatsAppFloat = () => {
   };
 
   return (
-    <aside aria-label="Contact shortcut" className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[999] flex flex-col items-end gap-3 pointer-events-none">
+    <aside aria-label="Contact shortcut" className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] z-[999] flex flex-row items-center justify-end gap-3 pointer-events-none">
       <AnimatePresence>
         {showTooltip && !dismissed && (
           <motion.div
-            initial={{ opacity: 0, x: 16, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 16, scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-            className="relative hidden sm:block pointer-events-auto glass-surface rounded-2xl p-3 sm:p-4 w-[180px] sm:w-auto sm:max-w-[220px]"
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 12 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="relative hidden sm:block pointer-events-auto glass-surface rounded-full py-3 pl-5 pr-8"
           >
+            <p className="text-sm font-medium text-foreground whitespace-nowrap">Questions? Message me on WhatsApp</p>
             <button
               onClick={handleDismiss}
-              className="absolute top-1 right-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute right-1 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Dismiss"
             >
               <X className="w-3 h-3" />
             </button>
-            <p className="text-xs sm:text-sm font-medium text-foreground mb-1 pr-4">Let's talk about your project</p>
-            <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
-              Message me on WhatsApp. I typically reply within 1 hour.
-            </p>
-            {/* Arrow */}
-            <div className="absolute bottom-[-7px] right-6 sm:right-8 w-3.5 h-3.5 bg-[hsl(222_26%_16%)] border-r border-b border-white/10 rotate-45" />
           </motion.div>
         )}
       </AnimatePresence>
