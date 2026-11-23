@@ -21,17 +21,13 @@ const useDeferredDecor = () => {
 
 // Lazy-loaded sections for performance
 const AboutSection = React.lazy(() => import('@/components/sections/AboutSection.jsx'));
-const TechnicalExpertiseSection = React.lazy(() => import('@/components/sections/TechnicalExpertiseSection.jsx'));
-const ProductionSection = React.lazy(() => import('@/components/sections/ProductionSection.jsx'));
-const AISection = React.lazy(() => import('@/components/sections/AISection.jsx'));
 const ClientProjectsSection = React.lazy(() => import('@/components/sections/ClientProjectsSection.jsx'));
-const CaseStudiesSection = React.lazy(() => import('@/components/sections/CaseStudiesSection.jsx'));
 const ServicesSection = React.lazy(() => import('@/components/sections/ServicesSection.jsx'));
 const EngagementSection = React.lazy(() => import('@/components/sections/EngagementSection.jsx'));
 const FAQSection = React.lazy(() => import('@/components/sections/FAQSection.jsx'));
-const SkillsSection = React.lazy(() => import('@/components/sections/SkillsSection.jsx'));
 const CareerSection = React.lazy(() => import('@/components/sections/CareerSection.jsx'));
 
+const WorkWithMeSection = React.lazy(() => import('@/components/sections/WorkWithMeSection.jsx'));
 const ContactSection = React.lazy(() => import('@/components/sections/ContactSection.jsx'));
 
 const SectionFallback = () => (
@@ -69,40 +65,13 @@ const HomePage = () => {
         <StatsSection />
 
         <React.Suspense fallback={<SectionFallback />}>
-          {/* 3. Services & consulting (primary offer) */}
+          <WorkWithMeSection />
           <ServicesSection />
-
-          {/* 4. About */}
           <AboutSection />
-
-          {/* 4. Engineering Expertise */}
-          <TechnicalExpertiseSection />
-
-          {/* 5. Production Experience */}
-          <ProductionSection />
-
-          {/* 6. AI Engineering */}
-          <AISection />
-
-          {/* 7. Featured Projects + Client Work */}
           <ClientProjectsSection />
-
-          {/* 8. Case Studies */}
-          <CaseStudiesSection />
-
-          {/* 9. Engagement models + process */}
           <EngagementSection />
-
-          {/* 10. Tech Stack */}
-          <SkillsSection />
-
-          {/* 11. Career Timeline */}
           <CareerSection />
-
-          {/* 12. FAQ */}
           <FAQSection />
-
-          {/* 13. Contact */}
           <ContactSection />
         </React.Suspense>
       </main>

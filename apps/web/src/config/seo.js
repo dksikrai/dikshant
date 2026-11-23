@@ -17,28 +17,28 @@ export const SITE = {
 
 const HOME = {
   path: '/',
-  title: 'Dikshant Goyal | Full-Stack Developer & Technical Consultant',
-  ogTitle: 'Dikshant Goyal — Full-Stack Developer & Technical Consultant',
+  title: 'Dikshant Goyal | Project Manager & Full-Stack Developer',
+  ogTitle: 'Dikshant Goyal — Project Manager & Full-Stack Developer',
   description:
-    'Full-stack developer & technical consultant in Jaipur, India. Web apps, APIs, AI automation and server setup with Next.js, React, Node.js, Python, Laravel and AWS.',
+    'Project manager and full-stack developer in Jaipur, India. I plan and deliver software projects, from scope to launch, with hands-on Laravel, Node.js and AWS depth.',
   keywords:
     'Dikshant Goyal, full-stack developer, technical consultant, Next.js developer, React developer, Node.js developer, Python developer, Laravel developer, AWS, server setup, DevOps, OpenAI integration, freelance developer India, Jaipur',
 };
 
 const SERVICES_HUB = {
   path: '/services',
-  title: 'Web, API, AI & DevOps Services | Dikshant Goyal',
-  ogTitle: 'Services: Web, API, AI & DevOps — Dikshant Goyal',
+  title: 'Project Management & Development Services | Dikshant Goyal',
+  ogTitle: 'Services: Project Management, Web, API & Cloud — Dikshant Goyal',
   description:
-    'Hire a full-stack developer and technical consultant: web apps, APIs, AI automation, ecommerce integrations, cloud and server setup, audits and project management.',
+    'Hire a project manager and full-stack developer: software delivery, web apps, APIs, AI automation, ecommerce integrations, cloud setup and code audits.',
   keywords:
     'hire full-stack developer, web development services, API development, AI automation, AWS server setup, technical consultant, software audit, freelance developer India',
 };
 
 const RESUME = {
   path: '/resume',
-  title: 'Resume | Dikshant Goyal, Full-Stack Developer',
-  ogTitle: 'Resume — Dikshant Goyal, Full-Stack Developer & Technical Consultant',
+  title: 'Resume | Dikshant Goyal, Project Manager & Full-Stack Developer',
+  ogTitle: 'Resume — Dikshant Goyal, Project Manager & Full-Stack Developer',
   description:
     'Resume of Dikshant Goyal: experience, skills and achievements across Next.js, React, Node.js, Python, Laravel, AWS and technical project management. Download the PDF.',
   keywords: 'Dikshant Goyal resume, full-stack developer resume, Laravel developer CV, Node.js developer, technical project manager',

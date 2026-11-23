@@ -200,11 +200,12 @@ const FeaturedProjectCard = ({ project, index }) => {
 };
 
 // Compact project card for the grid
-const CompactProjectCard = ({ project }) => {
+const CompactProjectCard = React.forwardRef(({ project }, ref) => {
   const ios = isIOS();
 
   return (
     <motion.div
+      ref={ref}
       layout={!ios}
       initial={ios ? false : { opacity: 0, scale: 0.94 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -247,10 +248,12 @@ const CompactProjectCard = ({ project }) => {
       )}
     </motion.div>
   );
-};
+});
+CompactProjectCard.displayName = 'CompactProjectCard';
 
 const ClientProjectsSection = () => {
   const [filter, setFilter] = useState('All');
+  const [showAll, setShowAll] = useState(false);
   const tabsRef = useRef(null);
 
   // Keep the selected segment in view when the row scrolls sideways (phones).
@@ -268,7 +271,9 @@ const ClientProjectsSection = () => {
     list.scrollTo({ left: tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2, behavior: 'smooth' });
   }, [filter]);
   const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.type)))];
-  const visible = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
+  const filtered = filter === 'All' ? allProjects : allProjects.filter((p) => p.type === filter);
+  const LIMIT = 8;
+  const visible = showAll ? filtered : filtered.slice(0, LIMIT);
 
   return (
     <section className="site-section" id="projects">
@@ -298,7 +303,7 @@ const ClientProjectsSection = () => {
         {/* ── All Client Work ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
           <FadeIn>
-            <div className="section-label mb-3">ALL CLIENT WORK</div>
+            <div className="section-label mb-3">All client work</div>
             <h3 className="text-foreground" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
               {allProjects.length}+ Projects delivered
             </h3>
@@ -349,6 +354,18 @@ const ClientProjectsSection = () => {
               ))}
             </AnimatePresence>
           </motion.div>
+          {filtered.length > LIMIT && (
+            <div className="mt-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAll((v) => !v)}
+                aria-expanded={showAll}
+                className="glass-pill inline-flex min-h-11 items-center rounded-full px-6 text-sm font-medium text-foreground"
+              >
+                {showAll ? 'Show fewer projects' : `Show all ${filtered.length} projects`}
+              </button>
+            </div>
+          )}
         </TabsContent>
         </Tabs>
       </div>

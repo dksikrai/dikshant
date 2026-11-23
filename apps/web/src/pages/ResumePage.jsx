@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Download, ArrowRight, MapPin, Mail, Github, Linkedin } from 'lucide-react';
+import { ResumeArt } from '@/components/Illustrations.jsx';
 import PageShell, { Breadcrumbs } from '@/components/PageShell.jsx';
 import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/site.js';
@@ -23,18 +24,19 @@ const ResumePage = () => {
       <article className="site-container pb-16">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resume' }]} />
 
-        <header className="flex flex-col gap-4 max-w-3xl">
+        <header className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
+          <div className="flex flex-col gap-4 max-w-3xl">
           <h1 className="text-foreground" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             Dikshant Goyal
           </h1>
           <p className="text-primary font-medium m-0" style={{ fontSize: '1.125rem' }}>
-            Full-Stack Developer &amp; Technical Consultant
+            Project Manager &amp; Full-Stack Developer
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 m-0 p-0 list-none text-sm text-muted-foreground">
             <li className="flex items-center gap-1.5"><MapPin size={15} aria-hidden="true" />{siteConfig.location}</li>
-            <li className="flex items-center gap-1.5"><Mail size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.mailtoUrl}>{siteConfig.email}</a></li>
-            <li className="flex items-center gap-1.5"><Linkedin size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li className="flex items-center gap-1.5"><Github size={15} aria-hidden="true" /><a className="hover:text-foreground" href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li className="flex items-center gap-1.5"><Mail size={15} aria-hidden="true" /><a className="inline-flex min-h-11 items-center hover:text-foreground sm:min-h-0" href={siteConfig.mailtoUrl}>{siteConfig.email}</a></li>
+            <li className="flex items-center gap-1.5"><Linkedin size={15} aria-hidden="true" /><a className="inline-flex min-h-11 items-center hover:text-foreground sm:min-h-0" href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li className="flex items-center gap-1.5"><Github size={15} aria-hidden="true" /><a className="inline-flex min-h-11 items-center hover:text-foreground sm:min-h-0" href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
           </ul>
           <p className="text-muted-foreground max-w-3xl m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>{resumeSummary}</p>
           <div className="flex flex-wrap gap-3 pt-1">
@@ -49,6 +51,8 @@ const ResumePage = () => {
               <ArrowRight strokeWidth={2.5} />
             </Button>
           </div>
+          </div>
+          <div className="hidden lg:block"><ResumeArt /></div>
         </header>
 
         <section className="mt-14" aria-labelledby="skills-h">
@@ -93,11 +97,11 @@ const ResumePage = () => {
         <section className="mt-14 glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-foreground font-medium m-0 mb-1 text-lg">See the work behind the resume</h2>
-            <p className="text-muted-foreground m-0 text-sm">Case studies and 19+ delivered projects on the home page.</p>
+            <p className="text-muted-foreground m-0 text-sm">Flagship builds and 19+ delivered projects on the home page.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="glass" className="rounded-lg"><Link to="/#projects">View projects</Link></Button>
-            <Button asChild variant="glass" className="rounded-lg"><Link to="/services">Services</Link></Button>
+            <Button asChild variant="glass" className="h-11 rounded-lg px-5"><Link to="/#projects">View projects</Link></Button>
+            <Button asChild variant="glass" className="h-11 rounded-lg px-5"><Link to="/services">Services</Link></Button>
           </div>
         </section>
       </article>

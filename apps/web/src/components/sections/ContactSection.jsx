@@ -78,11 +78,11 @@ const ContactSection = () => (
           className="font-medium text-foreground mb-5"
           style={{ fontSize: 'clamp(1.875rem, 5vw, 3.5rem)', letterSpacing: '-0.04em', lineHeight: 1.1 }}
         >
-          Let&apos;s build something exceptional
+          Let&apos;s plan your next project
         </h2>
         <p className="text-muted-foreground max-w-xl mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
-          Scaling a platform, shipping AI-powered workflows, or architecting a production SaaS?
-          Tell me about it and I&apos;ll reply within one business day.
+          Hiring a project manager, or need software planned and delivered? Tell me what you
+          are working on and I&apos;ll reply within one business day.
         </p>
       </FadeIn>
 

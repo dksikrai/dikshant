@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, ArrowUp, ArrowRight, Download, MapPin, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Twitter, Instagram, Mail, ArrowUp, ArrowRight, Download, MapPin, MessageCircle } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -18,12 +18,13 @@ const socialIcons = [
   { id: 'github', label: 'GitHub', href: siteConfig.links.github, icon: Github },
   { id: 'linkedin', label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
   { id: 'twitter', label: 'Twitter / X', href: siteConfig.links.twitter, icon: Twitter },
+  { id: 'instagram', label: 'Instagram', href: siteConfig.links.instagram, icon: Instagram },
   { id: 'whatsapp', label: 'WhatsApp', href: siteConfig.whatsappUrl, icon: MessageCircle },
   { id: 'email', label: 'Email', href: siteConfig.mailtoUrl, icon: Mail },
 ];
 
 const ColumnTitle = ({ children }) => (
-  <h2 className="mb-2 text-[11px] font-medium tracking-[0.14em] text-muted-foreground">
+  <h2 className="mb-2 text-xs font-medium text-muted-foreground">
     {children}
   </h2>
 );
@@ -82,7 +83,7 @@ const Footer = () => {
               </div>
 
               {/* Social icons: phones only (desktop shows the labelled Connect list) */}
-              <ul className="m-0 flex list-none gap-2.5 p-0 md:hidden" aria-label="Social links">
+              <ul className="m-0 flex list-none flex-wrap gap-2 p-0 md:hidden" aria-label="Social links">
                 {socialIcons.map(({ id, label, href, icon: Icon }) => (
                   <li key={id}>
                     <a

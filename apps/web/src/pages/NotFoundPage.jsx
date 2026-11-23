@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSeo } from '@/lib/seo.js';
 import { Home } from 'lucide-react';
 import { FadeIn } from '@/lib/motion.jsx';
+import { LostPathArt } from '@/components/Illustrations.jsx';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
@@ -16,6 +17,7 @@ const NotFoundPage = () => {
 
         <div className="site-container z-10"><div className="max-w-xl mx-auto text-center">
           <FadeIn>
+            <div className="mb-6"><LostPathArt /></div>
             <div className="mb-4 sm:mb-8">
               <span className="font-medium text-muted-foreground/40 leading-none" style={{ fontSize: 'clamp(6rem, 25vw, 12rem)' }}>
                 404

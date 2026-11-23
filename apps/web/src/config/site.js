@@ -38,7 +38,7 @@ const DEFAULT_WHATSAPP_TEXT = "Hi Dikshant, I saw your portfolio and I'd like to
 
 export const siteConfig = {
   name: 'Dikshant Goyal',
-  tagline: 'Full-Stack Developer & Technical Consultant. Web apps, APIs, AI automation and cloud, built end to end.',
+  tagline: 'Project Manager & Full-Stack Developer. I plan and deliver software projects, from first scope to launch.',
   headline: 'I build scalable backend systems, AI workflows & production-ready SaaS platforms.',
   location: 'Jaipur, India (IST)',
 
@@ -64,7 +64,7 @@ export const siteConfig = {
     linkedin: 'https://in.linkedin.com/in/csdikshant',
     github: 'https://github.com/dksikrai',
     twitter: 'https://twitter.com/csdikshant',
-    instagram: 'https://instagram.com/dksikrai',
+    instagram: 'https://www.instagram.com/dksikrai/',
   },
   resume: '/resume.pdf',
   resumeFilename: 'Dikshant_Goyal_Resume.pdf',

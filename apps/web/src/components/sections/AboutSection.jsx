@@ -1,118 +1,49 @@
 import React from 'react';
-import { FadeIn, SlideIn, StaggerGrid } from '@/lib/motion.jsx';
+import { FadeIn } from '@/lib/motion.jsx';
 
-const facts = [
-  { value: '3+ Years',      label: 'Building production systems' },
-  { value: '19+ Projects',  label: 'Across 5 countries' },
-  { value: 'Full-Stack', label: 'Next.js, Node, Python, Laravel' },
-  { value: 'AI-Enabled',    label: 'OpenAI, RAG, embeddings' },
+const strengths = [
+  { title: 'Plan', text: 'Requirements, scope, milestones and risks agreed in writing before work starts.' },
+  { title: 'Coordinate', text: 'Developers, designers, QA and stakeholders working from one plan, with regular updates.' },
+  { title: 'Deliver', text: 'API-driven systems shipped and supported, with the technical depth to back every estimate.' },
 ];
-
-const techBadges = [
-  'Next.js', 'React', 'Node.js', 'Python', 'Laravel', 'AWS', 'OpenAI', 'Docker',
-];
-
-const FactCard = ({ value, label }) => (
-  <div className="glass-card card-hover rounded-2xl p-5 flex flex-col gap-1 h-full">
-    <span
-      className="font-medium tracking-tight text-foreground"
-      style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', letterSpacing: '-0.03em' }}
-    >
-      {value}
-    </span>
-    <span className="text-muted-foreground text-sm leading-snug">{label}</span>
-  </div>
-);
 
 const AboutSection = () => (
-  <section
-    id="about"
-    className="site-section"
-  >
-
-    <div className="site-container z-10">
-
-      {/* ── Two-column layout ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-start">
-
-        {/* ── LEFT — Bio ── */}
+  <section id="about" className="site-section">
+    <div className="site-container">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <div>
-          <FadeIn delay={0}>
-            <span className="section-label block mb-4">ABOUT</span>
+          <FadeIn>
+            <span className="section-label mb-4 block">About</span>
           </FadeIn>
-
-          <FadeIn delay={0.08}>
-            <h2 className="text-foreground mb-8">
-              Full-stack engineer with a production mindset
-            </h2>
+          <FadeIn delay={0.07}>
+            <h2 className="mb-6 text-foreground">A project manager who still reads the code</h2>
           </FadeIn>
-
-          <FadeIn delay={0.14}>
-            <p className="text-muted-foreground mb-5 leading-relaxed">
-              I'm Dikshant Goyal — a full-stack engineer and technical consultant with 3+ years
-              building production web apps, APIs, AI-powered automation pipelines, and scalable
-              cloud infrastructure in JavaScript/TypeScript, Python and PHP. I care about system reliability, clean APIs, and
-              engineering solutions that handle real scale. From Redis queue monitoring to
-              OpenAI integrations, I build for production — not demos.
+          <FadeIn delay={0.12}>
+            <p className="mb-5 leading-relaxed text-muted-foreground">
+              I am Dikshant Goyal, Project Manager at iTechPanel LLP in Jaipur. I lead planning and
+              delivery across software workstreams, coordinating developers, QA and stakeholders for
+              integration-heavy and e-commerce platforms.
             </p>
-          </FadeIn>
-
-          <FadeIn delay={0.18}>
-            <p className="text-muted-foreground mb-10 leading-relaxed">
-              Currently at <strong className="text-foreground font-medium">iTechPanel LLP</strong> as
-              Project Manager — leading planning and delivery across software workstreams,
-              coordinating developers, QA and stakeholders, and staying hands-on with the
-              backend systems behind e-commerce and integration-heavy platforms.
+            <p className="leading-relaxed text-muted-foreground">
+              I started as a developer, so I can scope work realistically, spot technical risk early
+              and step in on the backend when it helps the team move.
             </p>
-          </FadeIn>
-
-          {/* Pull quote */}
-          <FadeIn delay={0.24}>
-            <blockquote
-              className="relative mb-12 pl-5 py-1"
-              style={{
-                borderLeft: '2px solid hsl(var(--primary))',
-              }}
-            >
-              <p
-                className="text-foreground/90 leading-relaxed m-0"
-                style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)' }}
-              >
-                I don't just write code — I architect systems that scale.
-              </p>
-            </blockquote>
-          </FadeIn>
-
-          {/* Tech badges row */}
-          <FadeIn delay={0.3}>
-            <div className="flex flex-wrap gap-2">
-              {techBadges.map((badge) => (
-                <span
-                  key={badge}
-                  className="mono-badge inline-flex items-center px-3 py-1.5 rounded-lg border"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    borderColor: 'rgba(255,255,255,0.09)',
-                    color: 'hsl(var(--muted-foreground))',
-                  }}
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
           </FadeIn>
         </div>
 
-        {/* ── RIGHT — Fact sidebar ── */}
-        <SlideIn direction="right" delay={0.1}>
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-4">
-            {facts.map((fact, i) => (
-              <FadeIn key={fact.value} delay={0.15 + i * 0.07} className="h-full">
-                <FactCard {...fact} />
-              </FadeIn>
-            ))}
-          </div>
-        </SlideIn>
+        <ul className="m-0 flex list-none flex-col gap-4 p-0">
+          {strengths.map((s, i) => (
+            <FadeIn key={s.title} delay={0.1 + i * 0.07}>
+              <li className="glass-card flex gap-5 rounded-2xl p-5">
+                <span className="font-mono text-sm text-primary">0{i + 1}</span>
+                <div>
+                  <h3 className="mb-1 text-foreground" style={{ fontSize: '1.0625rem' }}>{s.title}</h3>
+                  <p className="m-0 text-sm text-muted-foreground">{s.text}</p>
+                </div>
+              </li>
+            </FadeIn>
+          ))}
+        </ul>
       </div>
     </div>
   </section>

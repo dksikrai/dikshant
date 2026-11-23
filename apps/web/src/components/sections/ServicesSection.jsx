@@ -23,7 +23,7 @@ export const ServiceCard = ({ service }) => (
         {service.summary}
       </p>
     </div>
-    <ul className="flex flex-col gap-1.5 m-0 p-0 list-none">
+    <ul className="hidden sm:flex flex-col gap-1.5 m-0 p-0 list-none">
       {service.includes.slice(0, 3).map((o) => (
         <li key={o} className="flex items-start gap-2 text-[0.8125rem] text-foreground/80">
           <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
@@ -34,7 +34,7 @@ export const ServiceCard = ({ service }) => (
     <div className="mt-auto flex items-center justify-between gap-3 pt-1">
       <Link
         to={`/services/${service.id}`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
+        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
         aria-label={`View service: ${service.title}`}
       >
         View service
@@ -42,7 +42,7 @@ export const ServiceCard = ({ service }) => (
       </Link>
       <Button
         variant="link"
-        className="h-auto p-0 text-muted-foreground hover:text-foreground"
+        className="h-11 px-0 text-muted-foreground hover:text-foreground"
         onClick={() => startInquiry({ inquiry: 'Consulting', subject: service.title })}
         aria-label={`Discuss ${service.title}`}
       >

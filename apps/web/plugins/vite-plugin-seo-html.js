@@ -33,7 +33,7 @@ const person = () => ({
   email: `mailto:${siteConfig.email}`,
   telephone: siteConfig.phone,
   worksFor: { '@type': 'Organization', name: 'iTechPanel LLP' },
-  sameAs: [siteConfig.links.linkedin, siteConfig.links.github, siteConfig.links.twitter],
+  sameAs: [siteConfig.links.linkedin, siteConfig.links.github, siteConfig.links.twitter, siteConfig.links.instagram],
   address: { '@type': 'PostalAddress', addressLocality: 'Jaipur', addressRegion: 'Rajasthan', addressCountry: 'IN' },
   knowsAbout: [...new Set(skillGroups.flatMap((g) => g.items))],
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ServiceArt } from '@/components/Illustrations.jsx';
 import PageShell, { Breadcrumbs } from '@/components/PageShell.jsx';
 import ServiceIcon from '@/components/ServiceIcon.jsx';
 import NotFoundPage from '@/pages/NotFoundPage.jsx';
@@ -26,7 +27,8 @@ const ServiceDetail = ({ service }) => {
       <article className="site-container pb-16">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.title }]} />
 
-        <header className="flex flex-col gap-5 max-w-3xl">
+        <header className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
+          <div className="flex flex-col gap-5 max-w-3xl">
           <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
             <ServiceIcon name={service.icon} size={22} />
           </div>
@@ -36,6 +38,8 @@ const ServiceDetail = ({ service }) => {
           <p className="text-muted-foreground m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
             {service.intro}
           </p>
+          </div>
+          <div className="hidden lg:block"><ServiceArt /></div>
         </header>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_22rem] gap-10 lg:gap-14 items-start">
@@ -88,7 +92,7 @@ const ServiceDetail = ({ service }) => {
                 Discuss your project
                 <ArrowRight strokeWidth={2.5} />
               </Button>
-              <Button asChild variant="glass" className="rounded-lg">
+              <Button asChild variant="glass" className="h-11 rounded-lg">
                 <Link to="/services">All services</Link>
               </Button>
             </div>

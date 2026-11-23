@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Download, ArrowRight, ChevronRight, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Menu, X, Download, ArrowRight, ChevronRight, Mail, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import { navLinks, NavEntry, useIsActive } from '@/lib/nav.jsx';
 import { startInquiry } from '@/lib/contactIntent.js';
 import { m as motion } from 'framer-motion';
@@ -20,6 +20,7 @@ const socials = [
   { label: 'GitHub',   href: siteConfig.links.github,   icon: Github },
   { label: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
   { label: 'Twitter / X', href: siteConfig.links.twitter, icon: Twitter },
+  { label: 'Instagram', href: siteConfig.links.instagram, icon: Instagram },
   { label: 'Email',    href: siteConfig.mailtoUrl, icon: Mail },
 ];
 
@@ -159,13 +160,13 @@ const Header = () => {
             >
               <LogoMark />
             </div>
-            <span className="font-medium text-[1.1rem] tracking-tight select-none">
+            <span className="whitespace-nowrap font-medium text-[1.1rem] tracking-tight select-none">
               Dikshant Goyal<span className="text-primary">.</span>
             </span>
           </Link>
 
           {/* Desktop nav with animated active pill */}
-          <nav className="hidden md:flex items-center gap-0.5" aria-label="Primary navigation">
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary navigation">
             {navLinks.map((link) => (
               <DesktopNavItem key={link.name} link={link} active={active} />
             ))}
@@ -199,7 +200,7 @@ const Header = () => {
                   id="mobile-menu-toggle"
                   variant="ghost"
                   size="icon"
-                  className="md:hidden rounded-full w-11 h-11 hover:bg-primary/10 hover:text-primary"
+                  className="lg:hidden rounded-full w-11 h-11 hover:bg-primary/10 hover:text-primary"
                   aria-label="Open menu"
                 >
                   <Menu className="w-5 h-5" />

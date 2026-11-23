@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { m as motion } from 'framer-motion';
-import { Briefcase, Award, CheckCircle2, Calendar, MapPin, TrendingUp } from 'lucide-react';
+import { Briefcase, Award, CheckCircle2, Calendar, MapPin, TrendingUp, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { siteConfig } from '@/config/site.js';
 import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, SlideIn, isIOS, ease } from '@/lib/motion.jsx';
 import { experience } from '@/config/resume.js';
@@ -17,8 +19,9 @@ const roles = experience.map((r, i) => ({ ...r, ...visual[i] }));
 const one = { dot: 'border-primary text-primary', tag: 'bg-primary/10 text-primary border-primary/25', check: 'text-primary', impact: 'bg-primary/10 text-primary border-primary/25', spine: 'bg-primary' };
 const accentConfig = { indigo: one, violet: one, cyan: one, emerald: one, amber: one };
 
-const CareerCard = ({ role, colors, ios }) => {
-  const Icon = role.icon;
+const CareerCard = ({ role, colors, defaultOpen }) => {
+  const [open, setOpen] = useState(defaultOpen);
+  const listId = `role-${role.date.replace(/\W+/g, '-')}`;
   return (
     <div className="glass-card card-hover rounded-2xl p-6 md:p-7">
       {/* Header */}
@@ -59,8 +62,18 @@ const CareerCard = ({ role, colors, ios }) => {
         {role.description}
       </p>
 
-      {/* Bullets */}
-      <ul className="space-y-3">
+      {/* Bullets: always shown on desktop, behind a toggle on smaller screens */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={listId}
+        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary lg:hidden"
+      >
+        {open ? 'Hide achievements' : `Show ${role.bullets.length} achievements`}
+        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+      <ul id={listId} className={`space-y-3 ${open ? 'mt-3 block' : 'hidden'} lg:mt-0 lg:block`}>
         {role.bullets.map((bullet, i) => (
           <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground/90">
             <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${colors.check}`} />
@@ -72,6 +85,67 @@ const CareerCard = ({ role, colors, ios }) => {
   );
 };
 
+
+// ─── Left rail: growth illustration + selected work ──────────────────────────
+
+const STEP_LABELS = ['Business Dev', 'WordPress Dev', 'Senior PHP / Laravel', 'Senior Web Dev', 'Project Manager'];
+const STEP_YEARS = ['2023', '2024', '2025', '2025', '2026'];
+const SHOTS = [
+  { src: '/screenshots/airventory.webp', name: 'Airventory' },
+  { src: '/screenshots/mapview.webp', name: 'MapView' },
+  { src: '/screenshots/profiletag.webp', name: 'ProfileTag' },
+];
+
+/** Five rising steps, one per role: the career in a single glance. */
+const GrowthSteps = () => (
+  <div>
+    <div className="flex h-36 items-end gap-2" role="img" aria-label="Career growth from Business Development in 2023 to Project Manager in 2026">
+      {STEP_LABELS.map((label, i) => (
+        <div key={label} className="flex h-full flex-1 flex-col justify-end">
+          <div
+            className={`rounded-t-lg border border-b-0 ${i === STEP_LABELS.length - 1 ? 'border-primary/50 bg-primary/25' : 'border-white/10 bg-white/[0.05]'}`}
+            style={{ height: `${28 + i * 18}%` }}
+          />
+        </div>
+      ))}
+    </div>
+    <div className="flex gap-2 border-t border-white/10 pt-2">
+      {STEP_YEARS.map((y, i) => (
+        <span key={i} className="flex-1 text-center font-mono text-[11px] text-muted-foreground">{y}</span>
+      ))}
+    </div>
+    <p className="mt-3 text-sm text-foreground">
+      From <span className="text-muted-foreground">{STEP_LABELS[0]}</span> to{' '}
+      <span className="font-medium text-primary">{STEP_LABELS[4]}</span> in under three years
+    </p>
+  </div>
+);
+
+/** Real client work, framed like browser windows. */
+const WorkStack = () => (
+  <div className="grid grid-cols-3 gap-2">
+    {SHOTS.map((shot) => (
+      <a key={shot.name} href="#projects" className="group block overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]" aria-label={`${shot.name} project`}>
+        <div className="flex gap-1 border-b border-white/10 px-1.5 py-1">
+          <span className="h-1 w-1 rounded-full bg-white/25" />
+          <span className="h-1 w-1 rounded-full bg-white/25" />
+          <span className="h-1 w-1 rounded-full bg-white/25" />
+        </div>
+        <img src={shot.src} alt={`${shot.name} screenshot`} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover object-top" />
+      </a>
+    ))}
+  </div>
+);
+
+const CareerRail = () => (
+  <aside className="flex flex-col gap-5 lg:sticky lg:top-28 lg:self-start">
+    <div className="glass-card rounded-3xl p-6">
+      <span className="section-label mb-4 block">Growth</span>
+      <GrowthSteps />
+    </div>
+  </aside>
+);
+
 const CareerSection = () => {
   const ios = isIOS();
 
@@ -82,12 +156,15 @@ const CareerSection = () => {
       <div className="site-container">
         <SectionHeader
           label="Experience"
-          title="Professional journey"
-          description="A trajectory of continuous growth, architectural ownership, and production impact."
+          title="Experience that kept moving up"
+          description="Five roles in under three years, from building websites to leading delivery for API-driven systems."
         />
 
-        {/* Timeline: readable measure, aligned to the container's left edge like every other section */}
-        <div className="relative max-w-4xl">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[340px_minmax(0,1fr)] lg:gap-14">
+        <CareerRail />
+
+        {/* Timeline */}
+        <div className="relative">
           {/* Static spine */}
           <div className="absolute left-[19px] top-0 w-px bg-white/[0.08] h-full" aria-hidden="true" />
           {/* Animated spine */}
@@ -125,12 +202,13 @@ const CareerSection = () => {
                   </motion.div>
 
                   <SlideIn direction="left" delay={idx * 0.08}>
-                    <CareerCard role={role} colors={colors} ios={ios} />
+                    <CareerCard role={role} colors={colors} defaultOpen={idx === 0} />
                   </SlideIn>
                 </div>
               );
             })}
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@
  * the prerendered HTML and Person JSON-LD. Edit here only.
  */
 export const resumeSummary =
-  'Full-stack developer, backend engineer and technical consultant based in Jaipur, India. I build web applications, APIs, integrations and AI automation with Next.js, React, Node.js, Python, PHP/Laravel and AWS, and lead technical delivery across development, design and QA.';
+  'Project manager and full-stack developer based in Jaipur, India. I lead planning and delivery across development, design and QA for API-driven systems, with hands-on Laravel, Node.js, Python and AWS experience.';
 
 export const experience = [
   {

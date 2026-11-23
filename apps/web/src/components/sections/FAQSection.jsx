@@ -20,7 +20,7 @@ const FAQSection = () => (
         <FadeIn delay={0.16} className="mt-6">
           <Button
             variant="glass"
-            className="rounded-full"
+            className="h-11 rounded-full px-5"
             onClick={() => startInquiry({ inquiry: 'Other', subject: 'Question about your services' })}
           >
             Ask a question

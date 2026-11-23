@@ -6,7 +6,7 @@ import { User, Layers, FolderKanban, Mail, Briefcase, FileText } from 'lucide-re
 export const navLinks = [
   { name: 'Services', to: '/services', icon: Briefcase },
   { name: 'About', href: '#about', icon: User },
-  { name: 'Expertise', href: '#expertise', icon: Layers },
+  { name: 'Process', href: '#process', icon: Layers },
   { name: 'Projects', href: '#projects', icon: FolderKanban },
   { name: 'Resume', to: '/resume', icon: FileText },
   { name: 'Contact', href: '#contact', icon: Mail },

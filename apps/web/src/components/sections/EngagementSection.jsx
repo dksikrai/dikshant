@@ -5,6 +5,7 @@ import SectionHeader from '@/components/SectionHeader.jsx';
 import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 import { Button } from '@/components/ui/button';
 import { engagementModels, processSteps } from '@/config/offer.js';
+import { Roadmap } from '@/components/Illustrations.jsx';
 import { startInquiry } from '@/lib/contactIntent.js';
 
 
@@ -49,7 +50,7 @@ const EngagementSection = () => (
               </ul>
               <Button
                 variant="glass"
-                className="mt-auto rounded-full"
+                className="mt-auto h-11 rounded-full"
                 onClick={() => startInquiry({ inquiry: m.id === 'consulting' ? 'Consulting' : 'Project', subject: m.title })}
               >
                 Get a quote
@@ -62,6 +63,9 @@ const EngagementSection = () => (
 
       <FadeIn delay={0.1} className="mt-16">
         <h3 className="text-foreground font-medium mb-6" style={{ fontSize: '1.25rem' }}>How a project runs</h3>
+        <div className="glass-card mb-4 hidden rounded-2xl p-6 sm:block">
+          <Roadmap className="h-auto w-full" />
+        </div>
         <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 m-0 p-0 list-none">
           {processSteps.map((s, i) => (
             <li key={s.title} className="glass-card rounded-2xl p-5 flex flex-col gap-2">

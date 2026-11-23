@@ -5,6 +5,43 @@
  */
 export const services = [
   {
+    id: 'technical-project-management',
+    shortTitle: 'Project Management',
+    icon: 'Users',
+    title: 'Technical Project Management',
+    metaTitle: 'Technical Project Manager & Software Delivery Lead',
+    metaDescription:
+      'Plan, coordinate and ship software projects across developers, designers and QA with clear scope, milestones and honest status reporting.',
+    summary:
+      'Plan, coordinate and ship software across developers, designers and QA, with clear scope, milestones and honest status reporting.',
+    intro:
+      'Projects slip when scope is vague and nobody owns delivery. I lead the planning and coordination of software work, translating business goals into a clear plan, and keeping stakeholders informed without the jargon. Because I am an engineer too, I can also review the technical decisions.',
+    includes: [
+      'Scope, requirements and roadmap',
+      'Sprint planning and milestone tracking',
+      'Coordination across developers, designers and QA',
+      'Risk, dependency and stakeholder management',
+      'Release planning and quality gates',
+      'Clear weekly status reports',
+    ],
+    tech: ['Agile / Scrum', 'Jira', 'GitHub', 'CI/CD'],
+    idealFor: [
+      'Teams without a dedicated delivery lead',
+      'Business owners managing an outsourced development team',
+      'Projects that are late, over budget or unclear',
+    ],
+    faqs: [
+      {
+        q: 'Can you manage an existing team?',
+        a: 'Yes. I can coordinate your developers and designers, or bring my own, and keep scope, timelines and quality on track.',
+      },
+      {
+        q: 'Do you stay hands-on technically?',
+        a: 'Yes. I am an engineer first, so I can review architecture and unblock the team rather than only tracking tasks.',
+      },
+    ],
+  },
+  {
     id: 'web-app-development',
     shortTitle: 'Web App Development',
     icon: 'Layers',
@@ -260,43 +297,6 @@ export const services = [
       {
         q: 'Can you provide ongoing support?',
         a: 'Yes, as a monthly retainer covering fixes, updates and monitoring.',
-      },
-    ],
-  },
-  {
-    id: 'technical-project-management',
-    shortTitle: 'Project Management',
-    icon: 'Users',
-    title: 'Technical Project Management',
-    metaTitle: 'Technical Project Manager & Software Delivery Lead',
-    metaDescription:
-      'Plan, coordinate and ship software projects across developers, designers and QA with clear scope, milestones and honest status reporting.',
-    summary:
-      'Plan, coordinate and ship software across developers, designers and QA, with clear scope, milestones and honest status reporting.',
-    intro:
-      'Projects slip when scope is vague and nobody owns delivery. I lead the planning and coordination of software work, translating business goals into a clear plan, and keeping stakeholders informed without the jargon. Because I am an engineer too, I can also review the technical decisions.',
-    includes: [
-      'Scope, requirements and roadmap',
-      'Sprint planning and milestone tracking',
-      'Coordination across developers, designers and QA',
-      'Risk, dependency and stakeholder management',
-      'Release planning and quality gates',
-      'Clear weekly status reports',
-    ],
-    tech: ['Agile / Scrum', 'Jira', 'GitHub', 'CI/CD'],
-    idealFor: [
-      'Teams without a dedicated delivery lead',
-      'Business owners managing an outsourced development team',
-      'Projects that are late, over budget or unclear',
-    ],
-    faqs: [
-      {
-        q: 'Can you manage an existing team?',
-        a: 'Yes. I can coordinate your developers and designers, or bring my own, and keep scope, timelines and quality on track.',
-      },
-      {
-        q: 'Do you stay hands-on technically?',
-        a: 'Yes. I am an engineer first, so I can review architecture and unblock the team rather than only tracking tasks.',
       },
     ],
   },
