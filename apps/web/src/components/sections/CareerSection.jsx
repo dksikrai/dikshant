@@ -14,13 +14,8 @@ const visual = [
 ];
 const roles = experience.map((r, i) => ({ ...r, ...visual[i] }));
 
-const accentConfig = {
-  indigo:  { dot: 'border-indigo-500 text-indigo-400',  tag: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/25',  check: 'text-indigo-400',  impact: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/25', spine: 'from-indigo-500 to-violet-500' },
-  violet:  { dot: 'border-violet-500 text-violet-400',  tag: 'bg-violet-500/10 text-violet-400 border-violet-500/25',  check: 'text-violet-400',  impact: 'bg-violet-500/10 text-violet-400 border-violet-500/25', spine: 'from-violet-500 to-cyan-500' },
-  cyan:    { dot: 'border-cyan-500 text-cyan-400',      tag: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25',      check: 'text-cyan-400',    impact: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25', spine: 'from-cyan-500 to-emerald-500' },
-  amber:   { dot: 'border-amber-500 text-amber-400',    tag: 'bg-amber-500/10 text-amber-400 border-amber-500/25',    check: 'text-amber-400',   impact: 'bg-amber-500/10 text-amber-400 border-amber-500/25', spine: 'from-amber-500 to-orange-500' },
-  emerald: { dot: 'border-emerald-500 text-emerald-400', tag: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25', check: 'text-emerald-400', impact: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25', spine: 'from-emerald-500 to-sky-500' },
-};
+const one = { dot: 'border-primary text-primary', tag: 'bg-primary/10 text-primary border-primary/25', check: 'text-primary', impact: 'bg-primary/10 text-primary border-primary/25', spine: 'bg-primary' };
+const accentConfig = { indigo: one, violet: one, cyan: one, emerald: one, amber: one };
 
 const CareerCard = ({ role, colors, ios }) => {
   const Icon = role.icon;
@@ -30,24 +25,24 @@ const CareerCard = ({ role, colors, ios }) => {
       <div className="flex flex-col gap-3 mb-5 pb-5 border-b border-white/[0.06]">
         <div className="flex items-start justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-2.5 flex-wrap">
-            <h3 className="font-bold text-foreground" style={{ fontSize: 'clamp(1.0625rem, 2.5vw, 1.25rem)' }}>
+            <h3 className="font-medium text-foreground" style={{ fontSize: 'clamp(1.0625rem, 2.5vw, 1.25rem)' }}>
               {role.title}
             </h3>
             {role.tag && (
-              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${colors.tag}`}>
+              <span className={`text-[11px] font-medium px-2.5 py-0.5 rounded-full border ${colors.tag}`}>
                 {role.tag}
               </span>
             )}
           </div>
           {/* Impact chip */}
-          <span className={`flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full border ${colors.impact}`}>
+          <span className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full border ${colors.impact}`}>
             <TrendingUp className="w-3 h-3" />
             {role.impact}
           </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 text-sm">
-          <span className={`font-semibold ${colors.check}`}>{role.company}</span>
+          <span className={`font-medium ${colors.check}`}>{role.company}</span>
           <span className="flex items-center gap-1.5 text-muted-foreground text-xs">
             <Calendar className="w-3 h-3 shrink-0" />
             {role.date}
@@ -60,7 +55,7 @@ const CareerCard = ({ role, colors, ios }) => {
       </div>
 
       {/* Description */}
-      <p className="text-muted-foreground text-sm leading-relaxed mb-5 italic">
+      <p className="text-muted-foreground text-sm leading-relaxed mb-5 ">
         {role.description}
       </p>
 
@@ -86,8 +81,8 @@ const CareerSection = () => {
 
       <div className="site-container">
         <SectionHeader
-          label="EXPERIENCE"
-          title="Professional Journey"
+          label="Experience"
+          title="Professional journey"
           description="A trajectory of continuous growth, architectural ownership, and production impact."
         />
 
@@ -98,7 +93,7 @@ const CareerSection = () => {
           {/* Animated spine */}
           {!ios && (
             <motion.div
-              className="absolute left-[19px] top-0 w-px bg-gradient-to-b from-indigo-500 via-violet-500 to-transparent origin-top h-full"
+              className="absolute left-[19px] top-0 w-px bg-primary/50 origin-top h-full"
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, amount: 0.05 }}
@@ -126,9 +121,6 @@ const CareerSection = () => {
                       : { type: 'spring', stiffness: 400, damping: 20, delay: idx * 0.1 }
                     }
                   >
-                    {role.tag === 'Current' && (
-                      <span className="absolute inset-0 rounded-full animate-ping bg-indigo-500/20 pointer-events-none" />
-                    )}
                     <Icon className="w-4 h-4 shrink-0" />
                   </motion.div>
 

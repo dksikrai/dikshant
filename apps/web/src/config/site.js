@@ -34,7 +34,7 @@ const formatPhone = (p) => {
 };
 
 const CALL_REQUEST_TEXT = "Hi Dikshant, I'd like to book a 20-minute call to discuss a project. When are you free?";
-const DEFAULT_WHATSAPP_TEXT = "Hi Dikshant, I saw your portfolio and I'd like to discuss a project with you!";
+const DEFAULT_WHATSAPP_TEXT = "Hi Dikshant, I saw your portfolio and I'd like to discuss a project with you.";
 
 export const siteConfig = {
   name: 'Dikshant Goyal',

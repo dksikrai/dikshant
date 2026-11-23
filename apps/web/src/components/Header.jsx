@@ -15,7 +15,6 @@ import {
 } from '@/components/ui/sheet';
 import { siteConfig } from '@/config/site.js';
 import { ease } from '@/lib/motion.jsx';
-import { enableRefraction } from '@/lib/glass.js';
 
 const socials = [
   { label: 'GitHub',   href: siteConfig.links.github,   icon: Github },
@@ -76,14 +75,14 @@ const DesktopNavItem = ({ link, active }) => {
       link={link}
       id={`nav-${link.name.toLowerCase()}`}
       aria-current={isActive ? 'true' : undefined}
-      className={`relative px-4 py-2 rounded-full text-[0.8125rem] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
+      className={`relative rounded-full px-4 py-2 text-[0.8125rem] font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
         isActive ? 'text-foreground' : 'text-foreground/60 hover:text-foreground'
       }`}
     >
       {isActive && (
         <motion.span
           layoutId="nav-active-pill"
-          className="absolute inset-0 rounded-full bg-white/[0.12] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
+          className="absolute inset-0 rounded-full border border-white/15 bg-white/[0.12] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
         />
       )}
@@ -107,7 +106,7 @@ const MobileNavItem = ({ link, active, mobileOpen }) => {
           link={link}
           id={`mobile-nav-${link.name.toLowerCase()}`}
           aria-current={isActive ? 'true' : undefined}
-          className={`group flex min-h-[3.5rem] w-full items-center gap-3.5 px-4 text-left text-[1.0625rem] font-semibold tracking-tight transition-colors duration-150 active:bg-white/[0.08] focus-visible:outline-none focus-visible:bg-white/[0.08] ${
+          className={`group flex min-h-[3.5rem] w-full items-center gap-3.5 px-4 text-left text-[1.0625rem] font-medium tracking-tight transition-colors duration-150 active:bg-white/[0.08] focus-visible:outline-none focus-visible:bg-white/[0.08] ${
             isActive ? 'bg-primary/15 text-foreground' : 'text-foreground/85'
           }`}
         >
@@ -128,9 +127,6 @@ const Header = () => {
   const active = useActiveSection(hrefs);
   const capsuleRef = useRef(null);
 
-  // Real refraction on desktop Chromium; other browsers keep the CSS glass.
-  useEffect(() => enableRefraction(capsuleRef.current, { bezel: 20, scale: 30 }), []);
-
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     onScroll();
@@ -149,9 +145,7 @@ const Header = () => {
         {/* Floating liquid-glass capsule */}
         <div
           ref={capsuleRef}
-          className={`pointer-events-auto flex items-center justify-between gap-2 rounded-full glass-pill pl-2 pr-1.5 py-1 transition-shadow duration-300 ${
-            isScrolled ? 'shadow-2xl shadow-black/60' : ''
-          }`}
+          className="pointer-events-auto flex items-center justify-between gap-2 rounded-2xl glass-surface pl-2 pr-1.5 py-1"
         >
           {/* Logo */}
           <Link
@@ -160,14 +154,12 @@ const Header = () => {
             className="flex items-center gap-2.5 group min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
             aria-label="Dikshant Goyal, home"
           >
-            <motion.div
-              whileHover={{ rotate: -8, scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200"
+            <div
+              className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200"
             >
               <LogoMark />
-            </motion.div>
-            <span className="font-bold text-[1.1rem] tracking-tight select-none">
+            </div>
+            <span className="font-medium text-[1.1rem] tracking-tight select-none">
               Dikshant Goyal<span className="text-primary">.</span>
             </span>
           </Link>
@@ -185,7 +177,7 @@ const Header = () => {
             <Button
               asChild
               size="sm"
-              className="hidden md:inline-flex rounded-full text-[0.8125rem] font-semibold shadow-md shadow-primary/30"
+              className="hidden md:inline-flex rounded-lg text-[0.8125rem] font-medium"
             >
               <a
                 id="header-hire-me-btn"
@@ -195,7 +187,7 @@ const Header = () => {
                   startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' });
                 }}
               >
-                Book a Call
+                Book a call
                 <ArrowRight />
               </a>
             </Button>
@@ -226,12 +218,12 @@ const Header = () => {
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl glass-pill text-primary">
                       <LogoMark />
                     </span>
-                    <SheetTitle className="text-base font-bold tracking-tight">
+                    <SheetTitle className="text-base font-medium tracking-tight">
                       Dikshant Goyal<span className="text-primary">.</span>
                     </SheetTitle>
                   </div>
                   <SheetClose asChild>
-                    <Button variant="glass" size="icon" className="h-11 w-11 rounded-full" aria-label="Close menu">
+                    <Button variant="glass" size="icon" className="h-11 w-11 rounded-lg" aria-label="Close menu">
                       <X />
                     </Button>
                   </SheetClose>
@@ -241,7 +233,7 @@ const Header = () => {
                 {/* iOS-style grouped list */}
                 <nav aria-label="Mobile navigation">
                   <motion.ul
-                    className="overflow-hidden rounded-2xl border border-white/[0.10] bg-white/[0.06] divide-y divide-white/[0.07]"
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] divide-y divide-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                     initial="hidden"
                     animate={mobileOpen ? 'visible' : 'hidden'}
                     variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } } }}
@@ -261,19 +253,19 @@ const Header = () => {
                         target={href.startsWith('mailto') ? undefined : '_blank'}
                         rel="noopener noreferrer"
                         aria-label={label}
-                        className="flex h-11 w-11 items-center justify-center rounded-full glass-pill text-foreground/75 active:scale-95 active:bg-white/[0.14] transition"
+                        className="flex h-11 w-11 items-center justify-center rounded-full glass-pill text-foreground/75 active:scale-[0.98]"
                       >
                         <SocialIcon className="h-[18px] w-[18px]" />
                       </a>
                     ))}
                   </div>
-                  <Button asChild variant="glass" className="h-12 rounded-2xl text-[0.9375rem] font-semibold">
+                  <Button asChild variant="glass" className="h-12 rounded-lg text-[0.9375rem] font-medium">
                     <a id="mobile-download-resume" href={siteConfig.resume} download={siteConfig.resumeFilename}>
                       <Download className="text-primary" />
-                      Download Resume
+                      Download resume
                     </a>
                   </Button>
-                  <Button asChild className="h-12 rounded-2xl text-[0.9375rem] font-bold shadow-lg shadow-primary/30">
+                  <Button asChild className="h-12 rounded-lg text-[0.9375rem] font-medium">
                     <a
                       id="mobile-hire-me-btn"
                       href="#contact"
@@ -283,7 +275,7 @@ const Header = () => {
                         setTimeout(() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' }), 320);
                       }}
                     >
-                      Book a Call
+                      Book a call
                       <ArrowRight />
                     </a>
                   </Button>

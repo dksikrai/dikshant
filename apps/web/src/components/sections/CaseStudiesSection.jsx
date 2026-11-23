@@ -20,8 +20,8 @@ const caseStudies = [
     ],
     stack: ['Laravel', 'Redis', 'AWS', 'Vue.js', 'ShipStation API', 'Fabric.js'],
     results: ['60% Error Reduction', '10K+ Orders/Month', '4hr → 12min Processing'],
-    accent: 'from-indigo-500 to-sky-500',
-    badgeColor: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
+    accent: 'bg-primary',
+    badgeColor: 'text-primary bg-primary/10 border-primary/20',
   },
   {
     badge: 'AI Engineering · Automation',
@@ -36,8 +36,8 @@ const caseStudies = [
     ],
     stack: ['OpenAI', 'Laravel', 'Redis', 'PHP', 'Webhooks'],
     results: ['90% Time Reduction', '500+ Docs/Day', '99.5% Accuracy'],
-    accent: 'from-violet-500 to-indigo-500',
-    badgeColor: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+    accent: 'bg-primary',
+    badgeColor: 'text-primary bg-primary/10 border-primary/20',
   },
   {
     badge: 'SaaS Architecture · Multi-Tenant',
@@ -52,8 +52,8 @@ const caseStudies = [
     ],
     stack: ['Laravel', 'MySQL', 'Redis', 'Horizon', 'Stripe', 'AWS'],
     results: ['50+ Enterprise Clients', '99.9% Uptime', '3x Throughput'],
-    accent: 'from-emerald-500 to-teal-500',
-    badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+    accent: 'bg-primary',
+    badgeColor: 'text-primary bg-primary/10 border-primary/20',
   },
 ];
 
@@ -74,7 +74,7 @@ const MonoBadge = ({ label }) => (
 
 const ResultChip = ({ label }) => (
   <span
-    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
+    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
     style={{
       background: 'rgba(16, 185, 129, 0.1)',
       border: '1px solid rgba(16, 185, 129, 0.25)',
@@ -106,13 +106,13 @@ const CaseStudyCard = ({ study, index }) => {
       >
         {/* Gradient left accent bar */}
         <div
-          className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl bg-gradient-to-b ${study.accent}`}
+          className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl ${study.accent}`}
           aria-hidden="true"
         />
 
         <div
           className="rounded-2xl glass-card card-hover overflow-hidden"
-          style={{ background: 'hsl(220,16%,6%)', borderLeft: 'none' }}
+          style={{ background: 'hsl(var(--card))', borderLeft: 'none' }}
         >
           <div className="p-6 md:p-8">
 
@@ -120,12 +120,12 @@ const CaseStudyCard = ({ study, index }) => {
             <div className="flex flex-wrap items-start justify-between gap-3 mb-5">
               <div>
                 <span
-                  className={`mono-badge inline-block px-2.5 py-1 rounded-full border text-[11px] font-semibold mb-2 ${study.badgeColor}`}
+                  className={`mono-badge inline-block px-2.5 py-1 rounded-full border text-[11px] font-medium mb-2 ${study.badgeColor}`}
                 >
                   {study.badge}
                 </span>
                 <h3
-                  className="font-bold text-foreground leading-tight"
+                  className="font-medium text-foreground leading-tight"
                   style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', letterSpacing: '-0.025em' }}
                 >
                   {study.title}
@@ -142,12 +142,12 @@ const CaseStudyCard = ({ study, index }) => {
               {/* Challenge */}
               <div>
                 <p
-                  className="text-[11px] font-semibold uppercase tracking-widest mb-2"
+                  className="text-[11px] font-medium mb-2"
                   style={{ color: 'rgba(255,255,255,0.55)' }}
                 >
                   Challenge
                 </p>
-                <p className="text-sm italic leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {study.challenge}
                 </p>
               </div>
@@ -155,7 +155,7 @@ const CaseStudyCard = ({ study, index }) => {
               {/* Architecture */}
               <div>
                 <p
-                  className="text-[11px] font-semibold uppercase tracking-widest mb-2.5"
+                  className="text-[11px] font-medium mb-2.5"
                   style={{ color: 'rgba(255,255,255,0.55)' }}
                 >
                   Architecture
@@ -215,8 +215,8 @@ const CaseStudiesSection = () => (
     <div className="site-container">
 
       <SectionHeader
-        label="CASE STUDIES"
-        title="Engineering Deep Dives"
+        label="Case studies"
+        title="Engineering deep dives"
         description="Real problems, real architectures, real results."
       />
 

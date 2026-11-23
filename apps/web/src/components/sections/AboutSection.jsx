@@ -15,7 +15,7 @@ const techBadges = [
 const FactCard = ({ value, label }) => (
   <div className="glass-card card-hover rounded-2xl p-5 flex flex-col gap-1 h-full">
     <span
-      className="font-black tracking-tight text-foreground"
+      className="font-medium tracking-tight text-foreground"
       style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', letterSpacing: '-0.03em' }}
     >
       {value}
@@ -29,15 +29,6 @@ const AboutSection = () => (
     id="about"
     className="site-section"
   >
-    {/* Subtle background radial glow */}
-    <div
-      className="pointer-events-none absolute inset-0 z-0"
-      aria-hidden="true"
-      style={{
-        background:
-          'radial-gradient(ellipse 60% 50% at 20% 60%, hsl(243,88%,68%,0.06) 0%, transparent 70%)',
-      }}
-    />
 
     <div className="site-container z-10">
 
@@ -52,7 +43,7 @@ const AboutSection = () => (
 
           <FadeIn delay={0.08}>
             <h2 className="text-foreground mb-8">
-              Full-Stack Engineer with a Production Mindset
+              Full-stack engineer with a production mindset
             </h2>
           </FadeIn>
 
@@ -68,7 +59,7 @@ const AboutSection = () => (
 
           <FadeIn delay={0.18}>
             <p className="text-muted-foreground mb-10 leading-relaxed">
-              Currently at <strong className="text-foreground font-semibold">iTechPanel LLP</strong> as
+              Currently at <strong className="text-foreground font-medium">iTechPanel LLP</strong> as
               Project Manager — leading planning and delivery across software workstreams,
               coordinating developers, QA and stakeholders, and staying hands-on with the
               backend systems behind e-commerce and integration-heavy platforms.
@@ -80,11 +71,11 @@ const AboutSection = () => (
             <blockquote
               className="relative mb-12 pl-5 py-1"
               style={{
-                borderLeft: '2px solid hsl(243,88%,68%)',
+                borderLeft: '2px solid hsl(var(--primary))',
               }}
             >
               <p
-                className="italic text-foreground/90 leading-relaxed m-0"
+                className="text-foreground/90 leading-relaxed m-0"
                 style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)' }}
               >
                 I don't just write code — I architect systems that scale.

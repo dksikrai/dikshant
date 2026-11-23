@@ -14,7 +14,7 @@ export const ServiceCard = ({ service }) => (
       <ServiceIcon name={service.icon} />
     </div>
     <div className="flex flex-col gap-2">
-      <h3 className="text-foreground font-semibold leading-snug" style={{ fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+      <h3 className="text-foreground font-medium leading-snug" style={{ fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
         <Link to={`/services/${service.id}`} className="hover:text-primary transition-colors">
           {service.title}
         </Link>
@@ -34,7 +34,7 @@ export const ServiceCard = ({ service }) => (
     <div className="mt-auto flex items-center justify-between gap-3 pt-1">
       <Link
         to={`/services/${service.id}`}
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline underline-offset-4"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
         aria-label={`View service: ${service.title}`}
       >
         View service
@@ -54,16 +54,11 @@ export const ServiceCard = ({ service }) => (
 
 const ServicesSection = () => (
   <section id="services" className="site-section" aria-labelledby="services-heading">
-    <div
-      className="pointer-events-none absolute inset-0 z-0"
-      aria-hidden="true"
-      style={{ background: 'radial-gradient(ellipse 50% 40% at 50% 20%, hsl(243,88%,68%,0.07) 0%, transparent 70%)' }}
-    />
     <div className="site-container z-10">
       <SectionHeader
         id="services-heading"
-        label="SERVICES & CONSULTING"
-        title="How I Can Help Your Business"
+        label="Services & consulting"
+        title="How I can help your business"
         description="Hands-on engineering and independent technical advice across the full stack: web, APIs, AI, cloud and delivery."
       />
 
@@ -76,13 +71,13 @@ const ServicesSection = () => (
       <FadeIn delay={0.1} className="mt-10 flex flex-wrap justify-center gap-3">
         <Button
           size="lg"
-          className="h-12 rounded-full px-7 font-semibold shadow-lg shadow-primary/30"
+          className="h-12 rounded-lg px-7 font-medium"
           onClick={() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' })}
         >
-          Book a Consultation
+          Book a consultation
           <ArrowRight strokeWidth={2.5} />
         </Button>
-        <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-7 font-semibold">
+        <Button asChild variant="glass" size="lg" className="h-12 rounded-lg px-7 font-medium">
           <Link to="/services">View all services</Link>
         </Button>
       </FadeIn>

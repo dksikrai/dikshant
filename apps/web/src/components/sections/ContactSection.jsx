@@ -54,7 +54,7 @@ const InfoRow = ({ icon: Icon, label, children }) => (
       <Icon className="h-4 w-4" />
     </span>
     <div className="min-w-0">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
+      <p className="text-xs text-muted-foreground">{label}</p>
       <div className="text-sm font-medium text-foreground break-words">{children}</div>
     </div>
   </div>
@@ -63,23 +63,22 @@ const InfoRow = ({ icon: Icon, label, children }) => (
 const ContactSection = () => (
   <section className="site-section" id="contact">
     <div className="absolute top-0 left-0 right-0 h-px bg-white/[0.06]" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.06),transparent_65%)] pointer-events-none" />
 
     <div className="site-container z-10">
       <FadeIn className="text-center mb-14">
         <Badge
           variant="outline"
-          className="mb-8 gap-2 rounded-full border-emerald-500/25 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-400"
+          className="mb-8 gap-2 rounded-full border-emerald-500/25 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-400"
         >
           <span className="status-dot" />
           Open to consulting &amp; new opportunities
         </Badge>
 
         <h2
-          className="font-extrabold text-foreground mb-5"
+          className="font-medium text-foreground mb-5"
           style={{ fontSize: 'clamp(1.875rem, 5vw, 3.5rem)', letterSpacing: '-0.04em', lineHeight: 1.1 }}
         >
-          Let&apos;s build something <span className="text-gradient-primary">exceptional</span>
+          Let&apos;s build something exceptional
         </h2>
         <p className="text-muted-foreground max-w-xl mx-auto" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.0625rem)' }}>
           Scaling a platform, shipping AI-powered workflows, or architecting a production SaaS?
@@ -115,7 +114,7 @@ const ContactSection = () => (
             <Separator className="bg-white/[0.08]" />
 
             <div className="flex flex-col gap-2.5">
-              <Button asChild className="w-full h-11 justify-start rounded-xl shadow-lg shadow-primary/25">
+              <Button asChild className="w-full h-11 justify-start rounded-xl">
                 <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">
                   <CalendarCheck />
                   {siteConfig.hasBooking ? 'Book a 20-minute call' : 'Request a 20-minute call'}

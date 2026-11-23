@@ -4,28 +4,36 @@
 
 @layer base {
   :root, .dark {
-    /* ── Premium dark palette: near-black → indigo → cyan ── */
-    --background: 220 20% 4%;
-    --foreground: 0 0% 97%;
-    --card: 220 16% 6%;
-    --card-foreground: 0 0% 97%;
-    --popover: 220 16% 6%;
-    --popover-foreground: 0 0% 97%;
-    --primary: 243 88% 68%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 192 80% 55%;
-    --secondary-foreground: 220 20% 4%;
-    --accent: 220 14% 10%;
-    --accent-foreground: 0 0% 97%;
-    --muted: 220 14% 10%;
-    --muted-foreground: 220 9% 66%;
-    --primary-solid: 243 78% 61%; /* filled buttons: white text >= 4.5:1 */
+    /* Ink ramp: neutral surfaces tinted toward a terminal at night, one sky-blue accent */
+    --background: 226 29% 6%;
+    --foreground: 223 25% 95%;
+    --card: 222 25% 9%;
+    --card-foreground: 223 25% 95%;
+    --popover: 222 25% 9%;
+    --popover-foreground: 223 25% 95%;
+    --primary: 199 89% 62%;
+    --primary-foreground: 226 29% 6%;
+    --secondary: 223 22% 14%;
+    --secondary-foreground: 223 25% 95%;
+    --accent: 223 22% 14%;
+    --accent-foreground: 223 25% 95%;
+    --muted: 223 22% 14%;
+    --muted-foreground: 222 14% 68%;
+    --primary-solid: 201 96% 32%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 14% 11%;
-    --input: 220 14% 11%;
-    --ring: 243 88% 68%;
+    --border: 224 18% 15%;
+    --input: 224 18% 15%;
+    --ring: 199 89% 62%;
     --radius: 0.625rem;
+
+    /* Glass: translucent tints of the ink ramp, one hairline, one specular edge */
+    --glass-fill: 222 26% 14% / 0.52;
+    --glass-fill-strong: 222 26% 12% / 0.72;
+    --glass-edge: 0 0% 100% / 0.10;
+    --glass-shine: 0 0% 100% / 0.16;
+    --glass-shadow: 0 10px 30px -8px hsl(228 40% 2% / 0.55), 0 2px 6px hsl(228 40% 2% / 0.3);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   * { @apply border-border; }
@@ -37,8 +45,13 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply text-foreground antialiased;
+    /* One quiet cool light high on the page, so glass has something to catch */
+    background:
+      radial-gradient(60rem 36rem at 78% -6rem, hsl(var(--primary) / 0.09), transparent 70%),
+      hsl(var(--background));
+    background-attachment: fixed;
+    font-family: 'Geist', system-ui, -apple-system, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     -webkit-text-size-adjust: 100%;
@@ -51,245 +64,152 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Geist', system-ui, -apple-system, sans-serif;
     color: hsl(var(--foreground));
     line-height: 1.15;
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-weight: 500;
+    letter-spacing: 0;
   }
 
-  /* Fluid type scale */
-  h1 { font-size: clamp(2rem, 6vw, 4.5rem);   letter-spacing: -0.05em; }
-  h2 { font-size: clamp(1.6rem, 4vw, 3rem);    letter-spacing: -0.04em; }
-  h3 { font-size: clamp(1.15rem, 2.5vw, 1.75rem); letter-spacing: -0.03em; }
-  h4 { font-size: clamp(1rem, 2vw, 1.25rem);  letter-spacing: -0.02em; }
+  /* Fluid type scale: tight tracking only on large display text */
+  h1 { font-size: clamp(2.25rem, 6vw, 4rem);   line-height: 1.08; letter-spacing: -0.03em; }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; }
+  h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
+  h4 { font-size: clamp(1rem, 2vw, 1.125rem); }
 
-  p  { line-height: 1.75; color: hsl(var(--muted-foreground)); }
+  p  { line-height: 1.7; color: hsl(var(--muted-foreground)); }
+
+  :focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 2px; }
 }
 
 @layer components {
-  /* ── Layout system: every page/section uses these, so edges always align ── */
+  /* Layout system: every page/section uses these, so edges always align */
   .site-container {
     @apply relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
   .site-section {
-    @apply relative overflow-hidden py-14 md:py-24;
+    @apply relative overflow-hidden py-16 md:py-24;
   }
 
-
-  /* ── Liquid-glass system (iOS-style) ──────────────────────────────
-     Layers: translucent tint + blur/saturate + specular edge + soft shadow.
-     Glass only reads well over colour, so HomePage renders ambient orbs. */
+  /* Glass, in two tiers (Apple-style):
+     - floating layers (header, sheet, menus, toasts, controls) get real blur + saturation,
+       a hairline and a specular top edge;
+     - content cards stay quiet translucent panels, no blur, so long pages stay fast. */
   .glass,
-  .glass-card,
+  .glass-surface,
   .glass-strong,
-  .glass-pill {
+  .glass-pill,
+  .glass-sheet {
     position: relative;
-    -webkit-backdrop-filter: blur(22px) saturate(190%) brightness(1.06);
-    backdrop-filter: blur(22px) saturate(190%) brightness(1.06);
-    border: 1px solid rgba(255,255,255,0.09);
+    background: hsl(var(--glass-fill));
+    border: 1px solid hsl(var(--glass-edge));
+    box-shadow: inset 0 1px 0 hsl(var(--glass-shine)), var(--glass-shadow);
+    -webkit-backdrop-filter: blur(24px) saturate(1.7);
+    backdrop-filter: blur(24px) saturate(1.7);
   }
+  .glass-strong,
+  .glass-sheet { background: hsl(var(--glass-fill-strong)); }
 
-  .glass {
-    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.025));
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
+  /* Small controls sit inside a floating layer: lighter, no drop shadow */
+  .glass-pill {
+    background: hsl(0 0% 100% / 0.07);
+    box-shadow: inset 0 1px 0 hsl(var(--glass-shine));
+    transition: background-color 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    a.glass-pill:hover, button.glass-pill:hover { background: hsl(0 0% 100% / 0.12); }
   }
 
   .glass-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.022) 60%);
-    box-shadow:
-      0 10px 36px rgba(0,0,0,0.28),
-      inset 0 1px 0 rgba(255,255,255,0.16),
-      inset 0 -1px 0 rgba(255,255,255,0.03),
-      inset 0 0 28px rgba(255,255,255,0.03);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    position: relative;
+    background: linear-gradient(180deg, hsl(222 26% 14% / 0.7), hsl(222 26% 10% / 0.7));
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.06);
+    transition: border-color 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
   }
-
-  /* Specular edge: a 1px gradient ring that brightens toward the top-left. */
-  .glass-card::before,
-  .glass-pill::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 38%, rgba(255,255,255,0) 62%, rgba(255,255,255,0.10));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
   @media (hover: hover) and (pointer: fine) {
-    .glass-card:hover {
-      border-color: rgba(255,255,255,0.14);
+    .glass-card:hover { border-color: hsl(0 0% 100% / 0.16); }
+  }
+
+  /* Without backdrop-filter support, fall back to solid ink so text stays readable */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass, .glass-surface, .glass-strong, .glass-sheet { background: hsl(var(--card)); }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass, .glass-surface, .glass-strong, .glass-pill, .glass-sheet {
+      background: hsl(var(--card));
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
     }
   }
 
-  .glass-strong {
-    background: linear-gradient(180deg, rgba(20,20,28,0.72), rgba(12,12,18,0.82));
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-
-  /* Floating capsule used by the nav bar and chips */
-  .glass-pill {
-    background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
-    box-shadow:
-      0 8px 28px rgba(0,0,0,0.32),
-      inset 0 1px 0 rgba(255,255,255,0.2),
-      inset 0 -1px 0 rgba(255,255,255,0.04),
-      inset 0 0 18px rgba(255,255,255,0.04);
-  }
-
-  /* Cursor-following specular sheen (position set by lib/glass.js, hover devices only) */
-  .glass-card::after,
-  .glass-pill::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,0.13), transparent 62%);
-  }
-
-  /* ── Cards: one interaction system ──────────────────────────────────
-     Hover effects only exist on devices that can really hover. On touch, :hover
-     sticks after a tap (the glowing "selected" card), so it must never apply there. */
+  /* Cards: hover is a hairline change, never a lift or glow. Touch devices get none. */
   .card-hover,
   .hover-glow {
-    transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: border-color 0.18s var(--ease-out), background-color 0.18s var(--ease-out);
   }
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover,
-    .hover-glow:hover {
-      transform: translateY(-3px);
-      border-color: hsl(var(--primary) / 0.4);
-      box-shadow:
-        0 18px 48px rgba(0,0,0,0.34),
-        0 0 0 1px hsl(var(--primary) / 0.28),
-        inset 0 1px 0 rgba(255,255,255,0.18);
-    }
+    .hover-glow:hover { border-color: hsl(0 0% 100% / 0.16); }
   }
 
-  /* ── Premium shadow ── */
-  .premium-shadow {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.12);
-  }
+  .premium-shadow { box-shadow: none; }
 
-  .dark .premium-shadow {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.45);
-  }
+  /* Gradient text classes kept as plain text so old markup renders solid */
+  .text-gradient-primary,
+  .text-gradient-accent,
+  .text-gradient-warm { color: hsl(var(--primary)); }
 
-  /* ── Gradient text ── */
-  .text-gradient-primary {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(243,88%,72%) 0%, hsl(192,80%,60%) 100%);
-  }
-
-  .text-gradient-accent {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(192,80%,60%) 0%, hsl(160,70%,55%) 100%);
-  }
-
-  .text-gradient-warm {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(243,88%,72%) 0%, hsl(280,70%,68%) 100%);
-  }
-
-  /* ── Section label (overline text) ── */
+  /* Section label: quiet sentence-case meta */
   .section-label {
-    font-family: 'Geist Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: hsl(243 90% 79%);
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: hsl(var(--primary));
   }
 
-  /* ── Mono badge (for tech chips) ── */
   .mono-badge {
-    font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
   }
 
-  /* ── Gradient border ── */
-  .gradient-border {
-    position: relative;
-  }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, hsl(243,88%,62%,0.4), hsl(192,80%,50%,0.4));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
+  .gradient-border { position: relative; border: 1px solid hsl(var(--border)); }
 
-  /* ── Noise / grain texture overlay ── */
-  .noise-overlay {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.055; /* Slightly increased for more visible texture */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 128px 128px;
-    mix-blend-mode: overlay;
-  }
-  .dark .noise-overlay {
-    opacity: 0.065;
-  }
+  .noise-overlay { display: none; }
 
-  /* ── Terminal / code block ── */
+  /* Terminal: a quiet raised panel */
   .terminal {
-    font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'Geist Mono', ui-monospace, monospace;
     font-size: 0.8125rem;
     line-height: 1.7;
-    background: linear-gradient(160deg, rgba(18,18,26,0.78), rgba(10,10,16,0.88));
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 1rem;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12);
+    background: hsl(222 28% 8% / 0.62);
+    border: 1px solid hsl(var(--glass-edge));
+    border-radius: 0.75rem;
+    box-shadow: inset 0 1px 0 hsl(var(--glass-shine)), var(--glass-shadow);
+    -webkit-backdrop-filter: blur(24px) saturate(1.7);
+    backdrop-filter: blur(24px) saturate(1.7);
   }
 
-  /* ── Divider line ── */
-  .section-divider {
-    @apply border-t border-white/[0.06];
-  }
+  .section-divider { @apply border-t border-border; }
 
-  /* ── Smooth transition utility ── */
-  .smooth-transition { @apply transition-all duration-200 ease-in-out; }
+  .smooth-transition { transition: color 0.18s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.18s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
 
-  /* ── "Available" status dot ── */
+  /* Signature: the live status dot, used only for availability */
   .status-dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #10b981;
-    animation: pulse-dot 2s ease-in-out infinite;
+    background: #4cc38a;
   }
 
-  /* ── Texture legacy alias ── */
-  .texture-overlay { @apply noise-overlay; }
+  .texture-overlay { display: none; }
 }
 
 @layer utilities {
-
-  /* ── Pulse for status dot ── */
-  @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
-    50%       { box-shadow: 0 0 0 4px rgba(16,185,129,0); }
-  }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar       { width: 3px; height: 3px; }
@@ -299,7 +219,7 @@
 
   /* ── Text selection ── */
   ::selection {
-    background-color: hsl(243,88%,68%,0.25);
+    background-color: hsl(199 89% 62% / 0.28);
     color: hsl(var(--foreground));
   }
 
@@ -322,68 +242,21 @@ html { -webkit-tap-highlight-color: transparent; }
   input, textarea, select { font-size: 16px !important; }
 }
 
-/* Touch screens: no sticky :hover lift after a tap, and drop the costly grain overlay. */
-@media (hover: none) {
-  .noise-overlay { display: none; }
-}
-
-/* Big blur radii are expensive on phones: scroll jank and battery. */
-@media (max-width: 767px) {
-  .glass, .glass-card, .glass-strong, .glass-pill {
-    -webkit-backdrop-filter: blur(12px) saturate(160%);
-    backdrop-filter: blur(12px) saturate(160%);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .status-dot { animation: none; }
   html { scroll-behavior: auto; }
 }
 
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass, .glass-card, .glass-pill, .terminal { background: rgba(20,20,28,0.92); }
+/* Form controls: inset glass, hairline, visible focus ring (unlayered so it beats shadcn defaults) */
+.glass-input {
+  background: hsl(0 0% 100% / 0.05);
+  border: 1px solid hsl(0 0% 100% / 0.10);
+  box-shadow: inset 0 1px 2px hsl(228 40% 2% / 0.25);
+  transition: border-color 0.18s var(--ease-out), background-color 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
 }
-
-/* Form controls that sit on glass (unlayered so they beat shadcn's bg-transparent / border-input) */
-  .glass-input {
-    background: rgba(255,255,255,0.045);
-    border: 1px solid rgba(255,255,255,0.10);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
-    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-  }
-  .glass-input:hover { background: rgba(255,255,255,0.065); }
-  .glass-input:focus-visible {
-    outline: none;
-    border-color: hsl(var(--primary) / 0.7);
-    background: rgba(255,255,255,0.07);
-    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.22), inset 0 1px 2px rgba(0,0,0,0.2);
-  }
-
-
-/* Hover-capable devices only: reveal the cursor-following sheen */
-@media (hover: hover) and (pointer: fine) {
-  .glass-card:hover::after,
-  .glass-pill:hover::after { opacity: 1; }
-}
-
-/* Desktop Chromium: real refraction through an SVG displacement filter (see lib/glass.js).
-   --glass-refract is set per element; other browsers never get this class. */
-.glass-pill[data-glass-refract] {
-  -webkit-backdrop-filter: var(--glass-refract) blur(2px) saturate(200%) brightness(1.1);
-  backdrop-filter: var(--glass-refract) blur(2px) saturate(200%) brightness(1.1);
-}
-
-/* Translucent sheet for the mobile menu: lets the blurred page show through. */
-.glass-sheet {
-  background: linear-gradient(160deg, rgba(52,52,78,0.50), rgba(16,16,28,0.58));
-  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.08);
-  backdrop-filter: blur(32px) saturate(200%) brightness(1.08);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow:
-    0 24px 64px rgba(0,0,0,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.22),
-    inset 0 0 40px rgba(255,255,255,0.03);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass-sheet { background: rgba(20,20,30,0.96); }
+.glass-input:hover { border-color: hsl(0 0% 100% / 0.18); }
+.glass-input:focus-visible {
+  outline: none;
+  background: hsl(0 0% 100% / 0.07);
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.28);
 }

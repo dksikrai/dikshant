@@ -185,7 +185,7 @@ const headFor = (page) => {
 
 // ───────────────────────── static body content ─────────────────────────
 const S = {
-  wrap: 'max-width:960px;margin:0 auto;padding:96px 24px 48px;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e8ecff',
+  wrap: 'max-width:960px;margin:0 auto;padding:96px 24px 48px;font-family:Geist,Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#e8ecff',
   h1: 'font-size:clamp(2.25rem,6vw,4rem);line-height:1.1;letter-spacing:-0.04em;font-weight:800;margin:0 0 20px',
   h2: 'font-size:1.5rem;margin:40px 0 14px',
   p: 'max-width:700px;line-height:1.65;color:#9aa3c7;margin:0 0 20px',

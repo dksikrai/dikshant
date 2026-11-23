@@ -13,7 +13,7 @@ import { useSeo } from '@/lib/seo.js';
 const ContactSection = React.lazy(() => import('@/components/sections/ContactSection.jsx'));
 
 const H2 = ({ children }) => (
-  <h2 className="text-foreground font-bold mb-5" style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', letterSpacing: '-0.02em' }}>
+  <h2 className="text-foreground font-medium mb-5" style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', letterSpacing: '-0.02em' }}>
     {children}
   </h2>
 );
@@ -30,7 +30,7 @@ const ServiceDetail = ({ service }) => {
           <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary border border-primary/20 flex items-center justify-center">
             <ServiceIcon name={service.icon} size={22} />
           </div>
-          <h1 className="text-foreground" style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+          <h1 className="text-foreground" style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             {service.title}
           </h1>
           <p className="text-muted-foreground m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
@@ -58,8 +58,8 @@ const ServiceDetail = ({ service }) => {
               <ol className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-0 p-0 list-none">
                 {processSteps.map((s, i) => (
                   <li key={s.title} className="glass-card rounded-2xl p-5 flex flex-col gap-2">
-                    <span className="font-mono text-xs text-primary font-semibold">0{i + 1}</span>
-                    <h3 className="text-foreground font-semibold m-0 text-base">{s.title}</h3>
+                    <span className="font-mono text-xs text-primary font-medium">0{i + 1}</span>
+                    <h3 className="text-foreground font-medium m-0 text-base">{s.title}</h3>
                     <p className="text-muted-foreground m-0 text-[0.8125rem] leading-relaxed">{s.text}</p>
                   </li>
                 ))}
@@ -82,22 +82,22 @@ const ServiceDetail = ({ service }) => {
           {/* Sidebar */}
           <aside className="flex flex-col gap-5 lg:sticky lg:top-28" aria-label="Service summary">
             <div className="glass-card rounded-2xl p-6 flex flex-col gap-4 ring-1 ring-primary/30">
-              <h2 className="text-foreground font-bold m-0" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Ready to start?</h2>
+              <h2 className="text-foreground font-medium m-0" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Ready to start?</h2>
               <p className="text-muted-foreground m-0 text-sm leading-relaxed">Tell me about your project. I reply within one business day.</p>
-              <Button size="lg" className="h-12 rounded-full font-semibold shadow-lg shadow-primary/30" onClick={cta}>
+              <Button size="lg" className="h-12 rounded-lg font-medium" onClick={cta}>
                 Discuss your project
                 <ArrowRight strokeWidth={2.5} />
               </Button>
-              <Button asChild variant="glass" className="rounded-full">
+              <Button asChild variant="glass" className="rounded-lg">
                 <Link to="/services">All services</Link>
               </Button>
             </div>
 
             <div className="glass-card rounded-2xl p-6">
-              <h2 className="text-foreground font-bold m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Technologies</h2>
+              <h2 className="text-foreground font-medium m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Technologies</h2>
               <ul className="flex flex-wrap gap-2 m-0 p-0 list-none">
                 {service.tech.map((t) => (
-                  <li key={t} className="mono-badge text-[0.8125rem] font-semibold px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.09] text-foreground/80">
+                  <li key={t} className="mono-badge text-[0.8125rem] font-medium px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.09] text-foreground/80">
                     {t}
                   </li>
                 ))}
@@ -105,7 +105,7 @@ const ServiceDetail = ({ service }) => {
             </div>
 
             <div className="glass-card rounded-2xl p-6">
-              <h2 className="text-foreground font-bold m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Who this is for</h2>
+              <h2 className="text-foreground font-medium m-0 mb-4" style={{ fontSize: '1.125rem', letterSpacing: '-0.01em' }}>Who this is for</h2>
               <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
                 {service.idealFor.map((i) => (
                   <li key={i} className="flex items-start gap-3 text-muted-foreground text-sm">
@@ -124,7 +124,7 @@ const ServiceDetail = ({ service }) => {
             {related.map((r) => (
               <li key={r.id}>
                 <Link to={`/services/${r.id}`} className="glass-card card-hover rounded-2xl p-5 flex flex-col gap-2 h-full">
-                  <span className="text-foreground font-semibold">{r.title}</span>
+                  <span className="text-foreground font-medium">{r.title}</span>
                   <span className="text-muted-foreground text-sm">{r.summary}</span>
                 </Link>
               </li>

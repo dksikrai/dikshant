@@ -13,8 +13,8 @@ const EngagementSection = () => (
     <div className="site-container">
       <SectionHeader
         id="engagement-heading"
-        label="WORKING TOGETHER"
-        title="Flexible Ways to Engage"
+        label="Working together"
+        title="Flexible ways to engage"
         description="Pick the model that fits your stage. Scope and cost are agreed up front."
       />
 
@@ -30,12 +30,12 @@ const EngagementSection = () => (
                   <ServiceIcon name={m.icon} />
                 </div>
                 {m.featured && (
-                  <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/25">
+                  <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/25">
                     Most flexible
                   </span>
                 )}
               </div>
-              <h3 className="text-foreground font-semibold" style={{ fontSize: '1.1rem' }}>{m.title}</h3>
+              <h3 className="text-foreground font-medium" style={{ fontSize: '1.1rem' }}>{m.title}</h3>
               <p className="text-muted-foreground m-0 text-sm">
                 <span className="text-foreground/80 font-medium">Best for: </span>{m.bestFor}
               </p>
@@ -61,12 +61,12 @@ const EngagementSection = () => (
       </StaggerGrid>
 
       <FadeIn delay={0.1} className="mt-16">
-        <h3 className="text-foreground font-semibold mb-6" style={{ fontSize: '1.25rem' }}>How a project runs</h3>
+        <h3 className="text-foreground font-medium mb-6" style={{ fontSize: '1.25rem' }}>How a project runs</h3>
         <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 m-0 p-0 list-none">
           {processSteps.map((s, i) => (
             <li key={s.title} className="glass-card rounded-2xl p-5 flex flex-col gap-2">
-              <span className="font-mono text-xs text-primary font-semibold">0{i + 1}</span>
-              <h4 className="text-foreground font-semibold m-0">{s.title}</h4>
+              <span className="font-mono text-xs text-primary font-medium">0{i + 1}</span>
+              <h4 className="text-foreground font-medium m-0">{s.title}</h4>
               <p className="text-muted-foreground m-0 text-[0.8125rem] leading-relaxed">{s.text}</p>
             </li>
           ))}

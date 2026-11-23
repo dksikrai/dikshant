@@ -5,7 +5,6 @@ import Footer from '@/components/Footer.jsx';
 import HeroSection from '@/components/sections/HeroSection.jsx';
 import StatsSection from '@/components/sections/StatsSection.jsx';
 import { Skeleton } from '@/components/ui/skeleton';
-const FloatingTechBackground = React.lazy(() => import('@/components/FloatingTechBackground.jsx'));
 
 // Decorative only: mount after first paint, desktop-class devices only (keeps LCP/TBT clean).
 const useDeferredDecor = () => {
@@ -59,22 +58,6 @@ const HomePage = () => {
       >
         Skip to content
       </a>
-      {/* Grain texture overlay */}
-      <div className="noise-overlay" aria-hidden="true" />
-
-      {/* Floating Tech Icons */}
-      {showDecor && (
-        <React.Suspense fallback={null}>
-          <FloatingTechBackground />
-        </React.Suspense>
-      )}
-
-      {/* Ambient background gradients — static, no animation */}
-      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute -top-[10%] -left-[10%] w-[70%] h-[60vh] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.20),transparent_65%)]" />
-        <div className="absolute top-[35%] -right-[15%] w-[60%] h-[55vh] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.13),transparent_65%)]" />
-        <div className="absolute -bottom-[10%] left-[15%] w-[65%] h-[50vh] bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.12),transparent_65%)]" />
-      </div>
 
       <Header />
 

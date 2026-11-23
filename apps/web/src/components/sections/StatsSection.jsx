@@ -16,30 +16,26 @@ const STATS = [
   {
     value: 19,
     suffix: '+',
-    label: 'Projects Delivered',
+    label: 'Projects delivered',
     description: 'End-to-end production deployments',
-    gradient: 'linear-gradient(135deg, hsl(243,88%,72%) 0%, hsl(192,80%,60%) 100%)',
   },
   {
     value: 3,
     suffix: '+',
-    label: 'Years Production Experience',
+    label: 'Years of production experience',
     description: 'Live systems serving real users',
-    gradient: 'linear-gradient(135deg, hsl(192,80%,60%) 0%, hsl(160,70%,55%) 100%)',
   },
   {
     value: 99.9,
     suffix: '%',
     label: 'Uptime SLA',
     description: 'Maintained across all critical services',
-    gradient: 'linear-gradient(135deg, hsl(160,70%,55%) 0%, hsl(243,88%,72%) 100%)',
   },
   {
     value: 50,
     suffix: 'K+',
-    label: 'Users Served',
+    label: 'Users served',
     description: 'Across platforms and client products',
-    gradient: 'linear-gradient(135deg, hsl(280,70%,68%) 0%, hsl(243,88%,72%) 100%)',
   },
 ];
 
@@ -77,14 +73,11 @@ function StatItem({ stat, index }) {
     >
       {/* Number */}
       <div
-        className="font-extrabold tracking-tight leading-none"
+        className="font-medium tracking-tight leading-none"
         style={{
           fontSize: 'clamp(2rem, 4.5vw, 3rem)',
-          letterSpacing: '-0.04em',
-          backgroundImage: stat.gradient,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
+          letterSpacing: '-0.02em',
+          fontVariantNumeric: 'tabular-nums',
         }}
       >
         {displayed}{stat.suffix}
@@ -92,8 +85,8 @@ function StatItem({ stat, index }) {
 
       {/* Label */}
       <div
-        className="font-semibold text-sm leading-tight"
-        style={{ color: 'hsl(var(--foreground))', letterSpacing: '-0.01em' }}
+        className="font-medium text-sm leading-tight"
+        style={{ color: 'hsl(var(--foreground))' }}
       >
         {stat.label}
       </div>
@@ -129,8 +122,8 @@ export default function StatsSection() {
     <>
       <style>{`
         .stats-grid .stat-cell {
-          border-right: 1px solid rgba(255,255,255,0.06);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-right: 1px solid hsl(var(--border));
+          border-bottom: 1px solid hsl(var(--border));
         }
         .stats-grid .stat-cell:nth-child(2n) {
           border-right: none;
@@ -141,7 +134,7 @@ export default function StatsSection() {
         }
         @media (min-width: 768px) {
           .stats-grid .stat-cell {
-            border-right: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid hsl(var(--border));
             border-bottom: none;
           }
           .stats-grid .stat-cell:last-child {
@@ -157,8 +150,8 @@ export default function StatsSection() {
         id="stats"
         className="w-full py-0"
         style={{
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderTop: '1px solid hsl(var(--border))',
+          borderBottom: '1px solid hsl(var(--border))',
         }}
         aria-label="Key metrics"
       >

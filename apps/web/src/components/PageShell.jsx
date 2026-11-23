@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
-/** Shared chrome for the non-home pages: skip link, ambient glow, header, <main>, footer. */
+/** Shared chrome for the non-home pages: skip link, header, <main>, footer. */
 const PageShell = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-background">
     <a
@@ -12,10 +12,6 @@ const PageShell = ({ children }) => (
     >
       Skip to content
     </a>
-    <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-      <div className="absolute -top-[10%] -left-[10%] w-[70%] h-[60vh] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.18),transparent_65%)]" />
-      <div className="absolute top-[40%] -right-[15%] w-[60%] h-[55vh] bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.12),transparent_65%)]" />
-    </div>
     <Header />
     <main id="main" tabIndex={-1} className="flex-grow relative z-10 focus:outline-none pt-28 md:pt-32">
       {children}

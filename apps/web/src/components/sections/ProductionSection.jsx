@@ -7,46 +7,46 @@ import { FadeIn, StaggerGrid } from '@/lib/motion.jsx';
 
 const accentMap = {
   primary: {
-    icon: 'hsl(243,88%,68%)',
-    bg: 'hsl(243,88%,68%,0.1)',
-    chip: 'hsl(243,88%,68%,0.15)',
-    chipBorder: 'hsl(243,88%,68%,0.3)',
-    chipText: 'hsl(243,88%,75%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.15)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
   secondary: {
-    icon: 'hsl(192,80%,55%)',
-    bg: 'hsl(192,80%,55%,0.1)',
-    chip: 'hsl(192,80%,55%,0.12)',
-    chipBorder: 'hsl(192,80%,55%,0.3)',
-    chipText: 'hsl(192,80%,65%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.12)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
   amber: {
-    icon: 'hsl(38,92%,55%)',
-    bg: 'hsl(38,92%,55%,0.1)',
-    chip: 'hsl(38,92%,55%,0.12)',
-    chipBorder: 'hsl(38,92%,55%,0.3)',
-    chipText: 'hsl(38,92%,65%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.12)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
   violet: {
-    icon: 'hsl(265,80%,65%)',
-    bg: 'hsl(265,80%,65%,0.1)',
-    chip: 'hsl(265,80%,65%,0.12)',
-    chipBorder: 'hsl(265,80%,65%,0.3)',
-    chipText: 'hsl(265,80%,75%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.12)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
   emerald: {
-    icon: 'hsl(152,76%,48%)',
-    bg: 'hsl(152,76%,48%,0.1)',
-    chip: 'hsl(152,76%,48%,0.12)',
-    chipBorder: 'hsl(152,76%,48%,0.3)',
-    chipText: 'hsl(152,76%,60%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.12)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
   rose: {
-    icon: 'hsl(346,77%,60%)',
-    bg: 'hsl(346,77%,60%,0.1)',
-    chip: 'hsl(346,77%,60%,0.12)',
-    chipBorder: 'hsl(346,77%,60%,0.3)',
-    chipText: 'hsl(346,77%,70%)',
+    icon: 'hsl(199,89%,66%)',
+    bg: 'hsl(199,89%,62%,0.1)',
+    chip: 'hsl(199,89%,62%,0.12)',
+    chipBorder: 'hsl(199,89%,62%,0.3)',
+    chipText: 'hsl(199,89%,66%)',
   },
 };
 
@@ -120,7 +120,7 @@ const ProductionCard = ({ icon: Icon, title, description, metric, accent }) => {
       {/* Title + description */}
       <div className="flex flex-col gap-2 flex-1">
         <h3
-          className="text-foreground font-semibold leading-snug"
+          className="text-foreground font-medium leading-snug"
           style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
         >
           {title}
@@ -136,7 +136,7 @@ const ProductionCard = ({ icon: Icon, title, description, metric, accent }) => {
       {/* Metric chip */}
       <div className="mt-auto pt-2">
         <span
-          className="mono-badge inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold"
+          className="mono-badge inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium"
           style={{
             background: colors.chip,
             border: `1px solid ${colors.chipBorder}`,
@@ -152,21 +152,12 @@ const ProductionCard = ({ icon: Icon, title, description, metric, accent }) => {
 
 const ProductionSection = () => (
   <section id="production" className="site-section">
-    {/* Background glow */}
-    <div
-      className="pointer-events-none absolute inset-0 z-0"
-      aria-hidden="true"
-      style={{
-        background:
-          'radial-gradient(ellipse 55% 45% at 80% 30%, hsl(192,80%,55%,0.05) 0%, transparent 70%)',
-      }}
-    />
 
     <div className="site-container z-10">
 
       <SectionHeader
-        label="PRODUCTION EXPERIENCE"
-        title="Production Systems I've Owned"
+        label="Production experience"
+        title="Production systems I've owned"
         description="Real production work — not side projects. Systems handling real traffic, real data, real consequences."
       />
 

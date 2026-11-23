@@ -23,9 +23,9 @@ const capabilities = [
     description:
       'Retrieval-Augmented Generation pipelines — document chunking, embedding generation, vector storage, and semantic search.',
     stack: ['OpenAI', 'Embeddings', 'Redis'],
-    iconBg: 'bg-secondary/10',
-    iconColor: 'text-secondary',
-    iconBorder: 'border-secondary/20',
+    iconBg: 'bg-primary/10',
+    iconColor: 'text-primary',
+    iconBorder: 'border-primary/20',
   },
   {
     icon: Zap,
@@ -33,9 +33,9 @@ const capabilities = [
     description:
       'End-to-end AI automation: document classification, content extraction, AI-triggered webhooks, async processing via queues.',
     stack: ['Laravel Jobs', 'OpenAI', 'Webhooks'],
-    iconBg: 'bg-amber-500/10',
-    iconColor: 'text-amber-400',
-    iconBorder: 'border-amber-500/20',
+    iconBg: 'bg-primary/10',
+    iconColor: 'text-primary',
+    iconBorder: 'border-primary/20',
   },
   {
     icon: Layers,
@@ -43,9 +43,9 @@ const capabilities = [
     description:
       'Architecting multi-tenant AI SaaS platforms with per-tenant context, usage metering, billing integration, and scaling.',
     stack: ['Laravel', 'Multi-tenant', 'Stripe'],
-    iconBg: 'bg-violet-500/10',
-    iconColor: 'text-violet-400',
-    iconBorder: 'border-violet-500/20',
+    iconBg: 'bg-primary/10',
+    iconColor: 'text-primary',
+    iconBorder: 'border-primary/20',
   },
 ];
 
@@ -150,9 +150,9 @@ const codeLines = [
 
 const tokenColor = {
   comment: 'text-neutral-400',
-  var:     'text-cyan-300',
-  class:   'text-indigo-400',
-  fn:      'text-sky-300',
+  var:     'text-primary',
+  class:   'text-primary',
+  fn:      'text-primary',
   string:  'text-emerald-400',
   num:     'text-orange-300',
   plain:   'text-neutral-200',
@@ -194,7 +194,7 @@ const CapabilityCard = ({ item, index }) => {
           </div>
 
           {/* Text */}
-          <h3 className="text-sm font-semibold text-foreground mb-2 leading-snug tracking-tight">
+          <h3 className="text-sm font-medium text-foreground mb-2 leading-snug tracking-tight">
             {item.title}
           </h3>
           <p className="text-xs text-muted-foreground leading-relaxed flex-grow">
@@ -228,7 +228,7 @@ const CodeBlock = () => (
         <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
         <span
-          className="ml-3 text-[11px] font-mono tracking-wider"
+          className="ml-3 text-[11px] font-mono "
           style={{ color: 'rgba(255,255,255,0.55)' }}
         >
           DocumentAnalysisPipeline.php
@@ -266,8 +266,8 @@ const AISection = () => (
     <div className="site-container">
 
       <SectionHeader
-        label="AI ENGINEERING"
-        title="Building AI-Powered Systems"
+        label="AI engineering"
+        title="Building AI systems"
         description="Integrating modern AI capabilities into production architectures — not just demos, but real systems handling real workloads."
       />
 

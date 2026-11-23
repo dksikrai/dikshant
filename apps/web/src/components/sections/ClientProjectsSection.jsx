@@ -107,7 +107,7 @@ const TechIcon = ({ name, className }) => {
 };
 
 const TechBadge = ({ tech }) => (
-  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold mono-badge px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/70">
+  <span className="inline-flex items-center gap-1.5 text-[11px] font-medium mono-badge px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/70">
     <TechIcon name={tech} className="w-3 h-3 shrink-0" />
     {tech}
   </span>
@@ -138,7 +138,7 @@ const FeaturedProjectCard = ({ project, index }) => {
               decoding="async"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-500/10 to-cyan-500/5">
+            <div className="w-full h-full flex items-center justify-center bg-secondary">
               <Globe className="w-12 h-12 text-muted-foreground/30" strokeWidth={1} />
             </div>
           )}
@@ -150,7 +150,7 @@ const FeaturedProjectCard = ({ project, index }) => {
         <div className="p-7 md:p-9 flex flex-col justify-center gap-5">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <span className="section-label text-indigo-400">{project.type}</span>
+              <span className="section-label text-primary">{project.type}</span>
               {project.url !== '#' && (
                 <a
                   href={project.url}
@@ -163,7 +163,7 @@ const FeaturedProjectCard = ({ project, index }) => {
                 </a>
               )}
             </div>
-            <h3 className="font-extrabold text-foreground mb-3" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
+            <h3 className="font-medium text-foreground mb-3" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>
               {project.name}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed mb-3">
@@ -172,17 +172,17 @@ const FeaturedProjectCard = ({ project, index }) => {
           </div>
 
           {/* Architecture note */}
-          <div className="text-xs text-muted-foreground/70 border-l-2 border-indigo-500/30 pl-3 leading-relaxed">
-            <span className="text-indigo-400/70 section-label mr-2">ARCH</span>
+          <div className="text-xs text-muted-foreground/70 border-l-2 border-primary/30 pl-3 leading-relaxed">
+            <span className="text-primary/70 section-label mr-2">ARCH</span>
             {project.architecture}
           </div>
 
           {/* Metrics */}
           <div className="flex gap-2 flex-wrap">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="text-xs font-medium px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               {project.metric}
             </span>
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span className="text-xs font-medium px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
               {project.impact}
             </span>
           </div>
@@ -217,13 +217,13 @@ const CompactProjectCard = ({ project }) => {
         <div className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center overflow-hidden p-1">
           <Globe className="w-4 h-4 text-muted-foreground/60" />
         </div>
-        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
+        <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08] text-muted-foreground">
           {project.type}
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="font-bold text-foreground text-sm">{project.name}</h3>
+      <h3 className="font-medium text-foreground text-sm">{project.name}</h3>
 
       {/* Tech */}
       <div className="flex flex-wrap gap-1 mt-auto">
@@ -278,8 +278,8 @@ const ClientProjectsSection = () => {
 
         {/* ── Featured Projects ── */}
         <SectionHeader
-          label="FEATURED WORK"
-          title="Flagship Projects"
+          label="Featured work"
+          title="Flagship projects"
           description="Production systems with real architecture, real scale, real impact."
         />
 
@@ -300,7 +300,7 @@ const ClientProjectsSection = () => {
           <FadeIn>
             <div className="section-label mb-3">ALL CLIENT WORK</div>
             <h3 className="text-foreground" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
-              {allProjects.length}+ Projects Delivered
+              {allProjects.length}+ Projects delivered
             </h3>
           </FadeIn>
         </div>

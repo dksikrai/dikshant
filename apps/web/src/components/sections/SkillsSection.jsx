@@ -13,7 +13,7 @@ import { FadeIn, isIOS } from '@/lib/motion.jsx';
 const techStack = [
   {
     category: 'Backend',
-    accent: 'text-rose-400',
+    accent: 'text-primary',
     items: [
       { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
       { name: 'PHP 8+', icon: SiPhp, color: '#777BB4' },
@@ -24,17 +24,17 @@ const techStack = [
   },
   {
     category: 'AI & ML',
-    accent: 'text-violet-400',
+    accent: 'text-primary',
     items: [
       { name: 'OpenAI', icon: TbBrandOpenai, color: '#10a37f' },
       { name: 'RAG Systems', icon: null, label: 'RAG', color: '#a78bfa' },
       { name: 'Embeddings', icon: null, label: '⟨V⟩', color: '#c4b5fd' },
-      { name: 'LangChain', icon: null, label: '🦜', color: '#34d399' },
+      { name: 'LangChain', icon: null, label: 'LC', color: '#34d399' },
     ],
   },
   {
     category: 'Cloud & DevOps',
-    accent: 'text-amber-400',
+    accent: 'text-primary',
     items: [
       { name: 'AWS', icon: FaAws, color: '#FF9900' },
       { name: 'Docker', icon: SiDocker, color: '#2496ED' },
@@ -44,7 +44,7 @@ const techStack = [
   },
   {
     category: 'Frontend',
-    accent: 'text-cyan-400',
+    accent: 'text-primary',
     items: [
       { name: 'React', icon: SiReact, color: '#61DAFB' },
       { name: 'Next.js', icon: SiNextdotjs, color: '#f0f6fc' },
@@ -59,12 +59,12 @@ const techStack = [
       { name: 'Redis', icon: SiRedis, color: '#DC382D' },
       { name: 'Laravel Horizon', icon: null, label: 'HZN', color: '#6366f1' },
       { name: 'AWS SQS', icon: FaAws, color: '#FF9900' },
-      { name: 'Cron Jobs', icon: null, label: '⏱', color: '#34d399' },
+      { name: 'Cron Jobs', icon: null, label: 'CRN', color: '#34d399' },
     ],
   },
   {
     category: 'Databases',
-    accent: 'text-sky-400',
+    accent: 'text-primary',
     items: [
       { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
@@ -74,12 +74,12 @@ const techStack = [
   },
   {
     category: 'Ecommerce',
-    accent: 'text-pink-400',
+    accent: 'text-primary',
     items: [
       { name: 'WooCommerce', icon: SiWoocommerce, color: '#96588A' },
       { name: 'WordPress', icon: SiWordpress, color: '#21759B' },
       { name: 'Stripe', icon: null, label: '$', color: '#635bff' },
-      { name: 'ShipStation', icon: null, label: '📦', color: '#60a5fa' },
+      { name: 'ShipStation', icon: null, label: 'SS', color: '#60a5fa' },
     ],
   },
 ];
@@ -91,7 +91,7 @@ const TechIcon = ({ item }) => {
   }
   return (
     <span
-      className="text-sm font-bold shrink-0"
+      className="text-sm font-medium shrink-0"
       style={{ color: item.color, fontFamily: 'monospace', minWidth: '1.25rem', textAlign: 'center' }}
     >
       {item.label}
@@ -108,7 +108,7 @@ const SkillsSection = () => {
 
       <div className="site-container">
         <SectionHeader
-          label="TECH STACK"
+          label="Tech stack"
           title="Tools of the Trade"
           description="Technologies I work with daily in production environments."
         />

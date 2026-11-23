@@ -11,7 +11,7 @@ import { useSeo } from '@/lib/seo.js';
 const ContactSection = React.lazy(() => import('@/components/sections/ContactSection.jsx'));
 
 const H2 = ({ children }) => (
-  <h2 className="text-foreground font-bold mb-6" style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', letterSpacing: '-0.02em' }}>
+  <h2 className="text-foreground font-medium mb-6" style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', letterSpacing: '-0.02em' }}>
     {children}
   </h2>
 );
@@ -24,10 +24,10 @@ const ResumePage = () => {
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Resume' }]} />
 
         <header className="flex flex-col gap-4 max-w-3xl">
-          <h1 className="text-foreground" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+          <h1 className="text-foreground" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             Dikshant Goyal
           </h1>
-          <p className="text-primary font-semibold m-0" style={{ fontSize: '1.125rem' }}>
+          <p className="text-primary font-medium m-0" style={{ fontSize: '1.125rem' }}>
             Full-Stack Developer &amp; Technical Consultant
           </p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 m-0 p-0 list-none text-sm text-muted-foreground">
@@ -38,13 +38,13 @@ const ResumePage = () => {
           </ul>
           <p className="text-muted-foreground max-w-3xl m-0" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>{resumeSummary}</p>
           <div className="flex flex-wrap gap-3 pt-1">
-            <Button asChild size="lg" className="h-12 rounded-full px-7 font-semibold shadow-lg shadow-primary/30">
+            <Button asChild size="lg" className="h-12 rounded-lg px-7 font-medium">
               <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
                 <Download strokeWidth={2} />
                 Download PDF
               </a>
             </Button>
-            <Button variant="glass" size="lg" className="h-12 rounded-full px-7 font-semibold" onClick={() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' })}>
+            <Button variant="glass" size="lg" className="h-12 rounded-lg px-7 font-medium" onClick={() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' })}>
               Hire me
               <ArrowRight strokeWidth={2.5} />
             </Button>
@@ -56,7 +56,7 @@ const ResumePage = () => {
           <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 m-0">
             {skillGroups.map((g) => (
               <div key={g.group} className="glass-card rounded-2xl p-5">
-                <dt className="text-foreground font-semibold mb-3">{g.group}</dt>
+                <dt className="text-foreground font-medium mb-3">{g.group}</dt>
                 <dd className="m-0 flex flex-wrap gap-2">
                   {g.items.map((i) => (
                     <span key={i} className="text-[0.8125rem] font-medium px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/[0.08] text-foreground/80">
@@ -75,7 +75,7 @@ const ResumePage = () => {
             {experience.map((r) => (
               <li key={`${r.title}-${r.date}`} className="glass-card rounded-2xl p-6">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-foreground font-bold m-0" style={{ fontSize: '1.125rem' }}>{r.title}</h3>
+                  <h3 className="text-foreground font-medium m-0" style={{ fontSize: '1.125rem' }}>{r.title}</h3>
                   <span className="text-sm text-muted-foreground">{r.date}</span>
                 </div>
                 <p className="text-primary text-sm font-medium mt-1 mb-3">{r.company} · {r.location}</p>
@@ -92,12 +92,12 @@ const ResumePage = () => {
 
         <section className="mt-14 glass-card rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-foreground font-bold m-0 mb-1 text-lg">See the work behind the resume</h2>
+            <h2 className="text-foreground font-medium m-0 mb-1 text-lg">See the work behind the resume</h2>
             <p className="text-muted-foreground m-0 text-sm">Case studies and 19+ delivered projects on the home page.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="glass" className="rounded-full"><Link to="/#projects">View projects</Link></Button>
-            <Button asChild variant="glass" className="rounded-full"><Link to="/services">Services</Link></Button>
+            <Button asChild variant="glass" className="rounded-lg"><Link to="/#projects">View projects</Link></Button>
+            <Button asChild variant="glass" className="rounded-lg"><Link to="/services">Services</Link></Button>
           </div>
         </section>
       </article>

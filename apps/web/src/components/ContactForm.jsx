@@ -215,7 +215,7 @@ const ContactForm = () => {
         >
           <CheckCircle2 className="h-8 w-8 text-emerald-400" />
         </motion.span>
-        <h3 className="text-xl font-bold text-foreground">
+        <h3 className="text-xl font-medium text-foreground">
           {handoff.kind === 'emailed' ? 'Message sent' : handoff.kind === 'mailto' ? 'Almost there' : 'Your message is ready'}
         </h3>
         <p className="max-w-sm text-sm text-muted-foreground m-0">
@@ -229,7 +229,7 @@ const ContactForm = () => {
         </p>
         <div className="flex w-full max-w-xs flex-col gap-2.5">
           {handoff.kind !== 'emailed' && (
-            <Button asChild className="h-12 rounded-full font-semibold shadow-lg shadow-primary/25">
+            <Button asChild className="h-12 rounded-lg font-medium">
               <a href={handoff.kind === 'mailto' ? handoff.mailUrl : handoff.waUrl} target={handoff.kind === 'mailto' ? undefined : '_blank'} rel="noopener noreferrer">
                 {handoff.kind === 'mailto' ? <Mail /> : <MessageCircle />}
                 {handoff.kind === 'mailto' ? 'Open mail app' : 'Open WhatsApp'}
@@ -237,7 +237,7 @@ const ContactForm = () => {
             </Button>
           )}
           {handoff.kind === 'whatsapp' && (
-            <Button asChild variant="glass" className="h-11 rounded-full">
+            <Button asChild variant="glass" className="h-11 rounded-lg">
               <a href={handoff.mailUrl}>
                 <Mail />
                 Send by email instead
@@ -245,14 +245,14 @@ const ContactForm = () => {
             </Button>
           )}
           {handoff.kind !== 'whatsapp' && (
-            <Button asChild variant="glass" className="h-11 rounded-full">
+            <Button asChild variant="glass" className="h-11 rounded-lg">
               <a href={handoff.waUrl} target="_blank" rel="noopener noreferrer">
                 <MessageCircle />
                 {handoff.kind === 'emailed' ? 'Also message on WhatsApp' : 'Use WhatsApp instead'}
               </a>
             </Button>
           )}
-          <Button variant="ghost" className="rounded-full text-muted-foreground" onClick={() => setHandoff(null)}>
+          <Button variant="ghost" className="rounded-lg text-muted-foreground" onClick={() => setHandoff(null)}>
             <ArrowLeft />
             {handoff.kind === 'emailed' ? 'Send another message' : 'Back to the form'}
           </Button>
@@ -405,7 +405,7 @@ const ContactForm = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="h-12 w-full rounded-full px-7 text-[0.9375rem] font-semibold shadow-lg shadow-primary/25 sm:h-11 sm:w-auto"
+              className="h-12 w-full rounded-full px-7 text-[0.9375rem] font-medium sm:h-11 sm:w-auto"
             >
               {isSubmitting ? <Loader2 className="animate-spin" /> : <MessageCircle />}
               Send via WhatsApp
@@ -417,7 +417,7 @@ const ContactForm = () => {
               variant="glass"
               disabled={isSubmitting}
               onClick={handleSubmit((d) => onSubmit(d, 'email'))}
-              className="h-12 w-full rounded-full px-6 text-[0.9375rem] font-semibold sm:h-11 sm:w-auto"
+              className="h-12 w-full rounded-full px-6 text-[0.9375rem] font-medium sm:h-11 sm:w-auto"
             >
               {isSubmitting ? <Loader2 className="animate-spin" /> : <Mail />}
               Send by email

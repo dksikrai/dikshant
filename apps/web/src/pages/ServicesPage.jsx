@@ -18,7 +18,7 @@ const ServicesPage = () => {
     <PageShell>
       <div className="site-container pb-12">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services' }]} />
-        <h1 className="text-foreground max-w-3xl" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+        <h1 className="text-foreground max-w-3xl" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
           Web, API, AI &amp; DevOps Services
         </h1>
         <p className="text-muted-foreground mt-5 max-w-2xl" style={{ fontSize: '1.0625rem', lineHeight: 1.65 }}>
@@ -27,11 +27,11 @@ const ServicesPage = () => {
           service below, or tell me about your project and I&apos;ll recommend the right approach.
         </p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Button size="lg" className="h-12 rounded-full px-7 font-semibold shadow-lg shadow-primary/30" onClick={() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' })}>
-            Book a Consultation
+          <Button size="lg" className="h-12 rounded-lg px-7 font-medium" onClick={() => startInquiry({ inquiry: 'Consulting', subject: 'Consultation request' })}>
+            Book a consultation
             <ArrowRight strokeWidth={2.5} />
           </Button>
-          <Button asChild variant="glass" size="lg" className="h-12 rounded-full px-7 font-semibold">
+          <Button asChild variant="glass" size="lg" className="h-12 rounded-lg px-7 font-medium">
             <Link to="/resume">View my resume</Link>
           </Button>
         </div>

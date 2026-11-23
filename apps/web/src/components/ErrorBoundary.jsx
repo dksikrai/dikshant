@@ -26,13 +26,13 @@ class ErrorBoundary extends React.Component {
           <div className="bg-destructive/10 p-4 rounded-full mb-6 sm:mb-8">
             <AlertCircle className="w-10 h-10 sm:w-12 sm:h-12 text-destructive" />
           </div>
-          <h2 className="font-bold mb-4 text-foreground text-[clamp(1.5rem,5vw,2.25rem)] leading-tight">Something went wrong</h2>
+          <h2 className="font-medium mb-4 text-foreground text-[clamp(1.5rem,5vw,2.25rem)] leading-tight">Something went wrong</h2>
           <p className="text-muted-foreground mb-8 max-w-md text-[clamp(0.95rem,3vw,1.125rem)] leading-relaxed px-2">
             We apologize for the inconvenience. An unexpected error has occurred in this section of the application.
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+            className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
           >
             <RefreshCcw className="w-4 h-4" />
             Reload Page
@@ -40,7 +40,7 @@ class ErrorBoundary extends React.Component {
           
           {import.meta.env.DEV && (
             <div className="mt-8 p-4 bg-muted/50 rounded-lg text-left overflow-auto max-w-full text-xs text-muted-foreground">
-              <p className="font-bold mb-2 text-destructive">{this.state.error && this.state.error.toString()}</p>
+              <p className="font-medium mb-2 text-destructive">{this.state.error && this.state.error.toString()}</p>
               <pre className="whitespace-pre-wrap">{this.state.errorInfo && this.state.errorInfo.componentStack}</pre>
             </div>
           )}

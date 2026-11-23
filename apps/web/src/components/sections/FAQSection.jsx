@@ -14,7 +14,7 @@ const FAQSection = () => (
           compact
           id="faq-heading"
           label="FAQ"
-          title="Questions Clients Ask"
+          title="Questions clients ask"
           description="Can't find your answer? Send a message and I'll reply within one business day."
         />
         <FadeIn delay={0.16} className="mt-6">

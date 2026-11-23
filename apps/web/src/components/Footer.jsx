@@ -23,7 +23,7 @@ const socialIcons = [
 ];
 
 const ColumnTitle = ({ children }) => (
-  <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+  <h2 className="mb-2 text-[11px] font-medium tracking-[0.14em] text-muted-foreground">
     {children}
   </h2>
 );
@@ -53,7 +53,7 @@ const Footer = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl glass-pill text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <LogoMark />
                 </span>
-                <span className="text-lg font-bold tracking-tight">
+                <span className="text-lg font-medium tracking-tight">
                   Dikshant Goyal<span className="text-primary">.</span>
                 </span>
               </Link>
@@ -66,14 +66,14 @@ const Footer = () => {
               </span>
 
               <div className="flex gap-2.5">
-                <Button asChild className="h-12 flex-1 rounded-full px-5 font-semibold shadow-lg shadow-primary/30 sm:h-11 sm:flex-none sm:px-6">
+                <Button asChild className="h-12 flex-1 rounded-lg px-5 font-medium sm:h-11 sm:flex-none sm:px-6">
                   <Link to="/#contact">
-                    <span className="sm:hidden">Book a Call</span>
-                    <span className="hidden sm:inline">Book a Consultation</span>
+                    <span className="sm:hidden">Book a call</span>
+                    <span className="hidden sm:inline">Book a consultation</span>
                     <ArrowRight strokeWidth={2.5} />
                   </Link>
                 </Button>
-                <Button asChild variant="glass" className="h-12 rounded-full px-5 font-semibold sm:h-11">
+                <Button asChild variant="glass" className="h-12 rounded-lg px-5 font-medium sm:h-11">
                   <a href={siteConfig.resume} download={siteConfig.resumeFilename}>
                     <Download />
                     Resume
@@ -90,7 +90,7 @@ const Footer = () => {
                       target={href.startsWith('mailto') ? undefined : '_blank'}
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="flex h-11 w-11 items-center justify-center rounded-full glass-pill text-foreground/80 transition active:scale-95 active:bg-white/[0.14]"
+                      className="flex h-11 w-11 items-center justify-center rounded-full glass-pill text-foreground/80 transition active:scale-[0.98] active:bg-white/[0.14]"
                     >
                       <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
                     </a>
@@ -164,7 +164,7 @@ const Footer = () => {
             <motion.button
               whileTap={{ scale: 0.94 }}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex h-11 shrink-0 items-center gap-2 rounded-full glass-pill px-4 text-xs font-semibold text-foreground/85 transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              className="flex h-11 shrink-0 items-center gap-2 rounded-full glass-pill px-4 text-xs font-medium text-foreground/85 transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
             >
               Back to top
               <ArrowUp className="h-3.5 w-3.5" aria-hidden="true" />

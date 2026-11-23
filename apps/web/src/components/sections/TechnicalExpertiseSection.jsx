@@ -8,48 +8,48 @@ const expertise = [
   {
     icon: Server,
     title: 'Backend & API Architecture',
-    color: 'text-indigo-400',
-    iconBg: 'bg-indigo-500/10 border-indigo-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'Node.js, Python and PHP/Laravel backends: API-first design, multi-tenant SaaS, database optimization, and production-grade services in the language that fits the job.',
     points: ['Node.js, Python & Laravel', 'Multi-Tenant SaaS Design', 'API-First Architecture', 'Database Optimization'],
   },
   {
     icon: Zap,
     title: 'Queue & Async Systems',
-    color: 'text-amber-400',
-    iconBg: 'bg-amber-500/10 border-amber-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'Redis queues, background job processing, webhook delivery, event-driven architecture, and async workflow automation in Node.js, Python and Laravel (Horizon).',
     points: ['Redis & Queue Workers', 'Background Job Pipelines', 'Webhook Architecture', 'Event-Driven Systems'],
   },
   {
     icon: Cloud,
     title: 'Cloud Infrastructure',
-    color: 'text-sky-400',
-    iconBg: 'bg-sky-500/10 border-sky-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'AWS (EC2, S3, SQS, Lambda), Linux server management, CI/CD pipelines, zero-downtime deployment, and production monitoring.',
     points: ['AWS EC2, S3, SQS, Lambda', 'CI/CD Pipeline Setup', 'Linux Server Management', 'Zero-Downtime Deploys'],
   },
   {
     icon: Brain,
     title: 'AI Engineering',
-    color: 'text-violet-400',
-    iconBg: 'bg-violet-500/10 border-violet-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'OpenAI API integrations, RAG pipelines, document embeddings, vector caching with Redis, AI automation workflows for production SaaS.',
     points: ['OpenAI API Integration', 'RAG Pipelines & Embeddings', 'AI Automation Workflows', 'Vector Search Systems'],
   },
   {
     icon: Layout,
     title: 'Frontend Systems',
-    color: 'text-cyan-400',
-    iconBg: 'bg-cyan-500/10 border-cyan-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'Next.js, React, TypeScript, Tailwind CSS — building modern SaaS dashboards, responsive UI systems, and performant frontend architectures.',
     points: ['Next.js / React / TypeScript', 'Tailwind CSS Systems', 'SaaS Dashboard UI', 'Performance Optimization'],
   },
   {
     icon: ShoppingCart,
     title: 'Ecommerce & Payments',
-    color: 'text-rose-400',
-    iconBg: 'bg-rose-500/10 border-rose-500/20',
+    color: 'text-primary',
+    iconBg: 'bg-primary/10 border-primary/20',
     description: 'WooCommerce, Stripe, PayPal, ShipStation — building high-volume ecommerce backends with automated order processing and payment systems.',
     points: ['WooCommerce Customization', 'Stripe / PayPal Integration', 'Order Automation Systems', 'Inventory Management'],
   },
@@ -78,7 +78,7 @@ const ExpertiseCard = ({ exp, index }) => {
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
+        <h3 className="font-medium text-foreground" style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>
           {exp.title}
         </h3>
 
@@ -107,12 +107,12 @@ const TechnicalExpertiseSection = () => {
   return (
     <section className="site-section" id="expertise">
       {/* Ambient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-px bg-border" />
 
       <div className="site-container">
         <SectionHeader
-          label="ENGINEERING EXPERTISE"
-          title="What I Build With"
+          label="Engineering expertise"
+          title="What I build with"
           description="Core engineering domains where I have deep, production-proven experience."
         />
 
